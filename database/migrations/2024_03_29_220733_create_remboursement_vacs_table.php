@@ -16,12 +16,11 @@ return new class extends Migration
             $table->unsignedTinyInteger('nombre_heure');
             $table->unsignedTinyInteger('nombre_tickets');
             $table->boolean('statut');
-            
 
             $table->foreignId('user_id')
             ->constrained()
             ->onDelete('cascade');
-            
+
             $table->foreignId('matiere_id')
             ->constrained()
             ->onDelete('cascade');
