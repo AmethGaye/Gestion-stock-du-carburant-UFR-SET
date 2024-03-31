@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\auth\LogoutController;
+use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\auth\ResetPasswordController;
+use App\Http\Controllers\auth\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +19,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
+
+
+/*
+    les Routes pour l'authentification
+*/
+
+
+// connexion d'un utlisateur
+Route::get('/register', [RegisterController::class, 'create'])->name('auth.register');
+Route::post('/register', [RegisterController::class, 'store']);
+
+// connexion d'un utlisateur
+Route::get('/login', [LoginController::class, 'create'])->name('auth.login');
+Route::post('/login', [LoginController::class, 'store']);
+
+// deconnexion d'un utlisateur
+Route::post('/logout', [LogoutController::class, 'destroy'])->name('auth.logout')->middleware('auth');
+
+// oubli de mot de passe 
+Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.email');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'store']);
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->name('password.reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'update'])->name('password.update');
+
+
