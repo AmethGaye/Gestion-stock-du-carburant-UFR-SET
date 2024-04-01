@@ -34,12 +34,12 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 // connexion d'un utlisateur
 Route::get('/login', [LoginController::class, 'create'])->name('auth.login');
-Route::post('/login', [LoginController::class, 'store']);
+Route::post('/login', [LoginController::class, 'login']);
 
 // deconnexion d'un utlisateur
 Route::post('/logout', [LogoutController::class, 'destroy'])->name('auth.logout')->middleware('auth');
 
-// oubli de mot de passe 
+// oubli de mot de passe
 Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.email');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'store']);
 
