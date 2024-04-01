@@ -9,7 +9,7 @@ export default {
     extend: {
       fontFamily :{
         'nunito' : ['Nunito Sans '],
-        'jetBrains' : ['JetBrains Mono']
+        'open-sans' : ['open sans']
       }
     },
   },
