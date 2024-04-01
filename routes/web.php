@@ -19,7 +19,7 @@ use App\Http\Controllers\auth\ForgotPasswordController;
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    return view('index');
 });
 
 
