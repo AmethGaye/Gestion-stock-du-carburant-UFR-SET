@@ -1,4 +1,5 @@
 <div class="bg-white h-[69.5px] shadow_2 flex items-center justify-between px-6 relative">
+    {{-- Rechercher  sur l'ensemble du site --}}
     <form action="" class="flex items-center p-0 m-0">
         <div class="flex items-center relative">
             <label for="" class="absolute left-2.5 top-1/2 -translate-y-1/2">
@@ -20,6 +21,7 @@
                 <path d="M12.9153 19.6781C12.076 20.3981 10.9735 20.835 9.76606 20.835C8.55862 20.835 7.45615 20.3981 6.61685 19.6781M16.9048 11.7878V8.10743C16.9048 4.26333 13.7206 1.16504 9.76606 1.16504C5.81156 1.16504 2.58425 4.13125 2.58425 8.10743V11.7629C2.58425 12.322 2.49461 12.8774 2.31879 13.4077L1.4398 16.0592C1.41573 16.1318 1.46947 16.2067 1.54559 16.2067H17.9353C18.0158 16.2067 18.0729 16.1305 18.0482 16.0561L17.1632 13.3866C16.992 12.87 16.9048 12.3306 16.9048 11.7878Z" stroke="#71717A" stroke-width="2" stroke-linecap="round"/>
             </svg>                
         </div>
+        {{-- profile utilisateur --}}
         <div class="flex items-center gap-3">
             <div>
                 <h2 class="text-sm font-semibold text-right">Mouhamad Gaye</h2>

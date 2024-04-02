@@ -7,5 +7,5 @@
     @vite('resources/css/app.css')
     <title>Gestion De Stock Du Carburant | UFR SET</title>
 </head>
-<body class="ralative bg-[#F8F8F8] min-h-[100vh] h-screen w-full text-zinc-800">
+<body class="ralative bg-[#F8F8F8] min-h-[100vh] h-screen w-full text-zinc-500">
     

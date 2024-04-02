@@ -19,7 +19,7 @@ use App\Http\Controllers\auth\ForgotPasswordController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('users.chef-depart_assistante.cours');
 });
 
 
