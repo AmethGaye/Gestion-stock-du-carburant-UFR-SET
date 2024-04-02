@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ForgotPasswordRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ForgotPasswordController extends Controller
@@ -19,9 +21,16 @@ class ForgotPasswordController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ForgotPasswordRequest $request)
     {
-        //
+        $email=$request->email;
+        $user=User::where('email',$email)->first();
+
+        if ($user){
+            dd($user->prenom);
+        }else{
+            return back()->withErrors();
+        }
     }
 
 }
