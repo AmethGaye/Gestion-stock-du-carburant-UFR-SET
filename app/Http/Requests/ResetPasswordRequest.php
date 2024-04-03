@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use function Laravel\Prompts\password;
 
-class ForgotPasswordRequest extends FormRequest
+class ResetPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +24,8 @@ class ForgotPasswordRequest extends FormRequest
     {
         return [
             'email'=>'required|email|exists:users',
+            'password'=>'required|string|min:8|confirmed',
+            'password_confirmation'=>'required'
         ];
-    }
-
-    public function messages()
-    {
-        return [
-        'email.required' => 'L\'adresse email est obligatoire.',
-        'email.email' => 'L\'adresse email doit être une adresse email valide.'
-    ];
     }
 }
