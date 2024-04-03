@@ -4,12 +4,12 @@
 <section class="px-6 min-h-screen h-screen ">
 
     {{-- liens utiles au chef de departement --}}
-    <div class="border-b-zinc-200 border-b-2 mb-5">
+    <div class="border-b-zinc-200 border-b-2 mb-10">
         <a href="" class="py-3 px-6 inline-block text-sm font-medium text-zinc-400">Tous les cours</a>
         <a href="" class="py-3 px-6 inline-block text-sm font-semibold relative cr text-zinc-600">Approbation</a>
     </div>
         
-    <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-4">
+    <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
         {{-- barre de recherche --}}
         <form action="" class="flex items-center p-0 m-0">
             <div class="flex items-center relative">
@@ -47,13 +47,38 @@
                 <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
                     <path d="M6.5 1.30493V12.3049M12 6.80493L1 6.80493" stroke="white" stroke-width="2" stroke-linecap="round"/>
                 </svg>                        
-                Vacataire
+                Cours
             </button>
         </div>
     </div>
 
     {{-- choix entre les deux liens : tous les cours ou approbation --}}
     @yield('cours')
+
+    {{-- pagination --}}
+    <div class="flex p-4 items-center justify-between text-zinc-500 font-medium mt-2">
+        <div class="font-medium text-zinc-400">
+            page 1 / 10
+        </div>
+
+        <div class="flex items-center gap-1 *:w-9 *:h-9">
+            <a href="" class="icon-hover-2">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 1L1.70711 6.29289C1.31658 6.68342 1.31658 7.31658 1.70711 7.70711L7 13" stroke="#a1a1aa" stroke-width="2" stroke-linecap="round"/>
+                </svg>                                
+            </a>
+            <a href="" class="icon-hover-2 rounded-lg bg-zinc-200">1</a>
+            <a href="" class="icon-hover-2">2</a>
+            <a href="" class="icon-hover-2">3</a>
+            <a href="" class="icon-hover-2">4</a>
+            <a href="" class="icon-hover-2">5</a>
+            <a href="" class="icon-hover-2">
+                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L6.29289 6.29289C6.68342 6.68342 6.68342 7.31658 6.29289 7.70711L1 13" stroke="#737373" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </a>
+        </div>
+    </div>
     
 </section>
     
