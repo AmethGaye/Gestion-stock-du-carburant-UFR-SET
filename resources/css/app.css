@@ -26,6 +26,10 @@
   @apply transition-all duration-300 w-9 h-9 flex items-center justify-center hover:bg-zinc-100 rounded-lg
 }
 
+.icon-hover-2{
+  @apply icon-hover hover:bg-zinc-200
+}
+
 .trans{
   @apply transition duration-200 ease-linear
 }
@@ -53,6 +57,9 @@ main {
 
 .btn-2{
   @apply px-2 py-1 rounded text-sm flex gap-2 items-center tracking-wide;
+}
+.btn-3{
+  @apply px-4 py-1 rounded text-sm flex gap-2 items-center tracking-wide;
 }
 
 .cr{
