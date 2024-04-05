@@ -11,6 +11,15 @@
                 <h2 class="text-xl font-medium mt-4">Gestion Stock du carburant de l’UFR SET</h2>
                 <p class=" text-zinc-400">Merci d'entrer vos informations de connexion</p>
             </div>
+
+            {{-- message si l'itialisation du mot de passe a reussi--}}
+              @if(session('success'))
+                  <div class="text-red-600">
+                      {{session('success')}}
+                  </div>
+
+              @endif
+            {{---------------------------------------------------------------------------}}
             <form action="{{route('auth.login')}}" method="post" class="mt-10">
                 @csrf
                 <div class="mb-6">

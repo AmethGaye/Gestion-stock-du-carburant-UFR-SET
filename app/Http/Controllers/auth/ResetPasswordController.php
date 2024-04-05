@@ -36,6 +36,7 @@ class ResetPasswordController extends Controller
        }
        User::where('email',$request->email)
            ->update(['password'=>Hash::make($request->password)]);
+
        DB::table('password_reset_tokens')->where(['email'=>$request->email])->delete();
        return redirect()->to(route('auth.login'))
            ->with('success','Mot de passe reinitialisé');
