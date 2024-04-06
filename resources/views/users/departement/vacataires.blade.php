@@ -171,3 +171,108 @@
         </div>
     </section>
 @endsection
+
+
+{{-- FORMULAIRE D'AJOUT D'UN VACATAIRE --}}
+@section('new-vacataire')
+<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 w-8/12 scale-75 opacity-0 trans-2">
+    <div class="flex items-center justify-between">
+        <h1 class="font-semibold text-lg text-zinc-800">Ajouter un nouveau Vacataire</h1>
+        <div class="icon-hover-2 cursor-pointer" id="closer" >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 1L1 13M13 13L1 1.00001" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
+            </svg>                    
+        </div>
+    </div>
+    <form action="" method="" class="m-0 mt-6">
+        @csrf
+
+        <div class="mb-10 ">
+            <div class="w-full flex gap-4">
+                <div class="w-full flex flex-col relative mb-4">
+                    <label for="prenom" class="text-zinc-800 font-medium">Prénom</label>
+                    <input type="text" name="prenom" id="prenom" class="input-2" placeholder="Ahmada">   
+                </div>
+
+                <div class="w-full flex flex-col relative mb-4">
+                    <label for="nom" class="text-zinc-800 font-medium">Nom</label>
+                    <input type="text" name="nom" id="nom" class="input-2" placeholder="Gaye">   
+                </div>
+            </div>
+
+            <div class="w-full flex gap-4">
+                <div class="w-full  flex flex-col mb-4">
+                    <label for="Sexe" class="font-medium text-zinc-800">Sexe</label>
+                    <select name="Sexe" id="Sexe" class="input-2">
+                        <option value="">Masculin</option>
+                        <option value="">Féminin</option>
+                    </select>
+                </div>
+
+                <div class="w-full flex flex-col relative mb-4">
+                    <label for="email" class="text-zinc-800 font-medium">Adresse email universitaire</label>
+                    <input type="text" name="email" id="email" class="input-2" placeholder="Example@univ-thies.sn">
+                    <div class="text-[small] text-red-600 font-medium mt-2">Adresse email invalide !</div>
+                </div>
+            </div>
+
+            <div class="w-full flex gap-4">
+                <div class="w-full flex flex-col relative mb-4">
+                    <label for="tel" class="text-zinc-800 font-medium">Numéro de téléphone</label>
+                    <input type="tel" name="tel" id="tel" class="input-2" placeholder="784532081">   
+                </div>
+
+                <div class="w-full  flex flex-col mb-4">
+                    <label for="situation" class="font-medium text-zinc-800">Situation</label>
+                    <select name="situation" id="situation" class="input-2">
+                        <option value="">Véhiculé</option>
+                        <option value="">Nom</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="w-full flex gap-4">
+                
+                <div class="w-full  flex flex-col mb-4">
+                    <label for="ufr" class="font-medium text-zinc-700">Provenance</label>
+                    <select name="ufr" id="ufr" class="input-2">
+                        <option value="">Dakar</option>
+                        <option value="">Thiès</option>
+                        <option value="">Diourbel</option>
+                        <option value="">Kaolack</option>
+                        <option value="">Kolda</option>
+                        <option value="">Saint-Louis</option>
+                        <option value="">Louga</option>
+                        <option value="">Tambacounda</option>
+                        <option value="">Fatick</option>
+                        <option value="">Matam</option>
+                        <option value="">Ziguinchor</option>
+                        <option value="">Kaffrine</option>
+                        <option value="">Kédougou</option>
+                        <option value="">Sédhiou</option>
+                    </select>
+                </div>
+
+                <div class="w-full  flex flex-col mb-4">
+                    <label for="ufr" class="font-medium text-zinc-700">Statut</label>
+                    <select name="ufr" id="ufr" class="input-2">
+                        <option value="">Actif</option>
+                        <option value="">Inactif</option>
+                    </select>
+                </div>
+            </div>
+            
+                
+        </div>
+        <div class="flex gap-4 items-center">
+            <button type="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white font-medium flex justify-center items-center gap-2">
+                Ajouter
+            </button>
+            <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 font-semibold flex justify-center items-center gap-2">
+                Restaurer
+            </button>
+        </div>
+    </form>
+</div>
+@endsection
