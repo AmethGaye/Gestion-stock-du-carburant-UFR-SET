@@ -20,7 +20,7 @@ use App\Http\Controllers\auth\ForgotPasswordController;
 
 Route::get('/', function () {
     return view('users.directeur.activites');
-});
+})->middleware('auth');
 
 
 /*

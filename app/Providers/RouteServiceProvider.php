@@ -17,7 +17,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+
+    // si l'utilisateur connecté tente d'aceder a une oage reservé au vsiteur il sera redirigé vers la racine / HOME
+    public const HOME = '/';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
