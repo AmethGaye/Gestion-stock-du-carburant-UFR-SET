@@ -11,23 +11,25 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
 
     /**
      * renvoie le formulaire de connexion
      */
     public function create()
     {
-      /*  User::create( [
-                'nom' =>'BA',
-                'prenom'=>'mamadou',
-                'email' => 'mamadou.ba2@univ-thies.sn',
-                'role'=>'admins',
-                'status'=>'',
-                'date_naiss'=>'2000-06-01',
-                'password'=>Hash::make('12345678'),
-        ]
-        );
-      */
+    //   User::create( [
+    //             'nom' =>'Gaye',
+    //             'prenom'=>'Mouhamad',
+    //             'email' => 'mouhamad.gaye@univ-thies.sn',
+    //             'role'=>'admin',
+    //             'status'=>'',
+    //             'date_naiss'=>'2000-11-18',
+    //             'password'=>Hash::make('12345678'),
+    //     ]);
 
         return view('auth.login');
     }
@@ -48,16 +50,16 @@ class LoginController extends Controller
            // essayer de rediriger chaque type d'utilisateur a sa fenetre
 
            switch (Auth::user()->role){
-               case 'admins' :
+               case 'admin' :
                    // il retourne l'utilisateur dans la pase de connnexion pour le moment
-                   return redirect()->intended('/');
+                return redirect()->route('admin.dashboard');
                    break;
                case 'assistant':
 
                    // il retourne l'utilisateur dans la pase de connnexion pour le moment
                    return redirect()->intended('login');
 
-               case 'chef departement':
+               case 'chef_departement':
                    // il retourne l'utilisateur dans la pase de connnexion pour le moment
                    return redirect()->intended('login');
 

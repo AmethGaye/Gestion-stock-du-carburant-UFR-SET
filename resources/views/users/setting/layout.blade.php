@@ -5,8 +5,8 @@
 
     {{-- liens utiles au chef de departement --}}
     <div class="border-b-zinc-200 border-b-2 mb-8 font-nunito font-medium">
-        <a href="" class="py-3 px-6 inline-block font-semibold relative cr text-zinc-600">Compte</a>
-        <a href="" class="py-3 px-6 inline-block font-semibold relative text-zinc-400">Changer Mot De Passe</a>
+        <a href="{{ route('setting.compte') }}" class="py-3 px-6 inline-block font-semibold relative @if(Route::currentRouteName() == 'setting.compte') cr text-zinc-800 @else text-zinc-400 @endif">Compte</a>
+        <a href="{{ route('setting.password') }}" class="py-3 px-6 inline-block font-semibold relative @if(Route::currentRouteName() == 'setting.password') cr text-zinc-800 @else text-zinc-400 @endif">Changer Mot De Passe</a>
     </div>
         
     {{-- choix entre les deux liens : tous les cours ou approbation --}}
