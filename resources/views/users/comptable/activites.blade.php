@@ -36,19 +36,13 @@
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.933058 0.879586C1.17714 0.613462 1.57286 0.613462 1.81694 0.879586L5.93306 5.36749C6.17714 5.63362 6.57286 5.63362 6.81694 5.36749L10.9331 0.879587C11.1771 0.613463 11.5729 0.613463 11.8169 0.879587C12.061 1.14571 12.061 1.57718 11.8169 1.84331L7.70082 6.33121C6.96859 7.12959 5.78141 7.12959 5.04918 6.33121L0.933058 1.84331C0.688981 1.57718 0.688981 1.14571 0.933058 0.879586Z" fill="#52525B"/>
                 </svg>
             </button>
-
-            <button  type="menu" class="btn-1 bg-zinc-800 text-white" onclick="displayContainer(3)">
-                <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
-                    <path d="M6.5 1.30493V12.3049M12 6.80493L1 6.80493" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                </svg>                        
-                Activité
-            </button>
         </div>
     </div>
     {{-- activites --}}
 
     {{-- row 1 --}}
     <div class="bg-white mb-6 rounded-md border border-zinc-200 px-6 ">
+        {{-- BLOC 1 --}}
         <div class="flex items-center justify-between text-sm text-zinc-500 font-medium py-3">
             <div class="">
                 <div class="flex items-center gap-4 mb-3">
@@ -76,16 +70,10 @@
                     Distance : <span class="font-bold">76km</span>                
                 </div>
             </div>
+            {{-- BLOC 2 --}}
             <div class="flex items-center text-zinc-600 gap-2">
                 <form action="" method="" class="m-0">
-                    <button class="font-bold text-sm text-zinc-400" disabled>Editer</button>
-                </form>
-    
-                {{-- separator --}}
-                <div class=" w-0.5 h-6 bg-zinc-200"></div>
-    
-                <form action="" method="" class="m-0">
-                    <button class="font-bold text-sm text-[#FFB200]">Supprimer</button>
+                    <button class="font-bold text-sm text-zinc-600 mr-2">Restaurer</button>
                 </form>
     
                 {{-- separator --}}
@@ -102,6 +90,7 @@
     
     {{-- row 2 --}}
     <div class="bg-white mb-6 rounded-md border border-zinc-200 px-6 ">
+        {{-- BLOC 1 --}}
         <div class="flex items-center justify-between text-sm text-zinc-500 font-medium py-3">
             <div class="">
                 <div class="flex items-center gap-4 mb-3">
@@ -129,44 +118,57 @@
                     Distance : <span class="font-bold">76km</span>                
                 </div>
             </div>
+            {{-- BLOC 2 --}}
             <div class="flex items-center text-zinc-600 gap-2">
                 <form action="" method="" class="m-0">
-                    <button class="font-bold text-sm ">Editer</button>
-                </form>
-    
-                {{-- separator --}}
-                <div class=" w-0.5 h-6 bg-zinc-200"></div>
-    
-                <form action="" method="" class="m-0">
-                    <button class="font-bold text-sm text-[#FFB200]">Supprimer</button>
+                    <button class="font-bold text-sm text-zinc-400 mr-2" disabled>Restaurer</button>
                 </form>
     
                 {{-- separator --}}
                 <div class=" w-0.5 h-6 bg-zinc-200"></div>
     
                 <span class="icon-hover">
-                    <svg width="18" height="2" viewBox="0 0 18 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17 1L1 1" stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
-                    </svg>                                            
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 1V17M17 9L1 9" stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
+                    </svg>                    
                 </span>
             </div>
         </div>
         <div class="border-t border-t-zinc-200 py-4">
             <h3 class="text-[15px] font-semibold text-zinc-600">Description </h3>
-            <p class="mt-2">
+            <p class="mt-3 mb-8">
                 Select products that will be available via this channel. You can assign products to multiple channels. 
                 Select products that will be available via this channel. You can assign products to multiple channels.
                 Select products that will be available via this channel. You can assign products to multiple channels.
                 Select products that will be available via this channel. You can assign products to multiple channels.
                 Select products that will be available via this channel. You can assign products to multiple channels.
             </p>
-            <div class="flex py-2 justify-end">
+            <div class="flex justify-between">
                 <div class="flex items-center">
                     <span class="font-bold text-sm mr-4">Demande:</span>
                     <span class="flex justify-center">
                         <span class="flex items-center bg-orange-100 px-4 text-orange-500 py-1.5 rounded-md font-semibold text-sm">5 Tickets</span>
                     </span>
                 </div>
+
+                <form action="" class="m-0 flex gap-4">
+                    <div class="w-28 relative ">
+                        <input type="text" name="" id="" value="5" class="border-[1.5px] border-zinc-200 w-full rounded-md outline-none focus:border-zinc-500 px-4 py-2 font-bold text-zinc-600">
+                        <div class="absolute right-2 top-1/2 -translate-y-1/2 flex">
+                            <button type="button" class="w-7 h-7 mr-1  bg-zinc-100 flex items-center justify-center rounded-md">
+                                <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 1.4999C12 1.65903 11.9473 1.81165 11.8536 1.92417C11.7598 2.03669 11.6326 2.0999 11.5 2.0999H0.5C0.367392 2.0999 0.240215 2.03669 0.146447 1.92417C0.0526785 1.81165 0 1.65903 0 1.4999C0 1.34077 0.0526785 1.18816 0.146447 1.07564C0.240215 0.963117 0.367392 0.899902 0.5 0.899902H11.5C11.6326 0.899902 11.7598 0.963117 11.8536 1.07564C11.9473 1.18816 12 1.34077 12 1.4999Z" fill="#1C1C1C"/>
+                                </svg>                                    
+                            </button>
+                            <button type="button" class="w-7 h-7 bg-zinc-100 flex items-center justify-center rounded-md">
+                                <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 6.5C12 6.63261 11.9473 6.75979 11.8536 6.85355C11.7598 6.94732 11.6326 7 11.5 7H6.5V12C6.5 12.1326 6.44732 12.2598 6.35355 12.3536C6.25979 12.4473 6.13261 12.5 6 12.5C5.86739 12.5 5.74021 12.4473 5.64645 12.3536C5.55268 12.2598 5.5 12.1326 5.5 12V7H0.5C0.367392 7 0.240215 6.94732 0.146447 6.85355C0.0526785 6.75979 0 6.63261 0 6.5C0 6.36739 0.0526785 6.24021 0.146447 6.14645C0.240215 6.05268 0.367392 6 0.5 6H5.5V1C5.5 0.867392 5.55268 0.740215 5.64645 0.646447C5.74021 0.552679 5.86739 0.5 6 0.5C6.13261 0.5 6.25979 0.552679 6.35355 0.646447C6.44732 0.740215 6.5 0.867392 6.5 1V6H11.5C11.6326 6 11.7598 6.05268 11.8536 6.14645C11.9473 6.24021 12 6.36739 12 6.5Z" fill="#1C1C1C"/>
+                                </svg>   
+                            </button>
+                        </div>
+                    </div>
+                    <button class="btn bg-[#00B69B] text-white font-bold">Valider</button>
+                </form>
             </div>
         </div>
     </div>

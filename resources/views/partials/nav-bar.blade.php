@@ -1,4 +1,4 @@
-<div class="bg-white h-[69.5px] shadow_2 flex items-center justify-between px-6 relative">
+<div class="bg-white h-[69.5px] shadow_2 flex items-center justify-between px-6 fixed left-[280px] nav-bar z-50">
     {{-- Rechercher  sur l'ensemble du site --}}
     <form action="" class="flex items-center p-0 m-0">
         <div class="flex items-center relative">
@@ -7,7 +7,7 @@
                     <path d="M15.178 16.0683L10.4655 11.0455M12.052 6.87446C12.0433 10.1027 9.56776 12.7132 6.52264 12.7052C3.47752 12.6971 1.01599 10.0736 1.02465 6.84531C1.03332 3.61704 3.5089 1.00652 6.55402 1.01457C9.59914 1.02262 12.0607 3.64618 12.052 6.87446Z" stroke="#71717A" stroke-width="1.56321" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </label>
-            <input type="text" name='search' id="search" placeholder="Rechercher" class="pr-3 pl-9 py-1.5 outline-none w-80 bg-transparent text-sm text-zinc-500 border border-zinc-300 bg-zinc-100 rounded-md focus:border-zinc-500">
+            <input type="text" name='main-search' id="main-search" placeholder="Rechercher" class="pr-3 pl-9 py-1.5 outline-none w-80 bg-transparent text-sm text-zinc-500 border border-zinc-300 bg-zinc-100 rounded-md focus:border-zinc-500">
         </div>
     </form>
     <div class="flex items-center gap-4 ">
@@ -24,8 +24,8 @@
         {{-- profile utilisateur --}}
         <div class="flex items-center gap-3">
             <div>
-                <h2 class="text-sm font-semibold text-right">Mouhamad Gaye</h2>
-                <p class="text-xs text-right text-zinc-500 ">Admin</p>
+                <h2 class="text-sm font-semibold text-right text-zinc-800">Mouhamad Gaye</h2>
+                <p class="text-xs text-right text-zinc-400 font-medium tracking-wide">Admin</p>
             </div>
             <div class="rounded-full border border-zinc-200 overflow-hidden flex items-center justify-center cursor-pointer">
                 <img src="{{ asset('images/user.png') }}" alt="" class="w-10 h-10 object-cover rounded-full object-center" >

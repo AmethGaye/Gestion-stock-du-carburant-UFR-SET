@@ -14,7 +14,7 @@
                 @csrf
                 <div class="mb-6">
                     <div class="w-full  flex flex-col mb-4">
-                        <label for="email">Email</label>
+                        <label for="email" class="text-zinc-700 font-medium">Email</label>
                         <input type="text" name="email" placeholder="ahmada@gmail.com" id="email" class="input">
                     </div>
                     @error('email')
