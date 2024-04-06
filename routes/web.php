@@ -22,8 +22,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 */
 
 Route::get('/', function () {
-    return redirect()->route('auth.login');
-});
+    return view('users.directeur.activites');
+})->middleware('auth');
+
 
 
 /*
@@ -41,8 +42,8 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout'])->name('auth.logout')->middleware('auth');
 
 // oubli de mot de passe
-Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.email') ;//->middleware('guest');
-Route::post('/forgot-password', [ForgotPasswordController::class, 'store']) ;//->middleware('guest');
+Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.email')->middleware('guest');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->middleware('guest');
 
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'create'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'update'])->name('password.update');
