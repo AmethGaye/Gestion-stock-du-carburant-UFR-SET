@@ -50,7 +50,7 @@ class LoginController extends Controller
            switch (Auth::user()->role){
                case 'admins' :
                    // il retourne l'utilisateur dans la pase de connnexion pour le moment
-                   return redirect()->intended('login');
+                   return redirect()->intended('/');
                    break;
                case 'assistant':
 
