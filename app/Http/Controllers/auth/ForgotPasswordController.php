@@ -29,7 +29,7 @@ class ForgotPasswordController extends Controller
     {
         $token = Str::random(64);
 
-        // Vérifier si un token existe déjà pour cet email
+        // On  Vérifie si un token existe déjà pour cet email
         $existingToken = DB::table('password_reset_tokens')
             ->where('email', $request->email)
             ->first();
@@ -43,7 +43,7 @@ class ForgotPasswordController extends Controller
                     'created_at' => Carbon::now(),
                 ]);
         } else {
-            // Insérer un nouveau token
+            // sinon on Insére un nouveau token
             DB::table('password_reset_tokens')->insert([
                 'email' => $request->email,
                 'token' => $token,
