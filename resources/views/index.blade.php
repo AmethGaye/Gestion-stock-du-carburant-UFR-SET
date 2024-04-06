@@ -1,7 +1,5 @@
 @extends('base')
 
-@section('section')
-    <section>
-        div
-    </section>
+@section('section-2')
+
 @endsection

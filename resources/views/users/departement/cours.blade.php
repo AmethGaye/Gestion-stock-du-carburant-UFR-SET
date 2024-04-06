@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('section')
-<section class="px-6 min-h-screen h-screen ">
+<section class="px-6 min-h-screen ">
 
     {{-- liens utiles au chef de departement --}}
     <div class="border-b-zinc-200 border-b-2 mb-10">
@@ -43,7 +43,7 @@
                 </svg>
             </button>
 
-            <button  type="menu" class="btn-1 bg-zinc-800 text-white">
+            <button  type="menu" class="btn-1 bg-zinc-800 text-white" onclick="displayContainer(2)">
                 <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
                     <path d="M6.5 1.30493V12.3049M12 6.80493L1 6.80493" stroke="white" stroke-width="2" stroke-linecap="round"/>
                 </svg>                        

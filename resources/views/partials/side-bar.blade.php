@@ -12,7 +12,7 @@
                     </svg>
                 </a>
                 <div>
-                    <h2 class="font-open-sans font-bold ">Gestion Stock</h2>
+                    <h2 class="font-open-sans font-bold text-zinc-800">Gestion Stock</h2>
                     <p class="text-xs font-semibold text-zinc-500">du carburant de l’UFR SET</p>
                 </div>
             </div>

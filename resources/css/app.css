@@ -10,7 +10,6 @@
     }
  }
 
-
 .shadow_1{
     box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px;
 }
@@ -18,12 +17,17 @@
   box-shadow: rgba(0, 0, 0, 0.011) 0px 1px 3px 0px, rgba(27, 31, 35, 0.05) 0px 0px 0px 1px;
 }
 
+
 .input{
-  @apply text-zinc-600 text-sm  px-4 py-2.5 rounded-lg border border-zinc-300 bg-transparent mt-1 outline-none transition-all duration-200 focus:border-zinc-800;
+  @apply text-zinc-600 text-sm  px-4 py-2.5 rounded-lg border-[1.5px] border-zinc-200 bg-transparent mt-1 outline-none transition duration-200 focus:border-zinc-800;
+}
+
+.input-2{
+  @apply text-zinc-600  text-sm px-4 py-3 rounded-lg border-zinc-200 border-[1.5px] bg-transparent mt-1 outline-none transition duration-200 focus:border-zinc-800;
 }
 
 .icon-hover{
-  @apply transition-all duration-300 w-9 h-9 flex items-center justify-center hover:bg-zinc-100 rounded-lg
+  @apply transition duration-300 w-9 h-9 flex items-center justify-center hover:bg-zinc-100 rounded-lg
 }
 
 .icon-hover-2{
@@ -38,16 +42,28 @@
   @apply transition-all duration-200 ease-linear
 }
 
+.trans-2 {
+  @apply transition-all duration-200 ease-linear delay-75
+}
+
 .baton {
   @apply  before:absolute before:-left-2 before:w-1 before:h-1/2 before:bg-zinc-800 before:rounded
 }
 
-main {
+main, .nav-bar {
   width: calc(100% - 280px);
 }
 
+.ww {
+    width : calc(100% - 70px);
+}
+
+.mw{
+  width : calc(100% - 860px);
+}
+
 .btn {
-  @apply px-4 py-2 rounded-md text-sm flex gap-2 items-center tracking-wide;
+  @apply px-4 py-2 rounded-md text-sm flex gap-2 items-center justify-center tracking-wide;
 }
 
 
@@ -56,12 +72,16 @@ main {
 }
 
 .btn-2{
-  @apply px-2 py-1 rounded text-sm flex gap-2 items-center tracking-wide;
+  @apply px-2.5 py-1 rounded text-xs flex gap-2 items-center justify-center tracking-wide;
 }
 .btn-3{
   @apply px-4 py-1 rounded text-sm flex gap-2 items-center tracking-wide;
 }
 
 .cr{
-  @apply before:absolute before:left-0 before:-bottom-[2.5px] before:w-full before:h-[3px] before:rounded-lg before:bg-zinc-600 
+  @apply before:absolute before:left-0 before:-bottom-[2.5px] before:w-full before:h-[3px] before:rounded-lg before:bg-zinc-600
+}
+
+.light-bg {
+  background-color : rgba(0, 0, 0, 0.8);
 }

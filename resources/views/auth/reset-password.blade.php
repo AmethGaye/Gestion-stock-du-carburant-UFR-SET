@@ -13,7 +13,7 @@
             <form action="" class="mt-10">
                 <div class="mb-6">
                     <div class="w-full flex flex-col relative">
-                        <label for="password">Nouveau mot de passe</label>
+                        <label for="password" class="text-zinc-700 font-medium">Nouveau mot de passe</label>
                         <input type="password" name="password" id="password" class="input">
                         <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-4 top-[41px] hidden cursor-pointer">
                             <path d="M1.24666 9.17176C0.917778 8.42865 0.917778 7.57136 1.24666 6.82824C2.76905 3.38843 6.11596 1 10 1C13.884 1 17.2309 3.38843 18.7533 6.82824C19.0822 7.57136 19.0822 8.42865 18.7533 9.17176C17.2309 12.6116 13.884 15 10 15C6.11596 15 2.76905 12.6116 1.24666 9.17176Z" stroke="#4B5563" stroke-width="2"/>
@@ -25,7 +25,7 @@
                             
                     </div>
                     <div class="w-full flex flex-col relative">
-                        <label for="password">Confirmer votre mot de passe</label>
+                        <label for="password" class="text-zinc-700 font-medium">Confirmer votre mot de passe</label>
                         <input type="password" name="password" id="password" class="input">
                         <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-4 top-[41px] hidden cursor-pointer">
                             <path d="M1.24666 9.17176C0.917778 8.42865 0.917778 7.57136 1.24666 6.82824C2.76905 3.38843 6.11596 1 10 1C13.884 1 17.2309 3.38843 18.7533 6.82824C19.0822 7.57136 19.0822 8.42865 18.7533 9.17176C17.2309 12.6116 13.884 15 10 15C6.11596 15 2.76905 12.6116 1.24666 9.17176Z" stroke="#4B5563" stroke-width="2"/>
