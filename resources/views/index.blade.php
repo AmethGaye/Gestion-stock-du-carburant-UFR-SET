@@ -2,6 +2,6 @@
 
 @section('section')
     <section>
-        div
+      
     </section>
 @endsection
