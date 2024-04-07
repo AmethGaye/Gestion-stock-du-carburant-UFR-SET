@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\auth\ResetPasswordController;
 use App\Http\Controllers\auth\ForgotPasswordController;
+use App\Http\Controllers\RemboursementController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -22,8 +24,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 */
 
 Route::get('/', function () {
-    return view('users.directeur.activites');
-})->middleware('auth');
+    return redirect()->route('auth.login');
+});
 
 
 
@@ -69,6 +71,13 @@ Route::post('/admin/users/register', [UserController::class, 'store']);
 /*
     les Routes du directeur
 */
+Route::get('/directeur/dashboard', [DashboardController::class, 'index'])->name('directeur.dashboard');
+Route::get('/directeur/activite', [ActiviteController::class, 'index'])->name('directeur.activites');
+Route::get('/directeur/activite/update/{id}', [ActiviteController::class, 'edit'])->name('activite.edit');
+Route::get('/directeur/activite/update/{id}', [ActiviteController::class, 'update']);
+Route::get('/directeur/activite/delete/{id}', [ActiviteController::class, 'destroy'])->name('activite.delete');
 
+Route::get('/directeur/demandes', [RemboursementController::class, 'index'])->name('directeur.demandes');
+Route::post('/directeur/demandes/{id}', [RemboursementController::class, 'update'])->name('approuver');
 
 

@@ -24,7 +24,7 @@
         {{-- profile utilisateur --}}
         <div class="flex items-center gap-3">
             <div>
-                <h2 class="text-sm font-semibold text-right text-zinc-800">{{ auth()->user()->prenom." ".auth()->user()->nom }}</h2>
+                <h2 class="text-sm font-semibold text-right text-zinc-800 capitalize">{{ auth()->user()->prenom." ".auth()->user()->nom }}</h2>
                 <p class="text-xs text-right text-zinc-400 font-medium tracking-wide">{{ auth()->user()->role }}</p>
             </div>
             <div class="rounded-full border border-zinc-200 overflow-hidden flex items-center justify-center cursor-pointer">

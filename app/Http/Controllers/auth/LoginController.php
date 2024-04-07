@@ -69,7 +69,7 @@ class LoginController extends Controller
 
                case 'directeur':
                    // retourne l'utilsateur vers la page de connnexion pour le moment
-                   return redirect()->intended('login');
+                   return redirect()->route('directeur.dashboard');
 
                default :
                    // si l'utilisateur nest pas dans la base de donnée

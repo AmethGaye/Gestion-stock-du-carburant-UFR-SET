@@ -1,8 +1,8 @@
 @extends('layout')
 
 @section('content')
-    <div class="w-full h-full relative flex justify-center items-center bg-white">
-        <div class="w-5/12 relative">
+    <div class="w-full h-full relative flex justify-center items-center bg-white text-zinc-800 font-mtrph">
+        <div class="w-4/12 relative">
             <div class="w-full  flex items-center flex-col">
                 <div class="overflow-hidden rounded-lg  border border-zinc-200 shadow_1">
                     <img src="{{ asset('images/ufr_set.jpg') }}" alt="" class="w-32 h-32 object-cover ">

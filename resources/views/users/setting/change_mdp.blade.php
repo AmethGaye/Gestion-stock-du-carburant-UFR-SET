@@ -1,8 +1,8 @@
 @extends('users.setting.layout')
 
 @section('setting-content')
-<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6">
-    <h1 class="font-semibold text-lg text-zinc-700 mb-10">Changement De Mot De Passe</h1>
+<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 font-mtrph">
+    <h1 class="font-semibold text-lg text-zinc-700 mb-10">Changement de mot de passe</h1>
     <form action="" method="" class="m-0 mt-6">
         @csrf
         <div class="mb-10 ">
@@ -47,7 +47,7 @@
             <button type="submit" class="px-4 py-2.5 rounded-lg bg-zinc-800 text-white font-medium flex justify-center items-center gap-2">
                 Changer
             </button>
-            <button type="submit" class="px-4 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 font-semibold flex justify-center items-center gap-2">
+            <button type="submit" class="px-4 py-2.5 rounded-lg bg-zinc-100 text-zinc-800 font-mediumflex justify-center items-center gap-2">
                 Restaurer
             </button>
         </div>

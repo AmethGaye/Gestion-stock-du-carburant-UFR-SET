@@ -8,8 +8,11 @@ export default {
   theme: {
     extend: {
       fontFamily :{
-        'nunito' : ['Nunito Sans '],
-        'open-sans' : ['open sans']
+        'nunito' : ['Nunito Sans ', 'verdana'],
+        'open-sans' : ['open sans', 'verdana'],
+        'mtrph' : ['Metrophobic'],
+        'tt-web' : ['Titillium Web'],
+        'inter' : ['inter'],
       }
     },
   },
