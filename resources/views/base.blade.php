@@ -4,7 +4,7 @@
 @include('partials.side-bar')
 {{-- inclusion de la barre de navigation --}}
 @include('partials.nav-bar')
-<main class="relative left-[280px] top-[69.5px] pb-10">
+<main class="relative left-[280px] top-[69.5px] pb-10 px-2">
     <div class="px-6  py-3 text-sm font-medium text-zinc-400 mb-4">
         pages
         <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline mx-2">
@@ -22,16 +22,16 @@
 
 {{-- toutes les formulaires et les messages d'alertes --}}
 
-<div class="w-screen h-screen absolute left-0 top-0 -z-50 light-bg transition-opacity duration-100 ease-in-out flex items-center justify-center text-sm invisible opacity-0 scale-0" id="container">
+<div class="w-screen h-screen absolute left-0 top-0 -z-50 light-bg transition-opacity duration-100 ease-in-out flex items-center justify-center invisible opacity-0 scale-0" id="container">
     
     {{-- FIRST : FORMULAIRE D'AJOUT D'UN NOUVEL UTILISATEUR--}}
      @yield('new-user') 
 
     {{-- SECOND : FORMULAIRE D'AJOUT D'UN VACATAIRE--}}
-    @yield('new-vacataire')
+    {{-- @yield('new-vacataire') --}}
 
     {{-- THIRD : FORMULAIRE D'AJOUT D'UN COURS--}}
-    @yield('new-cours')
+    {{-- @yield('new-cours') --}}
 
     {{-- THIRD : FORMULAIRE D'AJOUT D'UNe ACTIVITE--}}
     @yield('new-activity')

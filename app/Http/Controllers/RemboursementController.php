@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ActiviteController extends Controller
+class RemboursementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,7 +12,11 @@ class ActiviteController extends Controller
     public function index()
     {
         if(auth()->user()->role == 'directeur'){
-            return view('users.directeur.activites');
+            return view('users.directeur.demandes');
+        }
+        
+        if(auth()->user()->role == 'comptable'){
+            return view('users.comptable.remboursement');
         }
     }
 

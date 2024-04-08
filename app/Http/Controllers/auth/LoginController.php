@@ -56,14 +56,10 @@ class LoginController extends Controller
                    // il retourne l'utilisateur dans la pase de connnexion pour le moment
                 return redirect()->route('admin.dashboard');
                    break;
-               case 'assistant':
+               case 'assistant' || 'chef_departement':
 
                    // il retourne l'utilisateur dans la pase de connnexion pour le moment
-                   return redirect()->intended('login');
-
-               case 'chef_departement':
-                   // il retourne l'utilisateur dans la pase de connnexion pour le moment
-                   return redirect()->intended('login');
+                   return redirect()->route('departement.dashboard');
 
                case 'comptable':
                    // retourne l'utilsateur vers la page de connnexion pour le moment
@@ -71,7 +67,7 @@ class LoginController extends Controller
 
                case 'directeur':
                    // retourne l'utilsateur vers la page de connnexion pour le moment
-                   return redirect()->intended('login');
+                   return redirect()->route('directeur.dashboard');
 
                default :
                    // si l'utilisateur nest pas dans la base de donnée

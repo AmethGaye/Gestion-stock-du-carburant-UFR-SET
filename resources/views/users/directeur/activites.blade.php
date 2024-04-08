@@ -37,7 +37,7 @@
                 </svg>
             </button>
 
-            <button  type="menu" class="btn-1 bg-zinc-800 text-white" onclick="displayContainer(3)">
+            <button  type="menu" class="btn-1 border border-zinc-800 bg-zinc-800 text-white" onclick="displayContainer()">
                 <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
                     <path d="M6.5 1.30493V12.3049M12 6.80493L1 6.80493" stroke="white" stroke-width="2" stroke-linecap="round"/>
                 </svg>                        
@@ -47,14 +47,16 @@
     </div>
     {{-- activites --}}
 
-    {{-- row 1 --}}
-    <div class="bg-white mb-6 rounded-md border border-zinc-200 px-6 ">
-        <div class="flex items-center justify-between text-sm text-zinc-500 font-medium py-3">
+
+    
+    {{-- row 2 --}}
+    <div class="bg-white mb-6 rounded-md border border-zinc-200 px-6 overflow-y-hidden h-20 " id="act-container">
+        <div class="flex items-center justify-between text-sm text-zinc-500 font-medium h-20">
             <div class="">
-                <div class="flex items-center gap-4 mb-3">
-                    <h2 class="text-base font-bold text-zinc-700">Sortie Pédagogique</h2>
+                <div class="flex items-center gap-4 mb-2.5">
+                    <h2 class="text-base font-bold font-inter text-zinc-700">Sortie Pédagogique</h2>
                     <span class="flex justify-center items-center">
-                        <span class="flex items-center bg-[#E2FBD7] px-4 text-[#34B53A] py-1.5 rounded-md font-semibold text-sm">Validé</span>
+                        <span class="flex items-center bg-[#E2FBD7] px-4 text-[#34B53A] py-1.5 rounded-md font-semibold text-xs">Validé</span>
                     </span>
                 </div>
                 <div class="flex items-center gap-2">
@@ -76,82 +78,31 @@
                     Distance : <span class="font-bold">76km</span>                
                 </div>
             </div>
-            <div class="flex items-center text-zinc-600 gap-2">
-                <form action="" method="" class="m-0">
-                    <button class="font-bold text-sm text-zinc-400" disabled>Editer</button>
-                </form>
+            <div class="flex items-center text-zinc-700 gap-3">
+
+                <button class="text-sm font-semibold" onclick="displayContainer()">Editer</button>
     
                 {{-- separator --}}
                 <div class=" w-0.5 h-6 bg-zinc-200"></div>
     
                 <form action="" method="" class="m-0">
-                    <button class="font-bold text-sm text-[#FFB200]">Supprimer</button>
+                    <button class="font-semibold text-sm text-[#FFB200] ">Supprimer</button>
                 </form>
     
                 {{-- separator --}}
                 <div class=" w-0.5 h-6 bg-zinc-200"></div>
     
-                <span class="icon-hover">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9 1V17M17 9L1 9" stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
-                    </svg>                    
+                <span class="icon-hover cursor-pointer" id="plus">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
+                        <path d="M10 2V18M18 10L2 10" stroke="#9FA6B2" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg> 
+                    <svg width="20" height="4" viewBox="0 0 20 4" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden">
+                        <path d="M18 2L2 2" stroke="#9FA6B2" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>                                                                  
                 </span>
             </div>
         </div>
-    </div>
-    
-    {{-- row 2 --}}
-    <div class="bg-white mb-6 rounded-md border border-zinc-200 px-6 ">
-        <div class="flex items-center justify-between text-sm text-zinc-500 font-medium py-3">
-            <div class="">
-                <div class="flex items-center gap-4 mb-3">
-                    <h2 class="text-base font-bold text-zinc-700">Sortie Pédagogique</h2>
-                    {{-- <span class="flex justify-center items-center">
-                        <span class="flex items-center bg-[#E2FBD7] px-4 text-[#34B53A] py-1.5 rounded-md font-semibold text-xs">Validé</span>
-                    </span> --}}
-                </div>
-                <div class="flex items-center gap-2">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
-                        <path d="M4.33333 3.66667V1M9.66667 3.66667V1M3.66667 6.33333H10.3333M2.33333 13H11.6667C12.0203 13 12.3594 12.8595 12.6095 12.6095C12.8595 12.3594 13 12.0203 13 11.6667V3.66667C13 3.31304 12.8595 2.97391 12.6095 2.72386C12.3594 2.47381 12.0203 2.33333 11.6667 2.33333H2.33333C1.97971 2.33333 1.64057 2.47381 1.39052 2.72386C1.14048 2.97391 1 3.31304 1 3.66667V11.6667C1 12.0203 1.14048 12.3594 1.39052 12.6095C1.64057 12.8595 1.97971 13 2.33333 13Z" stroke="#6F727A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg> 
-                    Sep 15, 2024
-                    <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.9375 5.13068C2.53646 5.13068 2.17022 5.03291 1.83878 4.83736C1.50734 4.63849 1.24219 4.37334 1.04332 4.0419C0.847775 3.71046 0.75 3.34422 0.75 2.94318C0.75 2.53883 0.847775 2.17259 1.04332 1.84446C1.24219 1.51302 1.50734 1.24953 1.83878 1.05398C2.17022 0.855113 2.53646 0.755682 2.9375 0.755682C3.34186 0.755682 3.7081 0.855113 4.03622 1.05398C4.36766 1.24953 4.63116 1.51302 4.8267 1.84446C5.02557 2.17259 5.125 2.53883 5.125 2.94318C5.125 3.34422 5.02557 3.71046 4.8267 4.0419C4.63116 4.37334 4.36766 4.63849 4.03622 4.83736C3.7081 5.03291 3.34186 5.13068 2.9375 5.13068Z" fill="#6F727A"/>
-                    </svg>
-                    Adresse : <span class="font-bold">Mboro</span>  
-                    <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.9375 5.13068C2.53646 5.13068 2.17022 5.03291 1.83878 4.83736C1.50734 4.63849 1.24219 4.37334 1.04332 4.0419C0.847775 3.71046 0.75 3.34422 0.75 2.94318C0.75 2.53883 0.847775 2.17259 1.04332 1.84446C1.24219 1.51302 1.50734 1.24953 1.83878 1.05398C2.17022 0.855113 2.53646 0.755682 2.9375 0.755682C3.34186 0.755682 3.7081 0.855113 4.03622 1.05398C4.36766 1.24953 4.63116 1.51302 4.8267 1.84446C5.02557 2.17259 5.125 2.53883 5.125 2.94318C5.125 3.34422 5.02557 3.71046 4.8267 4.0419C4.63116 4.37334 4.36766 4.63849 4.03622 4.83736C3.7081 5.03291 3.34186 5.13068 2.9375 5.13068Z" fill="#6F727A"/>
-                    </svg>
-                    Région : <span class="font-bold">Dakar</span>
-                    <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.9375 5.13068C2.53646 5.13068 2.17022 5.03291 1.83878 4.83736C1.50734 4.63849 1.24219 4.37334 1.04332 4.0419C0.847775 3.71046 0.75 3.34422 0.75 2.94318C0.75 2.53883 0.847775 2.17259 1.04332 1.84446C1.24219 1.51302 1.50734 1.24953 1.83878 1.05398C2.17022 0.855113 2.53646 0.755682 2.9375 0.755682C3.34186 0.755682 3.7081 0.855113 4.03622 1.05398C4.36766 1.24953 4.63116 1.51302 4.8267 1.84446C5.02557 2.17259 5.125 2.53883 5.125 2.94318C5.125 3.34422 5.02557 3.71046 4.8267 4.0419C4.63116 4.37334 4.36766 4.63849 4.03622 4.83736C3.7081 5.03291 3.34186 5.13068 2.9375 5.13068Z" fill="#6F727A"/>
-                    </svg> 
-                    Distance : <span class="font-bold">76km</span>                
-                </div>
-            </div>
-            <div class="flex items-center text-zinc-600 gap-2">
-                <form action="" method="" class="m-0">
-                    <button class="font-bold text-sm ">Editer</button>
-                </form>
-    
-                {{-- separator --}}
-                <div class=" w-0.5 h-6 bg-zinc-200"></div>
-    
-                <form action="" method="" class="m-0">
-                    <button class="font-bold text-sm text-[#FFB200]">Supprimer</button>
-                </form>
-    
-                {{-- separator --}}
-                <div class=" w-0.5 h-6 bg-zinc-200"></div>
-    
-                <span class="icon-hover">
-                    <svg width="18" height="2" viewBox="0 0 18 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17 1L1 1" stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
-                    </svg>                                            
-                </span>
-            </div>
-        </div>
-        <div class="border-t border-t-zinc-200 py-4">
+        <div class="border-t border-t-zinc-200 py-4" id="desc">
             <h3 class="text-[15px] font-semibold text-zinc-600">Description </h3>
             <p class="mt-2">
                 Select products that will be available via this channel. You can assign products to multiple channels. 
@@ -179,7 +130,7 @@
 
 {{-- FORMULAIRE D'AJOUT D'UNe ACTIVITE --}}
 @section('new-activity')
-<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 w-7/12 scale-75 opacity-0 trans-2">
+<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 w-8/12 scale-75 opacity-0 trans-2 font-mtrph">
     <div class="flex items-center justify-between">
         <h1 class="font-semibold text-lg text-zinc-800">nouvelle Activité</h1>
         <div class="icon-hover-2 cursor-pointer" id="closer" >
@@ -241,7 +192,7 @@
             </div>
 
             <div class="w-full flex gap-4">
-                <textarea name="description" id="description" rows="" placeholder="Décrivez .... " class="input-2 w-full"></textarea> 
+                <textarea name="description" id="description" rows="7" placeholder="Décrivez .... " class="input-2 w-full"></textarea> 
             </div>   
                 
         </div>

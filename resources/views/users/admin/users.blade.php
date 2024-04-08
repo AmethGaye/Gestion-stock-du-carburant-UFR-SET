@@ -36,7 +36,7 @@
                     <span class="font-medium">csv</span>
                 </button>
 
-                <button  type="menu" class="btn-1 bg-zinc-800 text-white" id="new-user" onclick="displayContainer(0)">
+                <button  type="menu" class="btn-1 bg-zinc-800 text-white border border-zinc-800" id="new-user" onclick="displayContainer()">
                     <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
                         <path d="M6.5 1.30493V12.3049M12 6.80493L1 6.80493" stroke="white" stroke-width="2" stroke-linecap="round"/>
                     </svg>
@@ -161,6 +161,7 @@
             </div>
 
             {{-- pagination --}}
+<<<<<<< HEAD
             <div class="flex p-4 items-center justify-between text-zinc-800 font-medium mt-2">
                 <div class="font-medium text-zinc-400">
                     page 1 / 10
@@ -184,13 +185,16 @@
                     </a>
                 </div>
             </div>
+=======
+            @include('partials.pagination')
+>>>>>>> 87becefdf56c212dbbae3449c81c2883967d6fb5
         </div>
     </section>
 @endsection
 
 {{-- FORMULAIRE D'AJOUT D'UN NOUVEL UTILISATEUR --}}
 @section('new-user')
-<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 w-8/12 scale-75 opacity-0 trans-2 ">
+<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 w-8/12 scale-75 opacity-0 trans-2 font-mtrph">
     <div class="flex items-center justify-between">
         <h1 class="font-semibold text-lg text-zinc-800">Ajouter un nouveau utilisateur</h1>
         <div class="icon-hover-2 cursor-pointer" id="closer" >
@@ -307,7 +311,7 @@
             <button type="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white font-medium flex justify-center items-center gap-2">
                 Ajouter
             </button>
-            <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 font-semibold flex justify-center items-center gap-2">
+            <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-100 text-zinc-800 font-medium flex justify-center items-center gap-2">
                 Restaurer
             </button>
         </div>
