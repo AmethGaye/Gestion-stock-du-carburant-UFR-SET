@@ -1,15 +1,17 @@
 <?php
 
-use App\Http\Controllers\ActiviteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CoursController;
+use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\VacataireController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\RemboursementController;
 use App\Http\Controllers\auth\ResetPasswordController;
 use App\Http\Controllers\auth\ForgotPasswordController;
-use App\Http\Controllers\RemboursementController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -58,26 +60,55 @@ Route::post('/reset-password', [ResetPasswordController::class, 'update'])->name
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 Route::get('/admin/roles', [UserController::class, 'roles'])->name('admin.roles');
-
-Route::get('/admin/setting/compte', [UserController::class, 'edit_compte'])->name('setting.compte');
-Route::post('/admin/setting/compte', [UserController::class, 'update_compte']);
-
-Route::get('/admin/setting/change-password', [UserController::class, 'edit_password'])->name('setting.password');
-Route::post('/admin/setting/change-password', [UserController::class, 'update_password']);
-
 Route::post('/admin/users/register', [UserController::class, 'store']);
 
 
 /*
-    les Routes du directeur
+    Réglages
 */
+
+Route::get('/setting/compte', [UserController::class, 'edit_compte'])->name('setting.compte');
+Route::post('/setting/compte', [UserController::class, 'update_compte']);
+
+Route::get('/setting/change-password', [UserController::class, 'edit_password'])->name('setting.password');
+Route::post('/setting/change-password', [UserController::class, 'update_password']);
+
+
+
+
+/*
+    les Routes du Directeur
+*/
+
 Route::get('/directeur/dashboard', [DashboardController::class, 'index'])->name('directeur.dashboard');
-Route::get('/directeur/activite', [ActiviteController::class, 'index'])->name('directeur.activites');
-Route::get('/directeur/activite/update/{id}', [ActiviteController::class, 'edit'])->name('activite.edit');
-Route::get('/directeur/activite/update/{id}', [ActiviteController::class, 'update']);
-Route::get('/directeur/activite/delete/{id}', [ActiviteController::class, 'destroy'])->name('activite.delete');
+
+Route::get('/directeur/activites', [ActiviteController::class, 'index'])->name('directeur.activites');
+Route::post('/directeur/activites/update/{id}', [ActiviteController::class, 'update'])->name('activite.update');
+Route::post('/directeur/activites/delete/{id}', [ActiviteController::class, 'destroy'])->name('activite.delete');
 
 Route::get('/directeur/demandes', [RemboursementController::class, 'index'])->name('directeur.demandes');
 Route::post('/directeur/demandes/{id}', [RemboursementController::class, 'update'])->name('approuver');
+
+
+
+/*
+    les Routes du Département
+*/
+Route::get('/departement/dashboard', [DashboardController::class, 'index'])->name('departement.dashboard');
+
+Route::get('/departement/vacataires', [VacataireController::class, 'index'])->name('departement.vacataires');
+Route::post('/departement/vacataires/update/{id}', [VacataireController::class, 'update'])->name('vacataire.update');
+Route::post('/departement/vacataires/delete/{id}', [VacataireController::class, 'destroy'])->name('vacataire.delete');
+
+Route::get('/departement/cours/all', [CoursController::class, 'index'])->name('cours.all');
+Route::get('/departement/cours/approbation', [CoursController::class, 'approbation'])->name('cours.approbation');
+Route::post('/departement/cours/approbation/{id}', [CoursController::class, 'approuver'])->name('approuver');
+
+Route::post('/departement/cours/update/{id}', [CoursController::class, 'update'])->name('cours.update');
+Route::post('/departement/cours/delete/{id}', [CoursController::class, 'delete'])->name('cours.delete');
+
+
+
+
 
 

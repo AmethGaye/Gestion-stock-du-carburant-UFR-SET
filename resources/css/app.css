@@ -28,7 +28,7 @@
 }
 
 .icon-hover{
-  @apply transition duration-300 w-9 h-9 flex items-center justify-center hover:bg-zinc-100 rounded-lg
+  @apply transition duration-150 w-9 h-9 flex items-center justify-center hover:bg-zinc-100 rounded-lg
 }
 
 .icon-hover-2{
@@ -39,8 +39,8 @@
   @apply transition duration-200 ease-linear
 }
 
-.trans-all{
-  @apply transition-all duration-200 ease-linear
+.trans-height{
+  @apply transition-[height] duration-200 ease-linear
 }
 
 .trans-2 {
@@ -48,7 +48,7 @@
 }
 
 .baton {
-  @apply  before:absolute before:-left-2 before:w-1 before:h-1/2 before:bg-zinc-800 before:rounded
+  @apply  before:absolute before:-left-2 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-1/2 before:bg-zinc-800 before:rounded
 }
 
 main, .nav-bar {

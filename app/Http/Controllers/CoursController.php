@@ -2,18 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Vacataire;
 use Illuminate\Http\Request;
 
-class VacataireController extends Controller
+class CoursController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('users.departement.vacataires');
+        return view('users.deparetement.all');
     }
+
+    public function approbation(){
+        return view('users.departement.approbation');
+    }
+
+    public function approuver(string $id){
+        
+    }
+
 
     /**
      * Show the form for editing the specified resource.
