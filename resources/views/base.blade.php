@@ -27,11 +27,11 @@
     {{-- FIRST : FORMULAIRE D'AJOUT D'UN NOUVEL UTILISATEUR--}}
      @yield('new-user') 
 
-    {{-- SECOND : FORMULAIRE D'AJOUT D'UN VACATAIRE--}}
-    {{-- @yield('new-vacataire') --}}
+    {{-- SECOND : FORMULAIRE D'AJOUT D'UN VACATAIRE --}}
+    @yield('new-vacataire')
 
     {{-- THIRD : FORMULAIRE D'AJOUT D'UN COURS--}}
-    {{-- @yield('new-cours') --}}
+    @yield('new-cours')
 
     {{-- THIRD : FORMULAIRE D'AJOUT D'UNe ACTIVITE--}}
     @yield('new-activity')

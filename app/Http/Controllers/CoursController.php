@@ -14,7 +14,7 @@ class CoursController extends Controller
      */
     public function index()
     {
-        return view('users.deparetement.all');
+        return view('users.departement.all');
     }
 
     public function approbation(){

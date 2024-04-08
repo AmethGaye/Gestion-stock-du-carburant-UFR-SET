@@ -51,26 +51,20 @@ class LoginController extends Controller
 
            switch (Auth::user()->role){
                case 'admin' :
-                   // il retourne l'utilisateur dans la pase de connnexion pour le moment
-                return redirect()->route('admin.dashboard');
-                   break;
-               case 'assistant' || 'chef_departement':
-
-                   // il retourne l'utilisateur dans la pase de connnexion pour le moment
-                   return redirect()->route('departement.dashboard');
-
+                    return redirect()->route('admin.dashboard');
+                    break;
+                case 'directeur':
+                    return redirect()->route('directeur.dashboard');
+                    break;
                case 'comptable':
-                   // retourne l'utilsateur vers la page de connnexion pour le moment
-                   return redirect()->intended('login');
-
-               case 'directeur':
-                   // retourne l'utilsateur vers la page de connnexion pour le moment
-                   return redirect()->route('directeur.dashboard');
-
+                    return redirect()->route('comptable.dashboard');
+                    break;
+                case 'assistant' || 'chef_departement':
+                    return redirect()->route('departement.dashboard');
+                    break;
                default :
-                   // si l'utilisateur nest pas dans la base de donnée
                     return redirect()->route('auth.login')->withErrors(['email'=>'email invalide ou mot de passe erroné']);
-
+                    break;
 
            }
 

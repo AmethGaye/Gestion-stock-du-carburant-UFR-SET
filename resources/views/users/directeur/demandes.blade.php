@@ -56,7 +56,7 @@
         
     
         {{-- row 1 --}}
-        <div class="text-sm h-20 overflow-hidden text-zinc-500 font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
+        <div class="text-sm h-20 overflow-hidden text-zinc-600 font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
     
             {{-- resume --}}
             <div class="h-20 relative flex items-center border-b border-zinc-300 mb-4 ">
@@ -87,7 +87,7 @@
         
                         {{--  --}}
                         <div class="transition-all duration-300 w-8 h-8 flex items-center justify-center mr-2 icon-hover" id="ch-container">
-                            <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform" id="chevron">
+                            <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform rotate-0" id="chevron">
                                 <path d="M13.5 1.5L8.20711 6.79289C7.81658 7.18342 7.18342 7.18342 6.79289 6.79289L1.5 1.5" stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
                             </svg>                                                       
                         </div> 

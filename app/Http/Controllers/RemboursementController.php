@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class RemboursementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -20,13 +25,6 @@ class RemboursementController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -58,6 +56,10 @@ class RemboursementController extends Controller
     public function update(Request $request, string $id)
     {
         //
+    }
+
+    public function _update(Request $request){
+
     }
 
     /**

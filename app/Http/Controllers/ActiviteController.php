@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class ActiviteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -13,6 +18,10 @@ class ActiviteController extends Controller
     {
         if(auth()->user()->role == 'directeur'){
             return view('users.directeur.activites');
+        }
+
+        if(auth()->user()->role == 'comptable'){
+            return view('users.comptable.activites');
         }
     }
 

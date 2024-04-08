@@ -12,6 +12,9 @@ use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\RemboursementController;
 use App\Http\Controllers\auth\ResetPasswordController;
 use App\Http\Controllers\auth\ForgotPasswordController;
+use App\Http\Controllers\DotationAdminsController;
+use App\Http\Controllers\DotationDepartsController;
+use App\Models\Dotation_depart;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -83,8 +86,9 @@ Route::post('/setting/change-password', [UserController::class, 'update_password
 Route::get('/directeur/dashboard', [DashboardController::class, 'index'])->name('directeur.dashboard');
 
 Route::get('/directeur/activites', [ActiviteController::class, 'index'])->name('directeur.activites');
-Route::post('/directeur/activites/update/{id}', [ActiviteController::class, 'update'])->name('activite.update');
-Route::post('/directeur/activites/delete/{id}', [ActiviteController::class, 'destroy'])->name('activite.delete');
+Route::post('/directeur/activites', [ActiviteController::class, 'store']);
+Route::post('/directeur/activites/update/{id}', [ActiviteController::class, 'update'])->name('d.activites.update');
+Route::post('/directeur/activites/delete/{id}', [ActiviteController::class, 'destroy'])->name('d.activites.delete');
 
 Route::get('/directeur/demandes', [RemboursementController::class, 'index'])->name('directeur.demandes');
 Route::post('/directeur/demandes/{id}', [RemboursementController::class, 'update'])->name('approuver');
@@ -97,15 +101,40 @@ Route::post('/directeur/demandes/{id}', [RemboursementController::class, 'update
 Route::get('/departement/dashboard', [DashboardController::class, 'index'])->name('departement.dashboard');
 
 Route::get('/departement/vacataires', [VacataireController::class, 'index'])->name('departement.vacataires');
-Route::post('/departement/vacataires/update/{id}', [VacataireController::class, 'update'])->name('vacataire.update');
-Route::post('/departement/vacataires/delete/{id}', [VacataireController::class, 'destroy'])->name('vacataire.delete');
+Route::post('/departement/vacataires', [VacataireController::class, 'store']);
+Route::post('/departement/vacataires/update/{id}', [VacataireController::class, 'update'])->name('dp.vacataires.update');
+Route::post('/departement/vacataires/delete/{id}', [VacataireController::class, 'destroy'])->name('dp.vacataires.delete');
 
+Route::post('/departement/cours', [CoursController::class, 'store']);
 Route::get('/departement/cours/all', [CoursController::class, 'index'])->name('cours.all');
 Route::get('/departement/cours/approbation', [CoursController::class, 'approbation'])->name('cours.approbation');
 Route::post('/departement/cours/approbation/{id}', [CoursController::class, 'approuver'])->name('approuver');
 
-Route::post('/departement/cours/update/{id}', [CoursController::class, 'update'])->name('cours.update');
-Route::post('/departement/cours/delete/{id}', [CoursController::class, 'delete'])->name('cours.delete');
+Route::post('/departement/cours/update/{id}', [CoursController::class, 'update'])->name('dp.cours.update');
+Route::post('/departement/cours/delete/{id}', [CoursController::class, 'delete'])->name('dp.cours.delete');
+
+Route::post('departement/demande_remboursement', [RemboursementController::class, 'store']);
+
+/*
+    les Routes du Comptable
+*/
+
+Route::get('/comptable/dashboard', [DashboardController::class, 'index'])->name('comptable.dashboard');
+
+Route::get('comptable/remboursements', [RemboursementController::class, 'index'])->name('comptable.remboursements');
+Route::post('comptable/remboursements/{id}', [RemboursementController::class, 'update'])->name('c.remboursements.update');
+Route::post('comptable/remboursement_multiple', [RemboursementController::class, '_update'])->name('c.remboursements._update');
+
+Route::get('comptable/activites', [ActiviteController::class, 'index'])->name('comptable.activites');
+Route::post('comptable/activites/{id}', [ActiviteController::class, 'update'])->name('c.activites.update');
+
+
+Route::get('comptable/dotation/administration', [DotationAdminsController::class, 'create'])->name('dotation.admin');
+Route::post('comptable/dotation/administration', [DotationAdminsController::class, 'store']);
+Route::get('comptable/dotation/departement', [DotationDepartsController::class, 'create'])->name('dotation.depart');
+Route::post('comptable/dotation/departement', [DotationDepartsController::class, 'store']);
+
+
 
 
 

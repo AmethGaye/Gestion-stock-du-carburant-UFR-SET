@@ -6,5 +6,17 @@ use Illuminate\Http\Request;
 
 class DotationAdminsController extends Controller
 {
-    //
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function create(){
+        return view('users.comptable.administration');
+    }
+
+    public function store(){
+
+    }
 }
