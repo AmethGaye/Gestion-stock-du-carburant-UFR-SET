@@ -63,7 +63,7 @@ Route::post('/admin/setting/compte', [UserController::class, 'update_compte']);
 Route::get('/admin/setting/change-password', [UserController::class, 'edit_password'])->name('setting.password');
 Route::post('/admin/setting/change-password', [UserController::class, 'update_password']);
 
-Route::post('/admin/users/register', [UserController::class, 'store']);
+Route::post('/admin/users/register', [UserController::class, 'store'])->name('add.user');
 
 
 /*
