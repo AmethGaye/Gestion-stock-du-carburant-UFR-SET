@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->date('date_naiss');
-            $table->string('telephone')->nullable()->unique();
+            $table->string('telephone')->unique();
             $table->string('role');
-            $table->string('status');
+            $table->boolean('status')->default(1);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
