@@ -78,24 +78,40 @@ class UserController extends Controller
     public function update_compte(Request $request)
     {
         $id = Auth::user()->getAuthIdentifier();
-        $credentials = $request->validate([
-            'email' => 'required|email|unique:users,email,'.$id,
-            'nom' => 'required|string|alpha|max:255',
-            'prenom' => 'required|string|alpha|max:255',
-            'telephone' => 'required|string|digits:9|numeric',
-        ]);
 
-        if ($credentials) {
-            User::where('id', $id)->update([
-                'nom' => $credentials['nom'],
-                'prenom' => $credentials['prenom'],
-                'email' => $credentials['email'],
-                'telephone' => $credentials['telephone'],
-            ]);
-            return redirect()->to(route('admin.dashboard')) ;
+        // Validation sans imposer le champ image si elle n'est pas présente
+        $regles = [
+            'email' => 'required|email|unique:users,email,' . $id,
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'telephone' => 'required|string|digits:9',
+        ];
+
+        if ($request->hasFile('image')) {
+            $regles['image'] = 'image|mimes:jpeg,png,jpg,gif|max:2048';
         }
-        return back()->withErrors('erreur de mise a jour');
+
+        $credentials = $request->validate($regles);
+
+        $updateData = [
+            'nom' => $credentials['nom'],
+            'prenom' => $credentials['prenom'],
+            'email' => $credentials['email'],
+            'telephone' => $credentials['telephone'],
+        ];
+
+        // Vérifie si un fichier image est présent et valide
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $imagePath = $request->image->store('images', 'public');
+            $updateData['image'] = $imagePath;
+
+        }
+
+        User::where('id', $id)->update($updateData);
+
+        return redirect()->to(route('admin.dashboard'));
     }
+
 
 
     /**
@@ -103,16 +119,38 @@ class UserController extends Controller
      */
     public function edit_password()
     {
-        return view('users.setting.change_mdp');
+        $id=auth()->user()->getAuthIdentifier();
+        return view('users.setting.change_mdp',compact('id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update_password(Request $request)
+    public function update_password(Request $request ,$id)
     {
-        //
-    }
+        //dd(User::find($id));
+
+        $validated=$request->validate([
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'old-password'=>['required','string']
+            ]
+        );
+        //dd(Hash::check($validated['old-password'], \auth()->user()->password));
+
+        if(!Hash::check($validated['old-password'], \auth()->user()->password)){
+
+           return back()->withErrors(['msg'=>'La mise à jour  de votre mot de passe a échoué']);
+
+        }
+
+        $validated['password']=Hash::make($validated['password']);//encyter le  password
+        $data=['password' => $validated['password']];
+
+        // update le mot de passe
+            User::find($id)->update($data);
+
+            return redirect()->route('setting.password')->withSuccess('Votre mot de passe a été mis à jour');
+       }
 
     /**
      * Remove the specified resource from storage.
@@ -121,4 +159,5 @@ class UserController extends Controller
     {
         //
     }
+
 }

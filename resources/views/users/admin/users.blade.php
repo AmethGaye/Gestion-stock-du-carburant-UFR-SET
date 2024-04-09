@@ -78,10 +78,10 @@
                     </span>
                     <span class="w-[25%] flex items-center gap-2">
                         @if($user->image)
-                            <img src="{{ asset('images/user.png') }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
+                            <img src="{{ asset('storage/'.auth()->user()->image) }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
                         @else
+                            <img src="{{ asset('images/user.png') }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
                         @endif
-                        <img src="{{ asset('images/user.png') }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
                        {{$user->prenom }} {{$user->nom}}
                     </span>
                     <span class="w-[25%]">{{$user->email}}</span>
@@ -90,7 +90,7 @@
                     @else
                         <span class="w-[15%]">Pas disponible</span>
                     @endif
-                    <span class="w-[150px] font-semibold">{{$user->role}}</span>
+                    <span class="w-[150px] font-semibold capitalize">{{$user->role}}</span>
                     <span class="w-[100px]">SET</span>
                     @if($user->status==1)
                     <span class="w-[130px] flex items-center">

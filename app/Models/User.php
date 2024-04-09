@@ -28,6 +28,7 @@ class User extends Authenticatable
         'telephone',
         'status',
         'date_naiss',
+        'image',
     ];
 
     /**

@@ -3,12 +3,17 @@
 @section('setting-content')
 <div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 font-mtrph">
 
-    <form action="{{route('setting.compte')}}" method="post" class="m-0 mt-6">
+    <form action="{{route('setting.compte')}}" method="post" enctype="multipart/form-data" class="m-0 mt-6">
         @csrf
         <div class="flex items-center justify-center mb-12">
             <span class="w-[25%] flex items-center flex-col gap-2">
-                <img src="{{ asset('images/user.png') }}" alt="" class="w-20 h-20 object-cover rounded-full object-center" >
-                <span class="font-nunito text-[#4379EE] font-semibold cursor-pointer">Modifier votre photo</span>
+                @if(Auth::user()->image)
+                    <img src="{{asset('storage/' . Auth::user()->image) }}" alt="" class="w-20 h-20 object-cover rounded-full object-center" >
+                @else
+                    <img src="{{ asset('images/user.png') }}" alt="" class="w-20 h-20 object-cover rounded-full object-center" >
+                @endif
+                <label for="photo" class="font-nunito text-[#4379EE] font-semibold cursor-pointer">Modifier votre photo</label>
+                <input type="file" name="image" id="photo" class="hidden">
             </span>
         </div>
         <div class="mb-10 ">

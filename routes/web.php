@@ -74,7 +74,7 @@ Route::get('/setting/compte', [UserController::class, 'edit_compte'])->name('set
 Route::post('/setting/compte', [UserController::class, 'update_compte']);
 
 Route::get('/setting/change-password', [UserController::class, 'edit_password'])->name('setting.password');
-Route::post('/setting/change-password', [UserController::class, 'update_password']);
+Route::post('/setting/change-password/{id}', [UserController::class, 'update_password'])->name('update.password');
 
 
 
