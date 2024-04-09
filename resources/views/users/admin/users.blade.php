@@ -45,6 +45,9 @@
             </div>
         </div>
 
+@if(session('success'))
+    <div class="text-green-500">{{session('success')}}</div>
+@endif
 
         <div class="bg-white rounded-md border border-zinc-200 relative">
             {{-- t-head --}}
@@ -111,8 +114,11 @@
                                 </svg>
                             </button>
                         </form>
-                        <form action="" method="" class="border border-zinc-200 px-3 py-1.5 rounded-r-lg bg-zinc-100 m-0">
+                        <form action="{{route('delete.user')}}" method="post" class="border border-zinc-200 px-3 py-1.5 rounded-r-lg bg-zinc-100 m-0">
+                            @csrf
+                            @method('delete')
                             <button>
+                                <input type="hidden" value="{{$user->id}}" name="id">
                                 <svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5.875 7.66667V12.6667M9.125 7.66667V12.6667M1 4.33333H14M13.1875 4.33333L12.4831 14.4517C12.4539 14.8722 12.2704 15.2657 11.9697 15.553C11.6689 15.8403 11.2731 16 10.8621 16H4.13787C3.72686 16 3.33112 15.8403 3.03034 15.553C2.72957 15.2657 2.54612 14.8722 2.51694 14.4517L1.8125 4.33333H13.1875ZM9.9375 4.33333V1.83333C9.9375 1.61232 9.8519 1.40036 9.69952 1.24408C9.54715 1.0878 9.34049 1 9.125 1H5.875C5.65951 1 5.45285 1.0878 5.30048 1.24408C5.1481 1.40036 5.0625 1.61232 5.0625 1.83333V4.33333H9.9375Z" stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>

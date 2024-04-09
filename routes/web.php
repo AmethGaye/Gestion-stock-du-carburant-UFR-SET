@@ -63,6 +63,8 @@ Route::get('/admin/roles', [UserController::class, 'roles'])->name('admin.roles'
 
 
 Route::post('/admin/users/register', [UserController::class, 'store'])->name('add.user');
+Route::delete('/admin/users', [UserController::class, 'destroy'])->name('delete.user');
+
 
 
 
