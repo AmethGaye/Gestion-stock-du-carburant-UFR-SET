@@ -63,7 +63,12 @@ Route::post('/reset-password', [ResetPasswordController::class, 'update'])->name
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 Route::get('/admin/roles', [UserController::class, 'roles'])->name('admin.roles');
-Route::post('/admin/users/register', [UserController::class, 'store']);
+
+
+Route::post('/admin/users/register', [UserController::class, 'store'])->name('add.user');
+Route::delete('/admin/users', [UserController::class, 'destroy'])->name('delete.user');
+
+
 
 
 /*
@@ -74,7 +79,7 @@ Route::get('/setting/compte', [UserController::class, 'edit_compte'])->name('set
 Route::post('/setting/compte', [UserController::class, 'update_compte']);
 
 Route::get('/setting/change-password', [UserController::class, 'edit_password'])->name('setting.password');
-Route::post('/setting/change-password', [UserController::class, 'update_password']);
+Route::post('/setting/change-password/{id}', [UserController::class, 'update_password'])->name('update.password');
 
 
 
