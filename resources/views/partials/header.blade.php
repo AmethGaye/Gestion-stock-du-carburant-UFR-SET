@@ -7,5 +7,5 @@
     @vite('resources/css/app.css')
     <title> GSC | UFR SET</title>
 </head>
-<body class="ralative bg-[#F8F8F8] min-h-[100vh] h-screen overflow-x-hidden text-zinc-600">
+<body class="ralative bg-[#F8F8F8] min-h-[100vh] h-screen overflow-x-hidden text-zinc-500">
     

@@ -1,7 +1,7 @@
 @extends('users.comptable.dotation')
 
 @section('dotation')
-    <div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 ">
+    <div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 font-mtrph">
         <h1 class="font-semibold text-lg text-zinc-600 mb-10">Dotation Régulier Des Départements</h1>
         <form action="" method="" class="m-0 mt-6">
             @csrf
@@ -20,27 +20,11 @@
                     @enderror
                 </div>
 
-                <div class="w-full  flex flex-col mb-4">
-                    <label for="ufr" class="font-medium text-zinc-700">UFR</label>
-                    <select name="ufr" id="ufr" class="input-2">
-                        <option value="">SET</option>
-                        <option value="">SES</option>
-                    </select>
-                    @error('email')
-                        <span class="text-red-500">{{ $message }}</span>
-                    @enderror
-                </div>
-
-
-                <div class="w-full  flex flex-col mb-4">
-                    <label for="date" class="font-medium text-zinc-700">Date</label>
-                    <input type="date" name="date" placeholder="ahmada@univ-thies.sn" id="date" class="input-2">
-                </div>
 
                 <div class="w-full  flex flex-col mb-4">
                     <label for="ticket" class="font-medium text-zinc-700">Tickets</label>
                     <div class="w-full relative ">
-                        <input type="number" name="ticket" id="ticket" value="5" class="input-2 w-full">
+                        <input type="number" name="ticket" id="ticket" value="200" class="input-2 w-full">
                         <div class="absolute right-2 top-7 -translate-y-1/2 flex">
                             <button type="button" class="w-8 h-8 mr-1  bg-zinc-100 flex items-center justify-center rounded-md">
                                 <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,11 +45,11 @@
                 
             </div>
             <div class="flex gap-4 items-center">
-                <button type="submit" class="px-4 py-2.5 rounded-lg bg-zinc-800 text-white font-medium flex justify-center items-center gap-2">
-                    VALIDER
+                <button type="submit" class="px-4 py-2.5 rounded-lg bg-zinc-800 text-white flex justify-center items-center gap-2">
+                    Valider
                 </button>
-                <button type="submit" class="px-4 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 font-semibold flex justify-center items-center gap-2">
-                    ANNULER
+                <button type="submit" class="px-4 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 flex justify-center items-center gap-2">
+                    Annuler
                 </button>
             </div>
         </form>
