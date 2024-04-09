@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('titre');
             $table->longText('description');
             $table->string('lieux');
-            $table->boolean('statut');
+            $table->boolean('statut')->default(false);
 
             $table->foreignId('user_id')
             ->constrained()
