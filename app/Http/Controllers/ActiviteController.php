@@ -18,12 +18,14 @@ class ActiviteController extends Controller
      */
     public function index()
     {
+        $activities=Activite::all();
+
         if(auth()->user()->role == 'directeur'){
-            return view('users.directeur.activites');
+            return view('users.directeur.activites',compact('activities'));
         }
 
         if(auth()->user()->role == 'comptable'){
-            return view('users.comptable.activites');
+            return view('users.comptable.activites',compact('activities'));
         }
     }
 
@@ -87,6 +89,10 @@ class ActiviteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $user = Activite::findOrFail($id);
+        $user->delete();
+
+        return redirect()->back()->with('success', 'Evenement supprimé avec succès');
     }
 }

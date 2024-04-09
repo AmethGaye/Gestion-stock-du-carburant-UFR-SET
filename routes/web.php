@@ -93,7 +93,7 @@ Route::get('/directeur/dashboard', [DashboardController::class, 'index'])->name(
 Route::get('/directeur/activites', [ActiviteController::class, 'index'])->name('directeur.activites');
 Route::post('/directeur/activites', [ActiviteController::class, 'store'])->name('directeur.activites');
 Route::post('/directeur/activites/update/{id}', [ActiviteController::class, 'update'])->name('d.activites.update');
-Route::post('/directeur/activites/delete/{id}', [ActiviteController::class, 'destroy'])->name('d.activites.delete');
+Route::delete('/directeur/activites/delete/{id}', [ActiviteController::class, 'destroy'])->name('d.activites.delete');
 
 
 Route::get('/directeur/demandes', [RemboursementController::class, 'index'])->name('directeur.demandes');

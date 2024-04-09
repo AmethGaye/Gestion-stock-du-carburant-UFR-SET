@@ -48,6 +48,7 @@
 
     {{-- activites --}}
     {{-- row 1 --}}
+    @foreach($activities as $activitie)
     <div class="bg-white mb-6 rounded-md border border-zinc-200 px-6 overflow-y-hidden h-20 transition-[height]" id="act-container">
         <div class="flex items-center justify-between text-sm text-zinc-500 font-medium h-20">
             <div class="">
@@ -61,15 +62,15 @@
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2">
                         <path d="M4.33333 3.66667V1M9.66667 3.66667V1M3.66667 6.33333H10.3333M2.33333 13H11.6667C12.0203 13 12.3594 12.8595 12.6095 12.6095C12.8595 12.3594 13 12.0203 13 11.6667V3.66667C13 3.31304 12.8595 2.97391 12.6095 2.72386C12.3594 2.47381 12.0203 2.33333 11.6667 2.33333H2.33333C1.97971 2.33333 1.64057 2.47381 1.39052 2.72386C1.14048 2.97391 1 3.31304 1 3.66667V11.6667C1 12.0203 1.14048 12.3594 1.39052 12.6095C1.64057 12.8595 1.97971 13 2.33333 13Z" stroke="#6F727A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Sep 15, 2024
+                    {{$activitie->date}}
                     <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.9375 5.13068C2.53646 5.13068 2.17022 5.03291 1.83878 4.83736C1.50734 4.63849 1.24219 4.37334 1.04332 4.0419C0.847775 3.71046 0.75 3.34422 0.75 2.94318C0.75 2.53883 0.847775 2.17259 1.04332 1.84446C1.24219 1.51302 1.50734 1.24953 1.83878 1.05398C2.17022 0.855113 2.53646 0.755682 2.9375 0.755682C3.34186 0.755682 3.7081 0.855113 4.03622 1.05398C4.36766 1.24953 4.63116 1.51302 4.8267 1.84446C5.02557 2.17259 5.125 2.53883 5.125 2.94318C5.125 3.34422 5.02557 3.71046 4.8267 4.0419C4.63116 4.37334 4.36766 4.63849 4.03622 4.83736C3.7081 5.03291 3.34186 5.13068 2.9375 5.13068Z" fill="#6F727A"/>
                     </svg>
-                    Adresse : <span class="font-bold">Mboro</span>
+                    Adresse : <span class="font-bold">{{$activitie->adresse}}</span>
                     <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.9375 5.13068C2.53646 5.13068 2.17022 5.03291 1.83878 4.83736C1.50734 4.63849 1.24219 4.37334 1.04332 4.0419C0.847775 3.71046 0.75 3.34422 0.75 2.94318C0.75 2.53883 0.847775 2.17259 1.04332 1.84446C1.24219 1.51302 1.50734 1.24953 1.83878 1.05398C2.17022 0.855113 2.53646 0.755682 2.9375 0.755682C3.34186 0.755682 3.7081 0.855113 4.03622 1.05398C4.36766 1.24953 4.63116 1.51302 4.8267 1.84446C5.02557 2.17259 5.125 2.53883 5.125 2.94318C5.125 3.34422 5.02557 3.71046 4.8267 4.0419C4.63116 4.37334 4.36766 4.63849 4.03622 4.83736C3.7081 5.03291 3.34186 5.13068 2.9375 5.13068Z" fill="#6F727A"/>
                     </svg>
-                    Région : <span class="font-bold">Dakar</span>
+                    Région : <span class="font-bold">{{$activitie->lieux}}</span>
                     <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2.9375 5.13068C2.53646 5.13068 2.17022 5.03291 1.83878 4.83736C1.50734 4.63849 1.24219 4.37334 1.04332 4.0419C0.847775 3.71046 0.75 3.34422 0.75 2.94318C0.75 2.53883 0.847775 2.17259 1.04332 1.84446C1.24219 1.51302 1.50734 1.24953 1.83878 1.05398C2.17022 0.855113 2.53646 0.755682 2.9375 0.755682C3.34186 0.755682 3.7081 0.855113 4.03622 1.05398C4.36766 1.24953 4.63116 1.51302 4.8267 1.84446C5.02557 2.17259 5.125 2.53883 5.125 2.94318C5.125 3.34422 5.02557 3.71046 4.8267 4.0419C4.63116 4.37334 4.36766 4.63849 4.03622 4.83736C3.7081 5.03291 3.34186 5.13068 2.9375 5.13068Z" fill="#6F727A"/>
                     </svg>
@@ -82,8 +83,10 @@
 
                 {{-- separator --}}
                 <div class=" w-0.5 h-6 bg-zinc-200"></div>
-
-                <form action="" method="" class="m-0">
+                   @php $id=$activitie->id @endphp
+                <form action="{{route('d.activites.delete',compact('id'))}}" method="post" class="m-0">
+                    @csrf
+                    @method('delete')
                     <button class="font-semibold text-sm text-[#FFB200] ">Supprimer</button>
                 </form>
 
@@ -104,23 +107,19 @@
             <h3 class="text-[15px] font-semibold text-zinc-600">Description </h3>
 
             <p class="mt-2 text-sm">
-                Select products that will be available via this channel. You can assign products to multiple channels.
-                Select products that will be available via this channel. You can assign products to multiple channels.
-                Select products that will be available via this channel. You can assign products to multiple channels.
-                Select products that will be available via this channel. You can assign products to multiple channels.
-                Select products that will be available via this channel. You can assign products to multiple channels.
+                {{$activitie->description}}
             </p>
             <div class="flex py-2 justify-end">
                 <div class="flex items-center">
                     <span class="font-bold text-sm mr-4">Demande:</span>
                     <span class="flex justify-center">
-                        <span class="flex items-center bg-orange-100 px-4 text-orange-500 py-1.5 rounded-md font-semibold text-sm">5 Tickets</span>
+                        <span class="flex items-center bg-orange-100 px-4 text-orange-500 py-1.5 rounded-md font-semibold text-sm">{{$activitie->ticket}} Tickets</span>
                     </span>
                 </div>
             </div>
         </div>
     </div>
-
+    @endforeach
     <div class="flex justify-end mt-8">
         <a href="" class="btn bg-zinc-800 text-white font-medium trans hover:bg-[#27272ae6]">Voir plus</a>
     </div>
