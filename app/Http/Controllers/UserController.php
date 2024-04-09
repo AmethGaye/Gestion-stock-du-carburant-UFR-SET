@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
 
 class UserController extends Controller
 {
@@ -102,9 +104,16 @@ class UserController extends Controller
 
         // Vérifie si un fichier image est présent et valide
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            // On Vérifie si l'utilisateur a déjà une image de profil enregistrée dans la BD
+            $user = User::find($id);
+            if ($user->image) {
+                // Supprime l'ancienne image de profil s'il en existe une
+                Storage::disk('public')->delete($user->image);
+            }
+            // ON Enregistre la nouvelle image de profil
             $imagePath = $request->image->store('images', 'public');
-            $updateData['image'] = $imagePath;
 
+            $updateData['image'] = $imagePath;
         }
 
         User::where('id', $id)->update($updateData);

@@ -88,6 +88,7 @@ Route::post('/setting/change-password/{id}', [UserController::class, 'update_pas
 Route::get('/directeur/dashboard', [DashboardController::class, 'index'])->name('directeur.dashboard');
 
 Route::get('/directeur/activites', [ActiviteController::class, 'index'])->name('directeur.activites');
+Route::post('/directeur/activites', [ActiviteController::class, 'store'])->name('directeur.activites');
 Route::post('/directeur/activites/update/{id}', [ActiviteController::class, 'update'])->name('activite.update');
 Route::post('/directeur/activites/delete/{id}', [ActiviteController::class, 'destroy'])->name('activite.delete');
 

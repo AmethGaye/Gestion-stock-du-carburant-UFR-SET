@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ActiviteRequest;
+use App\Models\Activite;
 use Illuminate\Http\Request;
 
 class ActiviteController extends Controller
@@ -27,9 +29,24 @@ class ActiviteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ActiviteRequest $request)
     {
-        //
+        $credentials = $request->validated();
+
+        $user_id=auth()->user()->getAuthIdentifier();
+        if ($credentials){
+            Activite::create([
+                'titre'=>$credentials['titre'],
+                'description'=>$credentials['description'],
+                'lieux'=>$credentials['lieux'],
+                'date'=>$credentials['date'],
+                'adresse'=>$credentials['adresse'],
+                'ticket'=>$credentials['ticket'],
+                'user_id'=>$user_id,
+            ]);
+            return redirect()->route('directeur.activites')->withSuccess('Ajout d\'une nouvelle  a réussie avec succès');
+        }
+        return back()->withErrors(['msg' => 'L\ajout d\'une nouvelle activité a echoué' ]);
     }
 
     /**
