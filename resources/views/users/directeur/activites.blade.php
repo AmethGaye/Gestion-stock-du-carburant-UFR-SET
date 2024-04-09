@@ -45,12 +45,10 @@
             </button>
         </div>
     </div>
+
     {{-- activites --}}
-
-
-
-    {{-- row 2 --}}
-    <div class="bg-white mb-6 rounded-md border border-zinc-200 px-6 overflow-y-hidden h-20 " id="act-container">
+    {{-- row 1 --}}
+    <div class="bg-white mb-6 rounded-md border border-zinc-200 px-6 overflow-y-hidden h-20 transition-[height]" id="act-container">
         <div class="flex items-center justify-between text-sm text-zinc-500 font-medium h-20">
             <div class="">
                 <div class="flex items-center gap-4 mb-2.5">
@@ -104,7 +102,8 @@
         </div>
         <div class="border-t border-t-zinc-200 py-4" id="desc">
             <h3 class="text-[15px] font-semibold text-zinc-600">Description </h3>
-            <p class="mt-2">
+
+            <p class="mt-2 text-sm">
                 Select products that will be available via this channel. You can assign products to multiple channels.
                 Select products that will be available via this channel. You can assign products to multiple channels.
                 Select products that will be available via this channel. You can assign products to multiple channels.

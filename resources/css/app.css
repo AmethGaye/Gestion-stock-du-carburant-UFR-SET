@@ -24,7 +24,7 @@
 }
 
 .input-2{
-  @apply text-zinc-600 px-4 py-3 rounded-lg border-zinc-200 border-[1.5px] bg-transparent mt-1 outline-none transition duration-200 focus:border-zinc-800;
+  @apply text-zinc-600 px-4 py-2.5 rounded-lg border-zinc-300 border-[1.5px] bg-transparent mt-1 outline-none transition duration-200 focus:border-zinc-800;
 }
 
 .icon-hover{

@@ -4,10 +4,12 @@
 <section class="px-6 min-h-screen ">
 
     {{-- liens utiles au chef de departement --}}
-    <div class="border-b-zinc-200 border-b-2 mb-10">
-        <a href="" class="py-3 px-6 inline-block text-sm font-medium text-zinc-400">Tous les cours</a>
-        <a href="" class="py-3 px-6 inline-block text-sm font-semibold relative cr text-zinc-600">Approbation</a>
+    @if (auth()->user()->role == 'chef_departement')
+    <div class="border-b-zinc-200 border-b-2 mb-10 text-zinc-500">
+        <a href="{{ route('cours.all') }}" class="relative py-3 px-6 inline-block  @if(Route::currentRouteName() == 'cours.all') cr text-zinc-700 font-medium @endif">Tous les cours</a>
+        <a href="{{ route('cours.approbation') }}" class="relative py-3 px-6 inline-block @if(Route::currentRouteName() == 'cours.approbation') cr text-zinc-700 font-medium @endif">A approuver</a>
     </div>
+    @endif
         
     <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
         {{-- barre de recherche --}}
@@ -56,29 +58,7 @@
     @yield('cours')
 
     {{-- pagination --}}
-    <div class="flex p-4 items-center justify-between text-zinc-500 font-medium mt-2">
-        <div class="font-medium text-zinc-400">
-            page 1 / 10
-        </div>
-
-        <div class="flex items-center gap-1 *:w-9 *:h-9">
-            <a href="" class="icon-hover-2">
-                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 1L1.70711 6.29289C1.31658 6.68342 1.31658 7.31658 1.70711 7.70711L7 13" stroke="#a1a1aa" stroke-width="2" stroke-linecap="round"/>
-                </svg>                                
-            </a>
-            <a href="" class="icon-hover-2 rounded-lg bg-zinc-200">1</a>
-            <a href="" class="icon-hover-2">2</a>
-            <a href="" class="icon-hover-2">3</a>
-            <a href="" class="icon-hover-2">4</a>
-            <a href="" class="icon-hover-2">5</a>
-            <a href="" class="icon-hover-2">
-                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 1L6.29289 6.29289C6.68342 6.68342 6.68342 7.31658 6.29289 7.70711L1 13" stroke="#737373" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </a>
-        </div>
-    </div>
+    @include('partials.pagination')
     
 </section>
     
@@ -87,9 +67,9 @@
 
 {{-- FORMULAIRE D'AJOUT D'UN COURS --}}
 @section('new-cours')
-<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 w-7/12 scale-75 opacity-0 trans-2">
+<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 w-7/12 scale-75 opacity-0 trans-2 font-mtrph">
     <div class="flex items-center justify-between">
-        <h1 class="font-semibold text-lg text-zinc-800">nouvelle scéance de cours</h1>
+        <h1 class="font-semibold text-lg text-zinc-800">Nouvelle cours</h1>
         <div class="icon-hover-2 cursor-pointer" id="closer" >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M13 1L1 13M13 13L1 1.00001" stroke="#111111" stroke-width="2" stroke-linecap="round"/>
@@ -161,15 +141,15 @@
             </div>
 
             <div class="w-full flex gap-4">
-                <textarea name="description" id="description" rows="8" placeholder="Décrivez .... " class="input-2 w-full"></textarea> 
+                <textarea name="description" id="description" rows="5" placeholder="Remarque .... " class="input-2 w-full"></textarea> 
             </div>   
                 
         </div>
         <div class="flex gap-4 items-center">
-            <button type="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white font-medium flex justify-center items-center gap-2">
+            <button type="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white flex justify-center items-center gap-2">
                 Ajouter
             </button>
-            <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 font-semibold flex justify-center items-center gap-2">
+            <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 flex justify-center items-center gap-2">
                 Restaurer
             </button>
         </div>

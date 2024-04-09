@@ -24,7 +24,7 @@
                         <path d="M16.875 0.429993H0.625C0.45924 0.429993 0.300268 0.495841 0.183058 0.613051C0.065848 0.730261 0 0.889232 0 1.05499C0 1.22075 0.065848 1.37972 0.183058 1.49693C0.300268 1.61414 0.45924 1.67999 0.625 1.67999H16.875C17.0408 1.67999 17.1997 1.61414 17.3169 1.49693C17.4342 1.37972 17.5 1.22075 17.5 1.05499C17.5 0.889232 17.4342 0.730261 17.3169 0.613051C17.1997 0.495841 17.0408 0.429993 16.875 0.429993Z" fill="#52525B"/>
                         <path d="M10.625 7.92999H6.875C6.70924 7.92999 6.55027 7.99584 6.43306 8.11305C6.31585 8.23026 6.25 8.38923 6.25 8.55499C6.25 8.72075 6.31585 8.87972 6.43306 8.99693C6.55027 9.11415 6.70924 9.17999 6.875 9.17999H10.625C10.7908 9.17999 10.9497 9.11415 11.0669 8.99693C11.1842 8.87972 11.25 8.72075 11.25 8.55499C11.25 8.38923 11.1842 8.23026 11.0669 8.11305C10.9497 7.99584 10.7908 7.92999 10.625 7.92999Z" fill="#52525B"/>
                     </svg>                                                                                                                 
-                    <span class="font-medium">Filtres</span>
+                    <span class="">Filtres</span>
                     <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.933058 0.879586C1.17714 0.613462 1.57286 0.613462 1.81694 0.879586L5.93306 5.36749C6.17714 5.63362 6.57286 5.63362 6.81694 5.36749L10.9331 0.879587C11.1771 0.613463 11.5729 0.613463 11.8169 0.879587C12.061 1.14571 12.061 1.57718 11.8169 1.84331L7.70082 6.33121C6.96859 7.12959 5.78141 7.12959 5.04918 6.33121L0.933058 1.84331C0.688981 1.57718 0.688981 1.14571 0.933058 0.879586Z" fill="#52525B"/>
                     </svg>
@@ -33,7 +33,7 @@
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 10V10.75C1 11.3467 1.23705 11.919 1.65901 12.341C2.08097 12.7629 2.65326 13 3.25 13H10.75C11.3467 13 11.919 12.7629 12.341 12.341C12.7629 11.919 13 11.3467 13 10.75V10M10 4L7 1M7 1L4 4M7 1V10" stroke="#52525B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>                                                                                          
-                    <span class="font-medium">csv</span>
+                    <span class="">csv</span>
                 </button>
 
                 <button  type="menu" class="btn-1 bg-zinc-800 text-white" onclick="displayContainer(1)">
@@ -66,7 +66,7 @@
             {{-- t-body --}}
             <div>
                 {{-- rows 1 --}}
-                <div class="flex items-center text-sm text-zinc-500 font-medium py-3 border-b border-b-zinc-200 *:px-4 ">
+                <div class="flex items-center text-sm py-4 font-medium border-b border-b-zinc-200 *:px-4 ">
                     {{-- cols --}}
                     <span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
@@ -78,7 +78,7 @@
                     </span>
                     <span class="w-[25%]">Mouhamadthiam@univ-thies.sn</span>
                     <span class="w-[15%]">+221786541861</span>
-                    <span class="w-[160px] font-semibold">Tambacounda</span>
+                    <span class="w-[160px] font-medium">Tambacounda</span>
                     <span class="w-[150px] flex">
                         <span class="flex mx-auto bg-green-100 px-4 text-green-500 py-1 rounded font-semibold text-xs">Véhiculé</span>
                     </span>
@@ -105,7 +105,7 @@
                 </div>
 
                 {{-- rows 2 --}}
-                <div class="flex items-center text-sm text-zinc-500 font-medium py-3 border-b border-b-zinc-200 *:px-4 ">
+                <div class="flex items-center text-sm font-medium py-4 border-b border-b-zinc-200 *:px-4 ">
                     {{-- cols --}}
                     <span>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
@@ -113,11 +113,11 @@
                         </svg>                            
                     </span>
                     <span class="w-[25%]">
-                        Bassirou diomaye diakhar faye
+                        Sény Mbaye
                     </span>
                     <span class="w-[25%]">Mouhamadthiam@univ-thies.sn</span>
                     <span class="w-[15%]">+221786541861</span>
-                    <span class="w-[160px] font-semibold">Saint Louis</span>
+                    <span class="w-[160px] font-medium">Saint Louis</span>
                     <span class="w-[150px] flex">
                         <span class="flex mx-auto bg-violet-100 px-4 text-violet-500 py-1 rounded font-semibold text-xs">Non</span>
                     </span>
@@ -145,29 +145,7 @@
                 
             </div>
             {{-- pagination --}}
-            <div class="flex p-4 items-center justify-between text-zinc-800 font-medium mt-2">
-                <div class="font-medium text-zinc-400">
-                    page 1 / 10
-                </div>
-
-                <div class="flex items-center gap-1 *:w-9 *:h-9">
-                    <a href="" class="icon-hover-2">
-                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 1L1.70711 6.29289C1.31658 6.68342 1.31658 7.31658 1.70711 7.70711L7 13" stroke="#27272a" stroke-width="2" stroke-linecap="round"/>
-                        </svg>                                
-                    </a>
-                    <a href="" class="icon-hover-2 rounded-lg bg-zinc-200">1</a>
-                    <a href="" class="icon-hover-2">2</a>
-                    <a href="" class="icon-hover-2">3</a>
-                    <a href="" class="icon-hover-2">4</a>
-                    <a href="" class="icon-hover-2">5</a>
-                    <a href="" class="icon-hover-2">
-                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1L6.29289 6.29289C6.68342 6.68342 6.68342 7.31658 6.29289 7.70711L1 13" stroke="#27272a" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+            @include('partials.pagination')
         </div>
     </section>
 @endsection
@@ -175,7 +153,7 @@
 
 {{-- FORMULAIRE D'AJOUT D'UN VACATAIRE --}}
 @section('new-vacataire')
-<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 w-8/12 scale-75 opacity-0 trans-2">
+<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 w-8/12 scale-75 opacity-0 trans-2 font-mtrph">
     <div class="flex items-center justify-between">
         <h1 class="font-semibold text-lg text-zinc-800">Ajouter un nouveau Vacataire</h1>
         <div class="icon-hover-2 cursor-pointer" id="closer" >
@@ -266,10 +244,10 @@
                 
         </div>
         <div class="flex gap-4 items-center">
-            <button type="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white font-medium flex justify-center items-center gap-2">
+            <button type="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white flex justify-center items-center gap-2">
                 Ajouter
             </button>
-            <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 font-semibold flex justify-center items-center gap-2">
+            <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 flex justify-center items-center gap-2">
                 Restaurer
             </button>
         </div>

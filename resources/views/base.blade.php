@@ -22,16 +22,16 @@
 
 {{-- toutes les formulaires et les messages d'alertes --}}
 
-<div class="w-screen h-screen absolute left-0 top-0 -z-50 light-bg transition-opacity duration-100 ease-in-out flex items-center justify-center invisible opacity-0 scale-0" id="container">
+<div class="w-screen h-screen fixed left-0 top-0 -z-50 light-bg transition-opacity duration-100 ease-in-out flex items-center justify-center invisible opacity-0 scale-0" id="container">
     
     {{-- FIRST : FORMULAIRE D'AJOUT D'UN NOUVEL UTILISATEUR--}}
      @yield('new-user') 
 
-    {{-- SECOND : FORMULAIRE D'AJOUT D'UN VACATAIRE--}}
-    {{-- @yield('new-vacataire') --}}
+    {{-- SECOND : FORMULAIRE D'AJOUT D'UN VACATAIRE --}}
+    @yield('new-vacataire')
 
     {{-- THIRD : FORMULAIRE D'AJOUT D'UN COURS--}}
-    {{-- @yield('new-cours') --}}
+    @yield('new-cours')
 
     {{-- THIRD : FORMULAIRE D'AJOUT D'UNe ACTIVITE--}}
     @yield('new-activity')

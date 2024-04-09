@@ -51,20 +51,20 @@
 
         <div class="bg-white rounded-md border border-zinc-200 relative">
             {{-- t-head --}}
-            <div class="flex items-center text-sm text-zinc-400 font-nunito font-bold py-5 border-b border-b-zinc-200 *:px-4 ">
+            <div class="flex items-center text-sm text-zinc-400 font-nunito font-bold py-5 border-b border-b-zinc-200 ">
                 {{-- cols --}}
-                <span>
+                <span class="px-4">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
                     </svg>
                 </span>
-                <span class="w-[25%]">PRENOM & NOM</span>
-                <span class="w-[25%]">EMAIL</span>
-                <span class="w-[15%]">TELEPHONE</span>
-                <span class="w-[150px]">ROLE</span>
-                <span class="w-[100px]">UFR</span>
-                <span class="w-[130px]">STATUT</span>
-                <span class="w-[150px] text-center">ACTION</span>
+                <span class="basis-[23%] pr-4 grow">PRENOM & NOM</span>
+                <span class="basis-[25%] pr-4 grow">EMAIL</span>
+                <span class="basis-[170px] pr-4">TELEPHONE</span>
+                <span class="basis-[15%] pr-4">ROLE</span>
+                <span class="basis-[100px] pr-4">UFR</span>
+                <span class="basis-[130px] pr-4">STATUT</span>
+                <span class="basis-[210px] text-center">ACTION</span>
             </div>
             {{-- t-body --}}
             <div>
@@ -72,14 +72,14 @@
                 @foreach($users as $user)
 
 
-                <div class="flex items-center text-sm text-zinc-500 font-medium py-3 border-b border-b-zinc-200 *:px-4 ">
+                <div class="flex items-center text-sm text-zinc-500 font-medium py-4 border-b border-b-zinc-200 ">
                     {{-- cols --}}
-                    <span>
+                    <span class="px-4">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
                         </svg>
                     </span>
-                    <span class="w-[25%] flex items-center gap-2">
+                    <span class="basis-[23%]  pr-4 grow flex items-center gap-2">
                         @if($user->image)
                             <img src="{{ asset('storage/'.auth()->user()->image) }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
                         @else
@@ -87,26 +87,26 @@
                         @endif
                        {{$user->prenom }} {{$user->nom}}
                     </span>
-                    <span class="w-[25%]">{{$user->email}}</span>
+                    <span class="basis-[25%]  pr-4 grow">{{$user->email}}</span>
                     @if($user->telephone)
-                    <span class="w-[15%]">{{$user->telephone}}</span>
+                    <span class="basis-[170px] pr-4 ">{{$user->telephone}}</span>
                     @else
-                        <span class="w-[15%]">Pas disponible</span>
+                        <span class="w-[170px] pr-4 ">Pas disponible</span>
                     @endif
-                    <span class="w-[150px] font-semibold capitalize">{{$user->role}}</span>
-                    <span class="w-[100px]">SET</span>
+                    <span class="basis-[15%]  pr-4 capitalize">{{$user->role}}</span>
+                    <span class="basis-[100px]">SET</span>
                     @if($user->status==1)
-                    <span class="w-[130px] flex items-center">
+                    <span class="basis-[130px]  pr-4 flex items-center">
                         <span class="w-2 h-2 rounded-full bg-green-500 block mr-2"></span>
                         <span class="font-semibold text">Active</span>
                     </span>
                     @else
-                        <span class="w-[130px] flex items-center">
+                        <span class="basis-[130px]  pr-4 flex items-center">
                         <span class="w-2 h-2 rounded-full bg-zinc-400 block mr-2"></span>
                         <span class="font-semibold text-zinc-400">Inactive</span>
                     </span>
                     @endif
-                    <span class="flex w-[150px] justify-center">
+                    <span class="flex basis-[210px] justify-center">
                         <form action="" method="" class="border border-zinc-200 px-3 py-1.5 rounded-l-lg bg-zinc-100 m-0">
                             <button type="submit">
                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -128,42 +128,6 @@
                 </div>
 
                 @endforeach
-
-                {{-- rows 2 --}}
-                {{-- <div class="flex items-center text-sm text-zinc-500 font-medium py-3 border-b border-b-zinc-200 *:px-4 ">
-                    <span>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checked" class="cursor-pointer">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556ZM11.2952 6.85076C11.6423 6.50363 11.6423 5.94082 11.2952 5.59368C10.9481 5.24655 10.3853 5.24655 10.0381 5.59368L7.11111 8.5207L5.96187 7.37146C5.61474 7.02433 5.05193 7.02433 4.70479 7.37146C4.35766 7.71859 4.35766 8.28141 4.70479 8.62854L6.48257 10.4063C6.8297 10.7535 7.39252 10.7535 7.73965 10.4063L11.2952 6.85076Z" fill="#1C1C1C"/>
-                        </svg>
-                    </span>
-                    <span class="w-[25%] flex items-center gap-2">
-                        <img src="{{ asset('images/user.png') }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
-                        Mouhamad Thiam
-                    </span>
-                    <span class="w-[25%]">Mouhamadthiam@univ-thies.sn</span>
-                    <span class="w-[15%]">+221786541861</span>
-                    <span class="w-[150px] font-semibold">Directeur</span>
-                    <span class="w-[100px]">SET</span>
-
-                    <span class="flex w-[150px] justify-center">
-                        <form action="" method="" class="border border-zinc-200 px-3 py-1.5 rounded-l-lg bg-zinc-100 m-0">
-                            <button type="submit">
-                                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.16755 2.78381H2.76216C2.2948 2.78381 1.84659 2.96947 1.51612 3.29994C1.18566 3.63041 1 4.07862 1 4.54597V14.2378C1 14.7052 1.18566 15.1534 1.51612 15.4839C1.84659 15.8143 2.2948 16 2.76216 16H12.454C12.9214 16 13.3696 15.8143 13.7001 15.4839C14.0305 15.1534 14.2162 14.7052 14.2162 14.2378V9.83245M12.9703 1.53797C13.1329 1.36966 13.3273 1.23542 13.5423 1.14306C13.7573 1.05071 13.9886 1.0021 14.2225 1.00007C14.4565 0.998033 14.6885 1.04262 14.9051 1.13122C15.1217 1.21982 15.3184 1.35067 15.4839 1.51612C15.6493 1.68158 15.7802 1.87833 15.8688 2.09489C15.9574 2.31145 16.002 2.54349 15.9999 2.77747C15.9979 3.01145 15.9493 3.24268 15.8569 3.45767C15.7646 3.67266 15.6303 3.8671 15.462 4.02966L7.89709 11.5946H5.4054V9.10291L12.9703 1.53797Z" stroke="#737373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        </form>
-                        <form action="" method="" class="border border-zinc-200 px-3 py-1.5 rounded-r-lg bg-zinc-100 m-0">
-                            <button>
-                                <svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5.875 7.66667V12.6667M9.125 7.66667V12.6667M1 4.33333H14M13.1875 4.33333L12.4831 14.4517C12.4539 14.8722 12.2704 15.2657 11.9697 15.553C11.6689 15.8403 11.2731 16 10.8621 16H4.13787C3.72686 16 3.33112 15.8403 3.03034 15.553C2.72957 15.2657 2.54612 14.8722 2.51694 14.4517L1.8125 4.33333H13.1875ZM9.9375 4.33333V1.83333C9.9375 1.61232 9.8519 1.40036 9.69952 1.24408C9.54715 1.0878 9.34049 1 9.125 1H5.875C5.65951 1 5.45285 1.0878 5.30048 1.24408C5.1481 1.40036 5.0625 1.61232 5.0625 1.83333V4.33333H9.9375Z" stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        </form>
-                    </span>
-                </div>
-
-                --}}
             </div>
 
             {{-- pagination --}}
@@ -261,11 +225,11 @@
                 <div class="w-full flex flex-col relative mb-4">
                     <label for="password" class="text-zinc-700 font-medium">Mot de passe par défaut</label>
                     <input type="password" name="password" id="password" class="input-2" placeholder="***************">
-                    <svg width="16" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-4 top-[40px] hidden cursor-pointer">
+                    <svg width="16" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-4 top-[43px] hidden cursor-pointer">
                         <path d="M1.24666 9.17176C0.917778 8.42865 0.917778 7.57136 1.24666 6.82824C2.76905 3.38843 6.11596 1 10 1C13.884 1 17.2309 3.38843 18.7533 6.82824C19.0822 7.57136 19.0822 8.42865 18.7533 9.17176C17.2309 12.6116 13.884 15 10 15C6.11596 15 2.76905 12.6116 1.24666 9.17176Z" stroke="#4B5563" stroke-width="2"/>
                         <path d="M12.8886 8C12.8886 9.65685 11.5953 11 10 11C8.40467 11 7.11141 9.65685 7.11141 8C7.11141 6.34315 8.40467 5 10 5C11.5953 5 12.8886 6.34315 12.8886 8Z" stroke="#4B5563" stroke-width="2"/>
                     </svg>
-                    <svg width="16" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-4 top-[40px] cursor-pointer">
+                    <svg width="16" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-4 top-[43px] cursor-pointer">
                         <path d="M1.24667 6.97471L2.13901 7.42607L2.13901 7.42607L1.24667 6.97471ZM18.7533 9.02529L17.861 8.57394L17.861 8.57394L18.7533 9.02529ZM1.24667 9.02529L0.35432 9.47665L0.354321 9.47665L1.24667 9.02529ZM18.7533 6.97471L17.861 7.42606L17.861 7.42606L18.7533 6.97471ZM15.7296 2.41076C15.2535 2.13087 14.6406 2.28995 14.3607 2.76606C14.0808 3.24217 14.2399 3.85503 14.716 4.13491L15.7296 2.41076ZM5.32457 11.8888C4.84697 11.6115 4.23497 11.7738 3.95763 12.2514C3.6803 12.729 3.84264 13.341 4.32024 13.6184L5.32457 11.8888ZM1.52637 11.263C1.87829 11.6887 2.50862 11.7485 2.93427 11.3966C3.35992 11.0446 3.41969 10.4143 3.06778 9.98866L1.52637 11.263ZM11.7443 3.03344C12.2874 3.13363 12.809 2.77456 12.9091 2.23144C13.0093 1.68832 12.6503 1.16681 12.1071 1.06662L11.7443 3.03344ZM18.3754 1.74007C18.7842 1.36864 18.8144 0.736195 18.443 0.327467C18.0716 -0.0812608 17.4391 -0.111497 17.0304 0.259933L18.3754 1.74007ZM1.62453 14.2599C1.21581 14.6314 1.18557 15.2638 1.557 15.6725C1.92843 16.0813 2.56087 16.1115 2.9696 15.7401L1.62453 14.2599ZM10 0.875C5.76284 0.875 2.05748 3.15614 0.35432 6.52336L2.13901 7.42607C3.48063 4.77362 6.46908 2.875 10 2.875V0.875ZM10 15.125C14.2372 15.125 17.9425 12.8439 19.6457 9.47664L17.861 8.57394C16.5194 11.2264 13.5309 13.125 10 13.125V15.125ZM0.35432 6.52336C-0.118107 7.45737 -0.118107 8.54264 0.35432 9.47665L2.13901 8.57394C1.95366 8.2075 1.95366 7.79251 2.13901 7.42607L0.35432 6.52336ZM17.861 7.42606C18.0463 7.7925 18.0463 8.20749 17.861 8.57394L19.6457 9.47664C20.1181 8.54264 20.1181 7.45737 19.6457 6.52336L17.861 7.42606ZM19.6457 6.52336C18.786 4.82376 17.4151 3.4016 15.7296 2.41076L14.716 4.13491C16.0922 4.94387 17.185 6.08969 17.861 7.42606L19.6457 6.52336ZM4.32024 13.6184C5.96758 14.5749 7.91735 15.125 10 15.125V13.125C8.27084 13.125 6.66747 12.6686 5.32457 11.8888L4.32024 13.6184ZM0.354321 9.47665C0.676621 10.1138 1.07087 10.7121 1.52637 11.263L3.06778 9.98866C2.70418 9.54888 2.39236 9.07482 2.13901 8.57394L0.354321 9.47665ZM12.1071 1.06662C11.4252 0.94083 10.7205 0.875 10 0.875V2.875C10.5985 2.875 11.1818 2.92968 11.7443 3.03344L12.1071 1.06662ZM7.28492 10.5962C8.79437 11.9679 11.2056 11.9679 12.7151 10.5962L11.37 9.11609C10.6233 9.79464 9.37667 9.79464 8.62999 9.11609L7.28492 10.5962ZM12.7151 10.5962C14.2798 9.17432 14.2798 6.82568 12.7151 5.40378L11.37 6.88391C12.0615 7.51226 12.0615 8.48774 11.37 9.11609L12.7151 10.5962ZM17.0304 0.259933L1.62453 14.2599L2.9696 15.7401L18.3754 1.74007L17.0304 0.259933Z" fill="#4B5563"/>
                     </svg>
                     <div class="text-[small] text-red-600 font-medium mt-2">

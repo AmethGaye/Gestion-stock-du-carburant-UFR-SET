@@ -9,7 +9,7 @@ const child = document.querySelector('#container > div');
 
 
 // Afficher le contenu principal
-const displayContainer = function(){
+const displayContainer = function(edit = false){
 
     container.classList.replace('opacity-0', 'opacity-100');
     container.classList.replace('-z-50', 'z-50');
@@ -47,12 +47,27 @@ chContainer.forEach((item, index)=>{
         const superContainer = document.querySelectorAll('#super-contain');
         let detail = document.querySelectorAll('.mx-4 > .max-h-44');
         let height = String(224 + detail[index].getBoundingClientRect().height);
-        if(superContainer[index].classList.contains('h-20')){
-            superContainer[index].classList.replace('h-20', 'h-['+height+']');
+        
+        if(e.currentTarget.firstElementChild.classList.contains('rotate-0')){
+            e.currentTarget.firstElementChild.style = "transform: rotate(-180deg)";
+            e.currentTarget.firstElementChild.classList.remove('rotate-0');
+
         }else{
-            superContainer[index].classList.replace('h-['+height+']', 'h-20');
+            e.currentTarget.firstElementChild.style = "";
+            e.currentTarget.firstElementChild.classList.add('rotate-0');
+
         }
-        e.currentTarget.firstElementChild.classList.toggle('-rotate-180');
+        // console.log(e.currentTarget.firstElementChild.classList)
+
+
+        if(superContainer[index].classList.contains('h-20')){
+            superContainer[index].style = "height :"+height+"px";
+            superContainer[index].classList.remove('h-20');
+            // superContainer[index].classList.replace('h-20', 'h-['+height+']');
+        }else{
+            superContainer[index].style = "";
+            superContainer[index].classList.add('h-20');
+        }
     })
 });
 
@@ -66,9 +81,11 @@ plus.forEach((item, index)=>{
         let height = String(desc[index].getBoundingClientRect().height + 80);
 
         if(actContainer[index].classList.contains('h-20')){
-            actContainer[index].classList.replace('h-20', 'h-['+height+']');
+            actContainer[index].style = `height : ${height}px`;
+            actContainer[index].classList.remove('h-20');
         }else{
-            actContainer[index].classList.replace('h-['+height+']', 'h-20');
+            actContainer[index].style = "";
+            actContainer[index].classList.add('h-20');
         }
         e.currentTarget.children[0].classList.toggle('hidden');
         e.currentTarget.children[1].classList.toggle('hidden');
