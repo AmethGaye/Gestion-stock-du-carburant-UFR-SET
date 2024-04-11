@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
-
 use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UserRequestValidation;
 
 
 class UserController extends Controller
 {
+    use UserRequestValidation;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -33,27 +37,31 @@ class UserController extends Controller
     /**
      * ajouter un nouvel utilisateur
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
 
-        $credentials=$request->validated();
-        if ($credentials){
-            User::create( [
-                'nom' =>$credentials['nom'],
-                'prenom'=>$credentials['prenom'],
-                'email' => $credentials['email'],
-                'role'=>$credentials['role'],
-                'telephone'=>$credentials['telephone'],
-                'status'=>'0',
-                'date_naiss'=>'2000-11-18',
-                'password'=>Hash::make($credentials['password']),
-            ]);
-            return redirect()->route('admin.users')->withSuccess('Ajout d\'un nouveau utiisateur a réussie avec succès');
+       
+        $validator = Validator::make($request->all(),$this->rules(), $this->messages());
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
         }
-        return back()->withErrors(['msg' => 'Impossible de créer l\'utilisateur.']);
 
-
+        $validated = $validator->validated();
+        if($validated){
+            User::create( [
+                        'nom' => $validated['nom'],
+                        'prenom'=> $validated['prenom'],
+                        'email' => $validated['email'],
+                        'role'=> $validated['role'],
+                        'telephone'=> $validated['telephone'],
+                        'date_naiss'=> '2000-11-18',
+                        'password'=>Hash::make($validated['password']),
+                    ]);
+            return response()->json(['success' => true, 'msg' => "L'utilisateur ajouté avec succés !"]);
+        }
     }
+
 
     /**
      * gestion des roles
