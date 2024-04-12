@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('telephone');
             $table->string('provenance');
             $table->string('origine');
+            $table->string('situation');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
