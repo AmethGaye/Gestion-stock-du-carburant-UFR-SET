@@ -111,7 +111,7 @@ Route::post('/departement/vacataires', [VacataireController::class, 'store']);
 Route::post('/departement/vacataires/update/{id}', [VacataireController::class, 'update'])->name('dp.vacataires.update');
 Route::delete('/departement/vacataires/delete/{id}', [VacataireController::class, 'destroy'])->name('dp.vacataires.delete');
 
-Route::post('/departement/cours', [CoursController::class, 'store']);
+Route::post('/departement/cours', [CoursController::class, 'store'])->name('cours.store');
 Route::get('/departement/cours/all', [CoursController::class, 'index'])->name('cours.all');
 Route::get('/departement/cours/approbation', [CoursController::class, 'approbation'])->name('cours.approbation');
 Route::post('/departement/cours/approbation/{id}', [CoursController::class, 'approuver'])->name('approuver');
