@@ -3,13 +3,13 @@
 @section('dotation')
     <div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 font-mtrph">
         <h1 class="font-semibold text-lg text-zinc-600 mb-10">Dotation Régulier De L’Administration</h1>
-        <form action="" method="" class="m-0 mt-6">
+        <form action="{{ route('dotation.admin') }}" method="POST" class="m-0 mt-6">
             @csrf
             <div class="mb-10">
 
                 <div class="w-full  flex flex-col mb-3">
                     <label for="nom" class="font-medium text-zinc-700">Nom</label>
-                    <input type="text" name="nom" id="nom" class="input-2">
+                    <input type="text" name="nom" id="nom" class="input-2" >
                     @error('nom')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
@@ -27,7 +27,7 @@
                 <div class="w-full  flex flex-col mb-4">
                     <label for="ticket" class="font-medium text-zinc-700">Tickets</label>
                     <div class="w-full relative ">
-                        <input type="number" name="ticket" id="ticket" value="5" class="input-2 w-full">
+                        <input type="number" name="ticket" id="ticket" value="@old('ticket')" class="input-2 w-full">
                         <div class="absolute right-2 top-7 -translate-y-1/2 flex">
                             <button type="button" class="w-8 h-8 mr-1  bg-zinc-100 flex items-center justify-center rounded-md">
                                 <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">

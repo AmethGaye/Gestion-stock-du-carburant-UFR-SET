@@ -25,6 +25,11 @@ return new class extends Migration
             $table->binary('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreignId('ufr_id')
+            ->nullable()
+            ->constrained()
+            ->onDelete('cascade');
         });
 
     }

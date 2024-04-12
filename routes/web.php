@@ -14,6 +14,7 @@ use App\Http\Controllers\auth\ResetPasswordController;
 use App\Http\Controllers\auth\ForgotPasswordController;
 use App\Http\Controllers\DotationAdminsController;
 use App\Http\Controllers\DotationDepartsController;
+use App\Http\Controllers\HistoriqueController;
 use App\Models\Dotation_depart;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -139,6 +140,7 @@ Route::get('comptable/dotation/administration', [DotationAdminsController::class
 Route::post('comptable/dotation/administration', [DotationAdminsController::class, 'store']);
 Route::get('comptable/dotation/departement', [DotationDepartsController::class, 'create'])->name('dotation.depart');
 Route::post('comptable/dotation/departement', [DotationDepartsController::class, 'store']);
+Route::get('comptable/dotation/historique', [HistoriqueController::class, 'index'])->name('dotation.historique');
 
 
 

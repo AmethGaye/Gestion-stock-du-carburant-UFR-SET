@@ -11,21 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dotation_admins', function (Blueprint $table) {
+        Schema::create('administrations', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
             $table->string('email');
-            $table->unsignedInteger('nombre_tickets');
-            $table->boolean('statut');
-
-            $table->foreignId('user_id')
-            ->constrained()
-            ->onDelete('cascade');
-
-            $table->foreignId('administration_id')
-            ->constrained()
-            ->onDelete('cascade');
-
             $table->timestamps();
         });
     }
@@ -35,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dotation_admins');
+        Schema::dropIfExists('administrations');
     }
 };

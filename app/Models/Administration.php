@@ -6,16 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Ufr extends Model
+class Administration extends Model
 {
     use HasFactory;
 
-
-    public function users(): HasMany{
-        return $this->hasMany(User::class);
-    }
-
-    public function departements():hasMany{
-        return $this->hasMany(Departement::class);
+    public function dotation_admins():HasMany
+    {
+        return $this->hasMany(Dotation_admin::class);
     }
 }

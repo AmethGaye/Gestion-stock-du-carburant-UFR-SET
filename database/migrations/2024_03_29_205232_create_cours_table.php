@@ -21,6 +21,10 @@ return new class extends Migration
             ->constrained()
             ->onDelete('cascade');
 
+            $table->foreignId('filiere_id')
+            ->constrained()
+            ->onDelete('cascade');
+
             $table->foreignId('vacataire_id')
             ->constrained()
             ->onDelete('cascade');

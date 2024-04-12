@@ -14,11 +14,6 @@ return new class extends Migration
         Schema::create('ufrs', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->foreignId('user_id')
-            ->nullable()
-            ->constrained()
-            ->nullOnDelete();
-            $table->timestamps();
         });
     }
 

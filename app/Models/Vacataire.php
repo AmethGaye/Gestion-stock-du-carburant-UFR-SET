@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Vacataire extends Model
 {
@@ -18,4 +19,12 @@ class Vacataire extends Model
       'telephone'
     ];
     use HasFactory;
+
+    public function cours():HasMany{
+      return $this->hasMany(Cours::class);
+    }
+
+    public function remboursement():HasMany{
+      return $this->hasMany(Remboursement_vac::class);
+    }
 }
