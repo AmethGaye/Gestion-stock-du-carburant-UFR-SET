@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('filiere', function (Blueprint $table) {
+        Schema::table('filieres', function (Blueprint $table) {
             $table->foreignId('departement_id')
                 ->constrained()
                 ->onDelete('cascade')
@@ -24,7 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('filiere', function (Blueprint $table) {
+        Schema::table('filieres', function (Blueprint $table) {
             $table->dropColumn('departement_id');
         });
     }

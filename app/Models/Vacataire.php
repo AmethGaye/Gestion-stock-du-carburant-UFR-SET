@@ -24,7 +24,4 @@ class Vacataire extends Model
       return $this->hasMany(Cours::class);
     }
 
-    public function remboursement():HasMany{
-      return $this->hasMany(Remboursement_vac::class);
-    }
 }

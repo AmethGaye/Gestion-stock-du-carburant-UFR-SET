@@ -18,10 +18,6 @@ class Matiere extends Model
     }
 
 
-    public function remboursement():HasMany{
-        return $this->hasMany(Remboursement_vac::class);
-    }
-
     public function filieres()
     {
         return $this->hasManyThrough(Filiere::class, Cours::class);

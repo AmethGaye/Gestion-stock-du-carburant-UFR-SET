@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Cours extends Model
 {
@@ -24,5 +25,9 @@ class Cours extends Model
     public function filiere()
     {
         return $this->belongsTo(Filiere::class, 'filiere_id');
+    }
+    public function remboursement():HasOne
+    {
+        return $this->HasOne(Remboursement_vac::class);
     }
 }
