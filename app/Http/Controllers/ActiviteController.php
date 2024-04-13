@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activite;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests\ActiviteRequestValidation;
 use Illuminate\Support\Facades\Validator;
@@ -22,13 +23,14 @@ class ActiviteController extends Controller
      */
     public function index()
     {
-        $activities=Activite::all();
 
         if(auth()->user()->role == 'directeur'){
+            $activities = Activite::all();
             return view('users.directeur.activites',compact('activities'));
         }
 
         if(auth()->user()->role == 'comptable'){
+            $activities = Activite::all();
             return view('users.comptable.activites',compact('activities'));
         }
     }
@@ -54,15 +56,14 @@ class ActiviteController extends Controller
 
         $credentials = $validator->validated();
         if($credentials){
-            $user_id=auth()->user()->getAuthIdentifier();
             Activite::create([
                 'titre'=>$credentials['titre'],
                 'description'=>$credentials['description'],
                 'lieux'=>$credentials['lieux'],
                 'date'=>$credentials['date'],
                 'adresse'=>$credentials['adresse'],
-                'ticket'=>$credentials['ticket'],
-                'user_id'=>$user_id,
+                'ticket_demande'=>$credentials['ticket_demande'],
+                'user_id'=>auth()->user()->getAuthIdentifier(),
             ]);
             return response()->json(['success' => true, 'msg' => 'Ajout d\'une nouvelle  a réussie avec succès']);
         }
@@ -79,9 +80,10 @@ class ActiviteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function reset(string $id)
     {
-        //
+        Activite::where('id', $id)->update(['statut' => false, 'ticket' => 0]);
+        return redirect()->back()->with('success', 'Restauration réussie !');
     }
 
     /**
@@ -89,7 +91,23 @@ class ActiviteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if($request->user()->role == 'directeur'){
+            $validator = Validator::make($request->all(),$this->rules(), $this->messages());
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()]);
+            }
+            Activite::where('id', $id)->update($request->only(['titre', 'ticket_demande', 'lieux', 'adresse', 'date',
+                'description']));
+            return response()->json(['success' => true, 'msg' => "Mise à jour réussie !" ]);
+
+        }
+
+        if($request->user()->role == 'comptable'){
+
+            Activite::where('id', $id)->update(['ticket' => $request->ticket, 'statut' => true]);
+            return redirect()->route('comptable.activites')->withSuccess('La demande a été traitée avec succés !');
+        }
     }
 
     /**

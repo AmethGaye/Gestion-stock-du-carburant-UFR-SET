@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 Trait ActiviteRequestValidation
 {
-    
+
     public function rules(): array
     {
         return [
@@ -13,7 +13,7 @@ Trait ActiviteRequestValidation
             'lieux'=>'required',
             'adresse'=>'required|string',
             'date'=>'required|date',
-            'ticket'=>'required|numeric',
+            'ticket_demande'=>'required|numeric',
 
         ];
     }
@@ -25,7 +25,7 @@ Trait ActiviteRequestValidation
         'description.required'=>'La description est obligatoire',
         'description.string'=>'La description doit contenir des chaines de caractères',
         'lieux.required'=>'Le lieu est obligatoire',
-        'ticket.required'=>'Le nombre de ticket est obligatoire',
+        'ticket_demande.required'=>'Le nombre de ticket est obligatoire',
         'ticket.numeric'=>'Le champs ticket doit contenir un nombre',
         'date.required'=>'La date est obligatoire',
         'date.date'=>'Entrer une date valide',

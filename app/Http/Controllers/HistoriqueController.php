@@ -14,10 +14,11 @@ class HistoriqueController extends Controller
 
     public function index(){
 
-        $depart = Dotation_depart::all();
-        $total_depart = Dotation_depart::sum('nombre_tickets');
-        $admin = Dotation_admin::all();
+        $dotation_depart = Dotation_depart::all();
+        $total_dep = Dotation_depart::sum('nombre_tickets');
+        $dotation_admin = Dotation_admin::all();
+        $total_admin = Dotation_admin::sum('nombre_tickets');
 
-        return view('users.comptable.historique', compact('depart', 'admin', 'total_depart'));
+        return view('users.comptable.historique', compact('dotation_depart', 'dotation_admin', 'total_dep', 'total_admin'));
     }
 }

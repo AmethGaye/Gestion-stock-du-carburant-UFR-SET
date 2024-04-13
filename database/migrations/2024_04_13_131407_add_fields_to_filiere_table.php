@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('administrations', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->string('email');
-            $table->timestamps();
+        Schema::table('filiere', function (Blueprint $table) {
+            $table->foreignId('departement_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -24,6 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('administrations');
+        Schema::table('filiere', function (Blueprint $table) {
+            $table->dropColumn('departement_id');
+        });
     }
 };

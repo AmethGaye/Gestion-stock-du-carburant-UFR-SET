@@ -1,6 +1,6 @@
 /*
-    affichage des formulaires d'ajout d'un nouveau utilisateur, vacataire, cours et les messages d'alertes 
-*/ 
+    affichage des formulaires d'ajout d'un nouveau utilisateur, vacataire, cours et les messages d'alertes
+*/
 document.addEventListener("DOMContentLoaded", (event) => {
     if(sessionStorage.getItem('msg')){
         showMessage(sessionStorage.getItem('msg'));
@@ -9,15 +9,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
 
-// contenu principale et tous les formulaires et les messages alertes 
+// contenu principale et tous les formulaires et les messages alertes
 const container = document.querySelector('#container');
 const child = document.querySelector('#container > div');
 const btn = document.querySelector('#submit');
 const closerBtn = document.querySelector('#closer');
 const form = document.querySelector('#subscription');
-const input = document.querySelectorAll('#subscription input');
 const chContainer = document.querySelectorAll('#ch-container');
-
+const r_form = document.querySelectorAll('#r_form');
 
 
 // Afficher le contenu principal
@@ -29,7 +28,7 @@ try {
         reset();
     });
 } catch (error) {
-    
+
 }
 
 
@@ -41,7 +40,7 @@ try {
             const superContainer = document.querySelectorAll('#super-contain');
             let detail = document.querySelectorAll('.mx-4 > .max-h-44');
             let height = String(224 + detail[index].getBoundingClientRect().height);
-            
+
             if(e.currentTarget.firstElementChild.classList.contains('rotate-0')){
                 e.currentTarget.firstElementChild.style = "transform: rotate(-180deg)";
                 e.currentTarget.firstElementChild.classList.remove('rotate-0');
@@ -65,7 +64,7 @@ try {
         })
     });
 } catch (error) {
-    
+
 }
 
 // Afficher en detail les activites DG
@@ -86,7 +85,7 @@ try {
             }
             e.currentTarget.children[0].classList.toggle('hidden');
             e.currentTarget.children[1].classList.toggle('hidden');
-            
+
         })
     })
 } catch (error) {
@@ -105,9 +104,33 @@ try {
 }
 
 
+
+try {
+    r_form.forEach((item, index) => {
+        item.addEventListener('submit', (e)=>{
+            e.preventDefault();
+            const x = document.querySelectorAll('#r_form input[type=number]');
+            let input = new FormData(item);
+            if(isNaN(input.get('ticket')) || input.get('ticket') === ""){
+                console.log(x[index].value)
+                x[index].classList.remove('border-zinc-200');
+                x[index].style = "border-color: #dc2626";
+            }else{
+                e.currentTarget.submit();
+            }
+        })
+    });
+} catch (error) {
+    console.log(error.message)
+}
+
+
+
+
 // LES FONCTIONS
 
-const displayContainer = function(edit = false){
+const displayContainer = function(edit = false, data = null){
+
     container.classList.replace('opacity-0', 'opacity-100');
     container.classList.replace('-z-50', 'z-50');
     container.classList.remove('invisible');
@@ -115,24 +138,43 @@ const displayContainer = function(edit = false){
 
     child.classList.replace('opacity-0', 'opacity-100');
     child.classList.replace('scale-75', 'scale-100');
+
+    if(edit && data){
+        form.action = `/directeur/activites/update/${data.id}`;
+        console.log(form.action)
+        let field = document.querySelectorAll("#subscription label + *");
+        field.forEach((item, index)=>{
+            if(item.nodeName === "DIV"){
+                item.firstElementChild.value = data[item.firstElementChild.id];
+            }else{
+                item.value = data[item.id];
+            }
+        })
+    }
 }
 
 const reset = ()=>{
     child.classList.replace('scale-100', 'scale-75');
-    child.classList.replace('opacity-100', 'opacity-0'); 
+    child.classList.replace('opacity-100', 'opacity-0');
     container.classList.replace('opacity-100', 'opacity-0');
     container.classList.replace('scale-100', 'scale-0');
     container.classList.replace('-z-50', 'z-50');
     container.classList.add('invisible');
 
-    input.forEach((item, i)=>{
-        if(i != 0){
+    let field = document.querySelectorAll("#subscription label + *");
+    field.forEach((item)=>{
+        if(item.nodeName === 'DIV'){
+            item.children[0].value = "";
+            // item.children[0].style = "border-color: red";
+            item.children[1].innerHTML = "";
+        }else{
             item.value = "";
             item.nextElementSibling.innerHTML = "";
-        } 
-    });
+        }
+    })
 
 }
+
 
 
 
@@ -146,12 +188,14 @@ const subscribe = async () => {
         });
         const result = await response.json();
 
-        if(response.ok & result.success){
+        if(response.ok && result.success){
             sessionStorage.setItem('msg',result.msg);
             location.reload();
-            
+            // console.log("ok")
+
         }else{
             showMessage(result.errors, 'error')
+            // console.log('error');
         }
 
     } catch (error) {
@@ -159,23 +203,30 @@ const subscribe = async () => {
     }
 };
 
+
 const showMessage = (message, type = 'success') => {
-    if(type == 'success'){
+    if(type === 'success'){
         document.getElementById('success').innerHTML = message;
         setTimeout(()=>{document.getElementById('success').innerHTML = "";},3500 );
     }
 
-    if(type == 'error'){
-        input.forEach((item)=>{
-            if(message[item.id]){
-                item.nextElementSibling.textContent = message[item.id]; 
+    if(type === 'error'){
+        let field = document.querySelectorAll("#subscription label + *");
+        // console.log(field);
+        field.forEach((item)=>{
+            if(item.nodeName === "DIV" && message[item.firstElementChild.id]){
+                item.children[1].textContent = message[item.firstElementChild.id];
+            }else if(message[item.id]){
+                item.nextElementSibling.textContent = message[item.id];
             }
         })
-        // console.log(input);
+        // console.log(message);
 
-        
+
     }
 };
+
+
 
 
 
