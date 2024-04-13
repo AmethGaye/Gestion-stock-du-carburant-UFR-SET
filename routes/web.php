@@ -40,8 +40,6 @@ Route::get('/', function () {
 */
 
 
-
-
 // connexion d'un utlisateur
 Route::get('/login', [LoginController::class, 'create'])->name('auth.login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -134,6 +132,7 @@ Route::post('comptable/remboursement_multiple', [RemboursementController::class,
 
 Route::get('comptable/activites', [ActiviteController::class, 'index'])->name('comptable.activites');
 Route::post('comptable/activites/{id}', [ActiviteController::class, 'update'])->name('c.activites.update');
+Route::put('comptable/activites/reset/{id}', [ActiviteController::class, 'reset'])->name('c.activites.reset');
 
 
 Route::get('comptable/dotation/administration', [DotationAdminsController::class, 'create'])->name('dotation.admin');

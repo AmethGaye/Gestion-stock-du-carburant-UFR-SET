@@ -57,7 +57,12 @@
                 <div class="flex items-center gap-4 mb-2.5">
                     <h2 class="text-base font-bold font-inter text-zinc-700">{{ $activitie->titre }}</h2>
                     <span class="flex justify-center items-center">
-                        <span class="flex items-center bg-[#E2FBD7] px-4 text-[#34B53A] py-1.5 rounded-md font-semibold text-xs">Validé</span>
+                        @if($activitie->statut)
+                            <span class="flex items-center bg-[#E2FBD7] px-4 text-[#34B53A] py-1.5 rounded-md font-semibold text-xs">Validé</span>
+                        @else
+                            <span class="w-4 h-1 rounded-full bg-amber-500">
+                            </span>
+                        @endif
                     </span>
                 </div>
                 <div class="flex items-center gap-2">
@@ -80,13 +85,12 @@
                 </div>
             </div>
             <div class="flex items-center text-zinc-700 gap-3">
-
-                <button class="text-sm font-semibold" onclick="displayContainer()">Editer</button>
-
+                <button class="text-sm font-semibold" onclick="displayContainer(true, {{ json_encode($activitie) }})">
+                    Editer
+                </button>
                 {{-- separator --}}
                 <div class=" w-0.5 h-6 bg-zinc-200"></div>
-                   @php $id=$activitie->id @endphp
-                <form action="{{route('d.activites.delete',compact('id'))}}" method="post" class="m-0">
+                <form action="{{route('d.activites.delete', $activitie->id)}}" method="post" class="m-0">
                     @csrf
                     @method('delete')
                     <button class="font-semibold text-sm text-[#FFB200] ">Supprimer</button>
@@ -113,9 +117,10 @@
             </p>
             <div class="flex py-2 justify-end">
                 <div class="flex items-center">
-                    <span class="font-bold text-sm mr-4">Demande:</span>
+                    <span class="font-medium text-sm mr-4">Demande:</span>
                     <span class="flex justify-center">
-                        <span class="flex items-center bg-orange-100 px-4 text-orange-500 py-1.5 rounded-md font-semibold text-sm">{{$activitie->ticket}} Tickets</span>
+                        <span class="flex items-center bg-orange-100 px-4 text-orange-500 py-1.5 rounded
+                        font-semibold text-sm font-inter">{{$activitie->ticket_demande}} Tickets</span>
                     </span>
                 </div>
             </div>
@@ -139,7 +144,7 @@
             </svg>
         </div>
     </div>
-    <form action="{{route('directeur.activites')}}" method="post" class="m-0 mt-6" id="subscription"> 
+    <form action="{{route('directeur.activites')}}" method="post" class="m-0 mt-6" id="subscription">
         @csrf
 
         <div class="mb-10 ">
@@ -147,7 +152,7 @@
                 <label for="titre" class="text-zinc-800 font-medium">Titre</label>
                 <input type="text" name="titre" id="titre" class="input-2" placeholder="Sortie Pédagogique">
                 {{-- erreur gerée en js --}}
-                <div class="text-sm text-red-600 font-medium mt-2">         
+                <div class="text-sm text-red-600 font-medium mt-2">
                 </div>
             </div>
 
@@ -155,9 +160,9 @@
                 <div class="w-full flex flex-col relative mb-3">
                     <label for="ticket" class="text-zinc-800 font-medium">Tickets sollicités</label>
                     <div class="w-full relative ">
-                        <input type="number" name="ticket" id="ticket" value="3" class="input-2 w-full">
+                        <input type="number" name="ticket_demande" id="ticket_demande" value="3" class="input-2 w-full">
                         {{-- erreur gerée en js --}}
-                        <div class="text-sm text-red-600 font-medium mt-2">         
+                        <div class="text-sm text-red-600 font-medium mt-2">
                         </div>
                         <div class="absolute right-2 top-7 -translate-y-1/2 flex">
                             <button type="button" class="w-8 h-8 mr-1  bg-zinc-100 flex items-center justify-center rounded-md">
@@ -176,7 +181,7 @@
 
                 <div class="w-full  flex flex-col mb-3">
                     <label for="region" class="font-medium text-zinc-800">Région</label>
-                    <select name="lieux" id="region" class="input-2">
+                    <select name="lieux" id="lieux" class="input-2">
                         <option value="Dakar">Dakar</option>
                         <option value="Thies">Thies</option>
                         <option value="Kaolack">Kaolack</option>
@@ -192,6 +197,9 @@
                         <option value="Fatick">Fatick</option>
                         <option value="Kaffrine">Kaffrine</option>
                     </select>
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
+                    </div>
                 </div>
             </div>
 
@@ -200,7 +208,7 @@
                     <label for="adresse" class="text-zinc-800 font-medium">Adresse</label>
                     <input type="text" name="adresse" id="adresse" class="input-2" placeholder="">
                     {{-- erreur gerée en js --}}
-                    <div class="text-sm text-red-600 font-medium mt-2">         
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
 
@@ -208,16 +216,17 @@
                     <label for="date" class="font-medium text-zinc-700">Date</label>
                     <input type="date" name="date" id="date" class="input-2">
                     {{-- erreur gerée en js --}}
-                    <div class="text-sm text-red-600 font-medium mt-2">         
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
-                
+
             </div>
 
-            <div class="w-full flex">
+            <div class="w-full flex flex-col">
+                <label></label>
                 <textarea name="description" id="description" rows="5" placeholder="Décrivez .... " class="input-2 w-full"></textarea>
                 {{-- erreur gerée en js --}}
-                <div class="text-sm text-red-600 font-medium mt-2">         
+                <div class="text-sm text-red-600 font-medium mt-2">
                 </div>
             </div>
 

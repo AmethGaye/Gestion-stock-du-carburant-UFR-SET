@@ -11,6 +11,7 @@ class Activite extends Model
     protected  $fillable=[
         'titre',
         'ticket',
+        'ticket_demande',
         'description',
         'lieux',
         'status',
@@ -19,6 +20,9 @@ class Activite extends Model
         'user_id'
 
     ];
+
+    protected $attributes = ['ticket' => 0];
+
     use HasFactory;
 
     public function user():BelongsTo

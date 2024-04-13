@@ -16,7 +16,8 @@ class Dotation_admin extends Model
         'email',
         'nombre_tickets',
         'user_id',
-        'statut'
+        'statut',
+        'administration_id'
     ];
 
     public function user():BelongsTo
@@ -24,8 +25,4 @@ class Dotation_admin extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function administration():BelongsTo
-    {
-        return $this->belongsTo(Administration::class);
-    }
 }

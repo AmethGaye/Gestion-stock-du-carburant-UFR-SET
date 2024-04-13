@@ -45,29 +45,30 @@
     {{-- cols --}}
     <span class="basis-3/12 grow pr-4">VACATAIRE</span>
     <span class="basis-3/12 grow pr-4">EMAIL</span>
-    <span class="basis-2/12 grow px-4">PROVENANCE</span>
-    <span class="basis-[160px] shrink-0 px-4">DUREE TOTALE</span>
-    <span class="basis-[180px] text-center px-4">SITUATION</span>
-    <span class="basis-[160px] px-4">DISTANCE</span>
+    <span class="basis-2/12 grow pr-4">PROVENANCE</span>
+    <span class="basis-[160px] pr-4">DUREE TOTALE</span>
+    <span class="basis-[180px] text-center">SITUATION</span>
+    <span class="basis-[160px] pr-4">DISTANCE</span>
     <span class="basis-[140px] text-center">ACTION</span>
 </div>
 
 
 
 {{-- row 1 --}}
-<div class="text-sm h-20 overflow-hidden text-zinc-600 font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height]" id="super-contain">
+<div class="text-sm h-20 overflow-hidden text-zinc-600 font-medium border border-zinc-200 rounded-md px-6 bg-white
+mb-4 relative transition-[height]" id="super-contain">
 
     {{-- resume --}}
     <div class="h-20 relative flex items-center border-b border-zinc-300 mb-4">
         {{-- cols --}}
         <span class="basis-3/12 grow pr-4">Mouhamadou Mansour</span>
         <span class="basis-3/12 grow pr-4">Mouhamadou@univ-thies.sn</span>
-        <span class="basis-2/12 grow px-4">Tambacounda</span>
-        <span class="basis-[160px] shrink-0 px-4 font-bold">20 Heures</span>
-        <span class="basis-[180px] flex px-4 justify-center">
+        <span class="basis-2/12 grow pr-4">Tambacounda</span>
+        <span class="basis-[160px] pr-4 font-bold">20 Heures</span>
+        <span class="basis-[180px] flex  justify-center">
             <span class="flex items-center bg-fuchsia-100 px-4 text-fuchsia-500 py-1 rounded font-semibold text-xs">Non</span>
         </span>
-        <span class="w-[160px] font-bold px-4">423.23 KM</span>
+        <span class="w-[160px] font-bold pr-4">423.23 KM</span>
 
         <span class="w-[140px] relative flex items-center justify-center gap-4">
             <div class="icon-hover rounded-lg bg-zinc-100 font-semibold text-zinc-800">0</div>
@@ -76,8 +77,8 @@
             <div class="transition-all duration-300 w-8 h-8 flex items-center justify-center mr-2 icon-hover" id="ch-container">
                 <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform rotate-0" id="chevron">
                     <path d="M13.5 1.5L8.20711 6.79289C7.81658 7.18342 7.18342 7.18342 6.79289 6.79289L1.5 1.5" stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
-                </svg>                                                       
-            </div> 
+                </svg>
+            </div>
         </span>
     </div>
 
@@ -139,15 +140,16 @@
                     {{-- separator --}}
                     <div class=" w-0.5 h-5 bg-zinc-200"></div>
                     <form action="" method="" class="m-0">
+                        @csrf
                         <button class="">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 7C13 10.3137 10.3137 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C8.53671 1 9.93849 1.57771 11 2.52779M11.6667 1V3C11.6667 3.36819 11.3682 3.66667 11 3.66667H9" stroke="#4C535F" stroke-width="2" stroke-linecap="round"/>
-                            </svg>                            
+                            </svg>
                         </button>
                     </form>
                 </span>
             </div>
-      
+
             <div class="flex items-center text-sm text-zinc-600 font-medium h-14 border-b">
                 {{-- cols --}}
                 <span class="px-4">
@@ -189,12 +191,12 @@
                         <button class="">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 7C13 10.3137 10.3137 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C8.53671 1 9.93849 1.57771 11 2.52779M11.6667 1V3C11.6667 3.36819 11.3682 3.66667 11 3.66667H9" stroke="#4C535F" stroke-width="2" stroke-linecap="round"/>
-                            </svg>                            
+                            </svg>
                         </button>
                     </form>
                 </span>
             </div>
-      
+
             <div class="flex items-center text-sm text-zinc-600 font-medium h-14 border-b">
                 {{-- cols --}}
                 <span class="px-4">
@@ -236,12 +238,12 @@
                         <button class="">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 7C13 10.3137 10.3137 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C8.53671 1 9.93849 1.57771 11 2.52779M11.6667 1V3C11.6667 3.36819 11.3682 3.66667 11 3.66667H9" stroke="#4C535F" stroke-width="2" stroke-linecap="round"/>
-                            </svg>                            
+                            </svg>
                         </button>
                     </form>
                 </span>
             </div>
-      
+
             <div class="flex items-center text-sm text-zinc-600 font-medium h-14 border-b">
                 {{-- cols --}}
                 <span class="px-4">
@@ -283,12 +285,12 @@
                         <button class="">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 7C13 10.3137 10.3137 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C8.53671 1 9.93849 1.57771 11 2.52779M11.6667 1V3C11.6667 3.36819 11.3682 3.66667 11 3.66667H9" stroke="#4C535F" stroke-width="2" stroke-linecap="round"/>
-                            </svg>                            
+                            </svg>
                         </button>
                     </form>
                 </span>
             </div>
-      
+
             <div class="flex items-center text-sm text-zinc-600 font-medium h-14 border-b">
                 {{-- cols --}}
                 <span class="px-4">
@@ -330,12 +332,12 @@
                         <button class="">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 7C13 10.3137 10.3137 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C8.53671 1 9.93849 1.57771 11 2.52779M11.6667 1V3C11.6667 3.36819 11.3682 3.66667 11 3.66667H9" stroke="#4C535F" stroke-width="2" stroke-linecap="round"/>
-                            </svg>                            
+                            </svg>
                         </button>
                     </form>
                 </span>
             </div>
-      
+
             <div class="flex items-center text-sm text-zinc-600 font-medium h-14 border-b">
                 {{-- cols --}}
                 <span class="px-4">
@@ -377,13 +379,13 @@
                         <button class="">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 7C13 10.3137 10.3137 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C8.53671 1 9.93849 1.57771 11 2.52779M11.6667 1V3C11.6667 3.36819 11.3682 3.66667 11 3.66667H9" stroke="#4C535F" stroke-width="2" stroke-linecap="round"/>
-                            </svg>                            
+                            </svg>
                         </button>
                     </form>
                 </span>
             </div>
-      
-        </div>              
+
+        </div>
 
         {{-- t-foot --}}
         <div class="h-20 text-sm font-semibold flex items-center justify-between">
@@ -432,8 +434,8 @@
             <div class="transition-all duration-300 w-8 h-8 flex items-center justify-center mr-2 icon-hover" id="ch-container">
                 <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform rotate-0" id="chevron">
                     <path d="M13.5 1.5L8.20711 6.79289C7.81658 7.18342 7.18342 7.18342 6.79289 6.79289L1.5 1.5" stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
-                </svg>                                                       
-            </div> 
+                </svg>
+            </div>
         </span>
     </div>
 
@@ -499,13 +501,13 @@
                         <button class="">
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 7C13 10.3137 10.3137 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C8.53671 1 9.93849 1.57771 11 2.52779M11.6667 1V3C11.6667 3.36819 11.3682 3.66667 11 3.66667H9" stroke="#4C535F" stroke-width="2" stroke-linecap="round"/>
-                            </svg>                            
+                            </svg>
                         </button>
                     </form>
                 </span>
             </div>
-      
-        </div>              
+
+        </div>
 
         {{-- t-foot --}}
         <div class="h-20 text-sm font-semibold flex items-center justify-between">
