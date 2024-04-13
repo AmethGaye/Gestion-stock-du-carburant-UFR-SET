@@ -87,7 +87,12 @@ class CoursController extends Controller
 
 
     public function approuver(string $id){
-
+        Cours::where('id', $id)->update(['statut' => true]);
+        return redirect()->route('cours.approbation');
+    }
+    public function restaurer(string $id){
+        Cours::where('id', $id)->update(['statut' => false]);
+        return redirect()->route('cours.approbation');
     }
 
 

@@ -117,6 +117,7 @@ Route::get('/departement/cours/all', [CoursController::class, 'index'])->name('c
 Route::delete('/departement/cours/all/{id}', [CoursController::class, 'destroy'])->name('cours.delete');
 Route::get('/departement/cours/approbation', [CoursController::class, 'approbation'])->name('cours.approbation');
 Route::post('/departement/cours/approbation/{id}', [CoursController::class, 'approuver'])->name('approuver');
+Route::post('/departement/cours/restauration/{id}', [CoursController::class, 'restaurer'])->name('restaurer');
 
 Route::post('/departement/cours/update/{id}', [CoursController::class, 'update'])->name('dp.cours.update');
 Route::post('/departement/cours/delete/{id}', [CoursController::class, 'delete'])->name('dp.cours.delete');
