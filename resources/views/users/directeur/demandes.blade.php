@@ -86,7 +86,7 @@
                         <div class=" w-0.5 h-6 bg-zinc-200"></div>
         
                         {{--  --}}
-                        <div class="transition-all duration-300 w-8 h-8 flex items-center justify-center mr-2 icon-hover" id="ch-container">
+                        <div class="transition-all duration-300 w-8 h-8 flex items-center justify-center mr-2 icon-hover cursor-pointer" id="ch-container">
                             <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform rotate-0" id="chevron">
                                 <path d="M13.5 1.5L8.20711 6.79289C7.81658 7.18342 7.18342 7.18342 6.79289 6.79289L1.5 1.5" stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
                             </svg>                                                       
@@ -94,25 +94,27 @@
                     </span>
                 </div>
             </div>
-    
+
+
+            {{-- t-head --}}
+            <div class="flex items-center text-sm text-zinc-800 font-nunito font-bold h-12 pr-4 bg-[#F1F4F9] rounded">
+                {{-- cols --}}
+                <span class="basis-[23%] grow px-4">Matière</span>
+                <span class="basis-[15%] grow pr-4">Semestre</span>
+                <span class="basis-[22%] grow pr-4">Filière</span>
+                <span class="basis-[15%] grow pr-4">Date</span>
+                <span class="w-[120px] pr-4">Durée</span>
+                <span class="w-[170px] text-center">Statut</span>
+            </div>
+
             {{-- detail --}}
             <div class="mx-4">
-                {{-- t-head --}}
-                <div class="flex items-center text-sm text-zinc-800 font-nunito font-bold h-12 pr-4 bg-[#F1F4F9] rounded">
-                    {{-- cols --}}
-                    <span class="basis-[23%] grow px-4">Matière</span>
-                    <span class="basis-[15%] grow pr-4">Semestre</span>
-                    <span class="basis-[22%] grow pr-4">Filière</span>
-                    <span class="basis-[15%] grow pr-4">Date</span>
-                    <span class="w-[120px] pr-4">Durée</span>
-                    <span class="w-[170px] text-center">Statut</span>
-                </div>
     
                 {{-- t-body --}}
                 
                 <div class="max-h-44 overflow-y-scroll">
                     {{-- row 1 --}}
-                    <div class="flex items-center text-sm text-zinc-600 font-medium h-14 border-b ">
+                    <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
                         {{-- cols --}}
                         <span class="basis-[23%] grow px-4">Développement Web</span>
                         <span class="basis-[15%] grow pr-4">Semestre 4</span>

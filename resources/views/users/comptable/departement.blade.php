@@ -3,19 +3,20 @@
 @section('dotation')
     <div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 font-mtrph">
         <h1 class="font-semibold text-lg text-zinc-600 mb-10">Dotation Régulier Des Départements</h1>
-        <form action="" method="" class="m-0 mt-6">
+        <form action="{{ route('dotation.depart') }}" method="POST" class="m-0 mt-6">
             @csrf
             <div class="mb-10">
 
                 <div class="w-full  flex flex-col mb-4">
                     <label for="departement" class="font-medium text-zinc-700">Département</label>
                     <select name="departement" id="departement" class="input-2">
-                        <option value="">INFORMATIQUE</option>
-                        <option value="">LSEE</option>
-                        <option value="">PHYSIQUE-CHIMIE</option>
-                        <option value="">MATHEMATIQUE INFORMATIQUE</option>
+                        <option value="" selected>Sélectionner un département</option>
+                        @foreach ($departements as $item)
+                            <option value="{{ $item->id }}">{{ $item->nom }}</option>
+                        @endforeach
+                        
                     </select>
-                    @error('email')
+                    @error('departement')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
@@ -24,7 +25,10 @@
                 <div class="w-full  flex flex-col mb-4">
                     <label for="ticket" class="font-medium text-zinc-700">Tickets</label>
                     <div class="w-full relative ">
-                        <input type="number" name="ticket" id="ticket" value="200" class="input-2 w-full">
+                        <input type="number" name="ticket" id="ticket" value="@old('ticket')" class="input-2 w-full">
+                        @error('ticket')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
                         <div class="absolute right-2 top-7 -translate-y-1/2 flex">
                             <button type="button" class="w-8 h-8 mr-1  bg-zinc-100 flex items-center justify-center rounded-md">
                                 <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,9 +42,6 @@
                             </button>
                         </div>
                     </div>
-                    @error('email')
-                        <span class="text-red-500">{{ $message }}</span>
-                    @enderror
                 </div>
                 
             </div>

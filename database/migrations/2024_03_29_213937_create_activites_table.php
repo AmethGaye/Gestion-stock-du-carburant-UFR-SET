@@ -17,7 +17,9 @@ return new class extends Migration
             $table->longText('description');
             $table->string('lieux');
             $table->boolean('statut')->default(false);
-
+            $table->integer('ticket')->default(0);
+            $table->string('adresse');
+            $table->date('date');
             $table->foreignId('user_id')
             ->constrained()
             ->onDelete('cascade');

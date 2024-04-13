@@ -21,20 +21,29 @@ class CoursController extends Controller
         $vacataires = Vacataire::all();
         $matieres = Matiere::all();
         $filieres = Filiere::all();
-        return view('users.departement.all',compact('vacataires','matieres','filieres'));
+       // $sceance_cours  =Cours::with('vacataire','matiere')->get();
+        $vacataires_sceances = Vacataire::with(['cours.matiere','cours.filiere'])->get();
+       //dd($vacataires_sceances);
+
+        return view('users.departement.all',compact('vacataires','matieres','filieres','vacataires_sceances'));
     }
 
     public function approbation(){
-        return view('users.departement.approbation');
+        $filieres = Filiere::all();
+        $matieres = Matiere::all();
+        $vacataires = Vacataire::all();
+        $sceance_cours=Cours::with(['vacataire','filiere','matiere'])->get();
+       // dd($sceance_cours);
+        return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }
     public function store(Request $request){
-/*
-        $validated=$request->validate(
+
+       $validated=$request->validate(
             [
-                //'filiere'=>'required|string|numeric',
+                'filiere'=>'required|string|numeric',
                 'matiere_id'=>'required|string|numeric',
                 'vacataire_id'=>'required|string|numeric',
-                //'date'=>'required|date',
+                'date'=>'required|date',
                 'remarque'=>'string',
                 'heure'=>'required|string|numeric',
             ],
@@ -59,10 +68,10 @@ class CoursController extends Controller
         if ($validated){
             Cours::create(
                 [
-                   // 'filiere'=>$validated['filiere'],
+                   'filiere_id'=>$validated['filiere'],
                     'matiere_id'=>$validated['matiere_id'],
                     'vacataire_id'=>$validated['vacataire_id'],
-                    //'date'=>$validated['date'],
+                    'date'=>$validated['date'],
                     'remarque'=>$validated['remarque'],
                     'duree'=>$validated['heure'],
                     'statut'=>false,
@@ -70,9 +79,10 @@ class CoursController extends Controller
 
                 ]
             );
-return redirect()->route('cours.all');
+            return back();
+         // return redirect()->route('cours.all');
         }
-*/
+          return back() ;
     }
 
 
@@ -102,6 +112,8 @@ return redirect()->route('cours.all');
      */
     public function destroy(string $id)
     {
-        //
+        $user = Cours::findOrFail($id);
+        $user->delete();
+        return redirect()->route('cours.all')->withSuccess('La séance de cours a été  supprimé avec succès');
     }
 }

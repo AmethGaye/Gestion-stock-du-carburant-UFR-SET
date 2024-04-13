@@ -46,6 +46,8 @@
         </div>
     </div>
 
+    <div class="text-green-500" id="success"></div>
+
     {{-- activites --}}
     {{-- row 1 --}}
     @foreach($activities as $activitie)
@@ -53,7 +55,7 @@
         <div class="flex items-center justify-between text-sm text-zinc-500 font-medium h-20">
             <div class="">
                 <div class="flex items-center gap-4 mb-2.5">
-                    <h2 class="text-base font-bold font-inter text-zinc-700">Sortie Pédagogique</h2>
+                    <h2 class="text-base font-bold font-inter text-zinc-700">{{ $activitie->titre }}</h2>
                     <span class="flex justify-center items-center">
                         <span class="flex items-center bg-[#E2FBD7] px-4 text-[#34B53A] py-1.5 rounded-md font-semibold text-xs">Validé</span>
                     </span>
@@ -137,25 +139,26 @@
             </svg>
         </div>
     </div>
-    <form action="{{route('directeur.activites')}}" method="post" class="m-0 mt-6">
+    <form action="{{route('directeur.activites')}}" method="post" class="m-0 mt-6" id="subscription"> 
         @csrf
 
         <div class="mb-10 ">
-            <div class="w-full flex flex-col relative mb-4">
+            <div class="w-full flex flex-col relative mb-3">
                 <label for="titre" class="text-zinc-800 font-medium">Titre</label>
                 <input type="text" name="titre" id="titre" class="input-2" placeholder="Sortie Pédagogique">
-                <div class="text-[small] text-red-600 font-medium mt-2">
-                    @error('titre')
-                    <span class="text-red-500">{{ $message}}</span>
-                    @enderror
+                {{-- erreur gerée en js --}}
+                <div class="text-sm text-red-600 font-medium mt-2">         
                 </div>
             </div>
 
             <div class="w-full flex gap-4">
-                <div class="w-full flex flex-col relative mb-4">
+                <div class="w-full flex flex-col relative mb-3">
                     <label for="ticket" class="text-zinc-800 font-medium">Tickets sollicités</label>
                     <div class="w-full relative ">
                         <input type="number" name="ticket" id="ticket" value="3" class="input-2 w-full">
+                        {{-- erreur gerée en js --}}
+                        <div class="text-sm text-red-600 font-medium mt-2">         
+                        </div>
                         <div class="absolute right-2 top-7 -translate-y-1/2 flex">
                             <button type="button" class="w-8 h-8 mr-1  bg-zinc-100 flex items-center justify-center rounded-md">
                                 <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,14 +172,9 @@
                             </button>
                         </div>
                     </div>
-                    @error('ticket')
-                    <div class="text-[small] text-red-600 font-medium mt-2">
-                        <span class="text-red-500">{{ $message}}</span>
-                    </div>
-                    @enderror
                 </div>
 
-                <div class="w-full  flex flex-col mb-4">
+                <div class="w-full  flex flex-col mb-3">
                     <label for="region" class="font-medium text-zinc-800">Région</label>
                     <select name="lieux" id="region" class="input-2">
                         <option value="Dakar">Dakar</option>
@@ -198,42 +196,37 @@
             </div>
 
             <div class="w-full flex gap-4">
-                <div class="w-full flex flex-col relative mb-4">
+                <div class="w-full flex flex-col relative mb-3">
                     <label for="adresse" class="text-zinc-800 font-medium">Adresse</label>
                     <input type="text" name="adresse" id="adresse" class="input-2" placeholder="">
-                    <div class="text-[small] text-red-600 font-medium mt-2">
-                        @error('adresse')
-                        <span class="text-red-500">{{ $message}}</span>
-                        @enderror
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">         
                     </div>
                 </div>
 
-                <div class="w-full  flex flex-col mb-4">
+                <div class="w-full  flex flex-col mb-3">
                     <label for="date" class="font-medium text-zinc-700">Date</label>
                     <input type="date" name="date" id="date" class="input-2">
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">         
+                    </div>
                 </div>
-                <div class="text-[small] text-red-600 font-medium mt-2">
-                    @error('date')
-                    <span class="text-red-500">{{ $message}}</span>
-                    @enderror
-                </div>
+                
             </div>
 
-            <div class="w-full flex gap-4">
-                <label for="description"></label><textarea name="description" id="description" rows="7" placeholder="Décrivez .... " class="input-2 w-full"></textarea>
-            </div>
-            <div class="text-[small] text-red-600 font-medium mt-2">
-                @error('description')
-                <span class="text-red-500">{{ $message}}</span>
-                @enderror
+            <div class="w-full flex">
+                <textarea name="description" id="description" rows="5" placeholder="Décrivez .... " class="input-2 w-full"></textarea>
+                {{-- erreur gerée en js --}}
+                <div class="text-sm text-red-600 font-medium mt-2">         
+                </div>
             </div>
 
         </div>
         <div class="flex gap-4 items-center">
-            <button type="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white font-medium flex justify-center items-center gap-2">
+            <button type="submit" id="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white flex justify-center items-center gap-2">
                 Ajouter
             </button>
-            <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 font-semibold flex justify-center items-center gap-2">
+            <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 flex justify-center items-center gap-2">
                 Restaurer
             </button>
         </div>

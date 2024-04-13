@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ActiviteRequest;
 use App\Models\Activite;
 use Illuminate\Http\Request;
+use App\Http\Requests\ActiviteRequestValidation;
+use Illuminate\Support\Facades\Validator;
 
 class ActiviteController extends Controller
 {
+
+    use ActiviteRequestValidation;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -40,12 +44,17 @@ class ActiviteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ActiviteRequest $request)
+    public function store(Request $request)
     {
-        $credentials = $request->validated();
+        $validator = Validator::make($request->all(),$this->rules(), $this->messages());
 
-        $user_id=auth()->user()->getAuthIdentifier();
-        if ($credentials){
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+
+        $credentials = $validator->validated();
+        if($credentials){
+            $user_id=auth()->user()->getAuthIdentifier();
             Activite::create([
                 'titre'=>$credentials['titre'],
                 'description'=>$credentials['description'],
@@ -55,9 +64,8 @@ class ActiviteController extends Controller
                 'ticket'=>$credentials['ticket'],
                 'user_id'=>$user_id,
             ]);
-            return redirect()->route('directeur.activites')->withSuccess('Ajout d\'une nouvelle  a réussie avec succès');
+            return response()->json(['success' => true, 'msg' => 'Ajout d\'une nouvelle  a réussie avec succès']);
         }
-        return back()->withErrors(['msg' => 'L\ajout d\'une nouvelle activité a echoué' ]);
     }
 
     /**

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('dotation_departs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('nombre_tickets');
-            $table->boolean('statut');
+            $table->unsignedMediumInteger('nombre_tickets');
+            $table->boolean('statut')->default(1);
 
             $table->foreignId('departement_id')
             ->constrained()
@@ -23,7 +23,6 @@ return new class extends Migration
             $table->foreignId('user_id')
             ->constrained()
             ->onDelete('cascade');
-
             $table->timestamps();
         });
     }

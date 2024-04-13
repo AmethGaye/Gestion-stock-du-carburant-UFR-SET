@@ -43,7 +43,7 @@
 <div class="bg-white border border-zinc-200 rounded-lg text-sm mb-8">
     <div class="px-6 py-4 flex items-center justify-between border-b border-b-zinc-200">
         <div class="flex items-center gap-4">
-            <h2 class="text-lg font-bold text-zinc-700 m-0">Départements</h2>
+            <h2 class="text-lg font-semibold text-zinc-700 m-0">Départements</h2>
             <div class="flex justify-center items-center">
                 <span class="flex items-center bg-[#E2FBD7] px-4 text-[#34B53A] py-1.5 rounded-xl font-semibold text-sm">Janvier</span>
             </div>
@@ -55,85 +55,32 @@
 
 
 
-    <div class="px-6 py-3 flex items-center justify-between border-b border-b-zinc-200">
-        <div>
-            <h2 class="text-base font-bold">Informatique</h2>
-            <span class="text-sm font-semibold text-[#9FA6B2]">18 / 11 / 2023</span>
+    @foreach ($depart as $item)
+        <div class="px-6 py-3 flex items-center justify-between border-b border-b-zinc-200">
+            <div>
+                <h2 class="text-base font-semibold mb-1">{{ $item->departement_id }}</h2>
+                <span class="text-[small] font-medium text-[#9FA6B2]">{{ $item->created_at }}</span>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <span class="text-[#9FA6B2] font-bold">{{ $item->nombre_tickets }}</span>
+                <span class="icon-hover cursor-pointer">
+                    <svg width="16" height="4" viewBox="0 0 16 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 2.75C8.41421 2.75 8.75 2.41421 8.75 2C8.75 1.58579 8.41421 1.25 8 1.25C7.58579 1.25 7.25 1.58579 7.25 2C7.25 2.41421 7.58579 2.75 8 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13.833 2.75C14.2472 2.75 14.583 2.41421 14.583 2C14.583 1.58579 14.2472 1.25 13.833 1.25C13.4188 1.25 13.083 1.58579 13.083 2C13.083 2.41421 13.4188 2.75 13.833 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2.16699 2.75C2.58121 2.75 2.91699 2.41421 2.91699 2C2.91699 1.58579 2.58121 1.25 2.16699 1.25C1.75278 1.25 1.41699 1.58579 1.41699 2C1.41699 2.41421 1.75278 2.75 2.16699 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>                                       
+                </span>
+            </div>
+
         </div>
+    @endforeach
 
-        <div class="flex items-center gap-4">
-            <span class="text-[#9FA6B2] font-bold">200 Tickets</span>
-            <span class="icon-hover cursor-pointer">
-                <svg width="16" height="4" viewBox="0 0 16 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 2.75C8.41421 2.75 8.75 2.41421 8.75 2C8.75 1.58579 8.41421 1.25 8 1.25C7.58579 1.25 7.25 1.58579 7.25 2C7.25 2.41421 7.58579 2.75 8 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M13.833 2.75C14.2472 2.75 14.583 2.41421 14.583 2C14.583 1.58579 14.2472 1.25 13.833 1.25C13.4188 1.25 13.083 1.58579 13.083 2C13.083 2.41421 13.4188 2.75 13.833 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2.16699 2.75C2.58121 2.75 2.91699 2.41421 2.91699 2C2.91699 1.58579 2.58121 1.25 2.16699 1.25C1.75278 1.25 1.41699 1.58579 1.41699 2C1.41699 2.41421 1.75278 2.75 2.16699 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>                                       
-            </span>
-        </div>
-
-    </div>
-
-    <div class="px-6 py-3 flex items-center justify-between border-b border-b-zinc-200">
-        <div>
-            <h2 class="text-base font-bold">Mathématique Informatique</h2>
-            <span class="text-sm font-semibold text-[#9FA6B2]">18 / 11 / 2023</span>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <span class="text-[#9FA6B2] font-bold">200 Tickets</span>
-            <span class="icon-hover cursor-pointer">
-                <svg width="16" height="4" viewBox="0 0 16 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 2.75C8.41421 2.75 8.75 2.41421 8.75 2C8.75 1.58579 8.41421 1.25 8 1.25C7.58579 1.25 7.25 1.58579 7.25 2C7.25 2.41421 7.58579 2.75 8 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M13.833 2.75C14.2472 2.75 14.583 2.41421 14.583 2C14.583 1.58579 14.2472 1.25 13.833 1.25C13.4188 1.25 13.083 1.58579 13.083 2C13.083 2.41421 13.4188 2.75 13.833 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2.16699 2.75C2.58121 2.75 2.91699 2.41421 2.91699 2C2.91699 1.58579 2.58121 1.25 2.16699 1.25C1.75278 1.25 1.41699 1.58579 1.41699 2C1.41699 2.41421 1.75278 2.75 2.16699 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>                                       
-            </span>
-        </div>
-
-    </div>
-
-    <div class="px-6 py-3 flex items-center justify-between border-b border-b-zinc-200">
-        <div>
-            <h2 class="text-base font-bold">Physique - Chimie</h2>
-            <span class="text-sm font-semibold text-[#9FA6B2]">18 / 11 / 2023</span>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <span class="text-[#9FA6B2] font-bold">200 Tickets</span>
-            <span class="icon-hover cursor-pointer">
-                <svg width="16" height="4" viewBox="0 0 16 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 2.75C8.41421 2.75 8.75 2.41421 8.75 2C8.75 1.58579 8.41421 1.25 8 1.25C7.58579 1.25 7.25 1.58579 7.25 2C7.25 2.41421 7.58579 2.75 8 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M13.833 2.75C14.2472 2.75 14.583 2.41421 14.583 2C14.583 1.58579 14.2472 1.25 13.833 1.25C13.4188 1.25 13.083 1.58579 13.083 2C13.083 2.41421 13.4188 2.75 13.833 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2.16699 2.75C2.58121 2.75 2.91699 2.41421 2.91699 2C2.91699 1.58579 2.58121 1.25 2.16699 1.25C1.75278 1.25 1.41699 1.58579 1.41699 2C1.41699 2.41421 1.75278 2.75 2.16699 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>                                       
-            </span>
-        </div>
-
-    </div>
-
-    <div class="px-6 py-3 flex items-center justify-between border-b border-b-zinc-200">
-        <div>
-            <h2 class="text-base font-bold">LSEE</h2>
-            <span class="text-sm font-semibold text-[#9FA6B2]">18 / 11 / 2023</span>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <span class="text-[#9FA6B2] font-bold">200 Tickets</span>
-            <span class="icon-hover cursor-pointer">
-                <svg width="16" height="4" viewBox="0 0 16 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 2.75C8.41421 2.75 8.75 2.41421 8.75 2C8.75 1.58579 8.41421 1.25 8 1.25C7.58579 1.25 7.25 1.58579 7.25 2C7.25 2.41421 7.58579 2.75 8 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M13.833 2.75C14.2472 2.75 14.583 2.41421 14.583 2C14.583 1.58579 14.2472 1.25 13.833 1.25C13.4188 1.25 13.083 1.58579 13.083 2C13.083 2.41421 13.4188 2.75 13.833 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2.16699 2.75C2.58121 2.75 2.91699 2.41421 2.91699 2C2.91699 1.58579 2.58121 1.25 2.16699 1.25C1.75278 1.25 1.41699 1.58579 1.41699 2C1.41699 2.41421 1.75278 2.75 2.16699 2.75Z" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>                                       
-            </span>
-        </div>
-
-    </div>
+    
 
     <div class="flex gap-6 px-6 py-5 items-center">
         <span class="text-zinc-400 font-semibold">TOTAL:</span>
-        <span class="text-blue-500 font-bold bg-blue-100 btn-1">800 Tickets</span>
+        <span class="text-blue-500 font-bold bg-blue-100 btn-1">{{ $total_depart }} Tickets</span>
     </div>
 </div> 
 
@@ -156,8 +103,8 @@
 
     <div class="px-6 py-3 flex items-center justify-between border-b border-b-zinc-200">
         <div>
-            <h2 class="text-base font-bold">Chef De Service Administratif</h2>
-            <p class="text-sm font-semibold text-[#9FA6B2]">mameCheikh@univ-thies.sn</p>
+            <h2 class="text-base font-semibold">Chef De Service Administratif</h2>
+            <p class="text-[small] font-medium text-[#9FA6B2]">mameCheikh@univ-thies.sn</p>
         </div>
 
         <div class="flex items-center gap-4">
@@ -175,8 +122,8 @@
 
     <div class="px-6 py-3 flex items-center justify-between border-b border-b-zinc-200">
         <div>
-            <h2 class="text-base font-bold">Directeur</h2>
-            <span class="text-sm font-semibold text-[#9FA6B2]">Thiam@univ-thies.sn</span>
+            <h2 class="text-base font-semibold">Directeur</h2>
+            <span class="text-[small] font-medium text-[#9FA6B2]">Thiam@univ-thies.sn</span>
         </div>
 
         <div class="flex items-center gap-4">
@@ -194,8 +141,8 @@
 
     <div class="px-6 py-3 flex items-center justify-between border-b border-b-zinc-200">
         <div>
-            <h2 class="text-base font-bold">Vice Directeur</h2>
-            <span class="text-sm font-semibold text-[#9FA6B2]">Diop@univ-thies.sn</span>
+            <h2 class="text-base font-semibold">Vice Directeur</h2>
+            <span class="text-[small] font-medium text-[#9FA6B2]">Diop@univ-thies.sn</span>
         </div>
 
         <div class="flex items-center gap-4">

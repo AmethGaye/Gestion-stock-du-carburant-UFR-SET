@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('activites', function (Blueprint $table) {
-           $table->integer('ticket')->default(0);
-           $table->string('adresse');
-           $table->date('date');
+        Schema::table('cours', function (Blueprint $table) {
+            $table->date('date');
         });
     }
 
@@ -23,9 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('activites', function (Blueprint $table) {
-            $table->dropColumn('adresse');
-            $table->dropColumn('ticket');
+        Schema::table('cours', function (Blueprint $table) {
             $table->dropColumn('date');
         });
     }

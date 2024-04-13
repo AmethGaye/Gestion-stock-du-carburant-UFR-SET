@@ -14,6 +14,7 @@ use App\Http\Controllers\auth\ResetPasswordController;
 use App\Http\Controllers\auth\ForgotPasswordController;
 use App\Http\Controllers\DotationAdminsController;
 use App\Http\Controllers\DotationDepartsController;
+use App\Http\Controllers\HistoriqueController;
 use App\Models\Dotation_depart;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -113,6 +114,7 @@ Route::delete('/departement/vacataires/delete/{id}', [VacataireController::class
 
 Route::post('/departement/cours', [CoursController::class, 'store'])->name('cours.store');
 Route::get('/departement/cours/all', [CoursController::class, 'index'])->name('cours.all');
+Route::delete('/departement/cours/all/{id}', [CoursController::class, 'destroy'])->name('cours.delete');
 Route::get('/departement/cours/approbation', [CoursController::class, 'approbation'])->name('cours.approbation');
 Route::post('/departement/cours/approbation/{id}', [CoursController::class, 'approuver'])->name('approuver');
 
@@ -139,6 +141,7 @@ Route::get('comptable/dotation/administration', [DotationAdminsController::class
 Route::post('comptable/dotation/administration', [DotationAdminsController::class, 'store']);
 Route::get('comptable/dotation/departement', [DotationDepartsController::class, 'create'])->name('dotation.depart');
 Route::post('comptable/dotation/departement', [DotationDepartsController::class, 'store']);
+Route::get('comptable/dotation/historique', [HistoriqueController::class, 'index'])->name('dotation.historique');
 
 
 

@@ -3,12 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-// use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+// use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -50,4 +53,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function ufr():BelongsTo{
+        return $this->belongsTo(Ufr::class);
+    }
+
+    public function remboursement():HasMany{
+        return $this->hasMany(Remboursement_vac::class);
+    }
+
+    public function Activites():HasMany
+    {
+        return $this->hasMany(Activite::class);
+    }
+    
+    public function dotation_admins():HasMany
+    {
+        return $this->hasMany(Activite::class);
+    }
+
+    public function dotation_departs():HasMany
+    {
+        return $this->hasMany(Activite::class);
+    }
+
 }
