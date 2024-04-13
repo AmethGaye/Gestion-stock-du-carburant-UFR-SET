@@ -31,7 +31,7 @@ class LoginRequest extends FormRequest
             'email.required'=>'L\'adresse email est obligatoire pour se connecter.',
             'email.email'=>'L\'adresse email doit être une adresse email valide.',
             'password.required'=>'Le mot de passe est obligatoire .',
-            'password.min'=>'Le mot de passe doit contenir moins 8 caractères .'
+            'password.min'=>'Le mot de passe doit contenir au moins 8 caractères .'
         ];
 
     }

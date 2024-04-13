@@ -16,14 +16,15 @@ class Matiere extends Model
     public function cours():HasMany{
         return $this->hasMany(Cours::class);
     }
-    
+
 
     public function remboursement():HasMany{
         return $this->hasMany(Remboursement_vac::class);
     }
 
-    public function filieres():BelongsToMany
+    public function filieres()
     {
-        return $this->belongsToMany(Filiere::class);
+        return $this->hasManyThrough(Filiere::class, Cours::class);
     }
+
 }

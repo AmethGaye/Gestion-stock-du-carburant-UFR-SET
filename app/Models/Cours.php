@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Cours extends Model
 {
     use HasFactory;
+    protected $fillable=['filiere_id','matiere_id','vacataire_id','duree','remarque','date','statut'];
+
 
     public function matiere():BelongsTo
     {
@@ -18,5 +20,9 @@ class Cours extends Model
     public function vacataire():BelongsTo
     {
         return $this->belongsTo(Vacataire::class);
+    }
+    public function filiere()
+    {
+        return $this->belongsTo(Filiere::class, 'filiere_id');
     }
 }

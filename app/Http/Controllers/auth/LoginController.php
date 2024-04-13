@@ -21,17 +21,19 @@ class LoginController extends Controller
      */
     public function create()
     {
-     /*
-         User::create( [
+
+        /* User::create( [
                'nom' =>'BA',
                'prenom'=>'Mamadou',
                 'email' => 'mamadou.ba2@univ-thies.sn',
                 'role'=>'admin',
-                'status'=>'',
+                'status'=>true,
+                'telephone'=>'774350647',
                 'date_naiss'=>'2001-11-18',
                 'password'=>Hash::make('12345678'),
         ]);
-     */
+        */
+
 
         return view('auth.login');
     }

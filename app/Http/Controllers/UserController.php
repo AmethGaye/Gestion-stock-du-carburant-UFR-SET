@@ -98,7 +98,7 @@ class UserController extends Controller
         ];
 
         if ($request->hasFile('image')) {
-            $regles['image'] = 'image|mimes:jpeg,png,jpg,gif|max:2048';
+            $regles['image'] = 'image|mimes:jpeg,png,jpg,gif';
         }
 
         $credentials = $request->validate($regles);

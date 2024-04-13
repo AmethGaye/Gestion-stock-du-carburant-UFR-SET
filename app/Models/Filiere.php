@@ -19,4 +19,8 @@ class Filiere extends Model
     {
         return $this->belongsToMany(Matiere::class);
     }
+    public function cours()
+    {
+        return $this->hasMany(Cours::class, 'filiere_id');
+    }
 }
