@@ -30,6 +30,11 @@ return new class extends Migration
             ->nullable()
             ->constrained()
             ->onDelete('cascade');
+
+            $table->foreignId('role_id')
+            ->nullable()
+            ->constrained()
+            ->nullOnDelete();
         });
 
     }
