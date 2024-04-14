@@ -120,7 +120,7 @@ Route::post('/departement/cours/restauration/{id}', [CoursController::class, 're
 Route::post('/departement/cours/update/{id}', [CoursController::class, 'update'])->name('dp.cours.update');
 Route::post('/departement/cours/delete/{id}', [CoursController::class, 'delete'])->name('dp.cours.delete');
 
-Route::post('departement/demande_remboursement', [RemboursementController::class, 'store']);
+Route::post('departement/demande_remboursement', [RemboursementController::class, 'store'])->name('dep.remboursement');
 
 /*
     les Routes du Comptable

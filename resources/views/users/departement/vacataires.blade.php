@@ -61,13 +61,13 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
                     </svg>
                 </span>
-                <span class="w-[25%]">PRENOM & NOM</span>
-                <span class="w-[25%]">EMAIL</span>
-                <span class="w-[15%]">TELEPHONE</span>
-                <span class="w-[160px]">PROVENANCE</span>
-                <span class="w-[150px] text-center">SITUATION</span>
-                <span class="w-[130px]">STATUT</span>
-                <span class="w-[150px] text-center">ACTION</span>
+                <span class="basis-[24%] grow">PRENOM & NOM</span>
+                <span class="basis-[25%] grow">EMAIL</span>
+                <span class="basis-[15%] grow">TELEPHONE</span>
+                <span class="basis-[160px]">PROVENANCE</span>
+                <span class="basis-[150px] text-center">SITUATION</span>
+                <span class="basis-[130px]">STATUT</span>
+                <span class="basis-[150px] text-center">ACTION</span>
             </div>
             {{-- t-body --}}
             <div>
@@ -80,33 +80,29 @@
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
                         </svg>
                     </span>
-                    <span class="w-[25%]">
+                    <span class="basis-[24%] grow">
                         {{$vacataire->prenom}}  {{$vacataire->nom}}
                     </span>
-                    <span class="w-[25%]"> {{$vacataire->email}} </span>
-                    <span class="w-[15%]"> {{$vacataire->telephone}} </span>
-                    <span class="w-[160px] font-medium"> {{$vacataire->provenance}} </span>
-                    @if( $vacataire->situation=='Véhiculé')
-                    <span class="w-[150px] flex">
-                        <span class="flex mx-auto bg-green-100 px-4 text-green-500 py-1 rounded font-semibold text-xs">Véhiculé</span>
+                    <span class="basis-[25%] grow"> {{$vacataire->email}} </span>
+                    <span class="basis-[15%] grow"> {{$vacataire->telephone}} </span>
+                    <span class="basis-[160px] font-medium"> {{$vacataire->provenance}} </span>
+                    <span class="basis-[150px] flex">
+                        <span class="flex mx-auto @if($vacataire->situation)  bg-blue-100 text-blue-500 @else bg-fuchsia-100 text-fuchsia-500 @endif  px-4 py-1 rounded font-semibold text-xs">
+                            @if($vacataire->situation)  Véhiculé @else Non @endif
+                        </span>
                     </span>
-                    @else
-                        <span class="w-[150px] flex">
-                        <span class="flex mx-auto bg-violet-100 px-4 text-violet-500 py-1 rounded font-semibold text-xs">Non</span>
-                    </span>
-                    @endif
                     @if($vacataire->status=='1')
-                    <span class="w-[130px] flex items-center">
+                    <span class="basis-[130px] flex items-center">
                         <span class="w-2 h-2 rounded-full bg-green-500 block mr-2"></span>
                         <span class="font-semibold text">Active</span>
                     </span>
                     @else
-                        <span class="w-[130px] flex items-center">
+                        <span class="basis-[130px] flex items-center">
                         <span class="w-2 h-2 rounded-full bg-zinc-400 block mr-2"></span>
                         <span class="font-semibold text-zinc-400">Inactif</span>
                     </span>
                     @endif
-                    <span class="flex w-[150px] justify-center">
+                    <span class="flex basis-[150px] justify-center">
                         <form action="" method="" class="border border-zinc-200 px-3 py-1.5 rounded-l-lg bg-zinc-100 m-0">
                             <button type="submit">
                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -208,8 +204,8 @@
                 <div class="w-full  flex flex-col mb-4">
                     <label for="situation" class="font-medium text-zinc-800">Situation</label>
                     <select name="situation" id="situation" class="input-2">
-                        <option value="Véhiculé">Véhiculé</option>
-                        <option value="Non vehiculé">Non vehiculé</option>
+                        <option value="1">Véhiculé</option>
+                        <option value="0">Non vehiculé</option>
                     </select>
                 </div>
             </div>

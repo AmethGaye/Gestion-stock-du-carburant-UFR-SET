@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('duree');
             $table->boolean('statut');
             $table->text('remarque');
+            $table->boolean('demande')->default(0);
 
             $table->foreignId('matiere_id')
             ->constrained()
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->foreignId('vacataire_id')
             ->constrained()
             ->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedMediumInteger('nombre_heure');
             $table->unsignedMediumInteger('nombre_tickets')->default(0);
-            $table->boolean('statut');
+            $table->enum('statut', [0, 1, 2]);
 
             $table->foreignId('user_id')
             ->constrained()

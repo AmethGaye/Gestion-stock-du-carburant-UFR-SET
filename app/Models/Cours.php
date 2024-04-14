@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Cours extends Model
 {
     use HasFactory;
-    protected $fillable=['filiere_id','matiere_id','vacataire_id','duree','remarque','date','statut'];
+    protected $fillable=['filiere_id','matiere_id','vacataire_id','duree','remarque','date','statut', 'demande'];
 
 
     public function matiere():BelongsTo

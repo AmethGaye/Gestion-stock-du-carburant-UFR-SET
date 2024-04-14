@@ -45,30 +45,27 @@
             @php
                 $total=0;
                 foreach ($sceance_cour->cours as $cour)
-             {
-               $total +=  $cour->duree;
-
-             }
-
+                 {
+                   $total +=  $cour->duree;
+                 }
             @endphp
             {{--calcul du total d'heure effectuer  par le vacataire--}}
             <span class="basis-[160px] font-bold pr-4">{{$total}} Heures</span>
             <span class="basis-[160px] pr-4">{{$sceance_cour->provenance}}</span>
             <span class="basis-[170px] flex justify-center">
-                <span class="flex mx-auto bg-blue-100 px-4 text-blue-500 py-1 rounded font-semibold text-xs">{{$sceance_cour->situation}}</span>
+                <span class="flex mx-auto @if($sceance_cour->situation) bg-blue-100 text-blue-500 @else bg-fuchsia-100
+                text-fuchsia-500 @endif px-4 py-1 rounded font-semibold
+                text-xs">
+                    @if($sceance_cour->situation) Véhiculé @else Non @endif
+                </span>
             </span>
 
             <span class="basis-[170px] relative flex items-center justify-center gap-4">
-                {{-- demander un remboursement --}}
-                {{--
-                    [
-                        "id_matiere" => 1,
-                        'id_vacataire' => 1,
-                        'id_comptable' => 1,
-                        'id_cours' => [1, 2, 4, 6]
-                    ]
-                --}}
-                <form action="" method="" class="m-0">
+                <form action="{{ route('dep.remboursement') }}" method="post" class="m-0">
+                    @csrf
+                    @foreach($sceance_cour->cours as $cours)
+                        <input type="hidden" name="cours_id[]" value="{{$cours->id}}">
+                    @endforeach
                     <button class="btn-3 bg-[#00B69B] text-white font-medium">envoyer</button>
                 </form>
                 {{-- separator --}}
@@ -127,7 +124,8 @@
                     </span>
                     @else
                         <span class="basis-[170px] flex justify-center text-xs">
-                        <span class="flex mx-auto bg-red-100 px-4 text-red-500 py-1 rounded font-semibold">Pas approuvé</span>
+                        <span class="flex mx-auto bg-amber-100 px-4 text-amber-500 py-1 rounded
+                        font-semibold">Non</span>
                     </span>
                     @endif
                     <span class="flex basis-[130px] justify-center">

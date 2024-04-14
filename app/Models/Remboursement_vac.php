@@ -11,6 +11,13 @@ class Remboursement_vac extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nombre_heure',
+        'nombre_tickets',
+        'user_id',
+        'cours_id',
+        'statut',
+    ];
     public function cours():HasOne
     {
         return $this->HasOne(Cours::class);
