@@ -22,7 +22,8 @@ class LoginController extends Controller
     public function create()
     {
 
-        /* User::create( [
+         /*
+          * User::create( [
                'nom' =>'BA',
                'prenom'=>'Mamadou',
                 'email' => 'mamadou.ba2@univ-thies.sn',
