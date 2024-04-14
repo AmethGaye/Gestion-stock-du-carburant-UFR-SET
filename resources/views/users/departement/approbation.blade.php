@@ -2,6 +2,11 @@
 
 @section('cours')
 <div class="">
+    @if ($errors->has('msg'))
+        <div class="text-red-600">
+            {{ $errors->first('msg') }}
+        </div>
+    @endif
     {{-- t-head --}}
     <div class="flex items-center text-sm text-zinc-400 font-nunito font-bold py-4 ">
         {{-- cols --}}

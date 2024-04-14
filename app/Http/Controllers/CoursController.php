@@ -6,6 +6,7 @@ use App\Http\Requests\CoursRequestValidation;
 use App\Models\Cours;
 use App\Models\Filiere;
 use App\Models\Matiere;
+use App\Models\Remboursement_vac;
 use App\Models\Vacataire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -72,9 +73,24 @@ class CoursController extends Controller
         return redirect()->route('cours.approbation');
     }
     public function restaurer(string $id){
-        Cours::where('id', $id)->update(['statut' => false]);
-        return redirect()->route('cours.approbation');
+
+        $if_id_cours_exist = Remboursement_vac::where('cours_id', $id)->exists();
+
+        $if_id_cours_statut_zero_exist = Remboursement_vac::where('cours_id', $id)->where('statut', '0')->exists();
+
+           if (!$if_id_cours_exist || $if_id_cours_statut_zero_exist) {
+            Remboursement_vac::where('cours_id', $id)->delete();
+
+            Cours::where('id', $id)->update(['statut' => false]);
+
+
+            return redirect()->route('cours.approbation');
+        } else {
+             // sinon on lui retourne la page avec un message d'erreur
+            return redirect()->back()->withErrors(['msg'=>'Le cours ne peut pas être restauré car il est déjà approuvé par le directeur ou payé.']);
+        }
     }
+
 
 
     /**
