@@ -65,7 +65,7 @@ class ActiviteController extends Controller
                 'ticket_demande'=>$credentials['ticket_demande'],
                 'user_id'=>auth()->user()->getAuthIdentifier(),
             ]);
-            return response()->json(['success' => true, 'msg' => 'Ajout d\'une nouvelle  a réussie avec succès']);
+            return response()->json(['success' => true, 'msg' => 'Ajout d\'une nouvelle activité réussie avec succès !']);
         }
     }
 

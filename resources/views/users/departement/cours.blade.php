@@ -45,7 +45,7 @@
                 </svg>
             </button>
 
-            <button  type="menu" class="btn-1 bg-zinc-800 text-white" onclick="displayContainer(2)">
+            <button  type="menu" class="btn-1 bg-zinc-800 text-white" onclick="displayContainer()">
                 <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
                     <path d="M6.5 1.30493V12.3049M12 6.80493L1 6.80493" stroke="white" stroke-width="2" stroke-linecap="round"/>
                 </svg>
@@ -53,6 +53,10 @@
             </button>
         </div>
     </div>
+
+    {{--    les message flash : type -> success --}}
+    <div class="text-green-500" id="success"></div>
+
 
     {{-- choix entre les deux liens : tous les cours ou approbation --}}
     @yield('cours')
@@ -76,7 +80,7 @@
             </svg>
         </div>
     </div>
-    <form action="{{{route('cours.store')}}}" method="post" class="m-0 mt-6">
+    <form action="{{{route('cours.store')}}}" method="post" class="m-0 mt-6" id="subscription">
         @csrf
 
         <div class="mb-10 ">
@@ -89,10 +93,8 @@
                             <option value="{{$filiere->id}}">{{$filiere->nom}}</option>
                         @endforeach
                     </select>
-                    <div class="text-[small] text-red-600 font-medium mt-2">
-                        @error('filiere')
-                        <span class="text-red-500">{{ $message}}</span>
-                        @enderror
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
 
@@ -103,10 +105,8 @@
                             <option value="{{$matiere->id}}">{{$matiere->nom}}</option>
                         @endforeach
                     </select>
-                    <div class="text-[small] text-red-600 font-medium mt-2">
-                        @error('matiere_id')
-                        <span class="text-red-500">{{ $message}}</span>
-                        @enderror
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
             </div>
@@ -118,10 +118,8 @@
                     <option value="{{$vacataire->id}}">{{$vacataire->prenom." ".$vacataire->nom}}</option>
                     @endforeach
                 </select>
-                <div class="text-[small] text-red-600 font-medium mt-2">
-                    @error('vacataire_id')
-                    <span class="text-red-500">{{ $message}}</span>
-                    @enderror
+                {{-- erreur gerée en js --}}
+                <div class="text-sm text-red-600 font-medium mt-2">
                 </div>
             </div>
 
@@ -130,6 +128,9 @@
                     <label for="heure" class="text-zinc-800 font-medium">Nombre d’heures</label>
                     <div class="w-full relative ">
                         <input type="number" name="heure" id="heure" value="" class="input-2 w-full">
+                        {{-- erreur gerée en js --}}
+                        <div class="text-sm text-red-600 font-medium mt-2">
+                        </div>
                         <div class="absolute right-2 top-7 -translate-y-1/2 flex">
                             <button type="button" class="w-8 h-8 mr-1  bg-zinc-100 flex items-center justify-center rounded-md">
                                 <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,40 +143,33 @@
                                 </svg>
                             </button>
                         </div>
-                        <div class="text-[small] text-red-600 font-medium mt-2">
-                            @error('heure')
-                            <span class="text-red-500">{{ $message}}</span>
-                            @enderror
-                        </div>
+                    </div>
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
 
                 <div class="w-full  flex flex-col mb-4">
                     <label for="date" class="font-medium text-zinc-700">Date</label>
                     <input type="date" name="date" placeholder="ahmada@univ-thies.sn" id="date" class="input-2">
-                    <div class="text-[small] text-red-600 font-medium mt-2">
-                        @error('date')
-                        <span class="text-red-500">{{ $message}}</span>
-                        @enderror
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
 
-                {{-- <div class="w-full  flex flex-col mb-4">
-                    <label for="ufr" class="font-medium text-zinc-700">Statut</label>
-                    <select name="ufr" id="ufr" class="input-2">
-                        <option value="">Validé</option>
-                        <option value="">Non</option>
-                    </select>
-                </div>  --}}
             </div>
 
-            <div class="w-full flex gap-4">
+            <div class="w-full flex flex-col">
+                <label></label>
                 <textarea name="remarque" id="description" rows="5" placeholder="Remarque .... " class="input-2 w-full"></textarea>
+                {{-- erreur gerée en js --}}
+                <div class="text-sm text-red-600 font-medium mt-2">
+                </div>
             </div>
 
         </div>
         <div class="flex gap-4 items-center">
-            <button type="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white flex justify-center items-center gap-2">
+            <button type="submit" id="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white flex justify-center items-center gap-2">
                 Ajouter
             </button>
             <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 flex justify-center items-center gap-2">

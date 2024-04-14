@@ -24,13 +24,13 @@
                     <path d="M13.75 4.17999H3.75C3.58424 4.17999 3.42527 4.24584 3.30806 4.36305C3.19085 4.48026 3.125 4.63923 3.125 4.80499C3.125 4.97075 3.19085 5.12972 3.30806 5.24693C3.42527 5.36415 3.58424 5.42999 3.75 5.42999H13.75C13.9158 5.42999 14.0747 5.36415 14.1919 5.24693C14.3092 5.12972 14.375 4.97075 14.375 4.80499C14.375 4.63923 14.3092 4.48026 14.1919 4.36305C14.0747 4.24584 13.9158 4.17999 13.75 4.17999Z" fill="#52525B"/>
                     <path d="M16.875 0.429993H0.625C0.45924 0.429993 0.300268 0.495841 0.183058 0.613051C0.065848 0.730261 0 0.889232 0 1.05499C0 1.22075 0.065848 1.37972 0.183058 1.49693C0.300268 1.61414 0.45924 1.67999 0.625 1.67999H16.875C17.0408 1.67999 17.1997 1.61414 17.3169 1.49693C17.4342 1.37972 17.5 1.22075 17.5 1.05499C17.5 0.889232 17.4342 0.730261 17.3169 0.613051C17.1997 0.495841 17.0408 0.429993 16.875 0.429993Z" fill="#52525B"/>
                     <path d="M10.625 7.92999H6.875C6.70924 7.92999 6.55027 7.99584 6.43306 8.11305C6.31585 8.23026 6.25 8.38923 6.25 8.55499C6.25 8.72075 6.31585 8.87972 6.43306 8.99693C6.55027 9.11415 6.70924 9.17999 6.875 9.17999H10.625C10.7908 9.17999 10.9497 9.11415 11.0669 8.99693C11.1842 8.87972 11.25 8.72075 11.25 8.55499C11.25 8.38923 11.1842 8.23026 11.0669 8.11305C10.9497 7.99584 10.7908 7.92999 10.625 7.92999Z" fill="#52525B"/>
-                </svg>                                                                                                                 
+                </svg>
                 <span class="font-medium">Filtres</span>
                 <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.933058 0.879586C1.17714 0.613462 1.57286 0.613462 1.81694 0.879586L5.93306 5.36749C6.17714 5.63362 6.57286 5.63362 6.81694 5.36749L10.9331 0.879587C11.1771 0.613463 11.5729 0.613463 11.8169 0.879587C12.061 1.14571 12.061 1.57718 11.8169 1.84331L7.70082 6.33121C6.96859 7.12959 5.78141 7.12959 5.04918 6.33121L0.933058 1.84331C0.688981 1.57718 0.688981 1.14571 0.933058 0.879586Z" fill="#52525B"/>
                 </svg>
             </button>
-            <button class="btn-1 bg-zinc-100 text-zinc-600 border">                                                                                                                
+            <button class="btn-1 bg-zinc-100 text-zinc-600 border">
                 <span class="font-medium">Janvier</span>
                 <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0.933058 0.879586C1.17714 0.613462 1.57286 0.613462 1.81694 0.879586L5.93306 5.36749C6.17714 5.63362 6.57286 5.63362 6.81694 5.36749L10.9331 0.879587C11.1771 0.613463 11.5729 0.613463 11.8169 0.879587C12.061 1.14571 12.061 1.57718 11.8169 1.84331L7.70082 6.33121C6.96859 7.12959 5.78141 7.12959 5.04918 6.33121L0.933058 1.84331C0.688981 1.57718 0.688981 1.14571 0.933058 0.879586Z" fill="#52525B"/>
@@ -51,13 +51,13 @@
             <span class="w-[190px] text-center">SITUATION</span>
             <span class="w-[210px] text-center ">ACTION</span>
         </div>
-        
+
         {{-- t-body --}}
-        
-    
+
+
         {{-- row 1 --}}
         <div class="text-sm h-20 overflow-hidden text-zinc-600 font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
-    
+
             {{-- resume --}}
             <div class="h-20 relative flex items-center border-b border-zinc-300 mb-4 ">
                 <div class="flex items-center w-full py-3">
@@ -68,36 +68,36 @@
                     <span class="w-[190px] flex items-center justify-center">
                         <span class="flex mx-auto bg-blue-100 px-4 text-blue-500 py-1 rounded font-semibold text-xs">Véhiculé</span>
                     </span>
-        
+
                     <span class="w-[210px] relative flex items-center justify-center gap-4 ">
                         {{-- demander un remboursement --}}
-                        {{-- 
+                        {{--
                             [
                                 "id_matiere" => 1,
                                 'id_vacataire' => 1,
                                 'id_comptable' => 1,
                                 'id_cours' => [1, 2, 4, 6]
-                            ]    
+                            ]
                         --}}
                         <form action="" method="" class="m-0 mr-2">
                             <button class="btn-3 bg-teal-500 text-white font-medium">Approuver</button>
                         </form>
                         {{-- separator --}}
                         <div class=" w-0.5 h-6 bg-zinc-200"></div>
-        
+
                         {{--  --}}
                         <div class="transition-all duration-300 w-8 h-8 flex items-center justify-center mr-2 icon-hover cursor-pointer" id="ch-container">
                             <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg" class="transition-transform rotate-0" id="chevron">
                                 <path d="M13.5 1.5L8.20711 6.79289C7.81658 7.18342 7.18342 7.18342 6.79289 6.79289L1.5 1.5" stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
-                            </svg>                                                       
-                        </div> 
+                            </svg>
+                        </div>
                     </span>
                 </div>
             </div>
 
 
             {{-- t-head --}}
-            <div class="flex items-center text-sm text-zinc-800 font-nunito font-bold h-12 pr-4 bg-[#F1F4F9] rounded">
+            <div class="flex items-center text-sm text-zinc-800 font-nunito font-bold h-12 bg-[#F1F4F9] rounded mx-4">
                 {{-- cols --}}
                 <span class="basis-[23%] grow px-4">Matière</span>
                 <span class="basis-[15%] grow pr-4">Semestre</span>
@@ -109,9 +109,9 @@
 
             {{-- detail --}}
             <div class="mx-4">
-    
+
                 {{-- t-body --}}
-                
+
                 <div class="max-h-44 overflow-y-scroll">
                     {{-- row 1 --}}
                     <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
@@ -124,10 +124,43 @@
                         <span class="w-[170px] flex justify-center text-xs">
                             <span class="flex mx-auto bg-emerald-100 px-4 text-emerald-500 py-1 rounded font-semibold">Approuvé</span>
                         </span>
-                    </div>       
+                    </div>
+                    <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
+                        {{-- cols --}}
+                        <span class="basis-[23%] grow px-4">Développement Web</span>
+                        <span class="basis-[15%] grow pr-4">Semestre 4</span>
+                        <span class="basis-[22%] grow pr-4">Informatique</span>
+                        <span class="basis-[15%] grow pr-4">18 / 01 / 2024</span>
+                        <span class="w-[120px] font-bold pr-4">3 Heure</span>
+                        <span class="w-[170px] flex justify-center text-xs">
+                            <span class="flex mx-auto bg-emerald-100 px-4 text-emerald-500 py-1 rounded font-semibold">Approuvé</span>
+                        </span>
+                    </div>
+                    <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
+                        {{-- cols --}}
+                        <span class="basis-[23%] grow px-4">Développement Web</span>
+                        <span class="basis-[15%] grow pr-4">Semestre 4</span>
+                        <span class="basis-[22%] grow pr-4">Informatique</span>
+                        <span class="basis-[15%] grow pr-4">18 / 01 / 2024</span>
+                        <span class="w-[120px] font-bold pr-4">3 Heure</span>
+                        <span class="w-[170px] flex justify-center text-xs">
+                            <span class="flex mx-auto bg-emerald-100 px-4 text-emerald-500 py-1 rounded font-semibold">Approuvé</span>
+                        </span>
+                    </div>
+                    <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
+                        {{-- cols --}}
+                        <span class="basis-[23%] grow px-4">Développement Web</span>
+                        <span class="basis-[15%] grow pr-4">Semestre 4</span>
+                        <span class="basis-[22%] grow pr-4">Informatique</span>
+                        <span class="basis-[15%] grow pr-4">18 / 01 / 2024</span>
+                        <span class="w-[120px] font-bold pr-4">3 Heure</span>
+                        <span class="w-[170px] flex justify-center text-xs">
+                            <span class="flex mx-auto bg-emerald-100 px-4 text-emerald-500 py-1 rounded font-semibold">Approuvé</span>
+                        </span>
+                    </div>
 
                 </div>
-                
+
                 {{-- t-foot --}}
                 {{-- t-foot --}}
                 <div class="h-20 flex items-center justify-between ">
@@ -135,20 +168,20 @@
                         <span class="text-zinc-400 font-semibold">TOTAL:</span>
                         <span class="text-red-500 font-bold bg-red-100 btn ml-4">8 Heures</span>
                     </div>
-        
+
                    <div>
-                      <p class="mr-2">Demandé par : Mr Idrissa Gaye</p>  
+                      <p class="mr-2">Demandé par : Mr Idrissa Gaye</p>
                    </div>
                 </div>
             </div>
-    
+
         </div>
-        
+
     </div>
 
     {{-- pagination --}}
     @include('partials.pagination')
-    
+
 </section>
-    
+
 @endsection

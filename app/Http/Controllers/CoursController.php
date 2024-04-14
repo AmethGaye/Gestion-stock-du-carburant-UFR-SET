@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CoursRequestValidation;
 use App\Models\Cours;
 use App\Models\Filiere;
 use App\Models\Matiere;
 use App\Models\Vacataire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class CoursController extends Controller
 {
+    use CoursRequestValidation;
     public function __construct(){
         $this->middleware('auth');
     }
@@ -36,38 +40,19 @@ class CoursController extends Controller
        // dd($sceance_cours);
         return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }
+
+
     public function store(Request $request){
 
-       $validated=$request->validate(
-            [
-                'filiere'=>'required|string|numeric',
-                'matiere_id'=>'required|string|numeric',
-                'vacataire_id'=>'required|string|numeric',
-                'date'=>'required|date',
-                'remarque'=>'string',
-                'heure'=>'required|string|numeric',
-            ],
-            [
-                'filiere.required' => 'Le champ filière est obligatoire.',
-                'filiere.string' => 'Le champ filière doit être une chaîne de caractères.',
-                'filiere.numeric' => 'Le champ filière doit être un nombre.',
+        $validator = Validator::make($request->all(),$this->rules(), $this->messages());
 
-                'matiere_id.required' => 'Le champ matière est obligatoire.',
-                'matiere_id.numeric' => 'Le champ matière doit être un nombre.',
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
 
-                'vacataire_id.required' => 'Le champ vacataire est obligatoire.',
-                'vacataire_id.numeric' => 'Le champ vacataire doit être un nombre.',
-
-                'date.required' => 'Le champ date est obligatoire.',
-                'date.date' => 'Le champ date doit être une date valide.',
-
-                'remarque.string' => 'Le champ remarque doit être une chaîne de caractères.',
-                'heure.required'=>'Le champ heure est obligatoire.'
-                ]
-        );
+        $validated = $validator->validated();
         if ($validated){
-            Cours::create(
-                [
+            Cours::create([
                    'filiere_id'=>$validated['filiere'],
                     'matiere_id'=>$validated['matiere_id'],
                     'vacataire_id'=>$validated['vacataire_id'],
@@ -75,12 +60,8 @@ class CoursController extends Controller
                     'remarque'=>$validated['remarque'],
                     'duree'=>$validated['heure'],
                     'statut'=>false,
-
-
-                ]
-            );
-            return back();
-         // return redirect()->route('cours.all');
+            ]);
+            return response()->json(['success' => true, 'msg' => 'Ajout d\'une nouvelle cours réussie avec succès !']);
         }
           return back() ;
     }

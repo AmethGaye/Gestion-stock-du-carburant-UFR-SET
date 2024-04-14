@@ -46,6 +46,7 @@
         </div>
     </div>
 
+{{--    les message flash : type -> success --}}
     <div class="text-green-500" id="success"></div>
 
     {{-- activites --}}
@@ -85,7 +86,7 @@
                 </div>
             </div>
             <div class="flex items-center text-zinc-700 gap-3">
-                <button class="text-sm font-semibold" onclick="displayContainer(true, {{ json_encode($activitie) }})">
+                <button class="text-sm font-semibold" onclick="displayContainer(true, {{ json_encode($activitie) }}, '/directeur/activites/update/'+{{ $activitie->id }})">
                     Editer
                 </button>
                 {{-- separator --}}

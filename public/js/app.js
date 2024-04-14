@@ -129,7 +129,7 @@ try {
 
 // LES FONCTIONS
 
-const displayContainer = function(edit = false, data = null){
+const displayContainer = function(edit = false, data = null, url = null){
 
     container.classList.replace('opacity-0', 'opacity-100');
     container.classList.replace('-z-50', 'z-50');
@@ -139,8 +139,8 @@ const displayContainer = function(edit = false, data = null){
     child.classList.replace('opacity-0', 'opacity-100');
     child.classList.replace('scale-75', 'scale-100');
 
-    if(edit && data){
-        form.action = `/directeur/activites/update/${data.id}`;
+    if(edit && data && url){
+        form.action = url;
         console.log(form.action)
         let field = document.querySelectorAll("#subscription label + *");
         field.forEach((item, index)=>{
