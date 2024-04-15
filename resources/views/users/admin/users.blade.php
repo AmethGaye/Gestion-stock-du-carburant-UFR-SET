@@ -8,7 +8,7 @@ function hasErrors(){
 
     return $prenom || $nom || $email || $telephone || $password ? true : false;
 }
-@endphp 
+@endphp
 
 @if (hasErrors())
     {{ hasErrors() }}
@@ -38,7 +38,7 @@ function hasErrors(){
 
             {{-- les options --}}
             <div class="flex items-center gap-2 ">
-                
+
                 <button class="btn-1 bg-zinc-100 text-zinc-600 border">
                     <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.75 4.17999H3.75C3.58424 4.17999 3.42527 4.24584 3.30806 4.36305C3.19085 4.48026 3.125 4.63923 3.125 4.80499C3.125 4.97075 3.19085 5.12972 3.30806 5.24693C3.42527 5.36415 3.58424 5.42999 3.75 5.42999H13.75C13.9158 5.42999 14.0747 5.36415 14.1919 5.24693C14.3092 5.12972 14.375 4.97075 14.375 4.80499C14.375 4.63923 14.3092 4.48026 14.1919 4.36305C14.0747 4.24584 13.9158 4.17999 13.75 4.17999Z" fill="#52525B"/>
@@ -100,7 +100,7 @@ function hasErrors(){
                     </span>
                     <span class="basis-[23%]  pr-4 grow flex items-center gap-2">
                         @if($user->image)
-                            <img src="{{ asset('storage/'.auth()->user()->image) }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
+                            <img src="{{ asset('storage/'.$user->image) }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
                         @else
                             <img src="{{ asset('images/user.png') }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
                         @endif
@@ -177,7 +177,7 @@ function hasErrors(){
                     <label for="prenom" class="text-zinc-800 font-medium">Prénom</label>
                     <input type="text" name="prenom" id="prenom" class="input-2" placeholder="Ahmada">
                     {{-- erreur gerée en js --}}
-                    <div class="text-sm text-red-600 font-medium mt-2">         
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
 
@@ -185,7 +185,7 @@ function hasErrors(){
                     <label for="nom" class="text-zinc-800 font-medium">Nom</label>
                     <input type="text" name="nom" id="nom" class="input-2" placeholder="Gaye">
                     {{-- erreur gerée en js --}}
-                    <div class="text-sm text-red-600 font-medium mt-2">         
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
 
@@ -205,7 +205,7 @@ function hasErrors(){
                     <label for="email" class="text-zinc-800 font-medium">Adresse email universitaire</label>
                     <input type="text" name="email" id="email" class="input-2" placeholder="Example@univ-thies.sn">
                     {{-- erreur gerée en js --}}
-                    <div class="text-sm text-red-600 font-medium mt-2">         
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
 
@@ -216,7 +216,7 @@ function hasErrors(){
                     <label for="telephone" class="text-zinc-800 font-medium">Numéro de téléphone</label>
                     <input type="telephone" name="telephone" id="telephone" class="input-2" placeholder="784532081">
                     {{-- erreur gerée en js --}}
-                    <div class="text-sm text-red-600 font-medium mt-2">         
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
 
@@ -238,7 +238,7 @@ function hasErrors(){
                     <label for="password" class="text-zinc-700 font-medium">Mot de passe par défaut</label>
                     <input type="password" name="password" id="password" class="input-2" placeholder="***************">
                     {{-- erreur gerée en js --}}
-                    <div class="text-sm text-red-600 font-medium mt-2">         
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                     <svg width="16" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute right-4 top-[43px] hidden cursor-pointer">
                         <path d="M1.24666 9.17176C0.917778 8.42865 0.917778 7.57136 1.24666 6.82824C2.76905 3.38843 6.11596 1 10 1C13.884 1 17.2309 3.38843 18.7533 6.82824C19.0822 7.57136 19.0822 8.42865 18.7533 9.17176C17.2309 12.6116 13.884 15 10 15C6.11596 15 2.76905 12.6116 1.24666 9.17176Z" stroke="#4B5563" stroke-width="2"/>

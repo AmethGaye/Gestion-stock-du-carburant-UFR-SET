@@ -40,7 +40,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-       
+
         $validator = Validator::make($request->all(),$this->rules(), $this->messages());
 
         if ($validator->fails()) {
@@ -103,6 +103,9 @@ class UserController extends Controller
 
         $credentials = $request->validate($regles);
 
+
+        $user = User::find($id);
+
         $updateData = [
             'nom' => $credentials['nom'],
             'prenom' => $credentials['prenom'],
@@ -110,24 +113,24 @@ class UserController extends Controller
             'telephone' => $credentials['telephone'],
         ];
 
-        // Vérifie si un fichier image est présent et valide
+        // On Vérifie si un fichier image est présent et valide
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            // On Vérifie si l'utilisateur a déjà une image de profil enregistrée dans la BD
-            $user = User::find($id);
+            // Supprimer l'ancienne image de profil s'il en existe une dans le BD
             if ($user->image) {
-                // Supprime l'ancienne image de profil s'il en existe une
                 Storage::disk('public')->delete($user->image);
             }
-            // ON Enregistre la nouvelle image de profil
+            //ON enregistre la nouvelle image de profil avec un nom unique
             $imagePath = $request->image->store('images', 'public');
 
             $updateData['image'] = $imagePath;
         }
 
-        User::where('id', $id)->update($updateData);
 
-        return redirect()->to(route('admin.dashboard'));
+        $user->update($updateData);
+
+        return redirect()->route('admin.dashboard');
     }
+
 
 
 
