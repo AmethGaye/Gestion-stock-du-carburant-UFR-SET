@@ -26,8 +26,8 @@ class Cours extends Model
     {
         return $this->belongsTo(Filiere::class, 'filiere_id');
     }
-    public function remboursement():HasOne
+    public function remboursements()
     {
-        return $this->HasOne(Remboursement_vac::class);
+        return $this->hasMany(Remboursement_vac::class);
     }
 }

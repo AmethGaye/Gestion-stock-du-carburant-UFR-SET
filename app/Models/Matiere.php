@@ -23,4 +23,8 @@ class Matiere extends Model
         return $this->hasManyThrough(Filiere::class, Cours::class);
     }
 
+    public function filiere()
+    {
+        return $this->belongsToMany(Filiere::class, 'matieres_filieres');
+    }
 }

@@ -23,9 +23,11 @@ class CoursController extends Controller
      */
     public function index()
     {
+        $id_filiere =
         $vacataires = Vacataire::all();
         $matieres = Matiere::all();
-        $filieres = Filiere::all();
+        $filieres = Filiere::with('matiere')->get();
+        //dd($filieres);
        // $sceance_cours  =Cours::with('vacataire','matiere')->get();
         $vacataires_sceances = Vacataire::with(['cours.matiere','cours.filiere'])->get();
        //dd($vacataires_sceances);
