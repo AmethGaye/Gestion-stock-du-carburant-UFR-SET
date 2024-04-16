@@ -54,15 +54,15 @@ class CoursController extends Controller
         $validated = $validator->validated();
         if ($validated){
             Cours::create([
-                   'filiere_id'=>$validated['filiere'],
+                   'filiere_id'=>$validated['filiere_id'],
                     'matiere_id'=>$validated['matiere_id'],
                     'vacataire_id'=>$validated['vacataire_id'],
                     'date'=>$validated['date'],
                     'remarque'=>$validated['remarque'],
-                    'duree'=>$validated['heure'],
+                    'duree'=>$validated['duree'],
                     'statut'=>false,
             ]);
-            return response()->json(['success' => true, 'msg' => 'Ajout d\'une nouvelle cours réussie avec succès !']);
+            return response()->json(['success' => true, 'msg' => 'Ajout d\'un nouveau cours réussie avec succès !']);
         }
           return back() ;
     }
@@ -106,7 +106,14 @@ class CoursController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(),$this->rules(), $this->messages());
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+
+        Cours::where('id', $id)->update($request->only(['filiere_id', 'matiere_id', 'vacataire_id', 'date', 'remarque', 'duree']));
+        return response()->json(['success' => true, 'msg' => 'Mise à jour du cours réussie avec succés !']);
     }
 
     /**

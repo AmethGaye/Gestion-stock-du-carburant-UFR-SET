@@ -61,10 +61,11 @@ Route::post('/reset-password', [ResetPasswordController::class, 'update'])->name
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+Route::post('/admin/users/{id}', [UserController::class, 'update'])->name('admin.update');
 Route::get('/admin/roles', [UserController::class, 'roles'])->name('admin.roles');
 
 
-Route::post('/admin/users/register', [UserController::class, 'store'])->name('add.user');
+Route::post('/admin/users/', [UserController::class, 'store'])->name('add.user');
 Route::delete('/admin/users', [UserController::class, 'destroy'])->name('delete.user');
 
 
@@ -112,7 +113,7 @@ Route::delete('/departement/vacataires/delete/{id}', [VacataireController::class
 
 Route::post('/departement/cours', [CoursController::class, 'store'])->name('cours.store');
 Route::get('/departement/cours/all', [CoursController::class, 'index'])->name('cours.all');
-Route::put('/departement/cours/all/update/{id}', [CoursController::class, 'update'])->name('cours.update');
+Route::post('/departement/cours/all/update/{id}', [CoursController::class, 'update'])->name('cours.update');
 Route::delete('/departement/cours/all/{id}', [CoursController::class, 'destroy'])->name('cours.delete');
 Route::get('/departement/cours/approbation', [CoursController::class, 'approbation'])->name('cours.approbation');
 Route::post('/departement/cours/approbation/{id}', [CoursController::class, 'approuver'])->name('approuver');

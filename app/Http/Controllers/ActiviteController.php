@@ -6,6 +6,7 @@ use App\Models\Activite;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests\ActiviteRequestValidation;
+use App\Models\Departement;
 use Illuminate\Support\Facades\Validator;
 
 class ActiviteController extends Controller

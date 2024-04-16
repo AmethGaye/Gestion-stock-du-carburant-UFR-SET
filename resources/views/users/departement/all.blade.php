@@ -143,8 +143,7 @@
                             </span>
                             <span class="flex basis-[130px] justify-center">
                                 <div class="border border-zinc-200 rounded-l-lg bg-zinc-100 m-0">
-                                    <button class="px-3 py-1.5" onclick="displayContainer(true, {{ json_encode
-                                    ($cours) }}, `/departement/cours/all/update/`+{{ $cours->id }} ) ">
+                                    <button class="px-3 py-1.5" onclick="displayContainer(`/departement/cours/all/update/`+{{ $cours->id }}, true, {{ json_encode($cours) }} ) ">
                                         <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path

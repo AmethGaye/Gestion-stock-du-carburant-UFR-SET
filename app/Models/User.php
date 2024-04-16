@@ -32,6 +32,8 @@ class User extends Authenticatable
         'status',
         'date_naiss',
         'image',
+        'sexe',
+        'ufr_id'
     ];
 
     /**

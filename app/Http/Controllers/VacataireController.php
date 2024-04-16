@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\VacataireRequest;
 use App\Models\Vacataire;
 use Illuminate\Http\Request;
+use App\Http\Requests\VacataireRequestValidation;
+use Illuminate\Support\Facades\Validator;
 
 class VacataireController extends Controller
 {
+    use VacataireRequestValidation; 
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +32,14 @@ class VacataireController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(),$this->rules(true), $this->messages());
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+
+        Vacataire::where('id', $id)->update($request->only(['nom', 'prenom', 'email', 'telephone', 'provenance', 'situation', 'status','origine']));
+        return response()->json(['success' => true, 'msg' => 'Mise à jours du vacataire avec succès !']);
     }
 
     /**
@@ -44,8 +53,15 @@ class VacataireController extends Controller
         return redirect()->back()->with('success', 'Evenement supprimé avec succès');
     }
 
-    public function store(VacataireRequest $request){
-        $credentials=$request->validated();
+    public function store(Request $request){
+
+        $validator = Validator::make($request->all(),$this->rules(), $this->messages());
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+
+        $credentials=$validator->validated();
 
         if ($credentials){
             Vacataire::create(
@@ -59,10 +75,11 @@ class VacataireController extends Controller
                     'situation'=>$credentials['situation'],
                     'status'=>$credentials['status'],
                     'origine'=>$credentials['provenance'],
+                    'sexe'=>$credentials['sexe'],
                 ]
             );
-         return redirect()->route('departement.vacataires')->withSuccess('L\'ajout du nouveau vacataire a réussi avec success');
+         return response()->json(['success' => true, 'msg' => 'L\'ajout du nouveau vacataire a réussi avec succès !']);
         }
-        return redirect()->route('departement.vacataires')->withErrors(['msg'=>'L\'ajout du nouveau vacataire a réussi avec success']);
     }
+
 }

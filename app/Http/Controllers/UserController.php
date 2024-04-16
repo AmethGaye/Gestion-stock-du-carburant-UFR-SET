@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Ufr;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,8 +29,9 @@ class UserController extends Controller
     public function index()
     {
        $users = User::all();
+       $ufr = Ufr::all();
         if(Auth::user()->role === 'admin'){
-            return view('users.admin.users',compact('users'));
+            return view('users.admin.users',compact('users', 'ufr'));
         }
     }
 
@@ -47,19 +49,30 @@ class UserController extends Controller
             return response()->json(['errors' => $validator->errors()]);
         }
 
-        $validated = $validator->validated();
-        if($validated){
-            User::create( [
-                        'nom' => $validated['nom'],
-                        'prenom'=> $validated['prenom'],
-                        'email' => $validated['email'],
-                        'role'=> $validated['role'],
-                        'telephone'=> $validated['telephone'],
-                        'date_naiss'=> '2000-11-18',
-                        'password'=>Hash::make($validated['password']),
-                    ]);
-            return response()->json(['success' => true, 'msg' => "L'utilisateur ajouté avec succés !"]);
+        User::create( [
+            'nom' => $request->nom,
+            'prenom'=> $request->prenom,
+            'email' => $request->email,
+            'role'=> $request->role,
+            'telephone'=> $request->telephone,
+            'sexe'=> $request->sexe,
+            'ufr_id' => $request->ufr_id,
+            'date_naiss'=> $request->date_naiss,
+            'password'=>Hash::make($request->password),
+        ]);
+        return response()->json(['success' => true, 'msg' => "L'utilisateur ajouté avec succés !"]);
+    }
+
+
+    public function update(Request $request, string $id){
+        $validator = Validator::make($request->all(),$this->rules(true), $this->messages());
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
         }
+
+        User::where('id', $id)->update($request->only(['nom', 'prenom', 'sexe', 'ufr_id', 'email', 'telephone', 'role', 'date_naiss']));
+        return response()->json(['success' => true, 'msg' => 'Mise à jour de l\'utilisteur réussie avec succès !']);
     }
 
 

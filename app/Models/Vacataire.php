@@ -16,7 +16,8 @@ class Vacataire extends Model
       'email',
       'status',
       'situation',
-      'telephone'
+      'telephone',
+      'sexe'
     ];
     use HasFactory;
 

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
 
-// contenu principale et tous les formulaires et les messages alertes
+// les variables
 const container = document.querySelector('#container');
 const child = document.querySelector('#container > div');
 const btn = document.querySelector('#submit');
@@ -17,6 +17,10 @@ const closerBtn = document.querySelector('#closer');
 const form = document.querySelector('#subscription');
 const chContainer = document.querySelectorAll('#ch-container');
 const r_form = document.querySelectorAll('#r_form');
+const eyes = document.querySelectorAll('#eyes');
+const eyesHidden = document.querySelectorAll('#eyes-hidden');
+const password = document.querySelectorAll('#password');
+const inputNumber = document.querySelector('input[type="number"]');
 
 
 // Afficher le contenu principal
@@ -129,8 +133,22 @@ try {
 
 // LES FONCTIONS
 
-const displayContainer = function(edit = false, data = null, url = null){
+const hidePassword = (index = null) => {
+    eyes[index].classList.add('hidden');
+    eyesHidden[index].classList.remove('hidden');
+    password[index].type = "password";
+    // console.log('hide')
+}
 
+const showPassword = (index = null) => {
+    eyes[index].classList.remove('hidden');
+    eyesHidden[index].classList.add('hidden');
+    password[index].type = "text";
+    // console.log('show')
+}
+
+
+const displayContainer = function(url = null, edit = false, data = null){
     container.classList.replace('opacity-0', 'opacity-100');
     container.classList.replace('-z-50', 'z-50');
     container.classList.remove('invisible');
@@ -138,12 +156,17 @@ const displayContainer = function(edit = false, data = null, url = null){
 
     child.classList.replace('opacity-0', 'opacity-100');
     child.classList.replace('scale-75', 'scale-100');
-
-    if(edit && data && url){
+    // console.log(data)
+    if(url){
         form.action = url;
-        console.log(form.action)
+    }
+
+
+    if(edit && data){
+        // console.log(form.action)
+        delPasswordField(true);
         let field = document.querySelectorAll("#subscription label + *");
-        field.forEach((item, index)=>{
+        field.forEach((item)=>{
             if(item.nodeName === "DIV"){
                 item.firstElementChild.value = data[item.firstElementChild.id];
             }else{
@@ -161,20 +184,44 @@ const reset = ()=>{
     container.classList.replace('-z-50', 'z-50');
     container.classList.add('invisible');
 
+    delPasswordField(false);
+
+
     let field = document.querySelectorAll("#subscription label + *");
     field.forEach((item)=>{
         if(item.nodeName === 'DIV'){
             item.children[0].value = "";
-            // item.children[0].style = "border-color: red";
-            item.children[1].innerHTML = "";
+            if(item.children[1]){
+                item.children[1].innerHTML = "";
+            }
+        }else if(item.nodeName === 'SELECT'){
+            item.firstElementChild.selected = 'true';
         }else{
             item.value = "";
+        }
+
+        if(item.nextElementSibling){ 
             item.nextElementSibling.innerHTML = "";
         }
     })
 
 }
 
+const delPasswordField = (x = false)=>{
+
+    if(x){
+        if(document.getElementById('default-mdp')){
+            document.getElementById('default-mdp').classList.add('hidden');
+        }
+    }else{
+        if(document.getElementById('default-mdp')){
+            document.getElementById('default-mdp').classList.remove('hidden');
+        }
+    }
+    
+
+
+}
 
 
 
@@ -182,11 +229,13 @@ const subscribe = async () => {
     try {
         let url = form.action;
         let data = new FormData(form);
+        // console.log(url)
         let response = await fetch(url, {
             method: 'POST',
             body: data,
         });
         const result = await response.json();
+        // const result = await response.text();
 
         if(response.ok && result.success){
             sessionStorage.setItem('msg',result.msg);
@@ -227,9 +276,100 @@ const showMessage = (message, type = 'success') => {
 };
 
 
+const incrementer = () => {
+    if(!inputNumber.value){
+        inputNumber.value = '0';   
+    }else{
+        inputNumber.value = String(parseInt(inputNumber.value) + 1);
+    }
+}
+
+
+const decrementer = () => {
+    if(parseInt(inputNumber.value) <= 0 || !inputNumber.value){
+        inputNumber.value = '0';
+    }else{
+        inputNumber.value = String(parseInt(inputNumber.value) - 1);
+    }
+}
 
 
 
+const showOptionContainer = (input) => {
+    document.getElementById('options-container').classList.toggle('hidden'); 
+    document.querySelector('#chevron').classList.toggle('rotate-180')
+    let options = document.querySelectorAll('#options-container > *');
+    options.forEach((item) => {
+        item.classList.remove('bg-zinc-100');
+        if(item.textContent === input.value){
+            item.classList.add('bg-zinc-100')
+        }
+    });
+}
+
+const getOption = (value) => {
+    document.getElementById('opt-choosen').value = value
+    document.getElementById('options-container').classList.toggle('hidden');
+    document.querySelector('#chevron').classList.toggle('rotate-180'); 
+
+}
+
+const showFiltersContainer = () => {
+    document.getElementById('filters-container').classList.toggle('hidden');
+    document.querySelector('#chevron-2').classList.toggle('rotate-180')
+
+
+}
+
+const addOrderBy = (elem, value) => {
+    if(!isPresent(value)){
+        let input = document.createElement('input');
+        input.type = "hidden";
+        input.name = "order[]";
+        input.value = value
+        document.getElementById('sub-filters').appendChild(input);
+        elem.classList.add('bg-zinc-200');
+    }else{
+        removeField(value);
+        elem.classList.remove('bg-zinc-200');
+    }
+} 
+
+const addFilter = (elem, key, value) => {
+    if(!isPresent(value)){
+        let input = document.createElement('input');
+        input.type = "hidden";
+        input.name = `${key}[]`;
+        input.value = value
+        document.getElementById('sub-filters').appendChild(input);
+        elem.classList.add('bg-zinc-200');
+    }else{
+        removeField(value);
+        elem.classList.remove('bg-zinc-200');
+    }
+}
+
+const isPresent = (value) => {
+    let inputs = document.querySelectorAll('#sub-filters > input');
+    let flag = false;
+    inputs.forEach((item, index) => {
+        if(index != 0 && item.value == value){
+            flag = true;
+        }
+    });
+
+    return flag;
+}
+
+
+const removeField = (value) => {
+    let inputs = document.querySelectorAll('#sub-filters > input');
+    inputs.forEach((item) => {
+        if(item.value == value){
+            item.remove();
+        }
+    });
+}
 
 
 

@@ -42,7 +42,7 @@
                     <span class="">csv</span>
                 </button>
 
-                <button  type="menu" class="btn-1 bg-zinc-800 text-white" onclick="displayContainer(1)">
+                <button  type="menu" class="btn-1 bg-zinc-800 text-white" onclick="displayContainer(`/departement/vacataires`)">
                     <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
                         <path d="M6.5 1.30493V12.3049M12 6.80493L1 6.80493" stroke="white" stroke-width="2" stroke-linecap="round"/>
                     </svg>
@@ -50,6 +50,9 @@
                 </button>
             </div>
         </div>
+
+        {{--    les message flash : type -> success --}}
+        <div class="text-green-500" id="success"></div>
 
 
         <div class="bg-white rounded-md border border-zinc-200 relative">
@@ -103,18 +106,18 @@
                     </span>
                     @endif
                     <span class="flex basis-[150px] justify-center">
-                        <form action="" method="" class="border border-zinc-200 px-3 py-1.5 rounded-l-lg bg-zinc-100 m-0">
-                            <button type="submit">
+                        <div class="border border-zinc-200  rounded-l-lg bg-zinc-100 m-0">
+                            <button type="submit" class="px-3 py-1.5" onclick="displayContainer(`/departement/vacataires/update/`+{{ $vacataire->id }}, true, {{ json_encode($vacataire) }} )" >
                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.16755 2.78381H2.76216C2.2948 2.78381 1.84659 2.96947 1.51612 3.29994C1.18566 3.63041 1 4.07862 1 4.54597V14.2378C1 14.7052 1.18566 15.1534 1.51612 15.4839C1.84659 15.8143 2.2948 16 2.76216 16H12.454C12.9214 16 13.3696 15.8143 13.7001 15.4839C14.0305 15.1534 14.2162 14.7052 14.2162 14.2378V9.83245M12.9703 1.53797C13.1329 1.36966 13.3273 1.23542 13.5423 1.14306C13.7573 1.05071 13.9886 1.0021 14.2225 1.00007C14.4565 0.998033 14.6885 1.04262 14.9051 1.13122C15.1217 1.21982 15.3184 1.35067 15.4839 1.51612C15.6493 1.68158 15.7802 1.87833 15.8688 2.09489C15.9574 2.31145 16.002 2.54349 15.9999 2.77747C15.9979 3.01145 15.9493 3.24268 15.8569 3.45767C15.7646 3.67266 15.6303 3.8671 15.462 4.02966L7.89709 11.5946H5.4054V9.10291L12.9703 1.53797Z" stroke="#737373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </button>
-                        </form>
+                        </div>
                         @php $id=$vacataire->id @endphp
-                        <form action="{{route('dp.vacataires.delete',compact('id'))}}" method="post" class="border border-zinc-200 px-3 py-1.5 rounded-r-lg bg-zinc-100 m-0">
+                        <form action="{{route('dp.vacataires.delete',compact('id'))}}" method="post" class="border border-zinc-200 rounded-r-lg bg-zinc-100 m-0">
                             @csrf
                             @method('delete')
-                            <button>
+                            <button class="px-3 py-1.5">
                                 <svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5.875 7.66667V12.6667M9.125 7.66667V12.6667M1 4.33333H14M13.1875 4.33333L12.4831 14.4517C12.4539 14.8722 12.2704 15.2657 11.9697 15.553C11.6689 15.8403 11.2731 16 10.8621 16H4.13787C3.72686 16 3.33112 15.8403 3.03034 15.553C2.72957 15.2657 2.54612 14.8722 2.51694 14.4517L1.8125 4.33333H13.1875ZM9.9375 4.33333V1.83333C9.9375 1.61232 9.8519 1.40036 9.69952 1.24408C9.54715 1.0878 9.34049 1 9.125 1H5.875C5.65951 1 5.45285 1.0878 5.30048 1.24408C5.1481 1.40036 5.0625 1.61232 5.0625 1.83333V4.33333H9.9375Z" stroke="#F87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -144,7 +147,7 @@
             </svg>
         </div>
     </div>
-    <form action="{{route('departement.vacataires')}}" method="post" class="m-0 mt-6">
+    <form action="{{route('departement.vacataires')}}" method="post" class="m-0 mt-6" id="subscription">
         @csrf
 
         <div class="mb-10 ">
@@ -152,58 +155,50 @@
                 <div class="w-full flex flex-col relative mb-4">
                     <label for="prenom" class="text-zinc-800 font-medium">Prénom</label>
                     <input type="text" name="prenom" id="prenom" class="input-2" placeholder="Ahmada">
-                    <div class="text-[small] text-red-600 font-medium mt-2">
-                        @error('prenom')
-                        <span class="text-red-500">{{ $message}}</span>
-                        @enderror
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
 
                 <div class="w-full flex flex-col relative mb-4">
                     <label for="nom" class="text-zinc-800 font-medium">Nom</label>
                     <input type="text" name="nom" id="nom" class="input-2" placeholder="Gaye">
-                    <div class="text-[small] text-red-600 font-medium mt-2">
-                        @error('nom')
-                        <span class="text-red-500">{{ $message}}</span>
-                        @enderror
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
             </div>
 
             <div class="w-full flex gap-4">
                 <div class="w-full  flex flex-col mb-4">
-                    <label for="Sexe" class="font-medium text-zinc-800">Sexe</label>
-                    <select name="sexe" id="Sexe" class="input-2">
-                        <option value="M">Masculin</option>
-                        <option value="F">Féminin</option>
+                    <label for="sexe" class="font-medium text-zinc-800">Sexe</label>
+                    <select name="sexe" id="sexe" class="input-2">
+                        <option value="Masculin">Masculin</option>
+                        <option value="Feminin">Féminin</option>
                     </select>
                 </div>
 
                 <div class="w-full flex flex-col relative mb-4">
                     <label for="email" class="text-zinc-800 font-medium">Adresse email universitaire</label>
                     <input type="text" name="email" id="email" class="input-2" placeholder="Example@univ-thies.sn">
-                    <div class="text-[small] text-red-600 font-medium mt-2">
-                        @error('email')
-                        <span class="text-red-500">{{ $message}}</span>
-                        @enderror
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
             </div>
 
             <div class="w-full flex gap-4">
                 <div class="w-full flex flex-col relative mb-4">
-                    <label for="tel" class="text-zinc-800 font-medium">Numéro de téléphone</label>
-                    <input type="tel" name="telephone" id="tel" class="input-2" placeholder="784532081">
-                    <div class="text-[small] text-red-600 font-medium mt-2">
-                        @error('telephone')
-                        <span class="text-red-500">{{ $message}}</span>
-                        @enderror
+                    <label for="telephone" class="text-zinc-800 font-medium">Numéro de téléphone</label>
+                    <input type="tel" name="telephone" id="telephone" class="input-2" placeholder="784532081">
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
                 </div>
 
                 <div class="w-full  flex flex-col mb-4">
                     <label for="situation" class="font-medium text-zinc-800">Situation</label>
-                    <select name="situation" id="situation" class="input-2">
+                    <select name="situation" id="situation" class="input-2 ">
                         <option value="1">Véhiculé</option>
                         <option value="0">Non vehiculé</option>
                     </select>
@@ -214,8 +209,9 @@
             <div class="w-full flex gap-4">
 
                 <div class="w-full  flex flex-col mb-4">
-                    <label for="ufr" class="font-medium text-zinc-700">Provenance</label>
-                    <select name="provenance" id="ufr" class="input-2">
+                    <label for="provenance" class="font-medium text-zinc-700">Provenance</label>
+                    <select name="provenance" id="provenance" class="input-2">
+                        <option value="" class="first-option" >Veillez sélectionner une région</option>
                         <option value="Dakar">Dakar</option>
                         <option value="Thiès">Thiès</option>
                         <option value="Kaolack">Kaolack</option>
@@ -231,12 +227,15 @@
                         <option value="Fatick">Fatick</option>
                         <option value="Kaffrine">Kaffrine</option>
                     </select>
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
+                    </div>
                 </div>
 
                 <div class="w-full  flex flex-col mb-4">
-                    <label for="ufr" class="font-medium text-zinc-700">Statut</label>
-                    <select name="status" id="ufr" class="input-2">
-                        <option value="1">Actif</option>
+                    <label for="status" class="font-medium text-zinc-700">Statut</label>
+                    <select name="status" id="status" class="input-2">
+                        <option value="1" class="first-option">Actif</option>
                         <option value="0">Inactif</option>
                     </select>
                 </div>
@@ -245,7 +244,7 @@
 
         </div>
         <div class="flex gap-4 items-center">
-            <button type="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white flex justify-center items-center gap-2">
+            <button type="submit" id="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white flex justify-center items-center gap-2">
                 Ajouter
             </button>
             <button type="reset" class="px-6 py-2.5 rounded-lg bg-zinc-200 text-zinc-800 flex justify-center items-center gap-2">

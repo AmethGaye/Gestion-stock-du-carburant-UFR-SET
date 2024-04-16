@@ -6,16 +6,20 @@ namespace App\Http\Requests;
 Trait UserRequestValidation
 {
 
-    public function rules(): array
+    public function rules($edit = false): array
     {
+        $email = ($edit) ? 'required|email' : 'required|email|unique:users';
+        $password = ($edit) ? '' : 'required|min:8';
         return [
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
+            'email' => $email,
+            'password' => $password,
             'nom' => 'required|string|alpha|max:255',
             'prenom' => 'required|string|alpha|max:255',
             'sexe' => 'required|string',
             'telephone' => 'required|string|digits:9|numeric',
             'role' => 'required|string',
+            'ufr_id' => 'required|numeric',
+            'date_naiss' => 'required|date',
         ];
     }
 
