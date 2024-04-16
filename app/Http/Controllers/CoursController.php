@@ -23,10 +23,11 @@ class CoursController extends Controller
      */
     public function index()
     {
-        $vacataires = Vacataire::all();
+
+        $vacataires = Vacataire::where('status','=',1)->get();
         $matieres = Matiere::all();
-        $filieres = Filiere::all();
-       // $sceance_cours  =Cours::with('vacataire','matiere')->get();
+        $filieres = Filiere::with('matiere')->get();
+        //dd($filieres);
         $vacataires_sceances = Vacataire::with(['cours.matiere','cours.filiere'])->get();
        //dd($vacataires_sceances);
 
@@ -37,6 +38,7 @@ class CoursController extends Controller
         $filieres = Filiere::all();
         $matieres = Matiere::all();
         $vacataires = Vacataire::all();
+
         $sceance_cours=Cours::with(['vacataire','filiere','matiere'])->get();
        // dd($sceance_cours);
         return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
@@ -62,7 +64,11 @@ class CoursController extends Controller
                     'duree'=>$validated['duree'],
                     'statut'=>false,
             ]);
+<<<<<<< HEAD
             return response()->json(['success' => true, 'msg' => 'Ajout d\'un nouveau cours réussie avec succès !']);
+=======
+            return response()->json(['success' => true, 'msg' => 'L\'ajout d\'une nouvelle cours réussie avec succès !']);
+>>>>>>> 0c1e9f1ae19f6b2701f96edf245754332190f8d0
         }
           return back() ;
     }
@@ -81,7 +87,7 @@ class CoursController extends Controller
            if (!$if_id_cours_exist || $if_id_cours_statut_zero_exist) {
             Remboursement_vac::where('cours_id', $id)->delete();
 
-            Cours::where('id', $id)->update(['statut' => false]);
+            Cours::where('id', $id)->update(['statut' => false,'demande'=>0]);
 
 
             return redirect()->route('cours.approbation');

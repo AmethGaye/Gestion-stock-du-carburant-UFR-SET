@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cours;
 use App\Models\Remboursement_vac;
+use App\Models\Vacataire;
 use Illuminate\Http\Request;
 
 class RemboursementController extends Controller
@@ -19,7 +20,11 @@ class RemboursementController extends Controller
     public function index()
     {
         if(auth()->user()->role == 'directeur'){
-            return view('users.directeur.demandes');
+
+
+            $liste_remboursement = Vacataire::where('status',1)->with(['cours.remboursements','cours.matiere','cours.filiere','cours.remboursements.user'])->get();
+
+            return view('users.directeur.demandes',compact('liste_remboursement'));
         }
 
         if(auth()->user()->role == 'comptable'){
@@ -44,6 +49,7 @@ class RemboursementController extends Controller
 
             $if_id_cours_exist=Remboursement_vac::where('cours_id', $cours->id)->exists();
             if(!$if_id_cours_exist && $cours->statut ){
+                Cours::find($id)->update(['demande'=>1]);
 
                 Remboursement_vac::create([
                     'nombre_heure'=>$cours->duree,
@@ -58,6 +64,8 @@ class RemboursementController extends Controller
         return redirect()->back()->withSuccess('La demande est transmise avec success');
 
     }
+
+
 
     /**
      * Display the specified resource.
@@ -78,9 +86,13 @@ class RemboursementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+       $id_cours= $request->id_cours;
+       foreach ($id_cours as $id_cour){
+           Remboursement_vac::where('cours_id',$id_cour)->update(['statut'=>'1']);
+       }
+       return redirect()->back();
     }
 
     public function _update(Request $request){

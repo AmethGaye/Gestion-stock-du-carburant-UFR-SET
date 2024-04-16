@@ -134,12 +134,11 @@
 
             <div class="w-full flex gap-4">
                 <div class="w-full  flex flex-col mb-4">
-                    <label for="filiere_id" class="font-medium text-zinc-800">Filiere</label>
-                    <select name="filiere_id" id="filiere_id" class="input-2">
-                        <option value="" class="first-option">Veillez sélectionner une filière</option>
-                        @foreach($filieres as $filiere)
+                    <label for="filiere" class="font-medium text-zinc-800">Filiere</label>
+                    <select name="filiere" id="filiere" class="input-2">
+                           @foreach($filieres as $filiere)
                             <option value="{{$filiere->id}}">{{$filiere->nom}}</option>
-                        @endforeach
+                           @endforeach
                     </select>
                     {{-- erreur gerée en js --}}
                     <div class="text-sm text-red-600 font-medium mt-2">
@@ -149,10 +148,12 @@
                 <div class="w-full  flex flex-col mb-4">
                     <label for="matiere_id" class="font-medium text-zinc-800">Matière</label>
                     <select name="matiere_id" id="matiere_id" class="input-2">
-                        <option value="" class="first-option">Veillez sélectionner une matière</option>
-                        @foreach($matieres as $matiere)
-                            <option value="{{$matiere->id}}">{{$matiere->nom}}</option>
+                        @foreach($filieres as $filiere)
+                            @foreach($filiere->matiere as $matiere)
+                                <option value="{{$matiere->id}}">{{$matiere->nom}}</option>
+                            @endforeach
                         @endforeach
+
                     </select>
                     {{-- erreur gerée en js --}}
                     <div class="text-sm text-red-600 font-medium mt-2">

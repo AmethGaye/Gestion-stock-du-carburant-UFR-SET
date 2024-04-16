@@ -100,19 +100,21 @@
 
         {{-- t-body --}}
 
-
+        @foreach($liste_remboursement as $vacataire)
         {{-- row 1 --}}
         <div class="text-sm h-20 overflow-hidden text-zinc-600 font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
-
+            @php $total_cours_dispense=0;
+            foreach($vacataire->cours as $cours){  $total_cours_dispense += $cours->duree; }
+            @endphp
             {{-- resume --}}
             <div class="h-20 relative flex items-center border-b border-zinc-300 mb-4 ">
                 <div class="flex items-center w-full py-3">
-                    <span class="basis-[24%] grow pl-2 pr-4">Mouhamadou Mansour Diouf</span>
-                    <span class="basis-[22%] grow pr-4">Mansour@gmail.com</span>
-                    <span class="w-[150px] font-bold pr-4">14 Heures</span>
-                    <span class="basis-[130px] grow pr-4">Diourbel</span>
+                    <span class="basis-[24%] grow pl-2 pr-4">{{$vacataire->prenom." ".$vacataire->nom}}</span>
+                    <span class="basis-[22%] grow pr-4">{{$vacataire->email}}</span>
+                    <span class="w-[150px] font-bold pr-4">{{$total_cours_dispense}} Heures</span>
+                    <span class="basis-[130px] grow pr-4">{{$vacataire->provenance}}</span>
                     <span class="w-[190px] flex items-center justify-center">
-                        <span class="flex mx-auto bg-blue-100 px-4 text-blue-500 py-1 rounded font-semibold text-xs">Véhiculé</span>
+                        <span class="flex mx-auto @if($vacataire->situation)  bg-blue-100 px-4 text-blue-500 @else bg-orange-100 px-4 text-orange-500 @endif py-1 rounded font-semibold text-xs">@if($vacataire->situation) Vehiculé @else Non @endif</span>
                     </span>
 
                     <span class="w-[210px] relative flex items-center justify-center gap-4 ">
@@ -125,8 +127,20 @@
                                 'id_cours' => [1, 2, 4, 6]
                             ]
                         --}}
-                        <form action="" method="" class="m-0 mr-2">
-                            <button class="btn-3 bg-teal-500 text-white font-medium">Approuver</button>
+                        @php
+                            $id_cours = [];
+                            foreach($vacataire->cours as $cours) {
+                                if ($cours->statut == 1) {
+                                    $id_cours[] = $cours->id;
+                                }
+                            }
+                        @endphp
+                        <form action="{{route('approuver.directeur')}}" method="post" class="m-0 mr-2">
+                            @csrf
+                            @foreach($id_cours as $cours)
+                                <input type="hidden" name="id_cours[]" value="{{$cours}}">
+                            @endforeach
+                            <button class="btn-3 @if(!empty($id_cours)) bg-teal-500 @else bg-gray-400 @endif  text-white font-medium" @if(empty($id_cours))disabled @endif  >Approuver</button>
                         </form>
                         {{-- separator --}}
                         <div class=" w-0.5 h-6 bg-zinc-200"></div>
@@ -160,70 +174,58 @@
 
                 <div class="max-h-44 overflow-y-scroll">
                     {{-- row 1 --}}
+                    @foreach($vacataire->cours as $cours)
+                        @if($cours->statut && $cours->demande==1)
                     <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
                         {{-- cols --}}
-                        <span class="basis-[23%] grow px-4">Développement Web</span>
-                        <span class="basis-[15%] grow pr-4">Semestre 4</span>
-                        <span class="basis-[22%] grow pr-4">Informatique</span>
-                        <span class="basis-[15%] grow pr-4">18 / 01 / 2024</span>
-                        <span class="w-[120px] font-bold pr-4">3 Heure</span>
+                        <span class="basis-[23%] grow px-4">{{$cours->matiere->nom}}</span>
+                        <span class="basis-[15%] grow pr-4">Semestre {{$cours->matiere->semestre}} </span>
+                        <span class="basis-[22%] grow pr-4">{{$cours->filiere->nom}}</span>
+                        <span class="basis-[15%] grow pr-4">{{$cours->date}}</span>
+                        <span class="w-[120px] font-bold pr-4">{{$cours->duree}} Heure</span>
                         <span class="w-[170px] flex justify-center text-xs">
-                            <span class="flex mx-auto bg-emerald-100 px-4 text-emerald-500 py-1 rounded font-semibold">Approuvé</span>
+                            <span class="flex mx-auto bg-emerald-100 px-4 text-emerald-500 py-1 rounded font-semibold"> @if($cours->statut) Approuvé  @endif</span>
                         </span>
                     </div>
-                    <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
-                        {{-- cols --}}
-                        <span class="basis-[23%] grow px-4">Développement Web</span>
-                        <span class="basis-[15%] grow pr-4">Semestre 4</span>
-                        <span class="basis-[22%] grow pr-4">Informatique</span>
-                        <span class="basis-[15%] grow pr-4">18 / 01 / 2024</span>
-                        <span class="w-[120px] font-bold pr-4">3 Heure</span>
-                        <span class="w-[170px] flex justify-center text-xs">
-                            <span class="flex mx-auto bg-emerald-100 px-4 text-emerald-500 py-1 rounded font-semibold">Approuvé</span>
-                        </span>
-                    </div>
-                    <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
-                        {{-- cols --}}
-                        <span class="basis-[23%] grow px-4">Développement Web</span>
-                        <span class="basis-[15%] grow pr-4">Semestre 4</span>
-                        <span class="basis-[22%] grow pr-4">Informatique</span>
-                        <span class="basis-[15%] grow pr-4">18 / 01 / 2024</span>
-                        <span class="w-[120px] font-bold pr-4">3 Heure</span>
-                        <span class="w-[170px] flex justify-center text-xs">
-                            <span class="flex mx-auto bg-emerald-100 px-4 text-emerald-500 py-1 rounded font-semibold">Approuvé</span>
-                        </span>
-                    </div>
-                    <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
-                        {{-- cols --}}
-                        <span class="basis-[23%] grow px-4">Développement Web</span>
-                        <span class="basis-[15%] grow pr-4">Semestre 4</span>
-                        <span class="basis-[22%] grow pr-4">Informatique</span>
-                        <span class="basis-[15%] grow pr-4">18 / 01 / 2024</span>
-                        <span class="w-[120px] font-bold pr-4">3 Heure</span>
-                        <span class="w-[170px] flex justify-center text-xs">
-                            <span class="flex mx-auto bg-emerald-100 px-4 text-emerald-500 py-1 rounded font-semibold">Approuvé</span>
-                        </span>
+                        @endif
+                    @endforeach
+
                     </div>
 
                 </div>
 
                 {{-- t-foot --}}
                 {{-- t-foot --}}
+            @php $total_cours_valide=0;
+            foreach($vacataire->cours as $cours){ if ($cours->statut){$total_cours_valide += $cours->duree;} }
+            @endphp
                 <div class="h-20 flex items-center justify-between ">
                     <div class="flex gap-1.5 items-center">
                         <span class="text-zinc-400 font-semibold">TOTAL:</span>
-                        <span class="text-red-500 font-bold bg-red-100 btn ml-4">8 Heures</span>
+                        <span class="text-red-500 font-bold bg-red-100 btn ml-4">{{$total_cours_valide}} Heures</span>
                     </div>
 
                    <div>
-                      <p class="mr-2">Demandé par : Mr Idrissa Gaye</p>
+                       @php $deja=1 @endphp
+                       @foreach($vacataire->cours as $cours)
+
+                           @foreach($cours->remboursements as $remboursement)
+                               @if($deja==1)
+                               <p class="mr-2">Demandé par : Mr/Mm {{ $remboursement->user->prenom." ".$remboursement->user->nom }}</p>
+                                   @php $deja=0 @endphp
+                               @endif
+                           @endforeach
+                       @endforeach
+
                    </div>
                 </div>
             </div>
 
         </div>
+    @endforeach
 
     </div>
+
 
     {{-- pagination --}}
     @include('partials.pagination')

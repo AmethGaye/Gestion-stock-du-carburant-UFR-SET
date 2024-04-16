@@ -97,7 +97,7 @@ Route::delete('/directeur/activites/delete/{id}', [ActiviteController::class, 'd
 
 
 Route::get('/directeur/demandes', [RemboursementController::class, 'index'])->name('directeur.demandes');
-Route::post('/directeur/demandes/{id}', [RemboursementController::class, 'update'])->name('approuver');
+Route::post('/directeur/demandes', [RemboursementController::class, 'update'])->name('approuver.directeur');
 
 
 
