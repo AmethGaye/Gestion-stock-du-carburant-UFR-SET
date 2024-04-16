@@ -64,11 +64,7 @@ class CoursController extends Controller
                     'duree'=>$validated['duree'],
                     'statut'=>false,
             ]);
-<<<<<<< HEAD
             return response()->json(['success' => true, 'msg' => 'Ajout d\'un nouveau cours réussie avec succès !']);
-=======
-            return response()->json(['success' => true, 'msg' => 'L\'ajout d\'une nouvelle cours réussie avec succès !']);
->>>>>>> 0c1e9f1ae19f6b2701f96edf245754332190f8d0
         }
           return back() ;
     }
