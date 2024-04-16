@@ -94,7 +94,7 @@
                             @foreach($id_cours as $cours)
                                 <input type="hidden" name="id_cours[]" value="{{$cours}}">
                             @endforeach
-                            <button class="btn-3 bg-teal-500 text-white font-medium">Approuver</button>
+                            <button class="btn-3 @if(!empty($id_cours)) bg-teal-500 @else bg-gray-400 @endif  text-white font-medium" @if(empty($id_cours))disabled @endif  >Approuver</button>
                         </form>
                         {{-- separator --}}
                         <div class=" w-0.5 h-6 bg-zinc-200"></div>
@@ -129,7 +129,7 @@
                 <div class="max-h-44 overflow-y-scroll">
                     {{-- row 1 --}}
                     @foreach($vacataire->cours as $cours)
-                        @if($cours->statut)
+                        @if($cours->statut && $cours->demande==1)
                     <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
                         {{-- cols --}}
                         <span class="basis-[23%] grow px-4">{{$cours->matiere->nom}}</span>

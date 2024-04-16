@@ -22,7 +22,7 @@ class RemboursementController extends Controller
         if(auth()->user()->role == 'directeur'){
 
 
-            $liste_remboursement = Vacataire::with(['cours.remboursements','cours.matiere','cours.filiere','cours.remboursements.user'])->get();
+            $liste_remboursement = Vacataire::where('status',1)->with(['cours.remboursements','cours.matiere','cours.filiere','cours.remboursements.user'])->get();
 
             return view('users.directeur.demandes',compact('liste_remboursement'));
         }
@@ -49,6 +49,7 @@ class RemboursementController extends Controller
 
             $if_id_cours_exist=Remboursement_vac::where('cours_id', $cours->id)->exists();
             if(!$if_id_cours_exist && $cours->statut ){
+                Cours::find($id)->update(['demande'=>1]);
 
                 Remboursement_vac::create([
                     'nombre_heure'=>$cours->duree,

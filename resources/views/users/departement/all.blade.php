@@ -27,7 +27,8 @@
 
 
         {{-- row 1 --}}
-        @foreach($vacataires_sceances as $sceance_cour )
+        @foreach($vacataires_sceances as $sceance_cour)
+            @if($sceance_cour->status)
             @php
                 $total_duree=0;
             @endphp
@@ -124,6 +125,7 @@
                     <div class="max-h-44 overflow-y-scroll">
                         {{-- row 1 --}}
                         @foreach($sceance_cour->cours as $cours)
+                            @if($cours->demande==0)
                         <div class="flex items-center text-sm py-3 border-b min-h-14">
                             {{-- cols --}}
                             <span class="px-4">
@@ -172,6 +174,7 @@
                         @php
                             $total_duree += $cours->duree;
                         @endphp
+                            @endif
                         @endforeach
                     </div>
 
@@ -196,6 +199,7 @@
                 </div>
 
             </div>
+            @endif
         @endforeach
 
 

@@ -43,7 +43,7 @@ class DotationAdminsController extends Controller
                 'statut' => 1,
                 'user_id' => auth()->user()->getAuthIdentifier(),
             ]);
-            return redirect()->back()->with('success', 'l\'operation est réussie avec succés !');
+            return redirect()->back()->with('success', 'l\'opération est réussie avec succès !');
         }
     }
 }
