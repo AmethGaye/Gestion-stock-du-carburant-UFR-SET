@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cours;
-use App\Models\Remboursement_vac;
 use App\Models\Vacataire;
 use Illuminate\Http\Request;
+use App\Models\Remboursement_vac;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class RemboursementController extends Controller
 {
@@ -28,8 +29,14 @@ class RemboursementController extends Controller
         }
 
         if(auth()->user()->role == 'comptable'){
-            $r_vacataires = Vacataire::where('status',1)->with(['cours.remboursements','cours.matiere','cours.remboursements.user'])->get();
-            return view('users.comptable.remboursement', compact('r_vacataires'));
+            $vacataires = Vacataire::where('status', '1')      
+                    ->with([
+                        'cours' => function(Builder $query){$query->where('demande', '1');},
+                        'cours.remboursements' => function(Builder $query){$query->where('statut', '1');},
+                        'cours.matiere'
+                        ])
+                    ->get();
+            return view('users.comptable.remboursement', compact('vacataires'));
         }
     }
 
