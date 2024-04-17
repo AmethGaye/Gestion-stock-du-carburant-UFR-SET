@@ -28,7 +28,8 @@ class RemboursementController extends Controller
         }
 
         if(auth()->user()->role == 'comptable'){
-            return view('users.comptable.remboursement');
+            $r_vacataires = Vacataire::where('status',1)->with(['cours.remboursements','cours.matiere','cours.remboursements.user'])->get();
+            return view('users.comptable.remboursement', compact('r_vacataires'));
         }
     }
 
@@ -70,9 +71,9 @@ class RemboursementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function filtre(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**

@@ -133,6 +133,7 @@ Route::get('/comptable/dashboard', [DashboardController::class, 'index'])->name(
 Route::get('comptable/remboursements', [RemboursementController::class, 'index'])->name('comptable.remboursements');
 Route::post('comptable/remboursements/{id}', [RemboursementController::class, 'update'])->name('c.remboursements.update');
 Route::post('comptable/remboursement_multiple', [RemboursementController::class, '_update'])->name('c.remboursements._update');
+Route::get('comptable/remboursement/filtre', [RemboursementController::class, 'filtre'])->name('filtre');
 
 Route::get('comptable/activites', [ActiviteController::class, 'index'])->name('comptable.activites');
 Route::post('comptable/activites/{id}', [ActiviteController::class, 'update'])->name('c.activites.update');

@@ -17,10 +17,11 @@
                 </div>
             </div>
             <div class="icon-hover">
-                <svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer">
-                    <path d="M1.19897 1.25635H22.199M1.19897 7.75635H22.199M1.19897 14.2563H22.199" stroke="#4C535F"
-                        stroke-width="2" stroke-linecap="round" />
+                <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 13H17M1 1H17H1ZM1 7H9H1Z" stroke="#232325" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
+                    
+                
             </div>
         </div>
 
