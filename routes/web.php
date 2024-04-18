@@ -137,7 +137,7 @@ Route::post('departement/demande_remboursement', [RemboursementController::class
 Route::get('/comptable/dashboard', [DashboardController::class, 'index'])->name('comptable.dashboard');
 
 Route::get('comptable/remboursements', [RemboursementController::class, 'index'])->name('comptable.remboursements');
-Route::post('comptable/remboursements/{id}', [RemboursementController::class, 'update'])->name('c.remboursements.update');
+Route::post('comptable/remboursements/{id}', [RemboursementController::class, 'r_update'])->name('c.remboursements.update');
 Route::post('comptable/remboursements/reset/{id}', [RemboursementController::class, 'reset'])->name('c.remboursements.reset');
 Route::post('comptable/remboursement_multiple', [RemboursementController::class, '_update'])->name('c.remboursements._update');
 Route::get('comptable/remboursement/filtre', [RemboursementController::class, 'filtre'])->name('filtre');

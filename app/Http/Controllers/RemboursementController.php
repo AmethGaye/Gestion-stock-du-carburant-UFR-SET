@@ -33,8 +33,7 @@ class RemboursementController extends Controller
                     ->with([
                         'cours' => function(Builder $query){$query->where('demande', '1');},
                         'cours.remboursement' => function(Builder $query){$query
-                            ->where('statut', '1')
-                            ->orWhere('statut', '2');},
+                            ->whereIn('statut', ['1', '2']);},
                         'cours.matiere'
                         ])
                     ->get();
@@ -61,7 +60,7 @@ class RemboursementController extends Controller
 
             $if_id_cours_exist=Remboursement_vac::where('cours_id', $cours->id)->exists();
             if(!$if_id_cours_exist && $cours->statut ){
-                Cours::find($id)->update(['demande'=>1]);
+                Cours::find($id)->update(['demande'=> 1]);
 
                 Remboursement_vac::create([
                     'nombre_heure'=>$cours->duree,
@@ -123,22 +122,19 @@ class RemboursementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-       if(auth()->user()->role == 'directeur'){
-            $id_cours= $request->id_cours;
-            foreach ($id_cours as $id_cour){
-                Remboursement_vac::where('cours_id',$id_cour)->update(['statut'=>'1']);
-            }
-            return redirect()->back();
-       }
-
-       if(auth()->user()->role == 'comptable'){
-
-            Remboursement_vac::where('id', $id)->update(['statut' => '2', 'nombre_tickets' => $request->input('tickets')]);
-            return redirect()->back()->with('success', 'sceance de cours remboursé avec succés');
-       }
+        $id_cours= $request->id_cours;
+        foreach ($id_cours as $id_cour){
+            Remboursement_vac::where('cours_id',$id_cour)->update(['statut'=>'1']);
+        }
+        return redirect()->back();
        
+    }
+
+    public function r_update(Request $request, string $id){
+        Remboursement_vac::where('id', $id)->update(['statut' => '2', 'nombre_tickets' => $request->input('tickets')]);
+        return redirect()->back()->with('success', 'sceance de cours remboursé avec succés');
     }
 
     public function _update(Request $request){
