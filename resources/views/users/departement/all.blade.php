@@ -28,7 +28,7 @@
 
         {{-- row 1 --}}
         @foreach($vacataires_sceances as $sceance_cour)
-            @if($sceance_cour->status)
+            @if($sceance_cour->status && $sceance_cour->cours->count() > 0)
             @php
                 $total_duree=0;
             @endphp
@@ -70,7 +70,7 @@
                                     <input type="hidden" name="cours_id[]" value="{{$cours->id}}">
                                 @endif
                             @endforeach
-                            <button class="btn-3 bg-[#00B69B] text-white font-medium">envoyer</button>
+                            <button class="px-4 py-1 rounded bg-[#00B69B] text-white font-mtrph">envoyer</button>
                         </form>
                         {{-- separator --}}
                         <div class=" w-0.5 h-6 bg-zinc-200"></div>
@@ -165,16 +165,16 @@
 
                     {{-- t-foot --}}
                     <div class="h-20 flex items-center justify-between">
-                        <div class="flex gap-1.5 items-center">
-                            <span class="text-zinc-400 font-semibold">TOTAL:</span>
-                            <span class="text-red-500 font-bold bg-red-100 btn-2 ml-4">{{$total_duree}} Heures</span>
+                        <div class="flex gap-2 items-center">
+                            <span class="text-zinc-400 font-semibold">Total :</span>
+                            <span class="text-zinc-500 font-medium bg-zinc-100 px-3 py-1.5 rounded">{{$total_duree}} Heures</span>
                         </div>
 
                         <div class="">
-                            <button class="btn bg-gray-200 border">
-                                <svg width="13" height="14" viewBox="0 0 13 14" fill="none"
+                            <button class="flex items-center px-4 py-2 gap-1.5 roundedborder bg-[#4C535F] text-white font-mtrph rounded">
+                                <svg width="11" height="11" viewBox="0 0 13 14" fill="none"
                                      xmlns="http://www.w3.org/2000/svg" class="mr-0.5">
-                                    <path d="M6.5 1.5V12.5M12 7L1 7" stroke="#52525B" stroke-width="2"
+                                    <path d="M6.5 1.5V12.5M12 7L1 7" stroke="#ffffff" stroke-width="2"
                                           stroke-linecap="round"/>
                                 </svg>
                                 Cours
