@@ -52,25 +52,21 @@ class RemboursementController extends Controller
         $user_id=auth()->user()->getAuthIdentifier();
         $cours_id = $request->cours_id;
 
-        if (empty($cours_id)) {
-            return redirect()->back()->withErrors(['msg' => 'Pas de cours dispensé ']);
-        }
+        // if (empty($cours_id)) {
+        //     return redirect()->back()->withErrors(['msg' => 'Pas de cours dispensé ']);
+        // }
         foreach ($cours_id as $id){
             $cours = Cours::where('id', $id)->first();
 
-            $if_id_cours_exist=Remboursement_vac::where('cours_id', $cours->id)->exists();
-            if(!$if_id_cours_exist && $cours->statut ){
-                Cours::find($id)->update(['demande'=> 1]);
-
-                Remboursement_vac::create([
-                    'nombre_heure'=>$cours->duree,
-                    'nombre_tickets'=>2,
-                    'user_id'=>$user_id,
-                    'cours_id'=>$cours->id,
-                    'statut'=>'0',
-                ]);
-            }
-
+            // $if_id_cours_exist=Remboursement_vac::where('cours_id', $cours->id)->exists();
+            Cours::find($id)->update(['demande'=> 1]);
+            Remboursement_vac::create([
+                'nombre_heure'=>$cours->duree,
+                'nombre_tickets'=>2,
+                'user_id'=>$user_id,
+                'cours_id'=>$cours->id,
+                'statut'=>'0',
+            ]);
         }
         return redirect()->back()->withSuccess('La demande est transmise avec success');
 

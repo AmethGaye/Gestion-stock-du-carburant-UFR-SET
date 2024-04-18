@@ -32,26 +32,20 @@
             @php
                 $total_duree=0;
             @endphp
-            <div
-                class="text-sm h-20 overflow-hidden font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height] duration-150"
-                id="super-contain">
+            <div class="text-sm h-20 overflow-hidden font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
 
                 {{-- resume --}}
                 <div class="min-h-20 flex items-center border-b border-zinc-200 mb-4">
                     {{-- cols --}}
                     <span class="pr-4">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
-                     id="checkbox" class="cursor-pointer">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z"
-                          fill="#1C1C1C" fill-opacity="0.2"/>
-                </svg>
-            </span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
+                        </svg>
+                    </span>
                     <span class="basis-[23%] grow pr-4">{{$sceance_cour->prenom." ".$sceance_cour->nom}}</span>
                     <span class="basis-[22%] grow pr-4">{{$sceance_cour->email}}</span>
 
                     {{--calcul du total d'heure effectuer  par le vacataire--}}
-
                     @php
                         $total=0;
                         foreach ($sceance_cour->cours as $cour)
@@ -63,54 +57,46 @@
                     <span class="basis-[160px] font-bold pr-4">{{$total}} Heures</span>
                     <span class="basis-[160px] pr-4">{{$sceance_cour->provenance}}</span>
                     <span class="basis-[170px] flex justify-center">
-                <span class="flex mx-auto @if($sceance_cour->situation) bg-blue-100 text-blue-500 @else bg-fuchsia-100
-                text-fuchsia-500 @endif px-4 py-1 rounded font-semibold
-                text-xs">
-                    @if($sceance_cour->situation)
-                        Véhiculé
-                    @else
-                        Non
-                    @endif
-                </span>
-            </span>
+                        <span class="flex mx-auto @if($sceance_cour->situation) bg-blue-100 text-blue-500 @else bg-fuchsia-100 text-fuchsia-500 @endif px-4 py-1 rounded font-semibold text-xs">
+                            @if($sceance_cour->situation) Véhiculé @else Non @endif
+                        </span>
+                    </span>
 
                     <span class="basis-[170px] relative flex items-center justify-center gap-4">
-                <form action="{{ route('dep.remboursement') }}" method="post" class="m-0">
-                    @csrf
-                    @foreach($sceance_cour->cours as $cours)
-                        <input type="hidden" name="cours_id[]" value="{{$cours->id}}">
-                    @endforeach
-                    <button class="btn-3 bg-[#00B69B] text-white font-medium">envoyer</button>
-                </form>
-                {{-- separator --}}
-                <div class=" w-0.5 h-6 bg-zinc-200"></div>
+                        <form action="{{ route('dep.remboursement') }}" method="post" class="m-0">
+                            @csrf
+                            @foreach($sceance_cour->cours as $cours)
+                                @if ($cours->statut && $cours->demande == 0)
+                                    <input type="hidden" name="cours_id[]" value="{{$cours->id}}">
+                                @endif
+                            @endforeach
+                            <button class="btn-3 bg-[#00B69B] text-white font-medium">envoyer</button>
+                        </form>
+                        {{-- separator --}}
+                        <div class=" w-0.5 h-6 bg-zinc-200"></div>
 
-                {{--  --}}
-                <div class="transition-all duration-300 w-8 h-8 flex items-center justify-center mr-2 icon-hover"
-                     id="ch-container">
-                    <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"
-                         class="transition-transform rotate-0" id="chevron">
-                        <path d="M13.5 1.5L8.20711 6.79289C7.81658 7.18342 7.18342 7.18342 6.79289 6.79289L1.5 1.5"
-                              stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </div>
-            </span>
+                        {{--  --}}
+                        <div class="transition-all duration-300 w-8 h-8 flex items-center justify-center mr-2 icon-hover"
+                            id="ch-container">
+                            <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                class="transition-transform rotate-0" id="chevron">
+                                <path d="M13.5 1.5L8.20711 6.79289C7.81658 7.18342 7.18342 7.18342 6.79289 6.79289L1.5 1.5"
+                                    stroke="#9FA6B2" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </span>
                 </div>
 
                 {{-- detail --}}
                 <div class="mx-4">
                     {{-- t-head --}}
-                    <div
-                        class="flex items-center text-sm text-zinc-800 font-nunito font-bold h-12  bg-[#F1F4F9] rounded">
+                    <div class="flex items-center text-sm text-zinc-800 font-nunito font-bold h-12  bg-[#F1F4F9] rounded">
                         {{-- cols --}}
                         <span class="px-4">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
-                         id="checkbox" class="cursor-pointer">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z"
-                              fill="#1C1C1C" fill-opacity="0.2"/>
-                    </svg>
-                </span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
+                            </svg>
+                        </span>
                         <span class="pr-4 basis-[23%] grow">Matière</span>
                         <span class="pr-4 basis-[15%] grow">Semestre</span>
                         <span class="pr-4 basis-[22%] grow">Filière</span>
