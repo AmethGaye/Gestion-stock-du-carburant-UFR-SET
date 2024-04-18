@@ -42,6 +42,8 @@ class RemboursementController extends Controller
         }
     }
 
+   
+
 
     /**
      * Store a newly created resource in storage.
@@ -82,8 +84,33 @@ class RemboursementController extends Controller
      */
     public function filtre(Request $request)
     {
-        dd($request);
+        $liste_remboursement = Vacataire::where('status', 1)
+            ->with(['cours.remboursements', 'cours.matiere', 'cours.filiere', 'cours.remboursements.user']);
+    
+        if ($request->filled('order')) {
+            foreach ($request->order as $order) {
+                $liste_remboursement->orderBy($order, 'asc');
+            }
+        }
+    
+        if ($request->filled('situation')) {
+            $liste_remboursement->whereIn('situation', $request->situation);
+        }
+    
+        if ($request->filled('demande')) {
+            $liste_remboursement->whereHas('cours', function ($query) use ($request) { 
+                $query->whereIn('demande', $request->demande);
+            });
+        }
+    
+        $liste_remboursement = $liste_remboursement->get(); 
+    
+        
+        return view('users.directeur.demandes', compact('liste_remboursement'));
     }
+
+   
+    
 
     /**
      * Show the form for editing the specified resource.

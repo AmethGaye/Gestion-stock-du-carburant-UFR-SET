@@ -26,10 +26,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-       $users = User::all();
-       $ufr = Ufr::all();
+       
+    
+        $users = User::all();
+        $ufr = Ufr::all();
         if(Auth::user()->role === 'admin'){
             return view('users.admin.users',compact('users', 'ufr'));
         }
@@ -81,9 +83,35 @@ class UserController extends Controller
      */
     public function roles()
     {
+     
+    }
+    public function filtre(Request $request)
+    {
+        $query = User::query();
+        
+        if ($request->filled('ufr_id')) {
+            $query->whereIn('ufr_id', $request->ufr_id);
+        }
+        if ($request->filled('status')) {
+            $query->whereIn('status', $request->status);
+        }
+        if ($request->filled('role')) {
+            $query->whereIn('role', $request->role);
+        }
+    
+        if ($request->filled('order')) {
+            foreach ($request->order as $order) {
+                $query->orderBy($order, 'asc');
+            }
+        }
+    
+        $users = $query->get();
+
+        //dd($users);
+        $ufr = Ufr::all();
+    return view('users.admin.users',compact('users', 'ufr'));
 
     }
-
 
     /**
      * Show the form for editing the specified resource.

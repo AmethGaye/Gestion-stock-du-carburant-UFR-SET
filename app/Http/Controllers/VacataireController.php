@@ -19,6 +19,34 @@ class VacataireController extends Controller
         return view('users.departement.vacataires',compact('vacataires'));
     }
 
+    public function filtre(Request $request)
+    {
+        
+        $vacataires=Vacataire::query();
+       
+        if($request->filled('order')){
+
+            foreach($request->order as $order ){
+                $vacataires->orderBy($order , 'asc');
+            }
+        }
+
+        if ($request->filled('situation')) {
+
+            $vacataires->whereIn('situation',$request->situation);
+        }
+        
+        if ($request->filled('status')) {
+
+            $vacataires->whereIn('status',$request->status);
+        }
+
+
+        $vacataires=$vacataires->get();
+        return view('users.departement.vacataires',compact('vacataires'));
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      */

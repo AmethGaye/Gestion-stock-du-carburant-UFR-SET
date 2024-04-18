@@ -63,6 +63,7 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('adm
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 Route::post('/admin/users/{id}', [UserController::class, 'update'])->name('admin.update');
 Route::get('/admin/roles', [UserController::class, 'roles'])->name('admin.roles');
+Route::get('/admin/users/filtre', [UserController::class, 'filtre'])->name('filtre.users');
 
 
 Route::post('/admin/users/', [UserController::class, 'store'])->name('add.user');
@@ -95,9 +96,12 @@ Route::post('/directeur/activites', [ActiviteController::class, 'store'])->name(
 Route::post('/directeur/activites/update/{id}', [ActiviteController::class, 'update'])->name('d.activites.update');
 Route::delete('/directeur/activites/delete/{id}', [ActiviteController::class, 'destroy'])->name('d.activites.delete');
 
+Route::get('/directeur/activites/filtre_activite', [ActiviteController::class, 'filtre_activite'])->name('filtre.activites');
+
 
 Route::get('/directeur/demandes', [RemboursementController::class, 'index'])->name('directeur.demandes');
 Route::post('/directeur/demandes', [RemboursementController::class, 'update'])->name('approuver.directeur');
+Route::get('/directeur/demandes/filtre', [RemboursementController::class, 'filtre'])->name('filtre.demande');
 
 
 
@@ -107,12 +111,14 @@ Route::post('/directeur/demandes', [RemboursementController::class, 'update'])->
 Route::get('/departement/dashboard', [DashboardController::class, 'index'])->name('departement.dashboard');
 
 Route::get('/departement/vacataires', [VacataireController::class, 'index'])->name('departement.vacataires');
+Route::get('/departement/vacataires/filtre', [VacataireController::class, 'filtre'])->name('departement.vacataires.filtre');
 Route::post('/departement/vacataires', [VacataireController::class, 'store']);
 Route::post('/departement/vacataires/update/{id}', [VacataireController::class, 'update'])->name('dp.vacataires.update');
 Route::delete('/departement/vacataires/delete/{id}', [VacataireController::class, 'destroy'])->name('dp.vacataires.delete');
 
 Route::post('/departement/cours', [CoursController::class, 'store'])->name('cours.store');
 Route::get('/departement/cours/all', [CoursController::class, 'index'])->name('cours.all');
+Route::get('/departement/cours/all/filtre', [CoursController::class, 'filtre'])->name('cours.all.filtre');
 Route::post('/departement/cours/all/update/{id}', [CoursController::class, 'update'])->name('cours.update');
 Route::delete('/departement/cours/all/{id}', [CoursController::class, 'destroy'])->name('cours.delete');
 Route::get('/departement/cours/approbation', [CoursController::class, 'approbation'])->name('cours.approbation');
@@ -137,6 +143,7 @@ Route::post('comptable/remboursement_multiple', [RemboursementController::class,
 Route::get('comptable/remboursement/filtre', [RemboursementController::class, 'filtre'])->name('filtre');
 
 Route::get('comptable/activites', [ActiviteController::class, 'index'])->name('comptable.activites');
+Route::get('comptable/activites/filtre', [ActiviteController::class, 'filtre_activite'])->name('comptable.activites.filtre');
 Route::post('comptable/activites/{id}', [ActiviteController::class, 'update'])->name('c.activites.update');
 Route::put('comptable/activites/reset/{id}', [ActiviteController::class, 'reset'])->name('c.activites.reset');
 
