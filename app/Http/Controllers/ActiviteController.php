@@ -35,6 +35,7 @@ class ActiviteController extends Controller
             return view('users.comptable.activites',compact('activities'));
         }
     }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -42,6 +43,28 @@ class ActiviteController extends Controller
     public function create()
     {
         //
+    }
+
+    public function filtre_activite(Request $request){
+
+        $activities = Activite::query();
+
+        if($request->filled('order')){
+            foreach($request->order as $order){
+
+                $activities->orderBy($order ,'asc');
+
+            }
+        }
+
+        if ($request->filled('statut')) {
+           $activities->whereIn('statut',$request->statut);
+        }
+
+        $activities = $activities->get();
+          
+            return view('users.directeur.activites',compact('activities'));
+
     }
 
     /**

@@ -34,6 +34,42 @@ class CoursController extends Controller
         return view('users.departement.all',compact('vacataires','matieres','filieres','vacataires_sceances'));
     }
 
+
+    public function filtre(Request $request){
+
+        $vacataires_sceances = Vacataire::with(['cours.matiere','cours.filiere']);
+
+        
+
+        if ($request->filled('situation')) {
+
+            $vacataires_sceances->whereIn('situation',$request->situation);
+        }
+        
+        if ($request->filled('status')) {
+
+            $vacataires_sceances->whereIn('status',$request->status);
+        }
+        
+        if($request->filled('order')){
+
+            foreach($request->order as $order ){
+
+                $vacataires_sceances->orderBy($order , 'asc');
+            }
+        }
+
+        
+        $vacataires = Vacataire::where('status','=',1)->get();
+        $matieres = Matiere::all();
+        $filieres = Filiere::with('matiere')->get();
+        //dd($filieres);
+        $vacataires_sceances = $vacataires_sceances->get();
+       //dd($vacataires_sceances);
+
+        return view('users.departement.all',compact('vacataires','matieres','filieres','vacataires_sceances'));
+    }
+
     public function approbation(){
         $filieres = Filiere::all();
         $matieres = Matiere::all();

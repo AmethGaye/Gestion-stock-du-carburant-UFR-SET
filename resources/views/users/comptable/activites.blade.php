@@ -42,16 +42,16 @@
                         </div>
                         <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addOrderBy(this, 'titre')">Titre</div>
                         <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addOrderBy(this, 'lieux')">Lieux</div>
-                        <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addOrderBy(this, 'Adresse')">Adresse</div>
+                        <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addOrderBy(this, 'adresse')">Adresse</div>
                         <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addOrderBy(this, 'ticket')">Ticket</div>
                     </div>
                     <div class="flex flex-wrap gap-2 pb-4 border-b mt-4">
-                        <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'status', '0')">Non Validé</div>
-                        <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'status', '1')">Validé</div>
+                        <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'statut', 0)">Non Validé</div>
+                        <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'statut', 1)">Validé</div>
                         
                     </div>
                     <div class="flex items-center justify-end gap-2 mt-4">
-                        <form action="" method="" class="m-0" id="sub-filters" >
+                        <form action="{{route('comptable.activites.filtre')}}" method="get" class="m-0" id="sub-filters" >
                             @csrf
                             <button type="submit" class="btn-1 bg-zinc-800 text-white">Valider</button>
                         </form>

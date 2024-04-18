@@ -50,7 +50,7 @@
                             <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'role', 'comptable')">Comptable</div>
                         </div>
                         <div class="flex items-center justify-end gap-2 mt-4">
-                            <form action="" method="" class="m-0" id="sub-filters" >
+                            <form action="{{route('filtre.users')}}" method="get" class="m-0" id="sub-filters" >
                                 @csrf
                                 <button type="submit" class="btn-1 bg-zinc-800 text-white">Valider</button>
                             </form>
