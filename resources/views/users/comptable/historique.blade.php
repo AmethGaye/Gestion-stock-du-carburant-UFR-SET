@@ -94,9 +94,9 @@
 <div class="bg-white border border-zinc-200 rounded-lg text-sm mb-8">
     <div class="px-6 py-4 flex items-center justify-between border-b border-b-zinc-200">
         <div class="flex items-center gap-4">
-            <h2 class="text-lg font-semibold text-zinc-700 m-0">Départements</h2>
+            <h2 class="text-lg font-medium text-zinc-600 m-0">Départements</h2>
             <div class="flex justify-center items-center">
-                <span class="flex items-center bg-[#E2FBD7] px-4 text-[#34B53A] py-1.5 rounded-xl font-semibold text-sm">Janvier</span>
+                <span class="flex items-center bg-[#E2FBD7] px-3 text-[#34B53A] py-1.5 rounded-xl font-semibold text-[small] tracking-wider">Janvier</span>
             </div>
         </div>
         <div class="px-3 py-1.5 border border-zinc-200 rounded-md font-semibold text-slate-400">
@@ -129,9 +129,9 @@
 
     
 
-    <div class="flex gap-6 px-6 py-5 items-center">
-        <span class="text-zinc-400 font-semibold">TOTAL:</span>
-        <span class="text-blue-500 font-bold bg-blue-100 btn-1">{{ $total_dep }} Tickets</span>
+    <div class="flex gap-3 px-6 py-5 items-center">
+        <span class="text-zinc-400 font-semibold">Total : </span>
+        <span class="text-zinc-600 font-semibold bg-zinc-100 px-3 py-1.5 rounded-md">{{ $total_dep }} Tickets</span>
     </div>
 </div> 
 
@@ -140,9 +140,9 @@
 <div class="bg-white border border-zinc-200 rounded-lg text-sm">
     <div class="px-6 py-4 flex items-center justify-between border-b border-b-zinc-200">
         <div class="flex items-center gap-4">
-            <h2 class="text-lg font-bold text-zinc-700 m-0">Administration</h2>
+            <h2 class="text-lg font-medium text-zinc-600 m-0">Administration</h2>
             <div class="flex justify-center items-center">
-                <span class="flex items-center bg-[#E2FBD7] px-4 text-[#34B53A] py-1.5 rounded-xl font-semibold text-sm">Janvier</span>
+                <span class="flex items-center bg-[#E2FBD7] px-3 text-[#34B53A] py-1.5 rounded-xl font-semibold text-[small] tracking-wider">Janvier</span>
             </div>
         </div>
         <div class="px-3 py-1.5 border border-zinc-200 rounded-md font-semibold text-slate-400">
@@ -174,8 +174,8 @@
     @endforeach
 
     <div class="flex gap-6 px-6 py-5 items-center">
-        <span class="text-zinc-400 font-semibold">TOTAL:</span>
-        <span class="text-blue-500 font-bold bg-blue-100 btn-1">{{ $total_admin }} Tickets</span>
+        <span class="text-zinc-400 font-semibold">Total : </span>
+        <span class="text-zinc-600 font-semibold bg-zinc-100 px-3 py-1.5 rounded-md">{{ $total_admin }} Tickets</span>
     </div>
 </div>                  
 

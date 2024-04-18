@@ -20,7 +20,18 @@ const r_form = document.querySelectorAll('#r_form');
 const eyes = document.querySelectorAll('#eyes');
 const eyesHidden = document.querySelectorAll('#eyes-hidden');
 const password = document.querySelectorAll('#password');
-const inputNumber = document.querySelector('input[type="number"]');
+const inputNumber = document.querySelectorAll('#number');
+const ticketInput = document.querySelectorAll('#tickets');
+
+try {
+    inputNumber.forEach((item, index) => {
+        item.addEventListener('change', (e)=> {
+            ticketInput[index].value = item.value;
+        });
+    }) 
+} catch (error) {
+    
+}
 
 
 // Afficher le contenu principal
@@ -276,21 +287,26 @@ const showMessage = (message, type = 'success') => {
 };
 
 
-const incrementer = () => {
+const incrementer = (elem) => {
+    let inputNumber = elem.parentNode.previousElementSibling;
     if(!inputNumber.value){
-        inputNumber.value = '0';   
+        inputNumber.value = '0';
     }else{
         inputNumber.value = String(parseInt(inputNumber.value) + 1);
-    }
+    };
+    ticketInput[getIndex(inputNumber)].value = inputNumber.value;
 }
 
 
-const decrementer = () => {
+const decrementer = (elem) => {
+    elem.parentNode.autofocus = true;
+    let inputNumber = elem.parentNode.previousElementSibling;
     if(parseInt(inputNumber.value) <= 0 || !inputNumber.value){
         inputNumber.value = '0';
     }else{
         inputNumber.value = String(parseInt(inputNumber.value) - 1);
     }
+    ticketInput[getIndex(inputNumber)].value = inputNumber.value;
 }
 
 
@@ -369,6 +385,18 @@ const removeField = (value) => {
             item.remove();
         }
     });
+}
+
+const getIndex = (elem) => {
+    let index = 0;
+    for(i = 0; i < inputNumber.length; i++){
+        if(elem == inputNumber[i]){
+            index = i;
+            break;
+        }
+    }
+    return index;
+
 }
 
 

@@ -73,7 +73,7 @@ main, .nav-bar {
 }
 
 .btn-2{
-  @apply px-2.5 py-1 rounded text-xs flex gap-2 items-center justify-center tracking-wide;
+  @apply px-2.5 py-1.5 rounded text-xs flex gap-2 items-center justify-center tracking-wide;
 }
 .btn-3{
   @apply px-4 py-1 rounded text-sm flex gap-2 items-center tracking-wide;

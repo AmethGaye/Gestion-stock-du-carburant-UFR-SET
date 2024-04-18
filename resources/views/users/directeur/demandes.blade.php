@@ -172,7 +172,7 @@
 
                 {{-- t-body --}}
 
-                <div class="max-h-44 overflow-y-scroll">
+                <div class="max-h-44 overflow-y-scroll ">
                     {{-- row 1 --}}
                     @foreach($vacataire->cours as $cours)
                         @if($cours->statut && $cours->demande==1)
@@ -199,24 +199,14 @@
             @php $total_cours_valide=0;
             foreach($vacataire->cours as $cours){ if ($cours->statut){$total_cours_valide += $cours->duree;} }
             @endphp
-                <div class="h-20 flex items-center justify-between ">
+                <div class="h-20 flex items-center justify-between px-4 text-[small]">
                     <div class="flex gap-1.5 items-center">
-                        <span class="text-zinc-400 font-semibold">TOTAL:</span>
-                        <span class="text-red-500 font-bold bg-red-100 btn ml-4">{{$total_cours_valide}} Heures</span>
+                        <span class="text-zinc-400 font-semibold ">Total : </span>
+                        <span class="text-zinc-600 font-semibold bg-zinc-100 btn-2 ml-4">{{$total_cours_valide}} Heures</span>
                     </div>
 
                    <div>
-                       @php $deja=1 @endphp
-                       @foreach($vacataire->cours as $cours)
-
-                           @foreach($cours->remboursements as $remboursement)
-                               @if($deja==1)
-                               <p class="mr-2">Demandé par : Mr/Mm {{ $remboursement->user->prenom." ".$remboursement->user->nom }}</p>
-                                   @php $deja=0 @endphp
-                               @endif
-                           @endforeach
-                       @endforeach
-
+                        <p class="mr-2 text-[small] font-medium">Demandé par : Mr Idrissa Gaye</p>
                    </div>
                 </div>
             </div>

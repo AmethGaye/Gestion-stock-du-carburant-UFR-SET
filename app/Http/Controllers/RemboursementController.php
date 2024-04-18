@@ -23,7 +23,7 @@ class RemboursementController extends Controller
         if(auth()->user()->role == 'directeur'){
 
 
-            $liste_remboursement = Vacataire::where('status',1)->with(['cours.remboursements','cours.matiere','cours.filiere','cours.remboursements.user'])->get();
+            $liste_remboursement = Vacataire::where('status',1)->with(['cours.remboursement','cours.matiere','cours.filiere','cours.remboursement.user'])->get();
 
             return view('users.directeur.demandes',compact('liste_remboursement'));
         }
@@ -32,7 +32,9 @@ class RemboursementController extends Controller
             $vacataires = Vacataire::where('status', '1')      
                     ->with([
                         'cours' => function(Builder $query){$query->where('demande', '1');},
-                        'cours.remboursements' => function(Builder $query){$query->where('statut', '1');},
+                        'cours.remboursement' => function(Builder $query){$query
+                            ->where('statut', '1')
+                            ->orWhere('statut', '2');},
                         'cours.matiere'
                         ])
                     ->get();
@@ -94,24 +96,40 @@ class RemboursementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
-       $id_cours= $request->id_cours;
-       foreach ($id_cours as $id_cour){
-           Remboursement_vac::where('cours_id',$id_cour)->update(['statut'=>'1']);
+       if(auth()->user()->role == 'directeur'){
+            $id_cours= $request->id_cours;
+            foreach ($id_cours as $id_cour){
+                Remboursement_vac::where('cours_id',$id_cour)->update(['statut'=>'1']);
+            }
+            return redirect()->back();
        }
-       return redirect()->back();
+
+       if(auth()->user()->role == 'comptable'){
+
+            Remboursement_vac::where('id', $id)->update(['statut' => '2', 'nombre_tickets' => $request->input('tickets')]);
+            return redirect()->back()->with('success', 'sceance de cours remboursé avec succés');
+       }
+       
     }
 
     public function _update(Request $request){
 
     }
 
+
+
     /**
-     * Remove the specified resource from storage.
+     * Reset the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function reset(string $id)
     {
-        //
+        if(auth()->user()->role == 'comptable'){
+            $remboursement = Remboursement_vac::find($id);
+            $remboursement->statut = '1';
+            $remboursement->save();
+            return redirect()->back()->with('success', 'restauration réussie !');
+        }
     }
 }

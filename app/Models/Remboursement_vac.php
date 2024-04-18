@@ -18,19 +18,14 @@ class Remboursement_vac extends Model
         'cours_id',
         'statut',
     ];
-    public function user()
+    public function user():BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function cours()
+    public function cours():hasOne
     {
-        return $this->belongsTo(Cours::class);
-    }
-
-    public function comptable():BelongsTo
-    {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Cours::class);
     }
 
 }

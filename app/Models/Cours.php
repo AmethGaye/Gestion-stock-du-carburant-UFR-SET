@@ -22,12 +22,12 @@ class Cours extends Model
     {
         return $this->belongsTo(Vacataire::class);
     }
-    public function filiere()
+    public function filiere():BelongsTo
     {
         return $this->belongsTo(Filiere::class, 'filiere_id');
     }
-    public function remboursements()
+    public function remboursement():HasOne
     {
-        return $this->hasMany(Remboursement_vac::class);
+        return $this->hasOne(Remboursement_vac::class);
     }
 }

@@ -156,7 +156,7 @@
                 {{-- t-body --}}
                 <div class="max-h-44 overflow-y-scroll">
                 @foreach ($vacataire->cours as $cours)
-                    <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b">
+                    <div class="flex items-center text-[small] text-zinc-600 font-medium min-h-14 border-b">
                         {{-- cols --}}
                         <span class="px-4">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
@@ -169,14 +169,14 @@
                         <span class="basis-32 font-bold pr-4  pl-[1.5px]">{{ $cours->duree }} heures</span>
                         <span class="basis-[140px] flex pr-4 justify-center">
                                 <div class="w-28 relative ">
-                                    <input type="number" name="" id="" value="2" class="border-[1.5px] border-zinc-200 w-full rounded-md outline-none focus:border-zinc-500 px-4 py-2 font-bold text-zinc-600">
-                                    <div class="absolute right-2 top-1/2 -translate-y-1/2 flex bg-white">
-                                        <button type="button" class="w-7 h-7 mr-1  bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center rounded-md" onclick="decrementer()">
+                                    <input type="number" name="" id="number"  value="{{ $cours->remboursement->nombre_tickets }}" class="border-[1.5px] border-zinc-200 w-full rounded-md outline-none focus:border-zinc-500 px-4 py-2 font-bold text-zinc-600 disabled:text-zinc-400" @if ($cours->remboursement->statut == 2) @disabled(true) @endif>
+                                    <div class="absolute right-2 top-1/2 -translate-y-1/2 flex bg-white ">
+                                        <button type="button" class="w-7 h-7 mr-1  bg-zinc-100 hover:bg-zinc-200 disabled:hover:bg-zinc-100 flex items-center justify-center rounded-md" onclick="decrementer(this)" @if ($cours->remboursement->statut == 2) @disabled(true) @endif>
                                             <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12 1.4999C12 1.65903 11.9473 1.81165 11.8536 1.92417C11.7598 2.03669 11.6326 2.0999 11.5 2.0999H0.5C0.367392 2.0999 0.240215 2.03669 0.146447 1.92417C0.0526785 1.81165 0 1.65903 0 1.4999C0 1.34077 0.0526785 1.18816 0.146447 1.07564C0.240215 0.963117 0.367392 0.899902 0.5 0.899902H11.5C11.6326 0.899902 11.7598 0.963117 11.8536 1.07564C11.9473 1.18816 12 1.34077 12 1.4999Z" fill="#1C1C1C"/>
                                             </svg>
                                         </button>
-                                        <button type="button" class="w-7 h-7 bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center rounded-md" onclick="incrementer()">
+                                        <button type="button" class="w-7 h-7 bg-zinc-100 hover:bg-zinc-200 disabled:hover:bg-zinc-100 flex items-center justify-center rounded-md" onclick="incrementer(this)" @if ($cours->remboursement->statut == 2) @disabled(true) @endif>
                                             <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12 6.5C12 6.63261 11.9473 6.75979 11.8536 6.85355C11.7598 6.94732 11.6326 7 11.5 7H6.5V12C6.5 12.1326 6.44732 12.2598 6.35355 12.3536C6.25979 12.4473 6.13261 12.5 6 12.5C5.86739 12.5 5.74021 12.4473 5.64645 12.3536C5.55268 12.2598 5.5 12.1326 5.5 12V7H0.5C0.367392 7 0.240215 6.94732 0.146447 6.85355C0.0526785 6.75979 0 6.63261 0 6.5C0 6.36739 0.0526785 6.24021 0.146447 6.14645C0.240215 6.05268 0.367392 6 0.5 6H5.5V1C5.5 0.867392 5.55268 0.740215 5.64645 0.646447C5.74021 0.552679 5.86739 0.5 6 0.5C6.13261 0.5 6.25979 0.552679 6.35355 0.646447C6.44732 0.740215 6.5 0.867392 6.5 1V6H11.5C11.6326 6 11.7598 6.05268 11.8536 6.14645C11.9473 6.24021 12 6.36739 12 6.5Z" fill="#1C1C1C"/>
                                             </svg>
@@ -184,26 +184,28 @@
                                     </div>
                                 </div>
                         </span>
-
-                        @php
-                            $array = ['text-emerald-500', 'bg-emerald-100' => $cours->statut, 'text-amber-500', 'bg-amber-100' => !$cours->statut];
-                            $classes = Arr::toCssClasses($array);
-                        @endphp
                         
                         <span class="basis-[160px] flex items-center justify-center">
-                            <span class="px-3 {{ $classes }} py-1 rounded font-semibold text-xs">@if ($cours->statut) Approuvé @else Non @endif</span>
+                            <span class="px-3 py-1 rounded font-medium text-xs @if ($cours->remboursement->statut == 1) text-orange-500 bg-orange-100  @else text-emerald-500 bg-emerald-100 @endif">
+                                @if ($cours->remboursement->statut == 1) Approuvé @else Payé @endif
+                            </span>
                         </span>
                         <span class="basis-[215px] flex items-center justify-center gap-3 box-border">
-                            <form action="" class="m-0">
-                                <button class="font-medium btn-2 bg-[#4C535F] text-white text-xs">Rembourser</button>
+                            <form action="{{ route('c.remboursements.update', $cours->remboursement->id) }}"  method="post"  class="m-0">
+                                @csrf
+                                <input type="hidden" name="tickets" id="tickets" value="{{ $cours->remboursement->nombre_tickets }}">
+                                <button type="submit"  @if ($cours->remboursement->statut == 2) @disabled(true) @endif
+                                        class=" font-mtrph btn-2 @if ($cours->remboursement->statut == 1) bg-[#4C535F] text-white  @else bg-zinc-200 text-zinc-500 @endif  text-xs">
+                                        Rembourser
+                                </button>
                             </form>
                             {{-- separator --}}
                             <div class=" w-0.5 h-5 bg-zinc-200"></div>
-                            <form action="" method="" class="m-0">
+                            <form action="{{ route('c.remboursements.reset',$cours->remboursement->id ) }}" method="POST" class="m-0">
                                 @csrf
-                                <button class="">
+                                <button @if ($cours->remboursement->statut == 1) @disabled(true) @endif>
                                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13 7C13 10.3137 10.3137 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C8.53671 1 9.93849 1.57771 11 2.52779M11.6667 1V3C11.6667 3.36819 11.3682 3.66667 11 3.66667H9" stroke="#4C535F" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M13 7C13 10.3137 10.3137 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C8.53671 1 9.93849 1.57771 11 2.52779M11.6667 1V3C11.6667 3.36819 11.3682 3.66667 11 3.66667H9" stroke=" @if ($cours->remboursement->statut == 2) #4C535F @else #a1a1aa @endif " stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </button>
                             </form>
@@ -213,24 +215,24 @@
                 </div>
 
                 {{-- t-foot --}}
-                <div class="h-20 text-sm font-semibold flex items-center justify-between">
-                    <div class="flex gap-2 items-center">
-                        <span class="text-zinc-400">TOTAL:</span>
-                        <span class="text-red-500 font-bold bg-red-100 btn-2 ml-4">8 Heures</span>
+                <div class="h-20 text-sm flex items-center justify-between">
+                    <div class="flex gap-2 items-center text-[small]">
+                        <span class="text-zinc-400 font-semibold">Total :</span>
+                        <span class="text-zinc-600 font-semibold bg-zinc-100 btn-2 ml-2">8 Heures</span>
                         {{-- separator --}}
                         <div class=" w-0.5 h-5 bg-zinc-200"></div>
-                        <span class="text-red-500 font-bold bg-red-100 btn-2">10 Tickets</span>
+                        <span class="text-zinc-600 font-semibold bg-zinc-100 btn-2 ">10 tickets</span>
                     </div>
 
                     <div class="flex gap-2">
                         <form class="text-zinc-600 m-0">
-                            <button class="btn-1 bg-zinc-800 text-white font-medium">
+                            <button type="submit" class=" font-mtrph px-3 py-1.5 rounded-md bg-[#4C535F] text-white ">
                                 Rembourser
                             </button>
                         </form>
                         <form class="text-zinc-600 m-0">
-                            <button class="btn-1 bg-zinc-200 font-medium">
-                                Annuler
+                            <button class="font-mtrph px-3 py-1.5 rounded-md bg-zinc-200 font-medium">
+                                Restaurer
                             </button>
                         </form>
                     </div>
