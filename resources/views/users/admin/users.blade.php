@@ -143,7 +143,7 @@
                                 </svg>
                             </button>
                         </sapn>
-                        <form action="{{route('delete.user')}}" method="post" class="border border-zinc-200 rounded-r-lg bg-zinc-100 m-0">
+                        <form action="{{route('delete.user')}}" method="post" class="border border-zinc-200 rounded-r-lg bg-zinc-100 m-0" id="delSubmit">
                             @csrf
                             @method('delete')
                             <button class="px-3 py-1.5">

@@ -167,7 +167,7 @@
                             </button>
                         </div>
                         @php $id=$vacataire->id @endphp
-                        <form action="{{route('dp.vacataires.delete',compact('id'))}}" method="post" class="border border-zinc-200 rounded-r-lg bg-zinc-100 m-0">
+                        <form action="{{route('dp.vacataires.delete',compact('id'))}}" method="post" class="border border-zinc-200 rounded-r-lg bg-zinc-100 m-0" id="delSubmit">
                             @csrf
                             @method('delete')
                             <button class="px-3 py-1.5">

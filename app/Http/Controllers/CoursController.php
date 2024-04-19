@@ -77,6 +77,45 @@ class CoursController extends Controller
         return view('users.departement.all',compact('vacataires','matieres','filieres','vacataires_sceances'));
     }
 
+
+
+    public function ap_filtre(Request $request){
+        $sceance_cours = Cours::all();
+
+        
+
+        // if ($request->filled('situation')) {
+
+        //     $sceance_cours->with(['vacataires' => function(Builder $query){
+        //         $query->whereIn('situation',$request->situation);
+        //     }]);
+        // }
+        
+        // if ($request->filled('status')) {
+
+        //     $sceance_cours->whereIn('status',$request->status);
+        // }
+        
+        // if($request->filled('order')){
+
+        //     foreach($request->order as $order ){
+
+        //         $sceance_cours->orderBy($order , 'asc');
+        //     }
+        // }
+
+        
+        $vacataires = Vacataire::where('status','=',1)->get();
+        $matieres = Matiere::all();
+        $filieres = Filiere::with('matiere')->get();
+        //dd($filieres);
+        // $sceance_cours = $sceance_cours->get();
+       //dd($vacataires_sceances);
+
+        return view('users.departement.approbation',compact('vacataires','matieres','filieres','sceance_cours'));
+    }
+
+
     public function approbation(){
         $filieres = Filiere::all();
         $matieres = Matiere::all();
