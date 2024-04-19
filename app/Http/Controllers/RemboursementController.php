@@ -23,8 +23,22 @@ class RemboursementController extends Controller
         if(auth()->user()->role == 'directeur'){
 
 
-            $liste_remboursement = Vacataire::where('status',1)->with(['cours.remboursement','cours.matiere','cours.filiere','cours.remboursement.user'])->get();
+            $liste_remboursement = Vacataire::where('status', 1)
+    ->with([
+        'cours' => function ($query) {
+            $query->whereHas('remboursement', function ($query) {
+                $query->where('statut', '0');
+            });
+        },
+        'cours.remboursement' => function ($query) {
+            $query->where('statut', 1);
+        },
+        'cours.matiere',
+        'cours.filiere',
+        'cours.remboursement.user'
+    ])->get();
 
+           // dd($liste_remboursement);
             return view('users.directeur.demandes',compact('liste_remboursement'));
         }
 
@@ -77,7 +91,7 @@ class RemboursementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function filtre(Request $request)
+    public function filtre_demande(Request $request)
     {
         $liste_remboursement = Vacataire::where('status', 1)
             ->with(['cours.remboursements', 'cours.matiere', 'cours.filiere', 'cours.remboursements.user']);
@@ -104,7 +118,39 @@ class RemboursementController extends Controller
         return view('users.directeur.demandes', compact('liste_remboursement'));
     }
 
-   
+    public function filtre(Request $request) {
+        $vacataires = Vacataire::where('status', '1')      
+                        ->with([
+                            'cours' => function($query) {
+                                $query->where('demande', '1');
+                            },
+                            'cours.matiere'
+                        ])
+                        ->whereHas('cours.remboursement', function ($query) use ($request) {
+                            if ($request->filled('statut')) {
+                                $query->whereIn('statut', $request->statut);
+                            } else {
+                                $query->whereIn('statut', ['1', '2']);
+                            }
+                        });
+    
+        
+        if ($request->filled('order')) {
+            foreach ($request->order as $order) {
+                $vacataires->orderBy($order , 'asc');
+            }
+        }
+    
+        if ($request->filled('situation')) {
+            $vacataires->whereIn('situation', $request->situation);
+        }
+    
+        $vacataires = $vacataires->get();
+        
+    
+        return view('users.comptable.remboursement', compact('vacataires'));
+    }
+    
     
 
     /**

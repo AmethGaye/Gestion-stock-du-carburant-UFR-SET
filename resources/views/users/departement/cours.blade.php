@@ -150,7 +150,8 @@
                 <div class="w-full  flex flex-col mb-4">
                     <label for="matiere_id" class="font-medium text-zinc-800">Matière</label>
                     <select name="matiere_id" id="matiere_id" class="input-2">
-                        @foreach($filiere->matiere as $matiere)
+                       
+                        @foreach($matieres as $matiere)
                                 <option value="{{$matiere->id}}">{{$matiere->nom}}</option>
                         @endforeach
                     </select>
