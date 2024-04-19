@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Cours;
 use App\Models\Vacataire;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class RemboursementController extends Controller
         if(auth()->user()->role == 'directeur'){
 
 
+
             $liste_remboursement = Vacataire::where('status', 1)
     ->with([
         'cours' => function ($query) {
@@ -37,6 +39,7 @@ class RemboursementController extends Controller
         'cours.filiere',
         'cours.remboursement.user'
     ])->get();
+
 
            // dd($liste_remboursement);
             return view('users.directeur.demandes',compact('liste_remboursement'));

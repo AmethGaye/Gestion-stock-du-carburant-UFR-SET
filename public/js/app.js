@@ -6,7 +6,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
         showMessage(sessionStorage.getItem('msg'));
         sessionStorage.removeItem('msg')
     }
+    try {
+        document.querySelector('#opt-choosen').value = sessionStorage.getItem('month') || "Janvier";
+        sessionStorage.removeItem('month');
+    } catch (error) {
+        
+    }
   });
+
 
 
 // les variables
@@ -230,8 +237,6 @@ const delPasswordField = (x = false)=>{
         }
     }
     
-
-
 }
 
 
@@ -323,11 +328,12 @@ const showOptionContainer = (input) => {
     });
 }
 
-const getOption = (value) => {
-    document.getElementById('opt-choosen').value = value
+const getOption = (key, value) => {
+    window.sessionStorage.setItem('month', value);
     document.getElementById('options-container').classList.toggle('hidden');
     document.querySelector('#chevron').classList.toggle('rotate-180'); 
-
+    document.getElementById('opt-choosen').nextElementSibling.value = key;
+    document.getElementById('opt-choosen').parentElement.submit();
 }
 
 const showFiltersContainer = () => {

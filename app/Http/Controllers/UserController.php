@@ -28,11 +28,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-       
     
-        $users = User::all();
-        $ufr = Ufr::all();
         if(Auth::user()->role === 'admin'){
+            $users = User::paginate(5);
+            $ufr = Ufr::all();
             return view('users.admin.users',compact('users', 'ufr'));
         }
     }
@@ -105,12 +104,11 @@ class UserController extends Controller
             }
         }
     
-        $users = $query->get();
+        $users = $query->paginate(7);
 
         //dd($users);
         $ufr = Ufr::all();
-    return view('users.admin.users',compact('users', 'ufr'));
-
+        return view('users.admin.users',compact('users', 'ufr'));
     }
 
     /**

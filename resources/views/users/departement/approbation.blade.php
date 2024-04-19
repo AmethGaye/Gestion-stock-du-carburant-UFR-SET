@@ -38,7 +38,7 @@
         <span class="basis-[22%] grow pr-4">{{$sceance_cour->matiere->nom}}</span>
         <span class="basis-[17%] grow pr-4">{{$sceance_cour->filiere->nom}}</span>
         <span class="basis-[130px] font-bold pr-4">{{$sceance_cour->duree}} Heures</span>
-        <span class="basis-[150px] pr-4">{{date('Y/m/d', strtotime($sceance_cour->date))}}</span>
+        <span class="basis-[150px] pr-4">{{date('d-m-Y', strtotime($sceance_cour->date))}}</span>
         @if($sceance_cour->statut==0)
         <span class="basis-[170px] relative flex items-center justify-center gap-4 mr-4">
             @php $id=$sceance_cour->id @endphp

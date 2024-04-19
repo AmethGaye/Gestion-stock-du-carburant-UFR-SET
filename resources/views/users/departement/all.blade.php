@@ -171,7 +171,7 @@
                         </div>
 
                         <div class="">
-                            <button class="flex items-center px-4 py-2 gap-1.5 roundedborder bg-[#4C535F] text-white font-mtrph rounded">
+                            <button class="flex items-center px-4 py-1.5 gap-2 roundedborder bg-[#4C535F] text-white font-mtrph rounded">
                                 <svg width="11" height="11" viewBox="0 0 13 14" fill="none"
                                      xmlns="http://www.w3.org/2000/svg" class="mr-0.5">
                                     <path d="M6.5 1.5V12.5M12 7L1 7" stroke="#ffffff" stroke-width="2"
