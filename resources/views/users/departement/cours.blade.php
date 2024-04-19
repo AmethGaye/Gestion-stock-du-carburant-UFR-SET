@@ -137,8 +137,8 @@
 
             <div class="w-full flex gap-4">
                 <div class="w-full  flex flex-col mb-4">
-                    <label for="filiere" class="font-medium text-zinc-800">Filiere</label>
-                    <select name="filiere" id="filiere" class="input-2">
+                    <label for="filiere_id" class="font-medium text-zinc-800">Filiere</label>
+                    <select name="filiere_id" id="filiere_id" class="input-2">
                            @foreach($filieres as $filiere)
                             <option value="{{$filiere->id}}">{{$filiere->nom}}</option>
                            @endforeach
@@ -151,7 +151,7 @@
                 <div class="w-full  flex flex-col mb-4">
                     <label for="matiere_id" class="font-medium text-zinc-800">Matière</label>
                     <select name="matiere_id" id="matiere_id" class="input-2">
-                        @foreach($filiere->matiere as $matiere)
+                        @foreach($matieres as $matiere)
                                 <option value="{{$matiere->id}}">{{$matiere->nom}}</option>
                         @endforeach
                     </select>
