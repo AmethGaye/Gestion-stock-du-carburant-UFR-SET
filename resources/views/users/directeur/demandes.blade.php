@@ -2,6 +2,7 @@
 
 @section('section')
 <section class="px-6 min-h-screen h-screen ">
+    {{-- {{ \Carbon\Carbon::parse(Auth::user()->created_at)->translatedFormat('d F Y à H\hi') }} --}}
 
     <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
         {{-- barre de recherche --}}
@@ -52,36 +53,36 @@
                             @csrf
                             <button type="submit" class="btn-1 bg-zinc-800 text-white">Valider</button>
                         </form>
-                        <form action="" method="" class="m-0 " id="sub-filters" >
-                            @csrf
+                       <a href="{{ route('directeur.demandes') }}">
                             <button type="submit" class="btn-1 bg-zinc-100 text-zinc-800">restaurer</button>
-                        </form>
+                        </a>
                     </div>
                 </div>        
             </div>
 
-            <div class="bg-zinc-100 text-zinc-600 border relative min-w-[130px] h-[34px] rounded-md tracking-wide text-sm">
-                <input type="text" value="Janvier" readonly class="font-medium outline-none border-none cursor-pointer absolute left-0 top-0 w-full h-full bg-transparent px-4" onclick="showOptionContainer(this)" id="opt-choosen">
+            <form action=""  method="" class="bg-zinc-100 text-zinc-600 border relative min-w-[130px] h-[34px] rounded-md tracking-wide text-sm m-0">
+                <input type="text" value="" readonly class="font-medium outline-none border-none cursor-pointer absolute left-0 top-0 w-full h-full bg-transparent px-4" onclick="showOptionContainer(this)" id="opt-choosen">
+                <input type="hidden" name="month" value="">
                 <span class="absolute top-1/2 right-3 -translate-y-1/2 transition-transform" id="chevron">
                     <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M0.933058 0.879586C1.17714 0.613462 1.57286 0.613462 1.81694 0.879586L5.93306 5.36749C6.17714 5.63362 6.57286 5.63362 6.81694 5.36749L10.9331 0.879587C11.1771 0.613463 11.5729 0.613463 11.8169 0.879587C12.061 1.14571 12.061 1.57718 11.8169 1.84331L7.70082 6.33121C6.96859 7.12959 5.78141 7.12959 5.04918 6.33121L0.933058 1.84331C0.688981 1.57718 0.688981 1.14571 0.933058 0.879586Z" fill="#52525B"/>
                     </svg>
                 </span>
                 <div class="absolute -left-6 top-10 w-44 rounded-lg bg-white z-40 border tracking-wide py-2 hidden" id="options-container">
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Janvier')">Janvier</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Février')">Février</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Mars')">Mars</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Avril')">Avril</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Mai')">Mai</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Juin')">Juin</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Juillet')">Juillet</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Aout')">Aout</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Septembre')">Septembre</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Octobre')">Octobre</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Novembre')">Novembre</div>
-                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('Décembre')">Décembre</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('1', 'Janvier')">Janvier</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('2', 'Février')">Février</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('3', 'Mars')">Mars</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('4', 'Avril')">Avril</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('5', 'Mai')">Mai</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('6', 'Juin')">Juin</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('7', 'Juillet')">Juillet</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('8', 'Aout')">Aout</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('9', 'Septembre')">Septembre</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('10', 'Octobre')">Octobre</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('11', 'Novembre')">Novembre</div>
+                    <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('12', 'Décembre')">Décembre</div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -140,7 +141,7 @@
                             @foreach($id_cours as $cours)
                                 <input type="hidden" name="id_cours[]" value="{{$cours}}">
                             @endforeach
-                            <button class="btn-3 @if(!empty($id_cours)) bg-teal-500 @else bg-gray-400 @endif  text-white font-medium" @if(empty($id_cours))disabled @endif  >Approuver</button>
+                            <button class="px-4 py-1 font-mtrph rounded @if(!empty($id_cours)) bg-teal-500 @else bg-gray-400 @endif  text-white font-medium" @if(empty($id_cours))disabled @endif  >Approuver</button>
                         </form>
                         {{-- separator --}}
                         <div class=" w-0.5 h-6 bg-zinc-200"></div>

@@ -54,10 +54,9 @@
                                 @csrf
                                 <button type="submit" class="btn-1 bg-zinc-800 text-white">Valider</button>
                             </form>
-                            <form action="" method="" class="m-0 " id="sub-filters" >
-                                @csrf
+                            <a href="{{ route('admin.users') }}">
                                 <button type="submit" class="btn-1 bg-zinc-100 text-zinc-800">restaurer</button>
-                            </form>
+                            </a>
                         </div>
                     </div>        
                 </div>
@@ -160,8 +159,11 @@
                 @endforeach
             </div>
 
+
             {{-- pagination --}}
-            @include('partials.pagination')
+            {{ $users->links() }}
+
+            
 
         </div>
     </section>
