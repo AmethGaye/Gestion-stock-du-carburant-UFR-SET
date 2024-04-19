@@ -101,7 +101,7 @@ Route::get('/directeur/activites/filtre_activite', [ActiviteController::class, '
 
 Route::get('/directeur/demandes', [RemboursementController::class, 'index'])->name('directeur.demandes');
 Route::post('/directeur/demandes', [RemboursementController::class, 'update'])->name('approuver.directeur');
-Route::get('/directeur/demandes/filtre', [RemboursementController::class, 'filtre'])->name('filtre.demande');
+Route::get('/directeur/demandes/filtre', [RemboursementController::class, 'filtre_demande'])->name('filtre.demande');
 
 
 

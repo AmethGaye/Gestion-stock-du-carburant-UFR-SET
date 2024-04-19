@@ -45,10 +45,10 @@
                     <div class="py-1.5 px-4 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addOrderBy(this, 'provenance')">Provenance</div>
                 </div>
                 <div class="flex flex-wrap gap-2 pb-4 border-b mt-4">
-                    <div class="py-1.5 px-4 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'situation', '0')">Non Véhiculé</div>
-                    <div class="py-1.5 px-4 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'situation', '1')">Véhiculé</div>
-                    <div class="py-1.5 px-4 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'demande', '1')">Approuvé</div>
-                    <div class="py-1.5 px-4 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'demande', '0')">Non Approuvé</div>
+                    <div class="py-1.5 px-4 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'situation', 0)">Non Véhiculé</div>
+                    <div class="py-1.5 px-4 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'situation', 1)">Véhiculé</div>
+                    <div class="py-1.5 px-4 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'statut', '2')">Payé</div>
+                    <div class="py-1.5 px-4 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addFilter(this, 'statut', '1')">Non payé</div>
                 </div>
                 <div class="flex items-center justify-end gap-2 mt-4">
                     <form action="{{ route('filtre') }}" method="get" class="m-0" id="sub-filters" >
