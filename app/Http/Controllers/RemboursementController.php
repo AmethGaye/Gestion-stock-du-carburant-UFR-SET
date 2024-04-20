@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Cours;
 use App\Models\Vacataire;
+use Cron\MonthField;
 use Illuminate\Http\Request;
 use App\Models\Remboursement_vac;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -39,7 +40,8 @@ class RemboursementController extends Controller
         'cours.filiere',
         'cours.remboursement.user'
     ])->get();
-
+ 
+    
 
            // dd($liste_remboursement);
             return view('users.directeur.demandes',compact('liste_remboursement'));
@@ -54,6 +56,7 @@ class RemboursementController extends Controller
                         'cours.matiere'
                         ])
                     ->get();
+                    
             return view('users.comptable.remboursement', compact('vacataires'));
         }
     }
@@ -88,16 +91,66 @@ class RemboursementController extends Controller
         return redirect()->back()->withSuccess('La demande est transmise avec success');
 
     }
+/**
+     * filtrage des donne par mois .
+     */
 
-
+     public function filtre_by_month(Request $request){
+        $num_month = $request->month;
+    
+        
+        $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();
+        $endOfMonth = Carbon::create(null, $num_month, 1)->endOfMonth();
+    
+        $liste_remboursement = Vacataire::where('status', 1)
+            ->whereHas('cours.remboursement', function($query) use ($startOfMonth, $endOfMonth){
+              //du premier du mois jusqu au fin du mois
+                $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+            })
+            ->with(['cours.remboursement' => function($query) use ($startOfMonth, $endOfMonth){
+                $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+            }, 'cours.matiere', 'cours.filiere', 'cours.remboursement.user'])
+            ->get();
+    
+        return view('users.directeur.demandes', compact('liste_remboursement'));
+    }
+    public function filtre_by_month_comptable(Request $request){
+        $num_month = $request->month;
+        $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();
+        $endOfMonth = Carbon::create(null, $num_month, 1)->endOfMonth();
+    
+        $vacataires = Vacataire::where('status', '1')
+            ->whereHas('cours', function ($query) use ($startOfMonth, $endOfMonth) {
+                $query->whereBetween('updated_at', [$startOfMonth, $endOfMonth]);
+            })
+            ->with([
+                'cours' => function($query) {
+                    $query->where('demande', '1');
+                },
+                'cours.remboursement' => function($query) {
+                    $query->whereIn('statut', ['1', '2']);
+                },
+                'cours.matiere'
+            ])
+            ->get();
+    
+        return view('users.comptable.remboursement', compact('vacataires'));
+    }
+    
+    
 
     /**
-     * Display the specified resource.
+     * Le directeur .
      */
     public function filtre_demande(Request $request)
     {
+        $debut_mois=Carbon::now()->startOfMonth()->toDateString();
+        $fin_mois=Carbon::now()->endOfMonth()->toDateString();
+
         $liste_remboursement = Vacataire::where('status', 1)
-            ->with(['cours.remboursements', 'cours.matiere', 'cours.filiere', 'cours.remboursements.user']);
+            ->with(['cours.remboursement'=> function($query) use ($debut_mois, $fin_mois){
+                $query->whereBetween('created_at', [$debut_mois,$fin_mois]);
+            }, 'cours.matiere', 'cours.filiere', 'cours.remboursement.user']);
     
         if ($request->filled('order')) {
             foreach ($request->order as $order) {
@@ -121,6 +174,12 @@ class RemboursementController extends Controller
         return view('users.directeur.demandes', compact('liste_remboursement'));
     }
 
+    
+   
+
+   /**
+     * Le comptable .
+     */
     public function filtre(Request $request) {
         $vacataires = Vacataire::where('status', '1')      
                         ->with([

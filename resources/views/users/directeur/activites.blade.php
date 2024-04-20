@@ -53,7 +53,7 @@
                         </div>
                         <div class="flex items-center justify-end gap-2 mt-4">
                             <form action="{{route('filtre.activites')}}" method="get" class="m-0" id="sub-filters" >
-                                @csrf
+                            
                                 <button type="submit" class="btn-1 bg-zinc-800 text-white">Valider</button>
                             </form>
                             <form action="" method="" class="m-0 " id="sub-filters" >
@@ -66,7 +66,8 @@
     
                 
     
-                <form action=""  method="" class="bg-zinc-100 text-zinc-600 border relative min-w-[130px] h-[34px] rounded-md tracking-wide text-sm m-0">
+                <form action="{{route('activite_filtre_by_month')}}"  method="get" class="bg-zinc-100 text-zinc-600 border relative min-w-[130px] h-[34px] rounded-md tracking-wide text-sm m-0">
+                    
                     <input type="text" value="" readonly class="font-medium outline-none border-none cursor-pointer absolute left-0 top-0 w-full h-full bg-transparent px-4" onclick="showOptionContainer(this)" id="opt-choosen">
                     <input type="hidden" name="month" value="">
                     <span class="absolute top-1/2 right-3 -translate-y-1/2 transition-transform" id="chevron">
@@ -200,7 +201,7 @@
             </svg>
         </div>
     </div>
-    <form action="{{route('directeur.activites')}}" method="post" class="m-0 mt-6" id="subscription">
+    <form action="{{route('directeur.activites.store')}}" method="post" class="m-0 mt-6" id="subscription">
         @csrf
 
         <div class="mb-10 ">

@@ -6,6 +6,7 @@ use App\Models\Vacataire;
 use Illuminate\Http\Request;
 use App\Http\Requests\VacataireRequestValidation;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class VacataireController extends Controller
 {
@@ -46,7 +47,16 @@ class VacataireController extends Controller
         return view('users.departement.vacataires',compact('vacataires'));
     }
 
+   public function filtre_by_month(Request $request){
+    $num_month=$request->month;
+    $start_month=Carbon::create(null ,$num_month ,1)->startOfMonth();
+    $end_month=Carbon::create(null ,$num_month ,1)->endOfMonth();
 
+    $vacataires=Vacataire::whereBetween('created_at',[$start_month,$end_month]);
+    $vacataires=$vacataires->get();
+    
+    return view('users.departement.vacataires',compact('vacataires'));
+   }
     /**
      * Show the form for editing the specified resource.
      */

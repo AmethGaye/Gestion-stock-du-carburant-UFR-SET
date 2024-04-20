@@ -21,4 +21,9 @@ class HistoriqueController extends Controller
 
         return view('users.comptable.historique', compact('dotation_depart', 'dotation_admin', 'total_dep', 'total_admin'));
     }
+
+  public function  filtre_historique(Request $request){
+    dd($request->all());
+
+    }
 }

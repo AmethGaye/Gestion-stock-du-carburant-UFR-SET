@@ -7,6 +7,7 @@ use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests\ActiviteRequestValidation;
 use App\Models\Departement;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class ActiviteController extends Controller
@@ -40,11 +41,26 @@ class ActiviteController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function filtre_by_month(Request $request)
+    { 
+        
+        if(auth()->user()->role =='directeur'){
+        $num_month= $request->month;
 
+        $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();
+        $endOfMonth = Carbon::create(null, $num_month, 1)->endOfMonth();
+       
+       $activities=Activite::whereBetween('created_at',[$startOfMonth ,$endOfMonth]);
+
+        $activities =$activities->get() ;
+        
+            return view('users.directeur.activites',compact('activities'));
+        }
+       
+        
+       
+    }
+//POur le comptable
     public function filtre_activite(Request $request){
 
         $activities = Activite::query();
@@ -63,7 +79,23 @@ class ActiviteController extends Controller
 
         $activities = $activities->get();
           
-            return view('users.directeur.activites',compact('activities'));
+        return view('users.comptable.activites',compact('activities'));
+
+    }
+
+    public function filtre_activite_by_month(Request $request){
+            $num_month= $request->month;
+    
+            $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();
+            $endOfMonth = Carbon::create(null, $num_month, 1)->endOfMonth();
+           
+           $activities=Activite::whereBetween('created_at',[$startOfMonth ,$endOfMonth]);
+    
+            $activities =$activities->get() ;
+
+            return view('users.comptable.activites',compact('activities'));
+
+            
 
     }
 

@@ -71,7 +71,8 @@
                     </div>        
                 </div>
     
-                <form action=""  method="" class="bg-zinc-100 text-zinc-600 border relative min-w-[130px] h-[34px] rounded-md tracking-wide text-sm m-0">
+                <form action="{{route('departement.vacataires.filtre_by_month')}}"  method="get" class="bg-zinc-100 text-zinc-600 border relative min-w-[130px] h-[34px] rounded-md tracking-wide text-sm m-0">
+                   @csrf
                     <input type="text" value="" readonly class="font-medium outline-none border-none cursor-pointer absolute left-0 top-0 w-full h-full bg-transparent px-4" onclick="showOptionContainer(this)" id="opt-choosen">
                     <input type="hidden" name="month" value="">
                     <span class="absolute top-1/2 right-3 -translate-y-1/2 transition-transform" id="chevron">

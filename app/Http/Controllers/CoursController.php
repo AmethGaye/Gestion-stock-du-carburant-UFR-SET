@@ -8,6 +8,7 @@ use App\Models\Filiere;
 use App\Models\Matiere;
 use App\Models\Remboursement_vac;
 use App\Models\Vacataire;
+use Carbon\Carbon;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -77,6 +78,27 @@ class CoursController extends Controller
         return view('users.departement.all',compact('vacataires','matieres','filieres','vacataires_sceances'));
     }
 
+    public function filtre_by_month(Request $request){
+        $num_month = $request->month;
+        $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();
+        $endOfMonth = Carbon::create(null, $num_month, 1)->endOfMonth();
+    
+        $vacataires_sceances = Vacataire::whereHas('cours', function($query) use ($startOfMonth, $endOfMonth) {
+            $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+        })->with([
+            'cours' => function($query) {
+                $query->where('demande', '0');
+            },
+            'cours.matiere',
+            'cours.filiere'
+        ])->get();
+        $vacataires = Vacataire::where('status','=',1)->get();
+        $matieres = Matiere::all();
+        $filieres = Filiere::with('matiere')->get();
+    
+        return view('users.departement.all', compact('vacataires', 'matieres', 'filieres', 'vacataires_sceances'));
+    }
+    
     public function approbation(){
         $filieres = Filiere::all();
         $matieres = Matiere::all();

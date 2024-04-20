@@ -91,10 +91,11 @@ Route::post('/setting/change-password/{id}', [UserController::class, 'update_pas
 
 Route::get('/directeur/dashboard', [DashboardController::class, 'index'])->name('directeur.dashboard');
 
-Route::get('/directeur/activites', [ActiviteController::class, 'index'])->name('directeur.activites');
-Route::post('/directeur/activites', [ActiviteController::class, 'store'])->name('directeur.activites');
+Route::get('/directeur/activites', [ActiviteController::class, 'index'])->name('directeur.activites.index');
+Route::post('/directeur/activites', [ActiviteController::class, 'store'])->name('directeur.activites.store');
 Route::post('/directeur/activites/update/{id}', [ActiviteController::class, 'update'])->name('d.activites.update');
 Route::delete('/directeur/activites/delete/{id}', [ActiviteController::class, 'destroy'])->name('d.activites.delete');
+Route::get('/directeur/activités/month_filtre', [ActiviteController::class, 'filtre_by_month'])->name('activite_filtre_by_month');
 
 Route::get('/directeur/activites/filtre_activite', [ActiviteController::class, 'filtre_activite'])->name('filtre.activites');
 
@@ -102,6 +103,8 @@ Route::get('/directeur/activites/filtre_activite', [ActiviteController::class, '
 Route::get('/directeur/demandes', [RemboursementController::class, 'index'])->name('directeur.demandes');
 Route::post('/directeur/demandes', [RemboursementController::class, 'update'])->name('approuver.directeur');
 Route::get('/directeur/demandes/filtre', [RemboursementController::class, 'filtre_demande'])->name('filtre.demande');
+
+Route::get('/directeur/demandes/month', [RemboursementController::class, 'filtre_by_month'])->name('filtre_by_month');
 
 
 
@@ -112,6 +115,7 @@ Route::get('/departement/dashboard', [DashboardController::class, 'index'])->nam
 
 Route::get('/departement/vacataires', [VacataireController::class, 'index'])->name('departement.vacataires');
 Route::get('/departement/vacataires/filtre', [VacataireController::class, 'filtre'])->name('departement.vacataires.filtre');
+Route::get('/departement/vacataires/month', [VacataireController::class, 'filtre_by_month'])->name('departement.vacataires.filtre_by_month');
 Route::post('/departement/vacataires', [VacataireController::class, 'store']);
 Route::post('/departement/vacataires/update/{id}', [VacataireController::class, 'update'])->name('dp.vacataires.update');
 Route::delete('/departement/vacataires/delete/{id}', [VacataireController::class, 'destroy'])->name('dp.vacataires.delete');
@@ -119,6 +123,8 @@ Route::delete('/departement/vacataires/delete/{id}', [VacataireController::class
 Route::post('/departement/cours', [CoursController::class, 'store'])->name('cours.store');
 Route::get('/departement/cours/all', [CoursController::class, 'index'])->name('cours.all');
 Route::get('/departement/cours/all/filtre', [CoursController::class, 'filtre'])->name('cours.all.filtre');
+
+Route::get('/departement/cours/all/month', [CoursController::class, 'filtre_by_month'])->name('cours.all.filtre.month');
 Route::post('/departement/cours/all/update/{id}', [CoursController::class, 'update'])->name('cours.update');
 Route::delete('/departement/cours/all/{id}', [CoursController::class, 'destroy'])->name('cours.delete');
 Route::get('/departement/cours/approbation', [CoursController::class, 'approbation'])->name('cours.approbation');
@@ -141,9 +147,11 @@ Route::post('comptable/remboursements/{id}', [RemboursementController::class, 'r
 Route::post('comptable/remboursements/reset/{id}', [RemboursementController::class, 'reset'])->name('c.remboursements.reset');
 Route::post('comptable/remboursement_multiple', [RemboursementController::class, '_update'])->name('c.remboursements._update');
 Route::get('comptable/remboursement/filtre', [RemboursementController::class, 'filtre'])->name('filtre');
+Route::get('comptable/remboursement/mois', [RemboursementController::class, 'filtre_by_month_comptable'])->name('comptable.filtre_by_month');
 
 Route::get('comptable/activites', [ActiviteController::class, 'index'])->name('comptable.activites');
 Route::get('comptable/activites/filtre', [ActiviteController::class, 'filtre_activite'])->name('comptable.activites.filtre');
+Route::get('comptable/activites/month1', [ActiviteController::class, 'filtre_activite_by_month'])->name('comptable.activites.filtre_by_month');
 Route::post('comptable/activites/{id}', [ActiviteController::class, 'update'])->name('c.activites.update');
 Route::put('comptable/activites/reset/{id}', [ActiviteController::class, 'reset'])->name('c.activites.reset');
 
@@ -153,6 +161,8 @@ Route::post('comptable/dotation/administration', [DotationAdminsController::clas
 Route::get('comptable/dotation/departement', [DotationDepartsController::class, 'create'])->name('dotation.depart');
 Route::post('comptable/dotation/departement', [DotationDepartsController::class, 'store']);
 Route::get('comptable/dotation/historique', [HistoriqueController::class, 'index'])->name('dotation.historique');
+
+Route::get('comptable/dotation/historique/filtre', [HistoriqueController::class, 'filtre_historique'])->name('filtre.historique');
 
 
 
