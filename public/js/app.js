@@ -18,7 +18,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 // les variables
 const container = document.querySelector('#container');
+const container2 = document.querySelector('#container-2');
 const child = document.querySelector('#container > div');
+const child2 = document.querySelector('#container-2 > div');
 const btn = document.querySelector('#submit');
 const closerBtn = document.querySelector('#closer');
 const form = document.querySelector('#subscription');
@@ -192,6 +194,41 @@ const displayContainer = function(url = null, edit = false, data = null){
             }
         })
     }
+}
+
+try {
+    const delSubmit = document.querySelectorAll('#delSubmit');
+    delSubmit.forEach((item, index) => {
+        item.addEventListener('submit', (e)=>{
+            e.preventDefault();
+            document.getElementById('delete').onclick = ()=> {delSubmit[index].submit()};
+            document.getElementById('cancel').onclick = ()=> {_reset()};
+            displayContainer2();
+        })
+    })
+    document.getElementById('closer2').onclick = ()=> {_reset()};
+} catch (error) {
+    
+}
+
+
+const displayContainer2 = () => {
+    container2.classList.replace('opacity-0', 'opacity-100');
+    container2.classList.replace('-z-50', 'z-50');
+    container2.classList.remove('invisible');
+    container2.classList.replace('scale-0', 'scale-100');
+
+    child2.classList.replace('opacity-0', 'opacity-100');
+    child2.classList.replace('scale-75', 'scale-100');
+}
+
+const _reset = () => {
+    child2.classList.replace('scale-100', 'scale-75');
+    child2.classList.replace('opacity-100', 'opacity-0');
+    container2.classList.replace('opacity-100', 'opacity-0');
+    container2.classList.replace('scale-100', 'scale-0');
+    container2.classList.replace('-z-50', 'z-50');
+    container2.classList.add('invisible');
 }
 
 const reset = ()=>{

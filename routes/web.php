@@ -128,6 +128,7 @@ Route::get('/departement/cours/all/month', [CoursController::class, 'filtre_by_m
 Route::post('/departement/cours/all/update/{id}', [CoursController::class, 'update'])->name('cours.update');
 Route::delete('/departement/cours/all/{id}', [CoursController::class, 'destroy'])->name('cours.delete');
 Route::get('/departement/cours/approbation', [CoursController::class, 'approbation'])->name('cours.approbation');
+Route::get('/departement/cours/approbation/filtre', [CoursController::class, 'ap_filtre'])->name('cours.approbation.filtre');
 Route::post('/departement/cours/approbation/{id}', [CoursController::class, 'approuver'])->name('approuver');
 Route::post('/departement/cours/restauration/{id}', [CoursController::class, 'restaurer'])->name('restaurer');
 

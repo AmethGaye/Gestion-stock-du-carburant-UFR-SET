@@ -146,7 +146,7 @@
                 </button>
                 {{-- separator --}}
                 <div class=" w-0.5 h-6 bg-zinc-200"></div>
-                <form action="{{route('d.activites.delete', $activitie->id)}}" method="post" class="m-0">
+                <form action="{{route('d.activites.delete', $activitie->id)}}" method="post" class="m-0" id="delSubmit">
                     @csrf
                     @method('delete')
                     <button class="font-semibold text-sm text-[#FFB200] ">Supprimer</button>

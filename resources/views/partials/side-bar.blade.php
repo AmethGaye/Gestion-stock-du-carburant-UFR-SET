@@ -102,10 +102,10 @@
                     </a>
                 </li>
 
-                <li class="mb-4 trans hover:rounded-lg hover:bg-zinc-100 flex @if(Route::currentRouteName() == 'cours.all' || Route::currentRouteName() == 'cours.approbation') baton bg-zinc-100 @endif">
-                    <a href="{{ route('cours.all') }}" class="flex gap-4 items-center w-full px-3 py-2.5 @if(Route::currentRouteName() == 'cours.all' || Route::currentRouteName() == 'cours.approbation') text-zinc-800 @endif">
+                <li class="mb-4 trans hover:rounded-lg hover:bg-zinc-100 flex @if(Route::currentRouteName() == 'cours.all' || Route::currentRouteName() == 'cours.approbation' || Route::currentRouteName() == 'cours.all.filtre' || Route::currentRouteName() == 'cours.approbation.filtre') baton bg-zinc-100 @endif">
+                    <a href="{{ route('cours.all') }}" class="flex gap-4 items-center w-full px-3 py-2.5 @if(Route::currentRouteName() == 'cours.all' || Route::currentRouteName() == 'cours.approbation' || Route::currentRouteName() == 'cours.all.filtre' || Route::currentRouteName() == 'cours.approbation.filtre') text-zinc-800 @endif">
                         <svg width="16" height="18" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 15H4C2.34315 15 1 16.3431 1 18M15 15V21M15 15C16.1046 15 17 14.1046 17 13V3C17 1.89543 16.1046 1 15 1H4C2.34315 1 1 2.34315 1 4V18M17 21H15M15 21H4C2.34315 21 1 19.6569 1 18" stroke="@if(Route::currentRouteName() == 'cours.all' || Route::currentRouteName() == 'cours.approbation') #27272a @else #71717a @endif" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M15 15H4C2.34315 15 1 16.3431 1 18M15 15V21M15 15C16.1046 15 17 14.1046 17 13V3C17 1.89543 16.1046 1 15 1H4C2.34315 1 1 2.34315 1 4V18M17 21H15M15 21H4C2.34315 21 1 19.6569 1 18" stroke="@if(Route::currentRouteName() == 'cours.all' || Route::currentRouteName() == 'cours.approbation' || Route::currentRouteName() == 'cours.all.filtre' || Route::currentRouteName() == 'cours.approbation.filtre') #27272a @else #71717a @endif" stroke-width="2" stroke-linecap="round"/>
                         </svg>                        
                         <span>Scéance de cours</span>                    
                     </a>
