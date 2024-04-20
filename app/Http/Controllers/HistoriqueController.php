@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dotation_admin;
 use App\Models\Dotation_depart;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HistoriqueController extends Controller
@@ -22,8 +23,57 @@ class HistoriqueController extends Controller
         return view('users.comptable.historique', compact('dotation_depart', 'dotation_admin', 'total_dep', 'total_admin'));
     }
 
-  public function  filtre_historique(Request $request){
-    dd($request->all());
+    public function filtre_historique(Request $request)
+    {
+    
+        $dotation_depart = Dotation_depart::query();
+        $dotation_admin = Dotation_admin::query();
+    
+        $total_dep = Dotation_depart::sum('nombre_tickets');
+        $total_admin = Dotation_admin::sum('nombre_tickets');
+    
+        if ($request->filled('order')) {
+            foreach ($request->order as $order) {
+                if ($order == 'nom') {
+                    $dotation_admin->orderBy($order, 'asc');
+                } else {
+                    $dotation_depart->orderBy($order, 'asc');
+                    $dotation_admin->orderBy($order, 'asc');
+                }
+            }
+        }
+    
+        
+        if ($request->filled('statut')) {
+           
+            $dotation_admin->where('statut', $request->statut);
+            $dotation_depart->where('statut', $request->statut);
+        }
+    
+        
+        $dotation_admin = $dotation_admin->get();
+        $dotation_depart = $dotation_depart->get();
+    
+        return view('users.comptable.historique', compact('dotation_depart', 'dotation_admin', 'total_dep', 'total_admin'));
+    }
+
+    public function filtre_historique_month(Request $request){
+        $dotation_depart = Dotation_depart::query();
+        $dotation_admin = Dotation_admin::query();
+    
+        $total_dep = Dotation_depart::sum('nombre_tickets');
+        $total_admin = Dotation_admin::sum('nombre_tickets');
+        $num_month=$request->month;
+        $startOfMonth=Carbon::create(null , $num_month,1)->startOfMonth();
+        $endOfMonth=Carbon::create(null, $num_month,1)->endOfMonth();
+
+        $dotation_admin->whereBetween('created_at',[$startOfMonth,$endOfMonth]);
+        $dotation_depart->whereBetween('created_at',[$startOfMonth,$endOfMonth]);
+
+        $dotation_admin=$dotation_admin->get();
+        $dotation_depart=$dotation_depart->get();
+      
+        return view('users.comptable.historique', compact('dotation_depart', 'dotation_admin', 'total_dep', 'total_admin'));
 
     }
 }

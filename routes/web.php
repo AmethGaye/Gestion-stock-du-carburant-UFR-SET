@@ -164,6 +164,7 @@ Route::post('comptable/dotation/departement', [DotationDepartsController::class,
 Route::get('comptable/dotation/historique', [HistoriqueController::class, 'index'])->name('dotation.historique');
 
 Route::get('comptable/dotation/historique/filtre', [HistoriqueController::class, 'filtre_historique'])->name('filtre.historique');
+Route::get('comptable/dotation/historique/month', [HistoriqueController::class, 'filtre_historique_month'])->name('filtre.historique.month');
 
 
 
