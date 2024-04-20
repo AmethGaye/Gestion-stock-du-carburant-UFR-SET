@@ -158,12 +158,15 @@
                 <span class="basis-[170px] relative flex items-center justify-center gap-4">
                     <form action="{{ route('dep.remboursement') }}" method="post" class="m-0">
                         @csrf
+                        @php $cour_vide=[] @endphp
                         @foreach($sceance_cour->cours as $cours)
                             @if ($cours->statut && $cours->demande == 0)
                                 <input type="hidden" name="cours_id[]" value="{{$cours->id}}">
+                                @php $cour_vide=$cours->id @endphp
                             @endif
+
                         @endforeach
-                        <button class="px-4 py-1 rounded bg-[#00B69B] text-white font-mtrph">envoyer</button>
+                        <button class="px-4 py-1 rounded bg-[#00B69B] text-white font-mtrph" @if(empty($cour_vide)) disabled @endif >envoyer</button>
                     </form>
                     {{-- separator --}}
                     <div class=" w-0.5 h-6 bg-zinc-200"></div>
