@@ -108,6 +108,58 @@ class CoursController extends Controller
        // dd($sceance_cours);
         return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }
+   public function ap_filtre(Request $request){
+
+    $filieres = Filiere::all();
+    $matieres = Matiere::all();
+    $vacataires = Vacataire::all();
+
+    $sceance_cours=Cours::with(['vacataire','filiere','matiere']);
+
+    if($request->filled('order')){
+        foreach ( $request->order as  $order) {
+            $sceance_cours->whereHas('vacataire' , function ($query) use ($order){
+                $query->orderBy($order, 'asc');
+            });
+        }
+    }
+
+    if($request->filled('situation')){
+      $situation = $request->situation;
+        $sceance_cours->whereHas('vacataire', function($query) use ($situation){
+            $query->whereIn('situation',$situation);
+        });
+
+    }
+
+    if($request->filled('demande')){
+
+        $sceance_cours->whereIn('demande',$request->demande);
+    }
+    $sceance_cours=$sceance_cours->get();
+   // dd($sceance_cours);
+
+    return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
+   }
+
+   public function ap_filtre_month(Request $request){
+    $filieres = Filiere::all();
+    $matieres = Matiere::all();
+    $vacataires = Vacataire::all();
+   $sceance_cours=Cours::with(['vacataire','filiere','matiere']);
+   
+   $num_month=$request->month;
+   $startOfMonth = Carbon::create(null,$num_month,1)->startOfMonth();
+   $endOfMonth = Carbon::create(null,$num_month,1)->endOfMonth();
+
+   if($request->filled('month')){
+    $sceance_cours->whereBetween('created_at',[$startOfMonth,$endOfMonth]);
+   }
+   
+   $sceance_cours=$sceance_cours->get();
+   // dd($sceance_cours);
+    return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
+   }
 
 
     public function store(Request $request){
