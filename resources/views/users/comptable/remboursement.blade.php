@@ -188,9 +188,18 @@
                         </span>
                         
                         <span class="basis-[160px] flex items-center justify-center">
-                            <span class="px-3 py-1 rounded font-medium text-xs @if ($cours->remboursement->statut == 1) text-orange-500 bg-orange-100  @else text-emerald-500 bg-emerald-100 @endif">
-                                @if ($cours->remboursement->statut == 1) Approuvé @else Payé @endif
+                            @if ($cours->remboursement->statut == 1) 
+                            <span class="px-3 py-1 rounded font-medium text-xs @if ($cours->remboursement->statut == 1) text-violet-500 bg-violet-100  @else text-emerald-500 bg-emerald-100 @endif">
+                                Approuvé
                             </span>
+                            @else
+                            <span class="h-8 w-9 flex items-center justify-center rounded-lg font-medium text-xs bg-green-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" color="#4ade80" fill="none">
+                                    <path d="M17 3.33782C15.5291 2.48697 13.8214 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 11.3151 21.9311 10.6462 21.8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                    <path d="M8 12.5C8 12.5 9.5 12.5 11.5 16C11.5 16 17.0588 6.83333 22 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            @endif
                         </span>
                         <span class="basis-[215px] flex items-center justify-center gap-3 box-border">
                             <form action="{{ route('c.remboursements.update', $cours->remboursement->id) }}"  method="post"  class="m-0">

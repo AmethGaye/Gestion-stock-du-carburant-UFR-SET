@@ -31,7 +31,7 @@
         </div>
         <div class="mb-4 pb-4 pl-8 pr-5">
             <p class="mb-2 text-zinc-600 font-medium">Êtes-vous sûr de vouloir continuer ?</p>
-            <p class="text-red-500 text-sm">Cette action est permanente, impossible de retourner en arriere</p>
+            <p class="text-red-500 text-[small]">Cette action est permanente, impossible de retourner en arriere</p>
         </div>
 
         <div class="bg-zinc-100 h-20 px-8 flex items-center justify-end gap-3">

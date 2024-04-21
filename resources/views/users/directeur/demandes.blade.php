@@ -103,6 +103,7 @@
 
         @foreach($liste_remboursement as $vacataire)
         {{-- row 1 --}}
+        @if ($vacataire->cours->count() > 0)
         <div class="text-sm h-20 overflow-hidden text-zinc-600 font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
             @php $total_cours_dispense=0;
             foreach($vacataire->cours as $cours){  $total_cours_dispense += $cours->duree; }
@@ -176,7 +177,6 @@
                 <div class="max-h-44 overflow-y-scroll ">
                     {{-- row 1 --}}
                     @foreach($vacataire->cours as $cours)
-                        @if($cours->statut && $cours->demande==1)
                     <div class="flex items-center text-sm text-zinc-600 font-medium min-h-14 border-b ">
                         {{-- cols --}}
                         <span class="basis-[23%] grow px-4">{{$cours->matiere->nom}}</span>
@@ -184,11 +184,14 @@
                         <span class="basis-[22%] grow pr-4">{{$cours->filiere->nom}}</span>
                         <span class="basis-[15%] grow pr-4">{{$cours->date}}</span>
                         <span class="w-[120px] font-bold pr-4">{{$cours->duree}} Heure</span>
+                        @php
+                            $statut = ($cours->remboursement->statut == '0') ? 'En cours' : 'Approuvé' ;
+                            $classes = ($cours->remboursement->statut == '0') ? 'bg-orange-100 px-4 text-orange-500' : 'bg-violet-100 px-4 text-violet-500';
+                        @endphp
                         <span class="w-[170px] flex justify-center text-xs">
-                            <span class="flex mx-auto bg-emerald-100 px-4 text-emerald-500 py-1 rounded font-semibold"> @if($cours->statut) Approuvé  @endif</span>
+                        <span class="flex mx-auto py-1.5 {{ $classes }} rounded font-semibold"> {{ $statut }} </span>
                         </span>
                     </div>
-                        @endif
                     @endforeach
 
                     </div>
@@ -213,7 +216,8 @@
             </div>
 
         </div>
-    @endforeach
+        @endif
+        @endforeach
 
     </div>
 

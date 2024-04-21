@@ -36,9 +36,11 @@
                     </span>
                     <div class="absolute -left-32 top-11  w-[360px] rounded-lg bg-white z-40 border tracking-wide hidden p-4" id="filters-container">
                         <div class="flex items-center flex-wrap gap-2 pb-4 border-b">
-                            <div class="py-1.5 px-2">
-                                <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1 0C0.734784 0 0.48043 0.105357 0.292893 0.292893C0.105357 0.48043 0 0.734784 0 1C0 1.26522 0.105357 1.51957 0.292893 1.70711C0.48043 1.89464 0.734784 2 1 2H12C12.2652 2 12.5196 1.89464 12.7071 1.70711C12.8946 1.51957 13 1.26522 13 1C13 0.734784 12.8946 0.48043 12.7071 0.292893C12.5196 0.105357 12.2652 0 12 0H1ZM1 4C0.734784 4 0.48043 4.10536 0.292893 4.29289C0.105357 4.48043 0 4.73478 0 5C0 5.26522 0.105357 5.51957 0.292893 5.70711C0.48043 5.89464 0.734784 6 1 6H6C6.26522 6 6.51957 5.89464 6.70711 5.70711C6.89464 5.51957 7 5.26522 7 5C7 4.73478 6.89464 4.48043 6.70711 4.29289C6.51957 4.10536 6.26522 4 6 4H1ZM1 8C0.734784 8 0.48043 8.10536 0.292893 8.29289C0.105357 8.48043 0 8.73478 0 9C0 9.26522 0.105357 9.51957 0.292893 9.70711C0.48043 9.89464 0.734784 10 1 10H5C5.26522 10 5.51957 9.89464 5.70711 9.70711C5.89464 9.51957 6 9.26522 6 9C6 8.73478 5.89464 8.48043 5.70711 8.29289C5.51957 8.10536 5.26522 8 5 8H1ZM11 13C11 13.2652 11.1054 13.5196 11.2929 13.7071C11.4804 13.8946 11.7348 14 12 14C12.2652 14 12.5196 13.8946 12.7071 13.7071C12.8946 13.5196 13 13.2652 13 13V7.414L14.293 8.707C14.4816 8.88916 14.7342 8.98995 14.9964 8.98767C15.2586 8.9854 15.5094 8.88023 15.6948 8.69482C15.8802 8.50941 15.9854 8.2586 15.9877 7.9964C15.99 7.7342 15.8892 7.4816 15.707 7.293L12.707 4.293C12.5195 4.10553 12.2652 4.00021 12 4.00021C11.7348 4.00021 11.4805 4.10553 11.293 4.293L8.293 7.293C8.19749 7.38525 8.12131 7.49559 8.0689 7.6176C8.01649 7.7396 7.9889 7.87082 7.98775 8.0036C7.9866 8.13638 8.0119 8.26806 8.06218 8.39095C8.11246 8.51385 8.18671 8.6255 8.28061 8.71939C8.3745 8.81329 8.48615 8.88754 8.60905 8.93782C8.73194 8.9881 8.86362 9.0134 8.9964 9.01225C9.12918 9.0111 9.2604 8.98351 9.3824 8.9311C9.50441 8.87869 9.61475 8.80251 9.707 8.707L11 7.414V13Z" fill="#52525b"/>
+                            <div class="py-1.5 px-2 bg-zinc-100 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" color="#52525b" fill="none">
+                                    <path d="M4 14H8.42109C9.35119 14 9.81624 14 9.94012 14.2801C10.064 14.5603 9.74755 14.8963 9.11466 15.5684L5.47691 19.4316C4.84402 20.1037 4.52757 20.4397 4.65145 20.7199C4.77533 21 5.24038 21 6.17048 21H10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M4 9L6.10557 4.30527C6.49585 3.43509 6.69098 3 7 3C7.30902 3 7.50415 3.43509 7.89443 4.30527L10 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M17.5 20V4M17.5 20C16.7998 20 15.4915 18.0057 15 17.5M17.5 20C18.2002 20 19.5085 18.0057 20 17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
                             <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer rounded-xl" onclick="addOrderBy(this, 'titre')">Titre</div>
@@ -92,7 +94,7 @@
                 </form>
             </div>
 
-            <button  type="menu" class="btn-1 border border-zinc-800 bg-zinc-800 text-white" onclick="displayContainer(`/departement/vacataires`)">
+            <button  type="menu" class="btn-1 border border-zinc-800 bg-zinc-800 text-white" onclick="displayContainer(`/directeur/activites`)">
                 <svg width="11" height="11" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
                     <path d="M6.5 1.30493V12.3049M12 6.80493L1 6.80493" stroke="white" stroke-width="2" stroke-linecap="round"/>
                 </svg>
@@ -111,7 +113,7 @@
         <div class="flex items-center justify-between text-sm text-zinc-500 font-medium h-20">
             <div class="">
                 <div class="flex items-center gap-4 mb-2.5">
-                    <h2 class="text-base font-bold font-inter text-zinc-700">{{ $activitie->titre }}</h2>
+                    <h2 class="text-base font-semibold text-zinc-700 capitalize">{{ $activitie->titre }}</h2>
                     <span class="flex justify-center items-center">
                         @if($activitie->statut)
                             <span class="flex items-center bg-[#E2FBD7] px-4 text-[#34B53A] py-1.5 rounded-md font-semibold text-xs">Validé</span>
@@ -141,7 +143,8 @@
                 </div>
             </div>
             <div class="flex items-center text-zinc-700 gap-3">
-                <button class="text-sm font-semibold" onclick="displayContainer('/directeur/activites/update/'+{{ $activitie->id }}, true, {{ json_encode($activitie) }})">
+                <button  onclick="displayContainer('/directeur/activites/update/'+{{ $activitie->id }}, true, {{ json_encode($activitie) }})"
+                    class="text-sm font-semibold @if($activitie->statut) text-zinc-400 @endif "  @if($activitie->statut) @disabled(true) @endif >
                     Editer
                 </button>
                 {{-- separator --}}
@@ -217,17 +220,17 @@
                 <div class="w-full flex flex-col relative mb-3">
                     <label for="ticket" class="text-zinc-800 font-medium">Tickets sollicités</label>
                     <div class="w-full relative ">
-                        <input type="number" name="ticket_demande" id="ticket_demande" value="" class="input-2 w-full">
+                        <input type="number" name="ticket_demande" id="ticket_demande" value="2" class="input-2 w-full">
                         {{-- erreur gerée en js --}}
                         <div class="text-sm text-red-600 font-medium mt-2">
                         </div>
                         <div class="absolute right-2 top-7 -translate-y-1/2 flex">
-                            <button type="button" class="w-8 h-8 mr-1  bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center rounded-md" onclick="decrementer()">
+                            <button type="button" class="w-8 h-8 mr-1  bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center rounded-md" onclick="decrementer(this)">
                                 <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 1.4999C12 1.65903 11.9473 1.81165 11.8536 1.92417C11.7598 2.03669 11.6326 2.0999 11.5 2.0999H0.5C0.367392 2.0999 0.240215 2.03669 0.146447 1.92417C0.0526785 1.81165 0 1.65903 0 1.4999C0 1.34077 0.0526785 1.18816 0.146447 1.07564C0.240215 0.963117 0.367392 0.899902 0.5 0.899902H11.5C11.6326 0.899902 11.7598 0.963117 11.8536 1.07564C11.9473 1.18816 12 1.34077 12 1.4999Z" fill="#1C1C1C"/>
                                 </svg>
                             </button>
-                            <button type="button" class="w-8 h-8 bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center rounded-md" onclick="incrementer()">
+                            <button type="button" class="w-8 h-8 bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center rounded-md" onclick="incrementer(this)">
                                 <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 6.5C12 6.63261 11.9473 6.75979 11.8536 6.85355C11.7598 6.94732 11.6326 7 11.5 7H6.5V12C6.5 12.1326 6.44732 12.2598 6.35355 12.3536C6.25979 12.4473 6.13261 12.5 6 12.5C5.86739 12.5 5.74021 12.4473 5.64645 12.3536C5.55268 12.2598 5.5 12.1326 5.5 12V7H0.5C0.367392 7 0.240215 6.94732 0.146447 6.85355C0.0526785 6.75979 0 6.63261 0 6.5C0 6.36739 0.0526785 6.24021 0.146447 6.14645C0.240215 6.05268 0.367392 6 0.5 6H5.5V1C5.5 0.867392 5.55268 0.740215 5.64645 0.646447C5.74021 0.552679 5.86739 0.5 6 0.5C6.13261 0.5 6.25979 0.552679 6.35355 0.646447C6.44732 0.740215 6.5 0.867392 6.5 1V6H11.5C11.6326 6 11.7598 6.05268 11.8536 6.14645C11.9473 6.24021 12 6.36739 12 6.5Z" fill="#1C1C1C"/>
                                 </svg>

@@ -332,24 +332,39 @@ const showMessage = (message, type = 'success') => {
 
 const incrementer = (elem) => {
     let inputNumber = elem.parentNode.previousElementSibling;
+
+    if(inputNumber.nodeName == 'DIV'){
+        inputNumber = inputNumber.previousElementSibling;
+    }
+
     if(!inputNumber.value){
         inputNumber.value = '0';
     }else{
         inputNumber.value = String(parseInt(inputNumber.value) + 1);
     };
-    ticketInput[getIndex(inputNumber)].value = inputNumber.value;
+    if(ticketInput.length != 0){
+     ticketInput[getIndex(inputNumber)].value = inputNumber.value;
+    }
 }
 
 
 const decrementer = (elem) => {
-    elem.parentNode.autofocus = true;
+    // elem.parentNode.autofocus = true;
     let inputNumber = elem.parentNode.previousElementSibling;
+
+    if(inputNumber.nodeName == 'DIV'){
+        inputNumber = inputNumber.previousElementSibling;
+    }
+
     if(parseInt(inputNumber.value) <= 0 || !inputNumber.value){
         inputNumber.value = '0';
     }else{
         inputNumber.value = String(parseInt(inputNumber.value) - 1);
     }
-    ticketInput[getIndex(inputNumber)].value = inputNumber.value;
+
+    if(ticketInput.length != 0){
+        ticketInput[getIndex(inputNumber)].value = inputNumber.value;
+    }
 }
 
 

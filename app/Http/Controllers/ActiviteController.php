@@ -89,13 +89,11 @@ class ActiviteController extends Controller
             $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();
             $endOfMonth = Carbon::create(null, $num_month, 1)->endOfMonth();
            
-           $activities=Activite::whereBetween('created_at',[$startOfMonth ,$endOfMonth]);
+            $activities=Activite::whereBetween('created_at',[$startOfMonth ,$endOfMonth]);
     
             $activities =$activities->get() ;
 
-            return view('users.comptable.activites',compact('activities'));
-
-            
+            return view('users.comptable.activites',compact('activities')); 
 
     }
 

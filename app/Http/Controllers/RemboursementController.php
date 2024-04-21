@@ -27,19 +27,19 @@ class RemboursementController extends Controller
 
 
             $liste_remboursement = Vacataire::where('status', 1)
-    ->with([
-        'cours' => function ($query) {
-            $query->whereHas('remboursement', function ($query) {
-                $query->where('statut', '0');
-            });
-        },
-        'cours.remboursement' => function ($query) {
-            $query->where('statut', 1);
-        },
-        'cours.matiere',
-        'cours.filiere',
-        'cours.remboursement.user'
-    ])->get();
+            ->with([
+                'cours' => function ($query) {
+                    $query
+                    ->whereHas('remboursement', function ($query) {
+                        $query->where('statut', '0');
+                    })
+                    ->where('demande', '1');
+                },
+                'cours.remboursement',
+                'cours.matiere',
+                'cours.filiere',
+                'cours.remboursement.user'
+            ])->get();
  
     
 
@@ -50,8 +50,8 @@ class RemboursementController extends Controller
         if(auth()->user()->role == 'comptable'){
             $vacataires = Vacataire::where('status', '1')      
                     ->with([
-                        'cours' => function(Builder $query){$query->where('demande', '1');},
-                        'cours.remboursement' => function(Builder $query){$query
+                        'cours' => function($query){$query->where('demande', '1');},
+                        'cours.remboursement' => function($query){$query
                             ->whereIn('statut', ['1', '2']);},
                         'cours.matiere'
                         ])
