@@ -62,7 +62,7 @@
             </div>        
         </div>
 
-        <form action=""  method="" class="bg-zinc-100 text-zinc-600 border relative min-w-[130px] h-[34px] rounded-md tracking-wide text-sm m-0">
+        <form action="{{route('cours.all.filtre.month')}}"  method="get" class="bg-zinc-100 text-zinc-600 border relative min-w-[130px] h-[34px] rounded-md tracking-wide text-sm m-0">
             <input type="text" value="" readonly class="font-medium outline-none border-none cursor-pointer absolute left-0 top-0 w-full h-full bg-transparent px-4" onclick="showOptionContainer(this)" id="opt-choosen">
             <input type="hidden" name="month" value="">
             <span class="absolute top-1/2 right-3 -translate-y-1/2 transition-transform" id="chevron">
@@ -158,12 +158,15 @@
                 <span class="basis-[170px] relative flex items-center justify-center gap-4">
                     <form action="{{ route('dep.remboursement') }}" method="post" class="m-0">
                         @csrf
+                        @php $cour_vide=[] @endphp
                         @foreach($sceance_cour->cours as $cours)
                             @if ($cours->statut && $cours->demande == 0)
                                 <input type="hidden" name="cours_id[]" value="{{$cours->id}}">
+                                @php $cour_vide=$cours->id @endphp
                             @endif
+
                         @endforeach
-                        <button class="px-4 py-1 rounded bg-[#00B69B] text-white font-mtrph">envoyer</button>
+                        <button class="px-4 py-1 rounded bg-[#00B69B] text-white font-mtrph" @if(empty($cour_vide)) disabled @endif >envoyer</button>
                     </form>
                     {{-- separator --}}
                     <div class=" w-0.5 h-6 bg-zinc-200"></div>
