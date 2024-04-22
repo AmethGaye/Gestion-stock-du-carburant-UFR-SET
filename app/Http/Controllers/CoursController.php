@@ -25,19 +25,22 @@ class CoursController extends Controller
      */
     public function index()
     {
-
+       $id_user=auth()->user()->getAuthIdentifier();
         $vacataires = Vacataire::where('status','=',1)->get();
         $matieres = Matiere::all();
         $filieres = Filiere::with('matiere')->get();
         //dd($filieres);
-        $vacataires_sceances = Vacataire::with([
-            'cours' => function(Builder $query){
-                $query->where('demande', '0');
+        $vacataires_sceances = Vacataire::whereHas('cours.matiere.filiere.departement', function($query) use ($id_user) {
+            $query->where('user_id', $id_user);
+        })->with([
+            'cours' => function($query) {
+                $query->where('demande', 0);
             },
             'cours.matiere',
             'cours.filiere'
         ])->get();
-       //dd($vacataires_sceances);
+        
+      //dd($vacataires_sceances);
 
         return view('users.departement.all',compact('vacataires','matieres','filieres','vacataires_sceances'));
     }
@@ -103,9 +106,11 @@ class CoursController extends Controller
         $filieres = Filiere::all();
         $matieres = Matiere::all();
         $vacataires = Vacataire::all();
-
-        $sceance_cours=Cours::with(['vacataire','filiere','matiere'])->get();
-       // dd($sceance_cours);
+        $id_user=auth()->user()->getAuthIdentifier();
+        $sceance_cours=Cours::whereHas('matiere.filiere.departement',function($query) use ($id_user){
+            $query->where('user_id',$id_user);
+        })->with(['vacataire','filiere','matiere'])->get();
+       //dd($sceance_cours);
         return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }
    public function ap_filtre(Request $request){

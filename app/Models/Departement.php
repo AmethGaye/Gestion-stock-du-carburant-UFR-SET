@@ -18,16 +18,16 @@ class Departement extends Model
     }
 
 
-    public function filieres() : HasMany
+    public function filiere() : HasMany
     {
         return $this->hasMany(Filiere::class);
     }
 
 
 
-    public function user():HasOne
+    public function user():HasMany
     {
-        return $this->hasOne(User::class);
+        return $this->hasMany(User::class);
     }
     
 

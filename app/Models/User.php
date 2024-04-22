@@ -78,5 +78,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Activite::class);
     }
+ public function departement():BelongsTo
+ {
+  return $this->belongsTo(Departement::class);
+ }
 
 }
