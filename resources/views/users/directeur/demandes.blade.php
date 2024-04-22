@@ -120,15 +120,7 @@
                     </span>
 
                     <span class="w-[210px] relative flex items-center justify-center gap-4 ">
-                        {{-- demander un remboursement --}}
-                        {{--
-                            [
-                                "id_matiere" => 1,
-                                'id_vacataire' => 1,
-                                'id_comptable' => 1,
-                                'id_cours' => [1, 2, 4, 6]
-                            ]
-                        --}}
+                       
                         @php
                             $id_cours = [];
                             foreach($vacataire->cours as $cours) {

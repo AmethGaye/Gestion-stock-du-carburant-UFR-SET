@@ -51,7 +51,8 @@ class DashboardController extends Controller
         
         if(auth()->user()->role == 'directeur'){
             $activites = Activite::latest()->limit(4)->get();
-            $remboursements = Remboursement_vac::latest()->where('statut', '0')->limit(4)->get();
+            $remboursements = Remboursement_vac::latest()->limit(4)->get();
+            // dd($remboursements);
             return view('users.directeur.dashboard', compact('remboursements', 'activites'));
         }
 

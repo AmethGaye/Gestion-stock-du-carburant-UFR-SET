@@ -79,7 +79,7 @@ class ActiviteController extends Controller
 
         $activities = $activities->get();
           
-        return view('users.comptable.activites',compact('activities'));
+        return view('users.directeur.activites',compact('activities'));
 
     }
 
