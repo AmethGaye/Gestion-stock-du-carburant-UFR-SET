@@ -6,8 +6,8 @@
     {{-- liens utiles au chef de departement --}}
     @if (auth()->user()->role == 'chef_departement')
     <div class="border-b-zinc-200 border-b-2 mb-10 text-zinc-500">
-        <a href="{{ route('cours.all') }}" class="relative py-3 px-6 inline-block  @if(Route::currentRouteName() == 'cours.all' || Route::currentRouteName() == 'cours.all.filtre') cr text-zinc-700 font-medium @endif">Tous les cours</a>
-        <a href="{{ route('cours.approbation') }}" class="relative py-3 px-6 inline-block @if(Route::currentRouteName() == 'cours.approbation' || Route::currentRouteName() == 'cours.approbation.filtre') cr text-zinc-700 font-medium @endif">A approuver</a>
+        <a href="{{ route('cours.all') }}" class="relative py-3 px-6 inline-block  @if(in_array(Route::currentRouteName(), ['cours.all', 'cours.all.filtre', 'cours.all.filtre.month'])) cr text-zinc-700 font-medium @endif">Tous les cours</a>
+        <a href="{{ route('cours.approbation') }}" class="relative py-3 px-6 inline-block @if(in_array(Route::currentRouteName(), ['cours.approbation', 'cours.approbation.filtre', 'cours.approbation.filtre_month'])) cr text-zinc-700 font-medium @endif">A approuver</a>
     </div>
     @endif
 
