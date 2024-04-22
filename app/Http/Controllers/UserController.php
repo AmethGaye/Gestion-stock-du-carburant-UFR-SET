@@ -28,7 +28,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-    
         if(Auth::user()->role === 'admin'){
             $users = User::paginate(5);
             $ufr = Ufr::all();

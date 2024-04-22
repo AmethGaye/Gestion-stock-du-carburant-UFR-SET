@@ -123,7 +123,7 @@
                         <span class="w-[170px] pr-4 ">Pas disponible</span>
                     @endif
                     <span class="basis-[15%]  pr-4 capitalize">{{$user->role}}</span>
-                    <span class="basis-[100px]">SET</span>
+                    <span class="basis-[100px]">{{$user->ufr->nom}}</span>
                     @if($user->status==1)
                     <span class="basis-[130px]  pr-4 flex items-center">
                         <span class="w-2 h-2 rounded-full bg-green-500 block mr-2"></span>
