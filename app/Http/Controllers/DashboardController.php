@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activite;
+use App\Models\Cours;
 use App\Models\Remboursement_vac;
 use App\Models\Ufr;
 use App\Models\User;
@@ -67,7 +68,8 @@ class DashboardController extends Controller
             $percent_vac_active=number_format($percent_vac_active, 2, '.', '');
 
             //Pour les cours
-            
+            $sceance_cours=Cours::whereHas()
+                                 ->with('matiere','vacataire')->where('statut',0)->count();
 
             $users = User::latest()->limit(4)->get();
             $vacataires = Vacataire::latest()->limit(5)->get();
