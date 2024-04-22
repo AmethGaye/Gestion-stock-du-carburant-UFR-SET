@@ -7,7 +7,7 @@
                 <div class=" flex items-start justify-between">
                     <div>
                         <p class="mb-3 font-medium py-1">Utilisateurs</p>
-                        <h1 class="text-3xl font-bold text-zinc-800">58</h1>
+                        <h1 class="text-3xl font-bold text-zinc-800">{{$total_users}}</h1>
                     </div>
                     <span class="bg-zinc-100 px-2 py-1.5 rounded-xl flex items-center justify-center ">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +19,7 @@
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
-                    <p><span class="text-emerald-400 mr-2">+08%</span> d'utilisateurs ajoutés</p>
+                    <p><span class="text-emerald-400 mr-2">+{{$percent_added_on_month}}%</span> d'utilisateurs ajoutés</p>
                 </div>
                     
             </div>
@@ -29,7 +29,7 @@
                 <div class=" flex items-start justify-between">
                     <div>
                         <p class="mb-3 font-medium py-1">UFR SET</p>
-                        <h1 class="text-3xl font-bold text-zinc-800">34</h1>
+                        <h1 class="text-3xl font-bold text-zinc-800">{{$users_ufr_set}}</h1>
                     </div>
                     <span class="bg-blue-100 px-2 py-1.5 rounded-xl flex items-center justify-center ">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +41,7 @@
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
-                    <p><span class="text-emerald-400 mr-2">+08%</span> d'utilisateurs ajoutés</p>
+                    <p><span class="text-emerald-400 mr-2">+{{$percent_user_ufrset}}%</span> d'utilisateurs ajoutés</p>
                 </div>
                     
             </div>
@@ -73,7 +73,7 @@
                 <div class=" flex items-start justify-between">
                     <div>
                         <p class="mb-3 font-medium py-1">Active</p>
-                        <h1 class="text-3xl font-bold text-zinc-800">48</h1>
+                        <h1 class="text-3xl font-bold text-zinc-800">{{$user_active}}</h1>
                     </div>
                     <span class="bg-green-100 px-2 py-1.5 rounded-xl flex items-center justify-center ">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +85,7 @@
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
-                    <p><span class="text-emerald-400 mr-2">+88%</span> d'utilisateurs actifs</p>
+                    <p><span class="text-emerald-400 mr-2">+{{$percent_users_active}}%</span> d'utilisateurs actifs</p>
                 </div>
                     
             </div>
