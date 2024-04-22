@@ -163,30 +163,29 @@
                     {{-- t-head --}}
                     <div class="flex items-center text-sm text-zinc-400 font-nunito font-bold py-5 border-b ">
                         {{-- cols --}}
-                        <span class="basis-[28%] pr-4 grow">TITRE</span>
+                        <span class="basis-[20%] pr-4 grow">VACATAIRE</span>
+                        <span class="basis-[28%] pr-4 grow">MATIERE</span>
+                        <span class="basis-[140px] pr-4">HEURES</span>
                         <span class="basis-[140px] pr-4">DATE</span>
-                        <span class="basis-[12%] pr-4 grow">ADRESSE</span>
-                        <span class="basis-[12%] pr-4 grow">TTICKETS</span>
-                        <span class="basis-[150px] pr-4 center">STATUT</span>
+                        <span class="basis-[12%] pr-4 grow">TICKETS</span>
+                        <span class="basis-[150px] text-center">STATUT</span>
                     </div>
                     {{-- t-body --}}
                     <div>
                         {{-- rows 1 --}}
-                        @foreach($activites as $item)
+                        @foreach($remboursements as $item)
         
         
                         <div class="flex items-center text-sm text-zinc-500 font-medium py-5 border-b border-b-zinc-200">
                             {{-- cols --}}
     
-                            <span class="basis-[28%]  pr-4 grow flex items-center gap-4">
-                                {{ $item->titre }}
-                            </span>
-    
-                            <span class="basis-[140px] pr-4">{{ $item->date }}</span>
+                            <span class="basis-[20%] pr-4 grow">{{ $item->cours->vacataire->prenom ." ". $item->cours->vacataire->nom }}</span>
+                            <span class="basis-[28%] pr-4 grow">{{ $item->cours->matiere->nom }}</span>
+                            <span class="basis-[140px] pr-4">{{ $item->cours->duree }}</span>
+                            <span class="basis-[140px] pr-4">{{ $item->cours->date }}</span>
+                            <span class="basis-[12%] pr-4 grow">{{ $item->nombre_tickets }} Tickets</span>
 
-                            <span class="basis-[12%] grow pr-4">{{$item->lieux}}</span>
-
-                            <span class="basis-[150px] flex">
+                            <span class="basis-[150px] flex justify-center">
                                 <span class="flex mx-auto @if($item->statut)  bg-green-100 text-green-500 @else bg-fuchsia-100 text-fuchsia-500 @endif  px-4 py-1 rounded font-semibold text-xs">
                                     @if($item->statut)  Validé @else Non @endif
                                 </span>

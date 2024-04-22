@@ -23,9 +23,9 @@ class Remboursement_vac extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function cours():hasOne
+    public function cours():BelongsTo
     {
-        return $this->hasOne(Cours::class);
+        return $this->belongsTo(Cours::class);
     }
 
 }
