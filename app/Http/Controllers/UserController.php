@@ -12,7 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UserRequestValidation;
-
+use App\Models\Departement;
 
 class UserController extends Controller
 {
@@ -31,7 +31,8 @@ class UserController extends Controller
         if(Auth::user()->role === 'admin'){
             $users = User::paginate(5);
             $ufr = Ufr::all();
-            return view('users.admin.users',compact('users', 'ufr'));
+            $departements = Departement::all();
+            return view('users.admin.users',compact('users', 'ufr', 'departements'));
         }
     }
 
@@ -49,16 +50,18 @@ class UserController extends Controller
             return response()->json(['errors' => $validator->errors()]);
         }
 
+
         User::create( [
             'nom' => $request->nom,
             'prenom'=> $request->prenom,
             'email' => $request->email,
-            'role'=> $request->role,
+            'role'=> $request->role_id,
             'telephone'=> $request->telephone,
             'sexe'=> $request->sexe,
             'ufr_id' => $request->ufr_id,
             'date_naiss'=> $request->date_naiss,
             'password'=>Hash::make($request->password),
+            'departement_id' => $request->departement_id || null
         ]);
         return response()->json(['success' => true, 'msg' => "L'utilisateur ajouté avec succés !"]);
     }
@@ -107,7 +110,8 @@ class UserController extends Controller
 
         //dd($users);
         $ufr = Ufr::all();
-        return view('users.admin.users',compact('users', 'ufr'));
+        $departements = Departement::all();
+        return view('users.admin.users',compact('users', 'ufr', 'departements'));
     }
 
     /**

@@ -121,7 +121,16 @@ try {
 try {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
-        subscribe();
+        if( 
+            document.querySelector('.departement_id')  
+            && document.querySelector('.departement_id').disabled == false
+            && document.querySelector('.departement_id').value == ""
+        ){
+            document.querySelector('.departement_id').nextElementSibling.innerHTML = "Veillez selectionner un département";
+            subscribe();
+        }else{
+            subscribe(); 
+        }
     });
 } catch (error) {
     console.log(error.message)
@@ -259,6 +268,11 @@ const reset = ()=>{
             item.nextElementSibling.innerHTML = "";
         }
     })
+
+
+    if(document.querySelector('.departement_id')){
+        document.querySelector('.departement_id').disabled = true;
+    }
 
 }
 
@@ -485,6 +499,18 @@ const getMatiere = async (id) => {
         console.log(error.message);
     }
 };
+
+const ruleChecker = (elem) => {
+    if(elem.value == 'assistant' || elem.value == 'chef_departement'){
+        // console.log('click')
+        document.querySelector('.departement_id').disabled = false;
+        document.querySelector('.departement_id').name = 'departement_id';
+    }else{
+        document.querySelector('.departement_id').name = '';
+        document.querySelector('.departement_id').disabled = true;
+
+    }
+}
 
 
 

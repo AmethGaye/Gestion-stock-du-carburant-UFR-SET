@@ -17,7 +17,7 @@ Trait UserRequestValidation
             'prenom' => 'required|string|alpha|max:255',
             'sexe' => 'required|string',
             'telephone' => 'required|string|digits:9|numeric',
-            'role' => 'required|string',
+            'role_id' => 'required|string',
             'ufr_id' => 'required|numeric',
             'date_naiss' => 'required|date',
         ];

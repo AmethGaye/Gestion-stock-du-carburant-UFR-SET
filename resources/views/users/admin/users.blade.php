@@ -186,7 +186,7 @@
 
         <div class="">
             <div class="w-full flex gap-4">
-                <div class="w-full flex flex-col relative mb-4">
+                <div class="w-full flex flex-col relative mb-3">
                     <label for="prenom" class="text-zinc-800 font-medium">Prénom</label>
                     <input type="text" name="prenom" id="prenom" class="input-2" placeholder="Ahmada">
                     {{-- erreur gerée en js --}}
@@ -194,7 +194,7 @@
                     </div>
                 </div>
 
-                <div class="w-full flex flex-col relative mb-4">
+                <div class="w-full flex flex-col relative mb-3">
                     <label for="nom" class="text-zinc-800 font-medium">Nom</label>
                     <input type="text" name="nom" id="nom" class="input-2" placeholder="Gaye">
                     {{-- erreur gerée en js --}}
@@ -205,7 +205,7 @@
 
             <div class="w-full flex gap-4">
 
-                <div class="w-full  flex flex-col mb-4">
+                <div class="w-full  flex flex-col mb-3">
                     <label for="date_naiss" class="font-medium text-zinc-700">Date de naissance</label>
                     <input type="date" name="date_naiss" placeholder="ahmada@univ-thies.sn" id="date_naiss" class="input-2">
                     {{-- erreur gerée en js --}}
@@ -213,7 +213,7 @@
                     </div>
                 </div>
 
-                <div class="w-full flex flex-col relative mb-4">
+                <div class="w-full flex flex-col relative mb-3">
                     <label for="telephone" class="text-zinc-800 font-medium">Numéro de téléphone</label>
                     <input type="telephone" name="telephone" id="telephone" class="input-2" placeholder="784532081">
                     {{-- erreur gerée en js --}}
@@ -226,7 +226,7 @@
 
             <div class="w-full flex gap-4">
 
-                <div class="w-full flex flex-col relative mb-4">
+                <div class="w-full flex flex-col relative mb-3">
                     <label for="email" class="text-zinc-800 font-medium">Adresse email universitaire</label>
                     <input type="text" name="email" id="email" class="input-2" placeholder="Example@univ-thies.sn">
                     {{-- erreur gerée en js --}}
@@ -234,8 +234,20 @@
                     </div>
                 </div>
 
-                 
-                <div class="w-full flex flex-col relative mb-4" id="default-mdp">
+                <div class="w-full  flex flex-col mb-3">
+                    <label for="Sexe" class="font-medium text-zinc-800">Sexe</label>
+                    <select name="sexe" id="sexe" class="input-2">
+                        <option value="Masculin">Masculin</option>
+                        <option value="Feminin">Féminin</option>
+                    </select>
+                </div>
+            </div>
+
+            
+
+
+            <div class="w-full flex gap-4">
+                <div class="w-full flex flex-col relative mb-3" id="default-mdp">
                     <label for="password" class="text-zinc-700 font-medium">Mot de passe par défaut</label>
                     <input type="password" value='12345678' name="password" id="password" class="input-2">
                     {{-- erreur gerée en js --}}
@@ -253,41 +265,49 @@
                         </svg>
                     </span>
                 </div>
-            </div>
-
-
-            <div class="w-full flex gap-4">
-
-                <div class="w-full  flex flex-col mb-4">
-                    <label for="Sexe" class="font-medium text-zinc-800">Sexe</label>
-                    <select name="sexe" id="sexe" class="input-2">
-                        <option value="Masculin">Masculin</option>
-                        <option value="Feminin">Féminin</option>
-                    </select>
-
-                </div>
-
-                <div class="w-full  flex flex-col mb-4">
-                    <label for="role" class="font-medium text-zinc-800">Rôle</label>
-                    <select name="role" id="role" class="input-2">
-                        <option value="admin">Admin</option>
-                        <option value="directeur">Directeur</option>
-                        <option value="assistant">Assistant</option>
-                        <option value="comptable">Comptable</option>
-                        <option value="chef_departement">Chef De Département</option>
-                    </select>
-                </div>
                 
-                <div class="w-full  flex flex-col mb-4">
+                
+                <div class="w-full  flex flex-col mb-3">
                     <label for="ufr_id" class="font-medium text-zinc-800">UFR</label>
                     <select name="ufr_id" id="ufr_id" class="input-2">
                         @foreach($ufr as $item)
                             <option value="{{ $item->id }}"> {{ $item->nom }} </option>
                         @endforeach
                     </select>
+                    <div class="text-sm text-red-600 font-medium mt-2">
+                    </div>
                 </div>
 
-        </div>
+            </div>
+
+            <div class="w-full flex gap-4">
+                <div class="w-full  flex flex-col mb-3">
+                    <label for="role_id" class="font-medium text-zinc-800" >Rôle</label>
+                    <select name="role_id" id="role_id" class="input-2" onchange="ruleChecker(this)">
+                        <option value="admin">Admin</option>
+                        <option value="directeur">Directeur</option>
+                        <option value="assistant">Assistant</option>
+                        <option value="comptable">Comptable</option>
+                        <option value="chef_departement">Chef De Département</option>
+                    </select>
+                    <div class="text-sm text-red-600 font-medium mt-2">
+                    </div>
+                </div>
+
+                <div class="w-full  flex flex-col mb-3">
+                    <label for="departement_id" class="font-medium text-zinc-800">Département</label>
+                    <select class="input-2 departement_id" id="departement_id"  disabled>
+                        <option value="">Selectionner un département</option>
+                        @foreach ($departements as $item)
+                            <option value="{{ $item->id }}">{{ $item->nom }}</option>
+                        @endforeach
+                    </select>
+                    {{-- erreur gerée en js --}}
+                    <div class="text-sm text-red-600 font-medium mt-2">
+                    </div>
+                </div>
+            </div>
+
         <div class="flex gap-4 items-center mt-8">
             <button type="submit" id="submit" class="px-6 py-2.5 rounded-lg bg-zinc-800 text-white font-medium flex justify-center items-center gap-2">
                 Ajouter
