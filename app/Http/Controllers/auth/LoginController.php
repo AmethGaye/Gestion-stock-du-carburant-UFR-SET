@@ -56,7 +56,8 @@ class LoginController extends Controller
            $request->session()->regenerate();
            // essayer de rediriger chaque type d'utilisateur a sa fenetre
 
-           switch (Auth::user()->role){
+           $user_role=auth()->user()->roles->nom;// variable de comparaison
+           switch ($user_role){
                case 'admin' :
                     return redirect()->route('admin.dashboard');
                     break;

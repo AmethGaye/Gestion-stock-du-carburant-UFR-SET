@@ -22,7 +22,8 @@ class RemboursementController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->role == 'directeur'){
+        $user_role=auth()->user()->roles->nom;// variable de comparaison
+        if($user_role == 'directeur'){
 
 
 
@@ -47,7 +48,7 @@ class RemboursementController extends Controller
             return view('users.directeur.demandes',compact('liste_remboursement'));
         }
 
-        if(auth()->user()->role == 'comptable'){
+        if($user_role == 'comptable'){
             $vacataires = Vacataire::where('status', '1')      
                     ->with([
                         'cours' => function($query){$query->where('demande', '1');},
@@ -259,7 +260,8 @@ class RemboursementController extends Controller
      */
     public function reset(string $id)
     {
-        if(auth()->user()->role == 'comptable'){
+        $user_role=auth()->user()->roles->nom;// variable de comparaison
+        if($user_role == 'comptable'){
             $remboursement = Remboursement_vac::find($id);
             $remboursement->statut = '1';
             $remboursement->save();

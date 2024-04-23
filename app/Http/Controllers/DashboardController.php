@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Activite;
 use App\Models\Cours;
 use App\Models\Remboursement_vac;
+use App\Models\Role;
 use App\Models\Ufr;
 use App\Models\User;
 use App\Models\Vacataire;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -22,8 +24,11 @@ class DashboardController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
         $ufr=Ufr::find(1);
-        dd(auth()->user()->role);
-        if(auth()->user()->role == 'admin'){
+        $id_user=auth()->user()->getAuthIdentifier();
+        
+        $user_role=auth()->user()->roles->nom;// variable de comparaison
+    
+        if($user_role == 'admin'){
             $total_users=User::all()->count();
 
             $users_ufr_set=User::whereHas('ufr',function($query)use ($ufr){
@@ -50,7 +55,7 @@ class DashboardController extends Controller
         }
 
         
-        if(auth()->user()->role == 'directeur'){
+        if($user_role == 'directeur'){
             $total_demande = Cours::where('demande',1)->count();
             $demande_on_month = Cours::where('demande',1)->whereBetween('updated_at',[$startOfMonth,$endOfMonth])->count();
             $cours_non_approuve = Cours::where('statut',1)->where('demande',0)->count();
@@ -91,7 +96,7 @@ class DashboardController extends Controller
              compact('remboursements', 'activites','total_demande','percent_demande_on_month','cours_non_approuve','percent_demande_non_approuve','total_activite','percent_activite_on_month','total_activite_non_approuve','percent_activite_non_appr_on_month'));
         }
 
-        if(auth()->user()->role == 'chef_departement' || auth()->user()->role == 'assistant'){
+        if($user_role == 'chef_departement' || auth()->user()->role == 'assistant'){
             $id_user=auth()->user()->departement->id;
             $total_vacataires=Vacataire::all()->count();
             $vacataires_add_on_month=Vacataire::whereBetween('created_at',[$startOfMonth, $endOfMonth])->count();
@@ -143,7 +148,7 @@ class DashboardController extends Controller
             compact('users', 'vacataires','total_vacataires','percent_vacataires_add_on_month','vacataires_active','percent_vac_active','sceance_cours_non_approuve','total_demandes','percent_cours_non_approuve','percent_cours_envoye'));
         }
 
-        if(auth()->user()->role == 'comptable'){
+        if($user_role == 'comptable'){
             return view('users.comptable.dashboard');
         }
 
