@@ -54,7 +54,7 @@
                         <form action="{{route('comptable.activites.filtre')}}" method="get" class="m-0" id="sub-filters" >
                             <button type="submit" class="btn-1 bg-zinc-800 text-white">Valider</button>
                         </form>
-                        <form action="" method="" class="m-0 " id="sub-filters" >
+                        <form action="{{ route('comptable.activites') }}" method="" class="m-0 " id="sub-filters" >
 
                             <button type="submit" class="btn-1 bg-zinc-100 text-zinc-800">restaurer</button>
                         </form>
@@ -85,6 +85,9 @@
                     <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('10', 'Octobre')">Octobre</div>
                     <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('11', 'Novembre')">Novembre</div>
                     <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('12', 'Décembre')">Décembre</div>
+                    <div class="py-2 mt-2 border-t px-5 font-medium text-orange-400 hover:bg-zinc-100 cursor-pointer">
+                        <a href="{{ route('comptable.activites') }}">Restaurer</a>
+                    </div>
                 </div>
             </form>
         </div>

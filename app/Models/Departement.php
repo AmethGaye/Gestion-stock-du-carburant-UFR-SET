@@ -25,9 +25,9 @@ class Departement extends Model
 
 
 
-    public function user():HasOne
+    public function users():HasMany
     {
-        return $this->hasOne(User::class);
+        return $this->hasMany(User::class);
     }
     
 

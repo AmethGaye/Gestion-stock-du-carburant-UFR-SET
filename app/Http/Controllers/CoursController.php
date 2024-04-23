@@ -27,25 +27,23 @@ class CoursController extends Controller
     {
 
         $vacataires = Vacataire::where('status','=',1)->get();
-        $matieres = Matiere::all();
-        $filieres = Filiere::with('matiere')->get();
+        $filieres = Filiere::with('matieres')->get();
         //dd($filieres);
         $vacataires_sceances = Vacataire::with([
-            'cours' => function(Builder $query){
+            'cours' => function($query){
                 $query->where('demande', '0');
             },
             'cours.matiere',
-            'cours.filiere'
         ])->get();
        //dd($vacataires_sceances);
 
-        return view('users.departement.all',compact('vacataires','matieres','filieres','vacataires_sceances'));
+        return view('users.departement.all',compact('vacataires','filieres','vacataires_sceances'));
     }
 
 
     public function filtre(Request $request){
 
-        $vacataires_sceances = Vacataire::with(['cours.matiere','cours.filiere']);
+        $vacataires_sceances = Vacataire::with(['cours.matiere']);
 
         
 
@@ -69,13 +67,11 @@ class CoursController extends Controller
 
         
         $vacataires = Vacataire::where('status','=',1)->get();
-        $matieres = Matiere::all();
-        $filieres = Filiere::with('matiere')->get();
-        //dd($filieres);
+        $matieres = Matiere::with('filieres')->get();
+        $filieres = Filiere::all();
         $vacataires_sceances = $vacataires_sceances->get();
-       //dd($vacataires_sceances);
 
-        return view('users.departement.all',compact('vacataires','matieres','filieres','vacataires_sceances'));
+        return view('users.departement.all',compact('vacataires','matieres', 'filieres', 'vacataires_sceances'));
     }
 
     public function filtre_by_month(Request $request){
@@ -93,8 +89,7 @@ class CoursController extends Controller
             'cours.filiere'
         ])->get();
         $vacataires = Vacataire::where('status','=',1)->get();
-        $matieres = Matiere::all();
-        $filieres = Filiere::with('matiere')->get();
+        $filieres = Filiere::with('matieres')->get();
     
         return view('users.departement.all', compact('vacataires', 'matieres', 'filieres', 'vacataires_sceances'));
     }
@@ -173,7 +168,6 @@ class CoursController extends Controller
         $validated = $validator->validated();
         if ($validated){
             Cours::create([
-                   'filiere_id'=>$validated['filiere_id'],
                     'matiere_id'=>$validated['matiere_id'],
                     'vacataire_id'=>$validated['vacataire_id'],
                     'date'=>$validated['date'],
@@ -233,6 +227,11 @@ class CoursController extends Controller
 
         Cours::where('id', $id)->update($request->only(['filiere_id', 'matiere_id', 'vacataire_id', 'date', 'remarque', 'duree']));
         return response()->json(['success' => true, 'msg' => 'Mise à jour du cours réussie avec succés !']);
+    }
+
+    public function matieres(string $id){
+        $filiere = Filiere::where('id', $id)->with('matieres')->get();
+        return response()->json(['success' => true, 'filiere' => json_encode($filiere[0])]);
     }
 
     /**

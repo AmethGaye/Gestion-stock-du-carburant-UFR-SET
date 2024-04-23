@@ -66,10 +66,9 @@ class DashboardController extends Controller
             $vacataires_active=Vacataire::where('status',1)->count();
             $percent_vac_active=( $vacataires_active/$total_vacataires)*100;
             $percent_vac_active=number_format($percent_vac_active, 2, '.', '');
+           
 
             //Pour les cours
-            $sceance_cours=Cours::whereHas()
-                                 ->with('matiere','vacataire')->where('statut',0)->count();
 
             $users = User::latest()->limit(4)->get();
             $vacataires = Vacataire::latest()->limit(5)->get();

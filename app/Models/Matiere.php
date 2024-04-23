@@ -18,12 +18,12 @@ class Matiere extends Model
     }
 
 
-    public function filieres()
-    {
-        return $this->hasManyThrough(Filiere::class, Cours::class);
-    }
+    // public function filieres()
+    // {
+    //     return $this->hasManyThrough(Filiere::class, Cours::class);
+    // }
 
-    public function filiere()
+    public function filieres(): BelongsToMany
     {
         return $this->belongsToMany(Filiere::class, 'matieres_filieres');
     }

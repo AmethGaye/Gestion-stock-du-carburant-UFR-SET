@@ -19,7 +19,7 @@
                         </svg>                                                            
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
@@ -44,7 +44,7 @@
                         </svg>
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
@@ -69,7 +69,7 @@
                         </svg>                          
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
@@ -94,7 +94,7 @@
                         </svg>                           
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        

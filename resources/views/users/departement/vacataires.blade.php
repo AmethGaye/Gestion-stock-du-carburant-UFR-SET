@@ -290,12 +290,22 @@
                 </div>
 
                 <div class="w-full  flex flex-col mb-4">
+                    <label for="ufr_id" class="font-medium text-zinc-800">UFR</label>
+                    <select name="ufr_id" id="ufr_id" class="input-2">
+                        @foreach($ufr as $item)
+                            <option value="{{ $item->id }}"> {{ $item->nom }} </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="w-full  flex flex-col mb-4">
                     <label for="status" class="font-medium text-zinc-700">Statut</label>
                     <select name="status" id="status" class="input-2">
                         <option value="1" class="first-option">Actif</option>
                         <option value="0">Inactif</option>
                     </select>
                 </div>
+
             </div>
 
 

@@ -51,8 +51,7 @@
                     <form action="{{route('filtre.historique')}}" method="get" class="m-0" id="sub-filters" >
                         <button type="submit" class="btn-1 bg-zinc-800 text-white">Valider</button>
                     </form>
-                    <form action="" method="" class="m-0 " id="sub-filters" >
-                        @csrf
+                    <form action="{{ route('dotation.historique') }}" method="GET" class="m-0 " id="sub-filters" >
                         <button type="submit" class="btn-1 bg-zinc-100 text-zinc-800">restaurer</button>
                     </form>
                 </div>

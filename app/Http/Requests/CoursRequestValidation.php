@@ -9,7 +9,6 @@ Trait CoursRequestValidation
     public function rules(): array
     {
         return [
-            'filiere_id'=>'required|string|numeric',
             'matiere_id'=>'required|string|numeric',
             'vacataire_id'=>'required|string|numeric',
             'date'=>'required|date',
@@ -21,9 +20,6 @@ Trait CoursRequestValidation
     public function messages()
     {
         return [
-            'filiere_id.required' => 'Le champ filière est obligatoire.',
-            'filiere_id.string' => 'Le champ filière doit être une chaîne de caractères.',
-            'filiere_id.numeric' => 'Le champ filière doit être un nombre.',
 
             'matiere_id.required' => 'Le champ matière est obligatoire.',
             'matiere_id.numeric' => 'Le champ matière doit être un nombre.',

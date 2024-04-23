@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Vacataire;
 use Illuminate\Http\Request;
 use App\Http\Requests\VacataireRequestValidation;
+use App\Models\Ufr;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
@@ -17,7 +18,8 @@ class VacataireController extends Controller
     public function index()
     {
         $vacataires=Vacataire::all();
-        return view('users.departement.vacataires',compact('vacataires'));
+        $ufr = Ufr::all();
+        return view('users.departement.vacataires',compact('vacataires', 'ufr'));
     }
 
     public function filtre(Request $request)
@@ -47,16 +49,16 @@ class VacataireController extends Controller
         return view('users.departement.vacataires',compact('vacataires'));
     }
 
-   public function filtre_by_month(Request $request){
-    $num_month=$request->month;
-    $start_month=Carbon::create(null ,$num_month ,1)->startOfMonth();
-    $end_month=Carbon::create(null ,$num_month ,1)->endOfMonth();
+    public function filtre_by_month(Request $request){
+        $num_month=$request->month;
+        $start_month=Carbon::create(null ,$num_month ,1)->startOfMonth();
+        $end_month=Carbon::create(null ,$num_month ,1)->endOfMonth();
 
-    $vacataires=Vacataire::whereBetween('created_at',[$start_month,$end_month]);
-    $vacataires=$vacataires->get();
-    
-    return view('users.departement.vacataires',compact('vacataires'));
-   }
+        $vacataires=Vacataire::whereBetween('created_at',[$start_month,$end_month]);
+        $vacataires=$vacataires->get();
+        
+        return view('users.departement.vacataires',compact('vacataires'));
+    }
     /**
      * Show the form for editing the specified resource.
      */

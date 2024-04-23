@@ -459,6 +459,33 @@ const getIndex = (elem) => {
 }
 
 
+const __select = (elem) => {
+    getMatiere(elem.value);
+}
+
+const getMatiere = async (id) => {
+    try {
+        let url = `/departement/cours/matieres/${id}`;
+
+        let response = await fetch(url);
+        const result = await response.json();
+        // const result = await response.text();
+        
+
+        if(response.ok && result.success){
+            let data = JSON.parse(result.filiere).matieres;
+            let options = "";
+            for(let x of data){
+                options += `<option value="${x.id}">${x.nom}</option> \n`;
+            }
+            document.getElementById('matiere_id').innerHTML = options;
+        }
+
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
 
 
 

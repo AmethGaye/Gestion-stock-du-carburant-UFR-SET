@@ -220,7 +220,15 @@
                         </span>
                         <span class="basis-[23%] grow pr-4">{{$cours->matiere->nom}}</span>
                         <span class="basis-[15%] grow pr-4">semestre {{$cours->matiere->semestre}}</span>
-                        <span class="basis-[22%] grow pr-4">{{$cours->filiere->nom}}</span>
+                        @php
+                            $nom_filiere = "inconnu";
+                            foreach($cours->matiere->filieres as $filiere){
+                                if($filiere->departement->id == auth()->user()->departement->id){
+                                    $nom_filiere = $filiere->nom; 
+                                }
+                            }
+                        @endphp
+                        <span class="basis-[22%] grow pr-4">{{$nom_filiere}}</span>
                         <span class="basis-[14%] grow pr-4">{{date('d-m-Y', strtotime($cours->date))}}</span>
                         <span class="basis-[150px] font-semibold pr-4">{{$cours->duree}} Heure</span>
                         <span class="basis-[170px] flex justify-center text-xs">

@@ -19,6 +19,7 @@ Trait VacataireRequestValidation
             'provenance'=>'required|string',
             'status'=>'required|string',
             'situation'=>'required|string',
+            'ufr_id'=>'required|string',
         ];
 
 

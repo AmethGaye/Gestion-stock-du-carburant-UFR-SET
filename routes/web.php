@@ -121,6 +121,7 @@ Route::post('/departement/vacataires/update/{id}', [VacataireController::class, 
 Route::delete('/departement/vacataires/delete/{id}', [VacataireController::class, 'destroy'])->name('dp.vacataires.delete');
 
 Route::post('/departement/cours', [CoursController::class, 'store'])->name('cours.store');
+Route::get('/departement/cours/matieres/{id}', [CoursController::class, 'matieres']);
 Route::get('/departement/cours/all', [CoursController::class, 'index'])->name('cours.all');
 Route::get('/departement/cours/all/filtre', [CoursController::class, 'filtre'])->name('cours.all.filtre');
 

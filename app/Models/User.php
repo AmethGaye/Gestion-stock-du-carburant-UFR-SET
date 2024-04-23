@@ -33,7 +33,8 @@ class User extends Authenticatable
         'date_naiss',
         'image',
         'sexe',
-        'ufr_id'
+        'ufr_id',
+        'departement_id',
     ];
 
     /**
@@ -77,6 +78,11 @@ class User extends Authenticatable
     public function dotation_departs():HasMany
     {
         return $this->hasMany(Activite::class);
+    }
+
+    public function departement(): BelongsTo
+    {
+        return $this->belongsTo(Departement::class);
     }
 
 }

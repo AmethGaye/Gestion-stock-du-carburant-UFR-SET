@@ -46,7 +46,7 @@
             <div class="w-full flex gap-4 mb-2">
                 <div class="w-full  flex flex-col">
                     <label for="filiere_id" class="font-medium text-zinc-800">Filiere</label>
-                    <select name="filiere_id" id="filiere_id" class="input-2">
+                    <select name="filiere_id" id="filiere_id" class="input-2" onchange="__select(this)">
                            @foreach($filieres as $filiere)
                             <option value="{{$filiere->id}}">{{$filiere->nom}}</option>
                            @endforeach
@@ -59,8 +59,8 @@
                 <div class="w-full  flex flex-col">
                     <label for="matiere_id" class="font-medium text-zinc-800">Matière</label>
                     <select name="matiere_id" id="matiere_id" class="input-2">
-                        @foreach($matieres as $matiere)
-                                <option value="{{$matiere->id}}">{{$matiere->nom}}</option>
+                        @foreach ($filieres[0]->matieres as $item)
+                        <option value="{{ $item->id }}">{{ $item->nom }}</option>
                         @endforeach
                     </select>
                     {{-- erreur gerée en js --}}
@@ -72,7 +72,7 @@
             <div class="w-full  flex flex-col mb-2">
                 <label for="vacataire_id" class="font-medium text-zinc-800">Vacataire</label>
                 <select name="vacataire_id" id="vacataire_id" class="input-2">
-                    <option value="" class="first-option">Liste des vacataires</option>
+                    <option value="" class="first-option">Veillez selectionner un vacataire</option>
                     @foreach($vacataires as $vacataire)
                     <option value="{{$vacataire->id}}">{{$vacataire->prenom." ".$vacataire->nom}}</option>
                     @endforeach

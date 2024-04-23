@@ -21,6 +21,11 @@ return new class extends Migration
             $table->string('origine');
             $table->string('situation');
             $table->boolean('status')->default(1);
+
+            $table->foreignId('ufr_id')
+            ->constrained()
+            ->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

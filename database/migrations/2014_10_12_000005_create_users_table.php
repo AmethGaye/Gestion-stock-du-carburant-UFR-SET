@@ -27,6 +27,10 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreignId('ufr_id')
+            ->constrained()
+            ->onDelete('cascade');
+
+            $table->foreignId('departement_id')
             ->nullable()
             ->constrained()
             ->onDelete('cascade');

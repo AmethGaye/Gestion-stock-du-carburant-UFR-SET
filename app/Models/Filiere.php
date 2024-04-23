@@ -15,15 +15,13 @@ class Filiere extends Model
         return $this->belongsTo(Departement::class);
     }
 
-    public function matieres():BelongsToMany
-    {
-        return $this->belongsToMany(Matiere::class);
-    }
+    
     public function cours()
     {
         return $this->hasMany(Cours::class, 'filiere_id');
     }
-    public function matiere()
+    
+    public function matieres() : BelongsToMany
     {
         return $this->belongsToMany(Matiere::class, 'matieres_filieres');
     }

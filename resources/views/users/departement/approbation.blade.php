@@ -111,8 +111,8 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
             </svg>
         </span>
-        <span class="basis-[23%] grow pr-4">VACATAIRE</span>
-        <span class="basis-[22%] grow pr-4">MATIERE</span>
+        <span class="basis-[18%] grow pr-4">VACATAIRE</span>
+        <span class="basis-[25%] grow pr-4">MATIERE</span>
         <span class="basis-[17%] grow pr-4">FILIERE</span>
         <span class="basis-[130px] pr-4">DUREE</span>
         <span class="basis-[150px] pr-4">DATE</span>
@@ -130,9 +130,17 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
             </svg>
         </span>
-        <span class="basis-[23%] grow pr-4">{{$sceance_cour->vacataire->prenom." ".$sceance_cour->vacataire->nom}}</span>
-        <span class="basis-[22%] grow pr-4">{{$sceance_cour->matiere->nom}}</span>
-        <span class="basis-[17%] grow pr-4">{{$sceance_cour->filiere->nom}}</span>
+        <span class="basis-[18%] grow pr-4">{{$sceance_cour->vacataire->prenom." ".$sceance_cour->vacataire->nom}}</span>
+        <span class="basis-[25%] grow pr-4">{{$sceance_cour->matiere->nom}}</span>
+        @php
+            $nom_filiere = "inconnu";
+            foreach($sceance_cour->matiere->filieres as $filiere){
+                if($filiere->departement->id == auth()->user()->departement->id){
+                    $nom_filiere = $filiere->nom; 
+                }
+            }
+        @endphp
+        <span class="basis-[17%] grow pr-4">{{$nom_filiere}}</span>
         <span class="basis-[130px] font-bold pr-4">{{$sceance_cour->duree}} Heures</span>
         <span class="basis-[150px] pr-4">{{date('d-m-Y', strtotime($sceance_cour->date))}}</span>
         @if($sceance_cour->statut==0)

@@ -285,7 +285,7 @@
                             <option value="{{ $item->id }}"> {{ $item->nom }} </option>
                         @endforeach
                     </select>
-            </div>
+                </div>
 
         </div>
         <div class="flex gap-4 items-center mt-8">
