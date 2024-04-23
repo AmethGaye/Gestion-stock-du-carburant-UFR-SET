@@ -100,9 +100,7 @@ class CoursController extends Controller
         $matieres = Matiere::all();
         $vacataires = Vacataire::all();
         $id_user=auth()->user()->getAuthIdentifier();
-        $sceance_cours=Cours::whereHas('matiere.filiere.departement',function($query) use ($id_user){
-            $query->where('user_id',$id_user);
-        })->with(['vacataire','filiere','matiere'])->get();
+        $sceance_cours=Cours::with(['vacataire','matiere'])->get();
        //dd($sceance_cours);
         return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }

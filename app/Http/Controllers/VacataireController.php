@@ -116,6 +116,7 @@ class VacataireController extends Controller
                     'status'=>$credentials['status'],
                     'origine'=>$credentials['provenance'],
                     'sexe'=>$credentials['sexe'],
+                    'ufr_id'=>$credentials['ufr_id'],
                 ]
             );
          return response()->json(['success' => true, 'msg' => 'L\'ajout du nouveau vacataire a réussi avec succès !']);

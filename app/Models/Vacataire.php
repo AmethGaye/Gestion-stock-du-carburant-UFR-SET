@@ -17,7 +17,8 @@ class Vacataire extends Model
       'status',
       'situation',
       'telephone',
-      'sexe'
+      'sexe',
+      'ufr_id'
     ];
     use HasFactory;
 

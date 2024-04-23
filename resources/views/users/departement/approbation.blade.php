@@ -123,6 +123,15 @@
 
     {{-- row 1 --}}
     @foreach($sceance_cours as $sceance_cour)
+    @php
+        $flag = false;   
+        foreach($sceance_cour->matiere->filieres as $filiere){
+            if($filiere->departement->id == auth()->user()->departement->id){
+                $flag = true;
+            }
+        }
+    @endphp
+    @if ($flag)
     <div class="flex items-center text-sm font-medium border border-zinc-200 h-[70px] py-2 rounded-md bg-white mb-4">
         {{-- cols --}}
         <span class="px-4">
@@ -180,7 +189,8 @@
 
         </span>
         @endif
-    </div>
+    </div>        
+    @endif
     @endforeach
 
 

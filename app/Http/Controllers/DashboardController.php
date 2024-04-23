@@ -21,7 +21,6 @@ class DashboardController extends Controller
     public function index(){
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
-         $id_user=auth()->user()->departement->id;
         $ufr=Ufr::find(1);
         if(auth()->user()->role == 'admin'){
             $total_users=User::all()->count();
@@ -92,7 +91,7 @@ class DashboardController extends Controller
         }
 
         if(auth()->user()->role == 'chef_departement' || auth()->user()->role == 'assistant'){
-
+            $id_user=auth()->user()->departement->id;
             $total_vacataires=Vacataire::all()->count();
             $vacataires_add_on_month=Vacataire::whereBetween('created_at',[$startOfMonth, $endOfMonth])->count();
             $percent_vacataires_add_on_month= ($vacataires_add_on_month/$total_vacataires)*100;

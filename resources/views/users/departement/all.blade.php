@@ -124,10 +124,10 @@
 
     {{-- row 1 --}}
     @foreach($vacataires_sceances as $sceance_cour)
-        @if($sceance_cour->status && $sceance_cour->cours->count() > 0)
         @php
-            $total_duree=0;
+            $total_duree=0;    
         @endphp
+        @if($sceance_cour->status && $sceance_cour->cours->count() > 0)
         <div class="text-sm h-20 overflow-hidden font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
 
             {{-- resume --}}
@@ -210,7 +210,15 @@
                 <div class="max-h-44 overflow-y-scroll">
                     {{-- row 1 --}}
                     @foreach($sceance_cour->cours as $cours)
-                        @if($cours->demande==0)
+                    @php
+                    $flag = false;  
+                    foreach($cours->matiere->filieres as $filiere){
+                        if($filiere->departement->id == auth()->user()->departement->id){
+                            $flag = true;
+                        }
+                    }     
+                    @endphp
+                    @if($cours->demande==0 && $flag)
                     <div class="flex items-center text-sm py-3 border-b min-h-14">
                         {{-- cols --}}
                         <span class="px-4">
