@@ -94,8 +94,13 @@ class DashboardController extends Controller
             $id_user=auth()->user()->departement->id;
             $total_vacataires=Vacataire::all()->count();
             $vacataires_add_on_month=Vacataire::whereBetween('created_at',[$startOfMonth, $endOfMonth])->count();
+            if ($total_vacataires !=0) {
+                
             $percent_vacataires_add_on_month= ($vacataires_add_on_month/$total_vacataires)*100;
             $percent_vacataires_add_on_month=number_format($percent_vacataires_add_on_month, 2, '.', '');
+            }else{
+                $percent_vacataires_add_on_month=0;
+            }
             $vacataires_active=Vacataire::where('status',1)->count();
             if($total_vacataires !=0){
                
@@ -114,7 +119,7 @@ class DashboardController extends Controller
             })->with('matiere','vacataire')->where('demande',1)->count();
 
             $total_cours_added = Cours::whereHas('matiere.filieres',function ($query) use ($id_user){
-                $$query->where('departement_id',$id_user);
+                $query->where('departement_id',$id_user);
             })->with('matiere','vacataire')->count();
              
             if($total_cours_added != 0){
@@ -122,8 +127,8 @@ class DashboardController extends Controller
                 $percent_cours_non_approuve = ($sceance_cours_non_approuve/$total_cours_added*100);
                 $percent_cours_non_approuve = number_format($percent_cours_non_approuve , 2, '.', '');
                 
-            $percent_cours_envoye = ($total_demandes/ $total_cours_added*100);
-            $percent_cours_envoye = number_format($percent_cours_envoye , 2, '.', '');
+                $percent_cours_envoye = ($total_demandes/ $total_cours_added*100);
+                $percent_cours_envoye = number_format($percent_cours_envoye , 2, '.', '');
             }else{
                 $percent_cours_non_approuve=0;
                 $percent_cours_envoye=0;

@@ -105,7 +105,8 @@ class RemboursementController extends Controller
         $liste_remboursement = Vacataire::where('status', 1)
             ->whereHas('cours.remboursement', function($query) use ($startOfMonth, $endOfMonth){
               //du premier du mois jusqu au fin du mois
-                $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+                $query->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                ->where('statut',0);
             })
             ->with(['cours.remboursement' => function($query) use ($startOfMonth, $endOfMonth){
                 $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
@@ -114,6 +115,9 @@ class RemboursementController extends Controller
     
         return view('users.directeur.demandes', compact('liste_remboursement'));
     }
+
+
+
     public function filtre_by_month_comptable(Request $request){
         $num_month = $request->month;
         $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();
@@ -143,39 +147,42 @@ class RemboursementController extends Controller
      * Le directeur .
      */
     public function filtre_demande(Request $request)
-    {
-        $debut_mois=Carbon::now()->startOfMonth()->toDateString();
-        $fin_mois=Carbon::now()->endOfMonth()->toDateString();
+{
+    $query = Vacataire::where('status', 1)
+        ->with([
+            'cours' => function ($query) use ($request) {
+                $query->where('demande', '1')
+                    ->whereHas('remboursement', function ($query) {
+                        $query->where('statut', '0');
+                    });
+            },
+            'cours.remboursement',
+            'cours.matiere',
+            'cours.filiere',
+            'cours.remboursement.user'
+        ]);
 
-        $liste_remboursement = Vacataire::where('status', 1)
-            ->with(['cours.remboursement'=> function($query) use ($debut_mois, $fin_mois){
-                $query->whereBetween('created_at', [$debut_mois,$fin_mois]);
-            }, 'cours.matiere', 'cours.filiere', 'cours.remboursement.user']);
-    
-        if ($request->filled('order')) {
-            foreach ($request->order as $order) {
-                $liste_remboursement->orderBy($order, 'asc');
-            }
-        }
-    
-        if ($request->filled('situation')) {
-            $liste_remboursement->whereIn('situation', $request->situation);
-        }
-    
-        if ($request->filled('demande')) {
-            $liste_remboursement->whereHas('cours', function ($query) use ($request) { 
-                $query->whereIn('demande', $request->demande);
-            });
-        }
-    
-        $liste_remboursement = $liste_remboursement->get(); 
-    
-        
-        return view('users.directeur.demandes', compact('liste_remboursement'));
+    if ($request->filled('situation')) {
+        $query->whereIn('situation', $request->situation);
     }
 
+    if ($request->filled('demande')) {
+        $query->whereHas('cours', function ($query) use ($request) { 
+            $query->whereIn('demande', $request->demande);
+        });
+    }
+
+    if ($request->filled('order')) {
+        foreach ($request->order as $order) {
+            $query->orderBy($order, 'asc');
+        }
+    }
+
+    $liste_remboursement = $query->get();
     
-   
+    return view('users.directeur.demandes', compact('liste_remboursement'));
+}
+
 
    /**
      * Le comptable .
