@@ -22,7 +22,8 @@ class DashboardController extends Controller
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
         $ufr=Ufr::find(1);
-        if(auth()->user()->role->role == 'admin'){
+        dd(auth()->user()->role);
+        if(auth()->user()->role == 'admin'){
             $total_users=User::all()->count();
 
             $users_ufr_set=User::whereHas('ufr',function($query)use ($ufr){
