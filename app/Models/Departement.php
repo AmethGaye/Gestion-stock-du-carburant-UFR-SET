@@ -18,7 +18,7 @@ class Departement extends Model
     }
 
 
-    public function filieres() : HasMany
+    public function filiere() : HasMany
     {
         return $this->hasMany(Filiere::class);
     }

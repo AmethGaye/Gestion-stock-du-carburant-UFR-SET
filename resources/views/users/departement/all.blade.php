@@ -222,6 +222,7 @@
                         <span class="basis-[15%] grow pr-4">semestre {{$cours->matiere->semestre}}</span>
                         @php
                             $nom_filiere = "inconnu";
+                            // dd($cours->matiere->filieres);
                             foreach($cours->matiere->filieres as $filiere){
                                 if($filiere->departement->id == auth()->user()->departement->id){
                                     $nom_filiere = $filiere->nom; 
