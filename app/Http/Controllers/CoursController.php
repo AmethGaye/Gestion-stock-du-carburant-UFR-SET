@@ -26,15 +26,18 @@ class CoursController extends Controller
     public function index()
     {
        $id_user=auth()->user()->getAuthIdentifier();
-        $vacataires = Vacataire::where('status','=',1)->get();
+        $vacataires = Vacataire::where('status','=',1)
+                ->where('ufr_id', auth()->user()->ufr->id)
+                ->get();
         $filieres = Filiere::with('matieres')->get();
         //dd($filieres);
-        $vacataires_sceances = Vacataire::with([
-            'cours' => function($query){
-                $query->where('demande', '0');
-            },
-            'cours.matiere',
-        ])->get();
+        $vacataires_sceances = Vacataire::where('ufr_id', auth()->user()->ufr->id)
+                ->with([
+                    'cours' => function($query){
+                        $query->where('demande', '0');
+                    },
+                    'cours.matiere',
+                ])->get();
         
       //dd($vacataires_sceances);
 
