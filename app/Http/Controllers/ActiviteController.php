@@ -145,7 +145,8 @@ class ActiviteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if($request->user()->role == 'directeur'){
+        $user_role=auth()->user()->roles->nom;// variable de comparaison
+        if($user_role == 'directeur'){
             $validator = Validator::make($request->all(),$this->rules(), $this->messages());
 
             if ($validator->fails()) {
@@ -157,7 +158,7 @@ class ActiviteController extends Controller
 
         }
 
-        if($request->user()->role == 'comptable'){
+        if($user_role == 'comptable'){
 
             Activite::where('id', $id)->update(['ticket' => $request->ticket, 'statut' => true]);
             return redirect()->route('comptable.activites')->withSuccess('La demande a été traitée avec succés !');
