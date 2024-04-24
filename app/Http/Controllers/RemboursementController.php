@@ -37,14 +37,14 @@ class RemboursementController extends Controller
                     ->where('demande', '1');
                 },
                 'cours.remboursement',
-                'cours.matiere',
-                'cours.filiere',
+                'cours.matiere.filieres',
+                
                 'cours.remboursement.user'
             ])->get();
  
     
 
-           // dd($liste_remboursement);
+         // dd($liste_remboursement);
             return view('users.directeur.demandes',compact('liste_remboursement'));
         }
 

@@ -1,6 +1,6 @@
 <div class="bg-white h-[69.5px] shadow_2 flex items-center justify-between px-6 fixed left-[280px] nav-bar z-50">
     {{-- Rechercher  sur l'ensemble du site --}}
-    <form action=""  method="post"class="flex items-center p-0 m-0">
+    <form action=""  method=""class="flex items-center p-0 m-0">
         <div class="flex items-center relative">
             <label for="main-search" class="absolute left-2.5 top-1/2 -translate-y-1/2">
                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">

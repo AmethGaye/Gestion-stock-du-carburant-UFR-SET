@@ -176,7 +176,15 @@
                         {{-- cols --}}
                         <span class="basis-[23%] grow px-4">{{$cours->matiere->nom}}</span>
                         <span class="basis-[15%] grow pr-4">Semestre {{$cours->matiere->semestre}} </span>
-                        <span class="basis-[22%] grow pr-4">{{$cours->filiere->nom}}</span>
+                        @php 
+                        $nom_filiere='inconnue';
+                        foreach ($cours->matiere->filieres as $filiere) {
+                            if ($filiere->departement->id == $cours->remboursement->user->departement_id) {
+                                $nom_filiere = $filiere->nom;
+                            }
+                        }
+                        @endphp
+                        <span class="basis-[22%] grow pr-4">{{$nom_filiere}}</span>
                         <span class="basis-[15%] grow pr-4">{{$cours->date}}</span>
                         <span class="w-[120px] font-bold pr-4">{{$cours->duree}} Heure</span>
                         @php
@@ -195,8 +203,8 @@
 
                 {{-- t-foot --}}
                 {{-- t-foot --}}
-            @php $total_cours_valide=0;
-            foreach($vacataire->cours as $cours){ if ($cours->statut){$total_cours_valide += $cours->duree;} }
+            @php $total_cours_valide=0; 
+            foreach($vacataire->cours as $cours){ if ($cours->statut){$total_cours_valide += $cours->duree;} } 
             @endphp
                 <div class="h-20 flex items-center justify-between px-4 text-[small]">
                     <div class="flex gap-1.5 items-center">
@@ -204,8 +212,10 @@
                         <span class="text-zinc-600 font-semibold bg-zinc-100 btn-2 ml-4">{{$total_cours_valide}} Heures</span>
                     </div>
 
-                   <div>
-                        <p class="mr-2 text-[small] font-medium">Demandé par : Mr Idrissa Gaye</p>
+                   <div> 
+                   
+                    
+                        <p class="mr-2 text-[small] font-medium">Demandé par : Idrissa Gaye</p>
                    </div>
                 </div>
             </div>
