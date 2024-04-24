@@ -107,6 +107,24 @@ class CoursController extends Controller
        //dd($sceance_cours);
         return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }
+
+    public function approbation_search(Request $request){
+        $search=$request->input('search','');
+        $search="%{$search}%";
+        
+
+        $filieres = Filiere::all();
+        $matieres = Matiere::all();
+        $vacataires = Vacataire::all();
+        $id_user=auth()->user()->getAuthIdentifier();
+        $sceance_cours=Cours::query()->whereAny(['duree','statut','demande','remarque'],'like',$search)
+                                      ->orWhereHas('vacataire', function ($query) use ($search){$query->whereAny(['nom','prenom','provenance','origine','telephone','email'],'like',$search);})
+                                      ->orWhereHas('matiere', function ($query) use ($search){$query->whereAny(['nom','volume_horaire','semestre'],'like',$search);})
+                                      ->orWhereHas('matiere.filieres', function ($query) use ($search){$query->whereAny(['nom'],'like',$search);})
+                                      ->with(['vacataire','matiere'])->get();
+       //dd($sceance_cours);
+        return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
+    }
    public function ap_filtre(Request $request){
 
     $filieres = Filiere::all();

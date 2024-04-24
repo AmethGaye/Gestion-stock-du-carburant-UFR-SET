@@ -92,6 +92,7 @@ Route::post('/setting/change-password/{id}', [UserController::class, 'update_pas
 Route::get('/directeur/dashboard', [DashboardController::class, 'index'])->name('directeur.dashboard');
 
 Route::get('/directeur/activites', [ActiviteController::class, 'index'])->name('directeur.activites.index');
+Route::get('/directeur/activites/search', [ActiviteController::class, 'search'])->name('search.activite');
 Route::post('/directeur/activites', [ActiviteController::class, 'store'])->name('directeur.activites.store');
 Route::post('/directeur/activites/update/{id}', [ActiviteController::class, 'update'])->name('d.activites.update');
 Route::delete('/directeur/activites/delete/{id}', [ActiviteController::class, 'destroy'])->name('d.activites.delete');
@@ -132,6 +133,7 @@ Route::get('/departement/cours/all/month', [CoursController::class, 'filtre_by_m
 Route::post('/departement/cours/all/update/{id}', [CoursController::class, 'update'])->name('cours.update');
 Route::delete('/departement/cours/all/{id}', [CoursController::class, 'destroy'])->name('cours.delete');
 Route::get('/departement/cours/approbation', [CoursController::class, 'approbation'])->name('cours.approbation');
+Route::get('/departement/cours/approbation/search', [CoursController::class, 'approbation_search'])->name('cours.approbation.search');
 Route::get('/departement/cours/approbation/filtre', [CoursController::class, 'ap_filtre'])->name('cours.approbation.filtre');
 Route::get('/departement/cours/approbation/month', [CoursController::class, 'ap_filtre_month'])->name('cours.approbation.filtre_month');
 Route::post('/departement/cours/approbation/{id}', [CoursController::class, 'approuver'])->name('approuver');
@@ -149,6 +151,7 @@ Route::post('departement/demande_remboursement', [RemboursementController::class
 Route::get('/comptable/dashboard', [DashboardController::class, 'index'])->name('comptable.dashboard');
 
 Route::get('comptable/remboursements', [RemboursementController::class, 'index'])->name('comptable.remboursements');
+Route::get('comptable/remboursements/search', [RemboursementController::class, 'search'])->name('search.remboursements');
 Route::post('comptable/remboursements/{id}', [RemboursementController::class, 'r_update'])->name('c.remboursements.update');
 Route::post('comptable/remboursements/reset/{id}', [RemboursementController::class, 'reset'])->name('c.remboursements.reset');
 Route::post('comptable/remboursement_multiple', [RemboursementController::class, '_update'])->name('c.remboursements._update');
@@ -156,6 +159,7 @@ Route::get('comptable/remboursement/filtre', [RemboursementController::class, 'f
 Route::get('comptable/remboursement/mois', [RemboursementController::class, 'filtre_by_month_comptable'])->name('comptable.filtre_by_month');
 
 Route::get('comptable/activites', [ActiviteController::class, 'index'])->name('comptable.activites');
+Route::get('comptable/activites/search', [ActiviteController::class, 'search'])->name('search.activites');
 Route::get('comptable/activites/filtre', [ActiviteController::class, 'filtre_activite'])->name('comptable.activites.filtre');
 Route::get('comptable/activites/month1', [ActiviteController::class, 'filtre_activite_by_month'])->name('comptable.activites.filtre_by_month');
 Route::post('comptable/activites/{id}', [ActiviteController::class, 'update'])->name('c.activites.update');
@@ -167,6 +171,7 @@ Route::post('comptable/dotation/administration', [DotationAdminsController::clas
 Route::get('comptable/dotation/departement', [DotationDepartsController::class, 'create'])->name('dotation.depart');
 Route::post('comptable/dotation/departement', [DotationDepartsController::class, 'store']);
 Route::get('comptable/dotation/historique', [HistoriqueController::class, 'index'])->name('dotation.historique');
+Route::get('comptable/dotation/historique/search', [HistoriqueController::class, 'search'])->name('search.historique');
 
 Route::get('comptable/dotation/historique/filtre', [HistoriqueController::class, 'filtre_historique'])->name('filtre.historique');
 Route::get('comptable/dotation/historique/month', [HistoriqueController::class, 'filtre_historique_month'])->name('filtre.historique.month');

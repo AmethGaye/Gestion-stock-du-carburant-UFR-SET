@@ -65,9 +65,48 @@ class RemboursementController extends Controller
     public function search(Request $request){
         $search = $request->input('search', '');
         $search = "%{$search}%";
-        dd($search);
+        $user_role=auth()->user()->roles->nom;// variable de comparaison
+
+        if($user_role == 'directeur'){
+
+
+
+            $liste_remboursement = Vacataire::query()
+                        ->whereAny(['nom','prenom','email','provenance'],'like', $search)
+                        ->where('status', 1)
+                        ->with([
+                             'cours' => function ($query) {
+                                  $query
+                                 ->whereHas('remboursement', function ($query) {
+                                     $query->where('statut', '0');
+                                 })
+                        ->where('demande', '1');
+                        },
+                        'cours.remboursement',
+                        'cours.matiere.filieres',
+                
+                        'cours.remboursement.user'
+                        ])->get();
+ 
+            return view('users.directeur.demandes',compact('liste_remboursement'));
+        }
+
+        if($user_role == 'comptable'){
+            $vacataires = Vacataire::query()
+                   ->whereAny(['nom','prenom','provenance','origine','email','sexe'],'like',$search)
+                   ->where('status', '1')      
+                    ->with([
+                        'cours' => function($query){$query->where('demande', '1');},
+                        'cours.remboursement' => function($query){
+                              $query->whereIn('statut', ['1', '2']);},
+                        'cours.matiere'
+                        ])
+                    ->get();
+                   
+            return view('users.comptable.remboursement', compact('vacataires'));
+
     }
-   
+}
 
 
     /**
