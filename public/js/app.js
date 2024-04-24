@@ -127,7 +127,6 @@ try {
             && document.querySelector('.departement_id').value == ""
         ){
             document.querySelector('.departement_id').nextElementSibling.innerHTML = "Veillez selectionner un département";
-            subscribe();
         }else{
             subscribe(); 
         }
@@ -199,7 +198,8 @@ const displayContainer = function(url = null, edit = false, data = null){
             if(item.nodeName === "DIV"){
                 item.firstElementChild.value = data[item.firstElementChild.id];
             }else{
-                item.value = data[item.id];
+                let x = data[item.id] || "";
+                item.value = x;
             }
         })
     }
@@ -344,7 +344,7 @@ const showMessage = (message, type = 'success') => {
 };
 
 
-const incrementer = (elem) => {
+const incrementer = (elem, value = 1) => {
     let inputNumber = elem.parentNode.previousElementSibling;
 
     if(inputNumber.nodeName == 'DIV'){
@@ -354,7 +354,7 @@ const incrementer = (elem) => {
     if(!inputNumber.value){
         inputNumber.value = '0';
     }else{
-        inputNumber.value = String(parseInt(inputNumber.value) + 1);
+        inputNumber.value = String(parseInt(inputNumber.value) + value);
     };
     if(ticketInput.length != 0){
      ticketInput[getIndex(inputNumber)].value = inputNumber.value;
@@ -362,7 +362,7 @@ const incrementer = (elem) => {
 }
 
 
-const decrementer = (elem) => {
+const decrementer = (elem, value = 1) => {
     // elem.parentNode.autofocus = true;
     let inputNumber = elem.parentNode.previousElementSibling;
 
@@ -373,7 +373,7 @@ const decrementer = (elem) => {
     if(parseInt(inputNumber.value) <= 0 || !inputNumber.value){
         inputNumber.value = '0';
     }else{
-        inputNumber.value = String(parseInt(inputNumber.value) - 1);
+        inputNumber.value = String(parseInt(inputNumber.value) - value);
     }
 
     if(ticketInput.length != 0){
@@ -500,16 +500,56 @@ const getMatiere = async (id) => {
     }
 };
 
-const ruleChecker = (elem) => {
-    if(elem.value == 'assistant' || elem.value == 'chef_departement'){
+
+try {
+    document.querySelectorAll('#roleSubs').forEach((item) => {
+        item.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log(item.action)
+            getRole(item);
+            item.parentElement.classList.toggle('opt');
+        } )
+    });
+} catch (error) {
+    
+}
+
+const getRole = async (elem) => {
+    try {
+        let url = elem.action;
+        let response = await fetch(url);
+        const result = await response.json();
+        // const result = await response.text();
+        console.log(result)
+        
+
+        if(response.ok && result.success){
+            document.querySelector('#roleForm').action = url;
+            document.querySelector('#roleForm #nom').value = result.role['nom'];
+            document.querySelector('#roleForm #priorite').value = result.role['priorite'];
+        }
+
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+const ruleChecker = (elem, data) => {
+    if(data[elem.value] == 'assistant' || data[elem.value] == 'chef_departement'){
         // console.log('click')
         document.querySelector('.departement_id').disabled = false;
-        document.querySelector('.departement_id').name = 'departement_id';
+        document.querySelector('.departement_id').value = "";
+
     }else{
-        document.querySelector('.departement_id').name = '';
         document.querySelector('.departement_id').disabled = true;
+        document.querySelector('.departement_id').value = "";
 
     }
+}
+
+
+const showOptions = (elem) => {
+    elem.nextElementSibling.classList.toggle('opt')
 }
 
 

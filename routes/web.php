@@ -15,6 +15,7 @@ use App\Http\Controllers\auth\ForgotPasswordController;
 use App\Http\Controllers\DotationAdminsController;
 use App\Http\Controllers\DotationDepartsController;
 use App\Http\Controllers\HistoriqueController;
+use App\Http\Controllers\RoleController;
 use App\Models\Dotation_depart;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -62,8 +63,13 @@ Route::post('/reset-password', [ResetPasswordController::class, 'update'])->name
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 Route::post('/admin/users/{id}', [UserController::class, 'update'])->name('admin.update');
-Route::get('/admin/roles', [UserController::class, 'roles'])->name('admin.roles');
 Route::get('/admin/users/filtre', [UserController::class, 'filtre'])->name('filtre.users');
+
+Route::get('/admin/roles', [RoleController::class, 'index'])->name('admin.roles');
+Route::post('/admin/roles', [RoleController::class, 'store'])->name('admin.roles');
+Route::get('/admin/roles/{id}', [RoleController::class, 'edit'])->name('admin.roles.edit');
+Route::post('/admin/roles/{id}', [RoleController::class, 'update']);
+Route::delete('/admin/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('admin.roles.destroy');
 
 
 Route::post('/admin/users/', [UserController::class, 'store'])->name('add.user');

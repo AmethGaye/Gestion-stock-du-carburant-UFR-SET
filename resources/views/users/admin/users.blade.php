@@ -122,7 +122,7 @@
                     @else
                         <span class="w-[170px] pr-4 ">Pas disponible</span>
                     @endif
-                    <span class="basis-[15%]  pr-4 capitalize">{{$user->role}}</span>
+                    <span class="basis-[15%]  pr-4 capitalize">{{$user->roles->nom}}</span>
                     <span class="basis-[100px]">{{$user->ufr->nom}}</span>
                     @if($user->status==1)
                     <span class="basis-[130px]  pr-4 flex items-center">
@@ -137,7 +137,7 @@
                     @endif
                     <span class="flex basis-[210px] justify-center">
                         <sapn class="border border-zinc-200  rounded-l-lg bg-zinc-100 m-0">
-                            <button class="px-3 py-1.5" onclick="displayContainer(`/admin/users/`+{{ $user->id }}, true, {{ $user }})">
+                            <button class="px-3 py-1.5" onclick="displayContainer(`/admin/users/`+{{ $user->id }}, true, {{ json_encode($user) }})">
                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.16755 2.78381H2.76216C2.2948 2.78381 1.84659 2.96947 1.51612 3.29994C1.18566 3.63041 1 4.07862 1 4.54597V14.2378C1 14.7052 1.18566 15.1534 1.51612 15.4839C1.84659 15.8143 2.2948 16 2.76216 16H12.454C12.9214 16 13.3696 15.8143 13.7001 15.4839C14.0305 15.1534 14.2162 14.7052 14.2162 14.2378V9.83245M12.9703 1.53797C13.1329 1.36966 13.3273 1.23542 13.5423 1.14306C13.7573 1.05071 13.9886 1.0021 14.2225 1.00007C14.4565 0.998033 14.6885 1.04262 14.9051 1.13122C15.1217 1.21982 15.3184 1.35067 15.4839 1.51612C15.6493 1.68158 15.7802 1.87833 15.8688 2.09489C15.9574 2.31145 16.002 2.54349 15.9999 2.77747C15.9979 3.01145 15.9493 3.24268 15.8569 3.45767C15.7646 3.67266 15.6303 3.8671 15.462 4.02966L7.89709 11.5946H5.4054V9.10291L12.9703 1.53797Z" stroke="#737373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -283,12 +283,16 @@
             <div class="w-full flex gap-4">
                 <div class="w-full  flex flex-col mb-3">
                     <label for="role_id" class="font-medium text-zinc-800" >Rôle</label>
-                    <select name="role_id" id="role_id" class="input-2" onchange="ruleChecker(this)">
-                        <option value="admin">Admin</option>
-                        <option value="directeur">Directeur</option>
-                        <option value="assistant">Assistant</option>
-                        <option value="comptable">Comptable</option>
-                        <option value="chef_departement">Chef De Département</option>
+                    @php
+                        $role_name = [];
+                        foreach($roles as $role){
+                            $role_name[$role->id] = $role->nom;
+                        }
+                    @endphp
+                    <select name="role_id" id="role_id" class="input-2" onchange="ruleChecker(this, {{ json_encode($role_name) }})">
+                       @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->nom }}</option>
+                       @endforeach
                     </select>
                     <div class="text-sm text-red-600 font-medium mt-2">
                     </div>
@@ -296,7 +300,7 @@
 
                 <div class="w-full  flex flex-col mb-3">
                     <label for="departement_id" class="font-medium text-zinc-800">Département</label>
-                    <select class="input-2 departement_id" id="departement_id"  disabled>
+                    <select class="input-2 departement_id" name="departement_id" id="departement_id"  disabled>
                         <option value="">Selectionner un département</option>
                         @foreach ($departements as $item)
                             <option value="{{ $item->id }}">{{ $item->nom }}</option>

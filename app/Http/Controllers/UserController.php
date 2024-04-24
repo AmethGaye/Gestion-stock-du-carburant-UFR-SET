@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Ufr;
 
+use App\Models\Role;
 use App\Models\User;
+use App\Models\Departement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +14,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UserRequestValidation;
-use App\Models\Departement;
 
 class UserController extends Controller
 {
@@ -33,7 +34,8 @@ class UserController extends Controller
             $users = User::paginate(5);
             $ufr = Ufr::all();
             $departements = Departement::all();
-            return view('users.admin.users',compact('users', 'ufr', 'departements'));
+            $roles = Role::all();
+            return view('users.admin.users',compact('users', 'ufr', 'departements', 'roles'));
         }
     }
 
@@ -52,18 +54,32 @@ class UserController extends Controller
         }
 
 
-        User::create( [
-            'nom' => $request->nom,
-            'prenom'=> $request->prenom,
-            'email' => $request->email,
-            'role'=> $request->role_id,
-            'telephone'=> $request->telephone,
-            'sexe'=> $request->sexe,
-            'ufr_id' => $request->ufr_id,
-            'date_naiss'=> $request->date_naiss,
-            'password'=>Hash::make($request->password),
-            'departement_id' => $request->departement_id || null
-        ]);
+        if($request->filled('departement_id')){
+            User::create( [
+                'nom' => $request->nom,
+                'prenom'=> $request->prenom,
+                'email' => $request->email,
+                'role_id'=> $request->role_id,
+                'telephone'=> $request->telephone,
+                'sexe'=> $request->sexe,
+                'ufr_id' => $request->ufr_id,
+                'date_naiss'=> $request->date_naiss,
+                'password'=>Hash::make($request->password),
+                'departement_id' => $request->departement_id
+            ]);
+        }else{
+            User::create( [
+                'nom' => $request->nom,
+                'prenom'=> $request->prenom,
+                'email' => $request->email,
+                'role_id'=> $request->role_id,
+                'telephone'=> $request->telephone,
+                'sexe'=> $request->sexe,
+                'ufr_id' => $request->ufr_id,
+                'date_naiss'=> $request->date_naiss,
+                'password'=>Hash::make($request->password),
+            ]);
+        }
         return response()->json(['success' => true, 'msg' => "L'utilisateur ajouté avec succés !"]);
     }
 
@@ -75,18 +91,10 @@ class UserController extends Controller
             return response()->json(['errors' => $validator->errors()]);
         }
 
-        User::where('id', $id)->update($request->only(['nom', 'prenom', 'sexe', 'ufr_id', 'email', 'telephone', 'role', 'date_naiss']));
+        User::where('id', $id)->update(['nom', 'prenom', 'sexe', 'ufr_id', 'email', 'telephone', 'role', 'date_naiss', 'departemen_id']);
         return response()->json(['success' => true, 'msg' => 'Mise à jour de l\'utilisteur réussie avec succès !']);
     }
 
-
-    /**
-     * gestion des roles
-     */
-    public function roles()
-    {
-     
-    }
     public function filtre(Request $request)
     {
         $query = User::query();

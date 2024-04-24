@@ -27,7 +27,7 @@ class User extends Authenticatable
         'email',
         'password',
         'prenom',
-        'role',
+        'role_id',
         'telephone',
         'status',
         'date_naiss',
@@ -36,6 +36,8 @@ class User extends Authenticatable
         'ufr_id',
         'departement_id',
     ];
+
+    protected $attribute = ['role' => 'test'];
 
     /**
      * The attributes that should be hidden for serialization.
