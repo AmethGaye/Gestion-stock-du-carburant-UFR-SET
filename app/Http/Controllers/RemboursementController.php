@@ -61,7 +61,12 @@ class RemboursementController extends Controller
             return view('users.comptable.remboursement', compact('vacataires'));
         }
     }
-
+   
+    public function search(Request $request){
+        $search = $request->input('search', '');
+        $search = "%{$search}%";
+        dd($search);
+    }
    
 
 

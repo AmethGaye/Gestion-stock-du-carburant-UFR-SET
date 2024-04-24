@@ -4,7 +4,7 @@
 
 <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
     {{-- barre de recherche --}}
-    <form action="{{route('shearch.cours')}}" method="post" class="flex items-center p-0 m-0">
+    <form action="{{route('shearch.cours')}}" method="get" class="flex items-center p-0 m-0">
         @csrf
         <div class="flex items-center relative">
             <label for="" class="absolute left-2.5 top-1/2 -translate-y-1/2">

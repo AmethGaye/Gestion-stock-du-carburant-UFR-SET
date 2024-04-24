@@ -15,7 +15,6 @@ use App\Http\Controllers\auth\ForgotPasswordController;
 use App\Http\Controllers\DotationAdminsController;
 use App\Http\Controllers\DotationDepartsController;
 use App\Http\Controllers\HistoriqueController;
-use App\Http\Controllers\SearchController;
 use App\Models\Dotation_depart;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -102,6 +101,7 @@ Route::get('/directeur/activites/filtre_activite', [ActiviteController::class, '
 
 
 Route::get('/directeur/demandes', [RemboursementController::class, 'index'])->name('directeur.demandes');
+Route::get('/directeur/demandes/search', [RemboursementController::class, 'search'])->name('search.demandes');
 Route::post('/directeur/demandes', [RemboursementController::class, 'update'])->name('approuver.directeur');
 Route::get('/directeur/demandes/filtre', [RemboursementController::class, 'filtre_demande'])->name('filtre.demande');
 
@@ -115,7 +115,7 @@ Route::get('/directeur/demandes/month', [RemboursementController::class, 'filtre
 Route::get('/departement/dashboard', [DashboardController::class, 'index'])->name('departement.dashboard');
 
 Route::get('/departement/vacataires', [VacataireController::class, 'index'])->name('departement.vacataires');
-Route::post('/departement/vacataires/search', [VacataireController::class, 'search'])->name('search.vacataires');
+Route::get('/departement/vacataires/search', [VacataireController::class, 'search'])->name('search.vacataires');
 Route::get('/departement/vacataires/filtre', [VacataireController::class, 'filtre'])->name('departement.vacataires.filtre');
 Route::get('/departement/vacataires/month', [VacataireController::class, 'filtre_by_month'])->name('departement.vacataires.filtre_by_month');
 Route::post('/departement/vacataires', [VacataireController::class, 'store']);
@@ -125,7 +125,7 @@ Route::delete('/departement/vacataires/delete/{id}', [VacataireController::class
 Route::post('/departement/cours', [CoursController::class, 'store'])->name('cours.store');
 Route::get('/departement/cours/matieres/{id}', [CoursController::class, 'matieres']);
 Route::get('/departement/cours/all', [CoursController::class, 'index'])->name('cours.all');
-Route::post('/departement/cours/all/search', [CoursController::class, 'search'])->name('shearch.cours');
+Route::get('/departement/cours/all/search', [CoursController::class, 'search'])->name('shearch.cours');
 Route::get('/departement/cours/all/filtre', [CoursController::class, 'filtre'])->name('cours.all.filtre');
 
 Route::get('/departement/cours/all/month', [CoursController::class, 'filtre_by_month'])->name('cours.all.filtre.month');
