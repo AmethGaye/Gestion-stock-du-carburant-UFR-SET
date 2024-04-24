@@ -3,7 +3,8 @@
 @section('dotation')
 <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
     {{-- barre de recherche --}}
-    <form action="" class="flex items-center p-0 m-0">
+    <form action="{{route('search.historique')}}" method="get" class="flex items-center p-0 m-0">
+        @csrf
         <div class="flex items-center relative">
             <label for="" class="absolute left-2.5 top-1/2 -translate-y-1/2">
                 <svg width="15" height="16" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">

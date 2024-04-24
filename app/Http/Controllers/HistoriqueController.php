@@ -22,6 +22,21 @@ class HistoriqueController extends Controller
 
         return view('users.comptable.historique', compact('dotation_depart', 'dotation_admin', 'total_dep', 'total_admin'));
     }
+    public function search(Request $request ){
+        $search = $request->input('search','');
+        $search = "%{$search}%";
+        
+
+        $dotation_depart = Dotation_depart::query()->whereAny(['statut','nombre_tickets'],'like',$search)
+                                           ->orWhereHas('departement', function($query) use ($search) {
+                                             $query->where('nom', 'like', $search);})
+                                            ->get();
+        $total_dep = Dotation_depart::sum('nombre_tickets');
+        $dotation_admin = Dotation_admin::query()->whereAny(['nom','statut','nombre_tickets','user_id'],'like',$search)->get();
+        $total_admin = Dotation_admin::sum('nombre_tickets');
+
+        return view('users.comptable.historique', compact('dotation_depart', 'dotation_admin', 'total_dep', 'total_admin'));
+    }
 
     public function filtre_historique(Request $request)
     {

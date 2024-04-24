@@ -6,7 +6,8 @@
 
     <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
         {{-- barre de recherche --}}
-        <form action="" class="flex items-center p-0 m-0">
+        <form action="{{route('search.demandes')}}" method="get" class="flex items-center p-0 m-0">
+            @csrf
             <div class="flex items-center relative">
                 <label for="" class="absolute left-2.5 top-1/2 -translate-y-1/2">
                     <svg width="15" height="16" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -176,7 +177,15 @@
                         {{-- cols --}}
                         <span class="basis-[23%] grow px-4">{{$cours->matiere->nom}}</span>
                         <span class="basis-[15%] grow pr-4">Semestre {{$cours->matiere->semestre}} </span>
-                        <span class="basis-[22%] grow pr-4">{{$cours->filiere->nom}}</span>
+                        @php 
+                        $nom_filiere='inconnue';
+                        foreach ($cours->matiere->filieres as $filiere) {
+                            if ($filiere->departement->id == $cours->remboursement->user->departement_id) {
+                                $nom_filiere = $filiere->nom;
+                            }
+                        }
+                        @endphp
+                        <span class="basis-[22%] grow pr-4">{{$nom_filiere}}</span>
                         <span class="basis-[15%] grow pr-4">{{$cours->date}}</span>
                         <span class="w-[120px] font-bold pr-4">{{$cours->duree}} Heure</span>
                         @php
@@ -195,8 +204,8 @@
 
                 {{-- t-foot --}}
                 {{-- t-foot --}}
-            @php $total_cours_valide=0;
-            foreach($vacataire->cours as $cours){ if ($cours->statut){$total_cours_valide += $cours->duree;} }
+            @php $total_cours_valide=0; 
+            foreach($vacataire->cours as $cours){ if ($cours->statut){$total_cours_valide += $cours->duree;} } 
             @endphp
                 <div class="h-20 flex items-center justify-between px-4 text-[small]">
                     <div class="flex gap-1.5 items-center">
@@ -204,8 +213,10 @@
                         <span class="text-zinc-600 font-semibold bg-zinc-100 btn-2 ml-4">{{$total_cours_valide}} Heures</span>
                     </div>
 
-                   <div>
-                        <p class="mr-2 text-[small] font-medium">Demandé par : Mr Idrissa Gaye</p>
+                   <div> 
+                   
+                    
+                        <p class="mr-2 text-[small] font-medium">Demandé par : Idrissa Gaye</p>
                    </div>
                 </div>
             </div>

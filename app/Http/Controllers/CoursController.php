@@ -107,6 +107,24 @@ class CoursController extends Controller
        //dd($sceance_cours);
         return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }
+
+    public function approbation_search(Request $request){
+        $search=$request->input('search','');
+        $search="%{$search}%";
+        
+
+        $filieres = Filiere::all();
+        $matieres = Matiere::all();
+        $vacataires = Vacataire::all();
+        $id_user=auth()->user()->getAuthIdentifier();
+        $sceance_cours=Cours::query()->whereAny(['duree','statut','demande','remarque'],'like',$search)
+                                      ->orWhereHas('vacataire', function ($query) use ($search){$query->whereAny(['nom','prenom','provenance','origine','telephone','email'],'like',$search);})
+                                      ->orWhereHas('matiere', function ($query) use ($search){$query->whereAny(['nom','volume_horaire','semestre'],'like',$search);})
+                                      ->orWhereHas('matiere.filieres', function ($query) use ($search){$query->whereAny(['nom'],'like',$search);})
+                                      ->with(['vacataire','matiere'])->get();
+       //dd($sceance_cours);
+        return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
+    }
    public function ap_filtre(Request $request){
 
     $filieres = Filiere::all();
@@ -246,5 +264,30 @@ class CoursController extends Controller
         $user = Cours::findOrFail($id);
         $user->delete();
         return redirect()->route('cours.all')->withSuccess('La séance de cours a été  supprimé avec succès');
+    }
+
+    public function search(Request $request){
+         $search = $request->input('search', '');
+         $search = "%{$search}%";
+         
+        $id_user=auth()->user()->getAuthIdentifier();
+        $vacataires = Vacataire::where('status','=',1)
+                                ->where('ufr_id', auth()->user()->ufr->id)
+                                 ->get();
+              $filieres = Filiere::with('matieres')->get();
+              
+              $vacataires_sceances = Vacataire::whereAny(['nom','prenom','email','provenance'],'like', $search)
+                                                ->where('ufr_id', auth()->user()->ufr->id)
+                                                ->with([
+                                                       'cours' => function($query){
+                                                        $query->where('demande', '0');
+                                                        },
+                                                'cours.matiere',
+                                                ])->get();
+              
+            
+      
+        return view('users.departement.all',compact('vacataires','filieres','vacataires_sceances'));
+        
     }
 }

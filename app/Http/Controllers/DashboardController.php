@@ -96,10 +96,11 @@ class DashboardController extends Controller
              compact('remboursements', 'activites','total_demande','percent_demande_on_month','cours_non_approuve','percent_demande_non_approuve','total_activite','percent_activite_on_month','total_activite_non_approuve','percent_activite_non_appr_on_month'));
         }
 
-        if($user_role == 'chef_departement' || auth()->user()->role == 'assistant'){
+        if($user_role == 'chef_departement' || $user_role  == 'assistant'){
             $id_user=auth()->user()->departement->id;
-            $total_vacataires=Vacataire::all()->count();
-            $vacataires_add_on_month=Vacataire::whereBetween('created_at',[$startOfMonth, $endOfMonth])->count();
+            $user_ufr=auth()->user()->ufr_id;
+            $total_vacataires=Vacataire::where('ufr_id', $user_ufr)->count();
+            $vacataires_add_on_month=Vacataire::where('ufr_id', $user_ufr)->whereBetween('created_at',[$startOfMonth, $endOfMonth])->count();
             if ($total_vacataires !=0) {
                 
             $percent_vacataires_add_on_month= ($vacataires_add_on_month/$total_vacataires)*100;
@@ -107,7 +108,7 @@ class DashboardController extends Controller
             }else{
                 $percent_vacataires_add_on_month=0;
             }
-            $vacataires_active=Vacataire::where('status',1)->count();
+            $vacataires_active=Vacataire::where('ufr_id', $user_ufr)->where('status',1)->count();
             if($total_vacataires !=0){
                
             $percent_vac_active=( $vacataires_active/$total_vacataires)*100;

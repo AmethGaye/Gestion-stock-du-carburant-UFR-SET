@@ -25,26 +25,47 @@ class ActiviteController extends Controller
      */
     public function index()
     {
-
-        if(auth()->user()->role == 'directeur'){
+        $user_role=auth()->user()->roles->nom;
+        if($user_role == 'directeur'){
             $activities = Activite::all();
             return view('users.directeur.activites',compact('activities'));
         }
 
-        if(auth()->user()->role == 'comptable'){
+        if($user_role == 'comptable'){
             $activities = Activite::all();
             return view('users.comptable.activites',compact('activities'));
         }
     }
    
+    public function search(Request $request){
+        $user_role=auth()->user()->roles->nom;
+        $search = $request->input('search','');
+        $search = "%{$search}%";
+
+        if( $user_role == 'directeur'){
+            $activities = Activite::query()
+                                 ->whereAny(['titre','description','lieux','adresse','ticket','date'],'like',$search)
+                                 ->get();
+            return view('users.directeur.activites',compact('activities'));
+        }
+
+        if($user_role == 'comptable'){
+            $activities = Activite::query()
+            ->whereAny(['titre','description','lieux','adresse','ticket','date'],'like',$search)
+            ->get();
+            
+            return view('users.comptable.activites',compact('activities'));
+        }
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function filtre_by_month(Request $request)
-    { 
+    {  
+        $user_role=auth()->user()->roles->nom;
         
-        if(auth()->user()->role =='directeur'){
+        if($user_role =='directeur'){
         $num_month= $request->month;
 
         $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();

@@ -22,6 +22,19 @@ class VacataireController extends Controller
         return view('users.departement.vacataires',compact('vacataires', 'ufr'));
     }
 
+
+public function search(Request $request){
+
+    $search = $request->input('search', '');
+    $search = "%{$search}%";
+
+        $vacataires=Vacataire::query()
+                                ->whereAny(['nom','prenom','email','provenance'],'like', $search)
+                                ->get();
+        $ufr = Ufr::all();
+        return view('users.departement.vacataires',compact('vacataires', 'ufr'));
+}
+
     public function filtre(Request $request)
     {
         
