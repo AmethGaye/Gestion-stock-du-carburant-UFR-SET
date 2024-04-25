@@ -62,6 +62,7 @@ Route::post('/reset-password', [ResetPasswordController::class, 'update'])->name
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+Route::get('/admin/users/search', [UserController::class, 'search'])->name('search.users');
 Route::post('/admin/users/{id}', [UserController::class, 'update'])->name('admin.update');
 Route::get('/admin/users/filtre', [UserController::class, 'filtre'])->name('filtre.users');
 

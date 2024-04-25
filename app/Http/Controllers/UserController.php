@@ -40,6 +40,21 @@ class UserController extends Controller
     }
 
 
+    public function search(Request $request){
+            $search=$request->input('search','');
+            $search="%{$search}%";
+           // dd($search);
+            $users=User::whereAny(['nom','prenom','date_naiss','telephone','sexe'],'like',$search)
+                         ->orWhereHas('roles',function ($query) use ($search){ $query->where('nom','like',$search);})
+                         ->orWhereHas('departement', function ($query) use ($search){ $query->where('nom','like',$search);})
+                         ->orWhereHas('ufr', function ($query) use ($search){ $query->where('nom','like',$search);})
+                         ->paginate(5);
+            $ufr = Ufr::all();
+            $departements = Departement::all();
+            $roles = Role::all();
+            return view('users.admin.users',compact('users', 'ufr', 'departements', 'roles'));
+    }
+
     /**
      * ajouter un nouvel utilisateur
      */
