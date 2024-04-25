@@ -127,8 +127,17 @@
                 <span class="basis-[190px] flex  justify-center">
                     <span class="flex items-center {{ $classes }} px-4  py-1 rounded font-semibold text-xs">  @if ($vacataire->situation) Véhiculé @else Non @endif</span>
                 </span>
-                <span class="w-[160px] font-bold pr-4">423.23 KM</span>
+             @php 
+                $distance = 0;
 
+             foreach ($tableau_distance as $ville => $distance) {
+                     if ($vacataire->provenance == $ville) {
+                         $distance = $tableau_distance[$ville];
+                           break;
+                    }
+                }
+             @endphp
+                <span class="w-[160px] font-bold pr-4">{{$distance }} KM</span>
                 <span class="w-[140px] relative flex items-center justify-center gap-4">
                     <div class="icon-hover rounded-lg bg-zinc-100 font-semibold text-zinc-800">0</div>
 
