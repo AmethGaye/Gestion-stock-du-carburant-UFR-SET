@@ -5,7 +5,7 @@
         <div class="px-6 pt-6 w-7/12 bg-white rounded-3xl shadow_3">
             <div>
                 <div>
-                    <p class="mb-6 text-xl text-zinc-600">Gestion Des Rôles</p>
+                    <p class="mb-6 text-lg font-medium text-zinc-600">Gestion Des Rôles</p>
                 </div>
                 
                 <div class="relative">
@@ -74,7 +74,7 @@
         <div class="px-6 py-8 w-5/12 h-5/6 bg-white rounded-3xl shadow_3 flex flex-col">
 
             <div class="flex items-center justify-between mb-12">
-                <h1 class="text-xl text-zinc-600">Ajouter / Modifier un rôle</h1>
+                <h1 class="text-lg font-medium text-zinc-600">Ajouter / Modifier un rôle</h1>
             </div>
             <form action="{{ route('admin.roles') }}" method="post" class="m-0 font-mtrph" id="roleForm">
                 @csrf

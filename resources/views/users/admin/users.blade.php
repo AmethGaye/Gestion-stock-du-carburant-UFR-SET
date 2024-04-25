@@ -3,7 +3,7 @@
 @section('section')
     <section class="px-6 min-h-screen h-screen ">
 
-        <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-4">
+        <div class="px-4 py-3 bg-white rounded-lg shadow_2 flex items-center justify-between mb-6">
             <form action="" class="flex items-center p-0 m-0">
                 <div class="flex items-center relative">
                     <label for="" class="absolute left-2.5 top-1/2 -translate-y-1/2">
@@ -78,7 +78,7 @@
 
     <div class="text-green-500" id="success"></div>
 
-        <div class="bg-white rounded-md border border-zinc-200 relative">
+        <div class="bg-white rounded-2xl shadow_2 relative">
             {{-- t-head --}}
             <div class="flex items-center text-sm text-zinc-400 font-nunito font-bold py-5 border-b border-b-zinc-200 ">
                 {{-- cols --}}
@@ -87,13 +87,13 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
                     </svg>
                 </span>
-                <span class="basis-[23%] pr-4 grow">PRENOM & NOM</span>
+                <span class="basis-[20%] pr-4 grow">PRENOM & NOM</span>
                 <span class="basis-[25%] pr-4 grow">EMAIL</span>
                 <span class="basis-[170px] pr-4">TELEPHONE</span>
-                <span class="basis-[15%] pr-4">ROLE</span>
+                <span class="basis-[18%]  grow pr-4">ROLE</span>
                 <span class="basis-[100px] pr-4">UFR</span>
                 <span class="basis-[130px] pr-4">STATUT</span>
-                <span class="basis-[210px] text-center">ACTION</span>
+                <span class="basis-[170px] text-center">ACTION</span>
             </div>
             {{-- t-body --}}
             <div>
@@ -101,14 +101,14 @@
                 @foreach($users as $user)
 
 
-                <div class="flex items-center text-sm text-zinc-500 font-medium py-4 border-b border-b-zinc-200 ">
+                <div class="flex items-center text-sm text-zinc-500 font-medium py-5 border-b border-b-zinc-200 ">
                     {{-- cols --}}
                     <span class="px-4">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
                         </svg>
                     </span>
-                    <span class="basis-[23%]  pr-4 grow flex items-center gap-2">
+                    <span class="basis-[20%]  pr-4 grow flex items-center gap-2 capitalize">
                         @if($user->image)
                             <img src="{{ asset('storage/'.$user->image) }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
                         @else
@@ -122,20 +122,24 @@
                     @else
                         <span class="w-[170px] pr-4 ">Pas disponible</span>
                     @endif
-                    <span class="basis-[15%]  pr-4 capitalize">{{$user->roles->nom}}</span>
+                    <span class="basis-[18%]  grow pr-4 capitalize">{{$user->roles->nom}}</span>
                     <span class="basis-[100px]">{{$user->ufr->nom}}</span>
                     @if($user->status==1)
-                    <span class="basis-[130px]  pr-4 flex items-center">
-                        <span class="w-2 h-2 rounded-full bg-green-500 block mr-2"></span>
-                        <span class="font-semibold text">Active</span>
+                    <span class="basis-[130px]  pr-4 flex items-center mr-2">
+                        <form action="" method="POST" class="m-0 ">
+                            <button class="p-1.5 rounded-full hover:bg-zinc-100"><div class="w-2 h-2 rounded-full bg-green-500 block"></div></button>
+                        </form>
+                        <span class="font-semibold text ml-1">Active</span>
                     </span>
                     @else
                         <span class="basis-[130px]  pr-4 flex items-center">
-                        <span class="w-2 h-2 rounded-full bg-zinc-400 block mr-2"></span>
-                        <span class="font-semibold text-zinc-400">Inactive</span>
-                    </span>
+                            <form action="" method="POST" class="m-0 ">
+                                <button class="p-1.5 rounded-full hover:bg-zinc-100"><div class="w-2 h-2 rounded-full bg-zinc-400 block"></div></button>
+                            </form>
+                            <span class="font-semibold text-zinc-400">Inactive</span>
+                        </span>
                     @endif
-                    <span class="flex basis-[210px] justify-center">
+                    <span class="flex basis-[170px] justify-center">
                         <sapn class="border border-zinc-200  rounded-l-lg bg-zinc-100 m-0">
                             <button class="px-3 py-1.5" onclick="displayContainer(`/admin/users/`+{{ $user->id }}, true, {{ json_encode($user) }})">
                                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">

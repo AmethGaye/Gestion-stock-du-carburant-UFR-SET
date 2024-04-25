@@ -1,7 +1,7 @@
 @extends('users.setting.layout')
 
 @section('setting-content')
-<div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 font-mtrph">
+<div class="bg-white rounded-3xl shadow_2 px-8 py-6 font-mtrph">
     <h1 class="font-semibold text-lg text-zinc-700 mb-10">Changement de mot de passe</h1>
     @if(session('success'))
         <div class="text-green-500">

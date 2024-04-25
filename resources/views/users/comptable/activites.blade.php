@@ -3,7 +3,7 @@
 @section('section')
 <section class="px-6 min-h-screen h-screen ">
 
-    <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
+    <div class="px-4 py-3 bg-white rounded-lg shadow_2 flex items-center justify-between mb-6">
         {{-- barre de recherche --}}
         <form action="{{route('search.activites')}}" method="GET" class="flex items-center p-0 m-0">
             @csrf
@@ -97,7 +97,7 @@
 
     {{-- row 1 --}}
     @foreach ($activities as $item)
-    <div class="bg-white mb-6 rounded-md border border-zinc-200 px-6 overflow-y-hidden h-20 transition-[height]" id="act-container">
+    <div class="bg-white mb-6 rounded-2xl shadow_2 px-6 overflow-y-hidden h-20 transition-[height]" id="act-container">
         <div class="flex items-center justify-between text-sm text-zinc-500 font-medium h-20">
             <div class="">
                 <div class="flex items-center gap-4 mb-2.5">
@@ -136,20 +136,20 @@
                 <form action="{{ route('c.activites.reset', $item->id) }}" method="post" class="m-0">
                     @csrf
                     @method('put')
-                    <button class="text-sm px-2 py-2 transition-colors hover:bg-zinc-100 rounded-md font-semibold disabled:text-zinc-400" @if(!$item->statut) disabled @endif>
+                    <button class="text-base font-mtrph px-2 py-2 transition-colors hover:bg-zinc-100 rounded-md font-semibold disabled:text-zinc-400" @if(!$item->statut) disabled @endif>
                         Restaurer
                     </button>
                 </form>
 
                 {{-- separator --}}
-                <div class=" w-0.5 h-6 bg-zinc-200"></div>
+                <div class=" w-0.5 h-[20px] bg-zinc-200"></div>
 
                 <span class="icon-hover cursor-pointer" id="plus">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="">
-                        <path d="M10 2V18M18 10L2 10" stroke="#71717a" stroke-width="2.5" stroke-linecap="round"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" color="#9FA6B2" fill="none">
+                        <path d="M12 4V20M20 12H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <svg width="20" height="4" viewBox="0 0 20 4" fill="none" xmlns="http://www.w3.org/2000/svg" class="hidden">
-                        <path d="M18 2L2 2" stroke="#71717a" stroke-width="2.5" stroke-linecap="round"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="#9FA6B2" fill="none" class="hidden">
+                        <path d="M20 12L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </span>
             </div>

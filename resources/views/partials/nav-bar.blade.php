@@ -10,21 +10,24 @@
             <input type="text" name='search' id="main-search" value="" placeholder="Rechercher" class="pr-3 pl-9 py-1.5 outline-none w-80 bg-transparent text-sm text-zinc-500 border border-zinc-300 bg-zinc-100 rounded focus:border-zinc-500">
         </div>
     </form>
-    <div class="flex items-center gap-4 ">
+    <div class="flex items-center gap-3 ">
+        
+        @if (in_array(auth()->user()->roles->nom, ['directeur', 'comptable']))
         <div class="icon-hover">
-            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.74399 8H19.744M7.74399 3H4.94399C3.82388 3 3.26383 3 2.83601 3.21799C2.45968 3.40973 2.15372 3.71569 1.96198 4.09202C1.74399 4.51984 1.74399 5.0799 1.74399 6.2V15.8C1.74399 16.9201 1.74399 17.4802 1.96198 17.908C2.15372 18.2843 2.45968 18.5903 2.83601 18.782C3.26383 19 3.82388 19 4.94399 19H16.544C17.6641 19 18.2241 19 18.652 18.782C19.0283 18.5903 19.3343 18.2843 19.526 17.908C19.744 17.4802 19.744 16.9201 19.744 15.8V6.2C19.744 5.0799 19.744 4.51984 19.526 4.09202C19.3343 3.71569 19.0283 3.40973 18.652 3.21799C18.2241 3 17.6641 3 16.544 3H13.744M7.74399 3H13.744M7.74399 3V2.5C7.74399 1.67157 7.07242 1 6.24399 1C5.41556 1 4.74399 1.67157 4.74399 2.5V3M13.744 3V2.5C13.744 1.67157 14.4156 1 15.244 1C16.0724 1 16.744 1.67157 16.744 2.5V3" stroke="#71717A" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-        </div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 7V3M16 7V3M7 11H17M5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21Z" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>                
+        </div>  
+        @endif
         <div class="icon-hover">
-            <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12.9153 19.6781C12.076 20.3981 10.9735 20.835 9.76606 20.835C8.55862 20.835 7.45615 20.3981 6.61685 19.6781M16.9048 11.7878V8.10743C16.9048 4.26333 13.7206 1.16504 9.76606 1.16504C5.81156 1.16504 2.58425 4.13125 2.58425 8.10743V11.7629C2.58425 12.322 2.49461 12.8774 2.31879 13.4077L1.4398 16.0592C1.41573 16.1318 1.46947 16.2067 1.54559 16.2067H17.9353C18.0158 16.2067 18.0729 16.1305 18.0482 16.0561L17.1632 13.3866C16.992 12.87 16.9048 12.3306 16.9048 11.7878Z" stroke="#71717A" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 17H20L18.595 15.595C18.4063 15.4063 18.2567 15.1822 18.1546 14.9357C18.0525 14.6891 18 14.4249 18 14.158V11C18.0002 9.75894 17.6156 8.54834 16.8992 7.53489C16.1829 6.52144 15.17 5.75496 14 5.341V5C14 4.46957 13.7893 3.96086 13.4142 3.58579C13.0391 3.21071 12.5304 3 12 3C11.4696 3 10.9609 3.21071 10.5858 3.58579C10.2107 3.96086 10 4.46957 10 5V5.341C7.67 6.165 6 8.388 6 11V14.159C6 14.697 5.786 15.214 5.405 15.595L4 17H9M15 17H9M15 17V18C15 18.7956 14.6839 19.5587 14.1213 20.1213C13.5587 20.6839 12.7956 21 12 21C11.2044 21 10.4413 20.6839 9.87868 20.1213C9.31607 19.5587 9 18.7956 9 18V17" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>                
         </div>
         {{-- profile utilisateur --}}
         <div class="flex items-center gap-3">
             <div>
-                <h2 class="text-sm font-semibold text-right text-zinc-800 capitalize">{{ auth()->user()->prenom." ".auth()->user()->nom }}</h2>
+                <h2 class="text-sm font-semibold text-right text-zinc-800 capitalize mb-1">{{ auth()->user()->prenom." ".auth()->user()->nom }}</h2>
                 <p class="text-xs text-right text-zinc-600 font-medium tracking-wide capitalize">{{ auth()->user()->roles->nom }}</p>
             </div>
             <div class="rounded-full border border-zinc-200 overflow-hidden flex items-center justify-center cursor-pointer">

@@ -25,7 +25,7 @@
                 <div class="mb-6">
                     <div class="w-full  flex flex-col mb-4">
                         <label for="email" class="text-zinc-700 font-medium">Email</label>
-                        <input type="text" name="email" placeholder="ahmada@univ-thies.sn" id="email" class="input-2" value="{{old('email')}}">
+                        <input type="text" name="email" placeholder="ahmada@univ-thies.sn" id="email" class="input-2" value="{{ old('email') }}">
                         @error('email')
                             <span class="text-red-600">{{ $message }}</span>
                         @enderror

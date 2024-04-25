@@ -2,7 +2,7 @@
 
 @section('cours')
 
-<div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
+<div class="px-4 py-3 bg-white rounded-lg shadow_2 flex items-center justify-between mb-7">
     {{-- barre de recherche --}}
     <form action="{{route('cours.approbation.search')}}" method="GET" class="flex items-center p-0 m-0">
         @csrf
@@ -133,7 +133,7 @@
         }
     @endphp
     @if ($flag)
-    <div class="flex items-center text-sm font-medium border border-zinc-200 h-[70px] py-2 rounded-md bg-white mb-4">
+    <div class="flex items-center text-sm font-medium  h-[70px] py-2 rounded-2xl shadow_2 bg-white mb-5">
         {{-- cols --}}
         <span class="px-4">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">

@@ -2,7 +2,7 @@
 
 @section('cours')
 
-<div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
+<div class="px-4 py-3 bg-white rounded-lg shadow_2 flex items-center justify-between mb-6">
     {{-- barre de recherche --}}
     <form action="{{route('shearch.cours')}}" method="get" class="flex items-center p-0 m-0">
         @csrf
@@ -132,26 +132,29 @@
             $total_duree=0;    
         @endphp
         @if($sceance_cour->status && $sceance_cour->cours->count() > 0)
-        <div class="text-sm h-20 overflow-hidden font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
+        <div class="text-[15px] h-20 overflow-hidden font-medium rounded-2xl shadow_2 px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
 
             {{-- resume --}}
-            <div class="min-h-20 flex items-center border-b border-zinc-200 mb-4">
+            <div class="min-h-20 flex items-center mb-4" id="ctn">
                 {{-- cols --}}
-                <span class="pr-4">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
+                <span class="mr-4">
+                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
                     </svg>
                 </span>
-                <span class="basis-[23%] grow pr-4">{{$sceance_cour->prenom." ".$sceance_cour->nom}}</span>
+                <span class="basis-[23%] grow pr-4 capitalize">{{$sceance_cour->prenom." ".$sceance_cour->nom}}</span>
                 <span class="basis-[22%] grow pr-4">{{$sceance_cour->email}}</span>
 
                 {{--calcul du total d'heure effectuer  par le vacataire--}}
                 @php
-                    $total=0;
+                    $total=0; 
                     foreach ($sceance_cour->cours as $cour)
-                        {
-                        $total +=  $cour->duree;
+                    {   
+                        $departs = $cour->matiere->filieres->map(function($item){ return $item->departement_id; });
+                        if($departs->has(auth()->user()->departement_id)){
+                            $total +=  $cour->duree;
                         }
+                    }
                 @endphp
                 {{--calcul du total d'heure effectuer  par le vacataire--}}
                 <span class="basis-[160px] font-bold pr-4">{{$total}} Heures</span>
@@ -173,7 +176,7 @@
                             @endif
 
                         @endforeach
-                        <button class="px-4 py-1 rounded bg-[#00B69B] text-white font-mtrph" @if(empty($cour_vide)) disabled @endif >envoyer</button>
+                        <button class="px-4 py-1 rounded bg-[#00B69B] text-white @if(empty($cour_vide)) bg-zinc-300 text-zinc-700 text-white @endif font-mtrph" @if(empty($cour_vide)) disabled @endif >envoyer</button>
                     </form>
                     {{-- separator --}}
                     <div class=" w-0.5 h-6 bg-zinc-200"></div>
@@ -195,7 +198,7 @@
                 {{-- t-head --}}
                 <div class="flex items-center text-sm text-zinc-800 font-nunito font-bold h-12  bg-[#F1F4F9] rounded">
                     {{-- cols --}}
-                    <span class="px-4">
+                    <span class="mx-4">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12.4444 0.888889H3.55556C2.0828 0.888889 0.888889 2.0828 0.888889 3.55556V12.4444C0.888889 13.9172 2.0828 15.1111 3.55556 15.1111H12.4444C13.9172 15.1111 15.1111 13.9172 15.1111 12.4444V3.55556C15.1111 2.0828 13.9172 0.888889 12.4444 0.888889ZM3.55556 0C1.59188 0 0 1.59188 0 3.55556V12.4444C0 14.4081 1.59188 16 3.55556 16H12.4444C14.4081 16 16 14.4081 16 12.4444V3.55556C16 1.59188 14.4081 0 12.4444 0H3.55556Z" fill="#1C1C1C" fill-opacity="0.2"/>
                         </svg>
@@ -245,7 +248,7 @@
                         <span class="basis-[14%] grow pr-4">{{date('d-m-Y', strtotime($cours->date))}}</span>
                         <span class="basis-[150px] font-semibold pr-4">{{$cours->duree}} Heure</span>
                         <span class="basis-[170px] flex justify-center text-xs">
-                            <span class="flex mx-auto px-4 @if($cours->statut) bg-emerald-100  text-emerald-500 @else text-amber-500 bg-amber-100 @endif py-1 rounded font-semibold">
+                            <span class="flex mx-auto px-4 @if($cours->statut) bg-emerald-100  text-emerald-500 @else text-fuchsia-500 bg-fuchsia-100 @endif py-1 rounded font-semibold">
                                 @if($cours->statut) Approuvé @else Non @endif
                             </span>
                         </span>
@@ -287,7 +290,7 @@
                 <div class="h-20 flex items-center justify-between">
                     <div class="flex gap-2 items-center">
                         <span class="text-zinc-400 font-semibold">Total :</span>
-                        <span class="text-zinc-500 font-medium bg-zinc-100 px-3 py-1.5 rounded">{{$total_duree}} Heures</span>
+                        <span class="text-zinc-500 text-sm font-medium bg-zinc-100 px-3 py-1.5 rounded-md">{{$total_duree}} Heures</span>
                     </div>
 
                     <div class="">

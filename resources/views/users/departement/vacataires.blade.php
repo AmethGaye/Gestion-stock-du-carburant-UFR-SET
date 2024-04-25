@@ -3,7 +3,7 @@
 @section('section')
     <section class="px-6 min-h-screen h-screen ">
 
-        <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-4">
+        <div class="px-4 py-3 bg-white rounded-lg shadow_2 flex items-center justify-between mb-6">
             {{-- barre de recherche --}}
             <form action="{{route('search.vacataires')}}"  method="get" class="flex items-center p-0 m-0">
                 @csrf
@@ -113,9 +113,9 @@
         <div class="text-green-500" id="success"></div>
 
 
-        <div class="bg-white rounded-md border border-zinc-200 relative">
+        <div class="bg-white rounded-3xl shadow_2 relative">
             {{-- t-head --}}
-            <div class="flex items-center text-sm text-zinc-400 font-bold py-5 border-b border-b-zinc-200 *:px-4 font-nunito">
+            <div class="flex items-center text-sm text-zinc-400 font-bold py-6 border-b border-b-zinc-200 *:px-4 font-nunito">
                 {{-- cols --}}
                 <span>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="checkbox" class="cursor-pointer">

@@ -108,50 +108,35 @@
         </div>
         <div class="bg-white col-span-5 rounded-3xl p-6 row-span-2">
             <div>
-                <p class="mb-4 font-medium">Vacataires recemment ajoutés</p>
+                <p class="mb-4 font-medium">Scéance de cours recemment ajoutés</p>
                 
                 <div class="relative">
                     {{-- t-head --}}
                     <div class="flex items-center text-sm text-zinc-400 font-nunito font-bold py-5 border-b ">
                         {{-- cols --}}
-                        <span class="basis-[28%] pr-4 grow">PRENOM & NOM</span>
-                        <span class="basis-[110px] pr-4">UFR</span>
-                        <span class="basis-[12%] pr-4 grow">ROLE</span>
-                        <span class="basis-[110px] pr-4">STATUT</span>
+                        <span class="basis-[20%] pr-4 grow">VACATAIRE</span>
+                        <span class="basis-[30%] pr-4 grow">MATIERE</span>
+                        <span class="basis-[140px] pr-4 ">DATE</span>
+                        <span class="basis-[110px] pr-4 text-center">DUREE</span>
                     </div>
                     {{-- t-body --}}
                     <div>
                         {{-- rows 1 --}}
-                        @foreach($users as $user)
+                        @foreach($cours as $item)
         
         
                         <div class="flex items-center text-sm text-zinc-500 font-medium py-5 border-b border-b-zinc-200">
                             {{-- cols --}}
     
-                            <span class="basis-[28%]  pr-4 grow flex items-center gap-4">
-                                @if($user->image)
-                                    <img src="{{ asset('storage/'.$user->image) }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
-                                @else
-                                    <img src="{{ asset('images/user.png') }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
-                                @endif
-                               {{$user->prenom }} {{$user->nom}}
+                            <span class="basis-[20%]  pr-4 grow flex items-center gap-4 capitalize">
+                               {{$item->vacataire->prenom }} {{$item->vacataire->nom}}
                             </span>
     
-                            <span class="basis-[110px] pr-4">SET</span>
+                            <span class="basis-[30%] pr-4 grow">{{ $item->matiere->nom }}</span>
 
-                            <span class="basis-[12%] grow pr-4 capitalize">{{$user->role}}</span>
+                            <span class="basis-[140px] pr-4 capitalize">{{$item->date}}</span>
 
-                            @if($user->status==1)
-                            <span class="basis-[110px]  pr-4 flex items-center">
-                                <span class="w-2 h-2 rounded-full bg-green-500 block mr-2"></span>
-                                <span class="font-semibold text">Active</span>
-                            </span>
-                            @else
-                                <span class="basis-[110px]  pr-4 flex items-center">
-                                <span class="w-2 h-2 rounded-full bg-zinc-400 block mr-2"></span>
-                                <span class="font-semibold text-zinc-400">Inactive</span>
-                            </span>
-                            @endif
+                            <span class="basis-[110px]  pr-4 text-center font-semibold">{{ $item->duree }} Heures</span>
                         </div>
         
                         @endforeach
@@ -164,7 +149,7 @@
 
         <div class="bg-white col-span-8 rounded-3xl p-6 row-span-2">
             <div>
-                <p class="mb-4 font-medium">Scéance de cours recemment ajoutés</p>
+                <p class="mb-4 font-medium">Vacataires recemment ajoutés</p>
                 
                 <div class="relative">
                     {{-- t-head --}}

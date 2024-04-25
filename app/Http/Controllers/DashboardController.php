@@ -142,11 +142,11 @@ class DashboardController extends Controller
             }
             
             
-            $users = User::latest()->limit(4)->get();
+            $cours = Cours::latest()->limit(5)->get();
             $vacataires = Vacataire::latest()->limit(5)->get();
 
             return view('users.departement.dashboard', 
-            compact('users', 'vacataires','total_vacataires','percent_vacataires_add_on_month','vacataires_active','percent_vac_active','sceance_cours_non_approuve','total_demandes','percent_cours_non_approuve','percent_cours_envoye'));
+            compact('cours', 'vacataires','total_vacataires','percent_vacataires_add_on_month','vacataires_active','percent_vac_active','sceance_cours_non_approuve','total_demandes','percent_cours_non_approuve','percent_cours_envoye'));
         }
 
         if($user_role == 'comptable'){
