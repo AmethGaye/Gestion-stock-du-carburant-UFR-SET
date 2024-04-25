@@ -107,8 +107,7 @@
                             <span class="flex items-center justify-center bg-[#E2FBD7] px-3 text-[#34B53A] py-1.5 rounded
                             font-semibold text-xs">Validé</span>
                         @else
-                            <span class="w-4 h-1 rounded-full bg-amber-500">
-                            </span>
+                            <span class="w-4 h-1 rounded-full bg-amber-500 flex items-center justify-center"></span>
                         @endif
                     </span>
                 </div>

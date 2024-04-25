@@ -69,15 +69,15 @@ class RemboursementController extends Controller
         }
 
         if($user_role == 'comptable'){
-            $vacataires = Vacataire::where('status', '1')      
+            $vacataires = Vacataire::whereHas('cours.remboursement' ,function($query){$query
+                    ->whereIn('statut', ['1', '2']);})
+                    ->where('status', '1')      
                     ->with([
                         'cours' => function($query){$query->where('demande', '1');},
-                        'cours.remboursement' => function($query){$query
-                            ->whereIn('statut', ['1', '2']);},
                         'cours.matiere'
                         ])
                     ->get();
-                    
+                  //dd($vacataires)  ;
             return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
         }
     }
@@ -203,6 +203,25 @@ class RemboursementController extends Controller
 
 
     public function filtre_by_month_comptable(Request $request){
+        $tableau_distance = [
+        
+            'Dakar'=> 74.7,
+            'Diourbel'=> 112.8,
+            'Louga'=> 112,8 ,
+            'Saint-louis'=> 192.8,
+            'Thies'=> 0.0,
+            'Matam'=> 473.2,
+            'Tambacounda'=> 453.0,
+            'Kolda'=> 676.2,
+            'Sedhiou'=> 367.7,
+            'Ziguinchor'=> 429.2,
+            'Fatick'=> 115.8,
+            'Kaffrine'=> 239.1,
+            'Kaolack'=> 171.3,
+            'Kedougou'=> 686.5,
+    
+    
+           ];
         $num_month = $request->month;
         $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();
         $endOfMonth = Carbon::create(null, $num_month, 1)->endOfMonth();
@@ -222,7 +241,7 @@ class RemboursementController extends Controller
             ])
             ->get();
     
-        return view('users.comptable.remboursement', compact('vacataires'));
+        return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
     }
     
     
@@ -272,6 +291,25 @@ class RemboursementController extends Controller
      * Le comptable .
      */
     public function filtre(Request $request) {
+        $tableau_distance = [
+        
+            'Dakar'=> 74.7,
+            'Diourbel'=> 112.8,
+            'Louga'=> 112,8 ,
+            'Saint-louis'=> 192.8,
+            'Thies'=> 0.0,
+            'Matam'=> 473.2,
+            'Tambacounda'=> 453.0,
+            'Kolda'=> 676.2,
+            'Sedhiou'=> 367.7,
+            'Ziguinchor'=> 429.2,
+            'Fatick'=> 115.8,
+            'Kaffrine'=> 239.1,
+            'Kaolack'=> 171.3,
+            'Kedougou'=> 686.5,
+    
+    
+           ];
         $vacataires = Vacataire::where('status', '1')      
                         ->with([
                             'cours' => function($query) {
@@ -301,7 +339,7 @@ class RemboursementController extends Controller
         $vacataires = $vacataires->get();
         
     
-        return view('users.comptable.remboursement', compact('vacataires'));
+        return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
     }
     
     

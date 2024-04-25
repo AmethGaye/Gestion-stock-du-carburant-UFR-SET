@@ -111,7 +111,7 @@ class CoursController extends Controller
     public function approbation_search(Request $request){
         $search=$request->input('search','');
         $search="%{$search}%";
-        
+        $departement=auth()->user()->departement->id;
 
         $filieres = Filiere::all();
         $matieres = Matiere::all();
@@ -120,7 +120,7 @@ class CoursController extends Controller
         $sceance_cours=Cours::query()->whereAny(['duree','statut','demande','remarque'],'like',$search)
                                       ->orWhereHas('vacataire', function ($query) use ($search){$query->whereAny(['nom','prenom','provenance','origine','telephone','email'],'like',$search);})
                                       ->orWhereHas('matiere', function ($query) use ($search){$query->whereAny(['nom','volume_horaire','semestre'],'like',$search);})
-                                      ->orWhereHas('matiere.filieres', function ($query) use ($search){$query->whereAny(['nom'],'like',$search);})
+                                      ->orWhereHas('matiere.filieres', function ($query) use ($search,$departement){$query->whereAny(['nom'],'like',$search)->where('departement_id',$departement);})
                                       ->with(['vacataire','matiere'])->get();
        //dd($sceance_cours);
         return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
@@ -269,6 +269,7 @@ class CoursController extends Controller
     public function search(Request $request){
          $search = $request->input('search', '');
          $search = "%{$search}%";
+         $departement=auth()->user()->departement->id;
          
         $id_user=auth()->user()->getAuthIdentifier();
         $vacataires = Vacataire::where('status','=',1)
@@ -277,6 +278,9 @@ class CoursController extends Controller
               $filieres = Filiere::with('matieres')->get();
               
               $vacataires_sceances = Vacataire::whereAny(['nom','prenom','email','provenance'],'like', $search)
+                                                ->orWhereHas('cours', function ($query) use ($search){ $query->whereAny(['remarque','statut','demande','duree','date'],'like',$search);})
+                                                ->orWhereHas('cours.matiere', function ($query) use ($search){$query->whereAny(['nom','volume_horaire','semestre'],'like',$search);})
+                                                ->orWhereHas('cours.matiere.filieres',function ($query) use ($search,$departement){ $query->where('nom','like',$search)->where('departement_id',$departement);})
                                                 ->where('ufr_id', auth()->user()->ufr->id)
                                                 ->with([
                                                        'cours' => function($query){
