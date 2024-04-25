@@ -91,7 +91,33 @@ class UserController extends Controller
             return response()->json(['errors' => $validator->errors()]);
         }
 
-        User::where('id', $id)->update(['nom', 'prenom', 'sexe', 'ufr_id', 'email', 'telephone', 'role', 'date_naiss', 'departemen_id']);
+        if($request->filled('departement_id')){
+            User::where('id', $id)->update( [
+                'nom' => $request->nom,
+                'prenom'=> $request->prenom,
+                'email' => $request->email,
+                'role_id'=> $request->role_id,
+                'telephone'=> $request->telephone,
+                'sexe'=> $request->sexe,
+                'ufr_id' => $request->ufr_id,
+                'date_naiss'=> $request->date_naiss,
+                'password'=>Hash::make($request->password),
+                'departement_id' => $request->departement_id
+            ]);
+        }else{
+            User::where('id', $id)->update( [
+                'nom' => $request->nom,
+                'prenom'=> $request->prenom,
+                'email' => $request->email,
+            'role_id'=> $request->role_id,
+                'telephone'=> $request->telephone,
+                'sexe'=> $request->sexe,
+                'ufr_id' => $request->ufr_id,
+                'date_naiss'=> $request->date_naiss,
+                'password'=>Hash::make($request->password),
+            ]);
+        }
+
         return response()->json(['success' => true, 'msg' => 'Mise à jour de l\'utilisteur réussie avec succès !']);
     }
 
