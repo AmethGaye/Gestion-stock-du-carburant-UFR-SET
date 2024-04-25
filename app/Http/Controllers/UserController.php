@@ -72,7 +72,7 @@ class UserController extends Controller
                 'nom' => $request->nom,
                 'prenom'=> $request->prenom,
                 'email' => $request->email,
-                'role_id'=> $request->role_id,
+            'role_id'=> $request->role_id,
                 'telephone'=> $request->telephone,
                 'sexe'=> $request->sexe,
                 'ufr_id' => $request->ufr_id,

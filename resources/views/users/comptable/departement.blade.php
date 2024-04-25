@@ -1,7 +1,7 @@
 @extends('users.comptable.dotation')
 
 @section('dotation')
-    <div class="bg-white border border-zinc-200 rounded-lg px-8 py-6 font-mtrph">
+    <div class="bg-white rounded-3xl shadow_2 px-8 py-6 font-mtrph">
         <h1 class="font-semibold text-lg text-zinc-600 mb-10">Dotation Régulier Des Départements</h1>
         <form action="{{ route('dotation.depart') }}" method="POST" class="m-0 mt-6">
             @csrf
@@ -25,7 +25,7 @@
                 <div class="w-full  flex flex-col mb-4">
                     <label for="ticket" class="font-medium text-zinc-700">Tickets</label>
                     <div class="w-full relative ">
-                        <input type="number" name="ticket" id="ticket" value="@old('ticket')" class="input-2 w-full">
+                        <input type="number" name="ticket" id="ticket" value="@old('ticket', 200)" class="input-2 w-full">
                         @error('ticket')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror

@@ -3,7 +3,7 @@
 @section('section')
 <section class="px-6 min-h-screen h-screen">
 
-<div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
+<div class="px-4 py-3 bg-white rounded-lg shadow_2 flex items-center justify-between mb-6">
     {{-- barre de recherche --}}
     <form action="{{route('search.remboursements')}}" method="GET" class="flex items-center p-0 m-0">
         @csrf
@@ -98,11 +98,11 @@
 
 <div class="flex items-center text-sm text-zinc-400 font-nunito font-bold py-4 px-6">
     {{-- cols --}}
-    <span class="basis-3/12 grow pr-4">VACATAIRE</span>
+    <span class="basis-[20%] grow pr-4">VACATAIRE</span>
     <span class="basis-3/12 grow pr-4">EMAIL</span>
     <span class="basis-2/12 grow pr-4">PROVENANCE</span>
     <span class="basis-[160px] pr-4">DUREE TOTALE</span>
-    <span class="basis-[180px] text-center">SITUATION</span>
+    <span class="basis-[190px] text-center">SITUATION</span>
     <span class="basis-[160px] pr-4">DISTANCE</span>
     <span class="basis-[140px] text-center">ACTION</span>
 </div>
@@ -111,21 +111,21 @@
 {{-- row 1 --}}
 @foreach($vacataires as $vacataire)
     @if ($vacataire->cours->count() > 0)
-        <div class="text-sm h-20 overflow-hidden text-zinc-600 font-medium border border-zinc-200 rounded-md px-6 bg-white mb-4 relative transition-[height]" id="super-contain">
+        <div class="text-[15px] h-20 overflow-hidden  font-medium rounded-2xl shadow_2 px-6 bg-white mb-4 relative transition-[height]" id="super-contain">
 
             {{-- resume --}}
-            <div class="h-20 relative flex items-center border-b border-zinc-300 mb-4">
+            <div class="h-20 relative flex items-center mb-4" id="ctn">
                 {{-- cols --}}
-                <span class="basis-3/12 grow pr-4">{{ $vacataire->prenom }} {{ $vacataire->nom }}</span>
+                <span class="basis-[20%] grow pr-4">{{ $vacataire->prenom }} {{ $vacataire->nom }}</span>
                 <span class="basis-3/12 grow pr-4">{{ $vacataire->email }}</span>
                 <span class="basis-2/12 grow pr-4">{{ $vacataire->provenance }}</span>
                 <span class="basis-[160px] pr-4 font-bold">{{ $vacataire->cours->sum('duree') }} Heures</span>
                 @php
-                    $array = ['bg-blue-100', 'px-4 text-blue-500' => $vacataire->situation == 1, 'bg-fuchsia-100', 'text-fuchsia-500' => $vacataire->situation == 0];
+                    $array = ['bg-blue-100', 'text-blue-500' => $vacataire->situation == 1, 'bg-fuchsia-100', 'text-fuchsia-500' => $vacataire->situation == 0];
                     $classes = Arr::toCssClasses($array);
                 @endphp
-                <span class="basis-[180px] flex  justify-center">
-                    <span class="flex items-center {{ $classes }}px-4  py-1 rounded font-semibold text-xs">  @if ($vacataire->situation) Véhiculé @else Non @endif</span>
+                <span class="basis-[190px] flex  justify-center">
+                    <span class="flex items-center {{ $classes }} px-4  py-1 rounded font-semibold text-xs">  @if ($vacataire->situation) Véhiculé @else Non @endif</span>
                 </span>
                 <span class="w-[160px] font-bold pr-4">423.23 KM</span>
 

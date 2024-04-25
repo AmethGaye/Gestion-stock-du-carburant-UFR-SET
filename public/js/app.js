@@ -80,10 +80,14 @@ try {
             if(superContainer[index].classList.contains('h-20')){
                 superContainer[index].style = "height :"+height+"px";
                 superContainer[index].classList.remove('h-20');
+                document.querySelectorAll('#ctn')[index].classList.add('border-b','border-zinc-300');
+                // console.log(document.querySelectorAll('#ctn')[index])
                 // superContainer[index].classList.replace('h-20', 'h-['+height+']');
             }else{
                 superContainer[index].style = "";
                 superContainer[index].classList.add('h-20');
+                document.querySelectorAll('#ctn')[index].classList.remove('border-b','border-zinc-300');
+
             }
         })
     });

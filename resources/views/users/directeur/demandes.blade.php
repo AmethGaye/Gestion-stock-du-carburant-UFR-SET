@@ -4,7 +4,7 @@
 <section class="px-6 min-h-screen h-screen ">
     {{-- {{ \Carbon\Carbon::parse(Auth::user()->created_at)->translatedFormat('d F Y à H\hi') }} --}}
 
-    <div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
+    <div class="px-4 py-3 bg-white rounded-lg shadow_2 flex items-center justify-between mb-6">
         {{-- barre de recherche --}}
         <form action="{{route('search.demandes')}}" method="get" class="flex items-center p-0 m-0">
             @csrf
@@ -108,12 +108,12 @@
         @foreach($liste_remboursement as $vacataire)
         {{-- row 1 --}}
         @if ($vacataire->cours->count() > 0)
-        <div class="text-sm h-20 overflow-hidden text-zinc-600 font-medium border border-zinc-200 rounded-md px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
+        <div class="text-[15px] h-20 overflow-hidden rounded-2xl shadow_2  font-medium px-4 bg-white mb-4 relative transition-[height] duration-150" id="super-contain">
             @php $total_cours_dispense=0;
             foreach($vacataire->cours as $cours){  $total_cours_dispense += $cours->duree; }
             @endphp
             {{-- resume --}}
-            <div class="h-20 relative flex items-center border-b border-zinc-300 mb-4 ">
+            <div class="h-20 relative flex items-center  mb-6 " id="ctn">
                 <div class="flex items-center w-full py-3">
                     <span class="basis-[24%] grow pl-2 pr-4">{{$vacataire->prenom." ".$vacataire->nom}}</span>
                     <span class="basis-[22%] grow pr-4">{{$vacataire->email}}</span>
@@ -228,8 +228,7 @@
     </div>
 
 
-    {{-- pagination --}}
-    @include('partials.pagination')
+    
 
 </section>
 

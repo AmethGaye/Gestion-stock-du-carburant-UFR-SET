@@ -1,7 +1,7 @@
 @extends('users.comptable.dotation')
 
 @section('dotation')
-<div class="px-4 py-3 bg-white rounded-md border border-zinc-200 flex items-center justify-between mb-6">
+<div class="px-4 py-3 bg-white rounded-xl shadow_2 flex items-center justify-between mb-6">
     {{-- barre de recherche --}}
     <form action="{{route('search.historique')}}" method="get" class="flex items-center p-0 m-0">
         @csrf
@@ -93,10 +93,10 @@
 {{-- ========================================================================================================= --}}
 
 
-<div class="bg-white border border-zinc-200 rounded-lg text-sm mb-8">
-    <div class="px-6 py-4 flex items-center justify-between border-b border-b-zinc-200">
+<div class="bg-white rounded-3xl shadow_2 text-sm mb-8">
+    <div class="px-6 py-5 flex items-center justify-between border-b border-b-zinc-200">
         <div class="flex items-center gap-4">
-            <h2 class="text-lg font-medium text-zinc-600 m-0">Départements</h2>
+            <h2 class="text-base font-medium text-zinc-600 m-0">Départements</h2>
             <div class="flex justify-center items-center">
                 <span class="flex items-center bg-[#E2FBD7] px-3 text-[#34B53A] py-1.5 rounded-xl font-semibold text-[small] tracking-wider">Janvier</span>
             </div>
@@ -139,10 +139,10 @@
 
 {{-- ========================================================================================================= --}}
 
-<div class="bg-white border border-zinc-200 rounded-lg text-sm">
-    <div class="px-6 py-4 flex items-center justify-between border-b border-b-zinc-200">
+<div class="bg-white rounded-3xl shadow_2 text-sm">
+    <div class="px-6 py-5 flex items-center justify-between border-b border-b-zinc-200">
         <div class="flex items-center gap-4">
-            <h2 class="text-lg font-medium text-zinc-600 m-0">Administration</h2>
+            <h2 class="text-base font-medium text-zinc-600 m-0">Administration</h2>
             <div class="flex justify-center items-center">
                 <span class="flex items-center bg-[#E2FBD7] px-3 text-[#34B53A] py-1.5 rounded-xl font-semibold text-[small] tracking-wider">Janvier</span>
             </div>

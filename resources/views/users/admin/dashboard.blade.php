@@ -92,7 +92,7 @@
         </div>
         <div class="bg-white col-span-5 rounded-3xl p-6 row-span-2">
             <div>
-                <p class="mb-4 font-medium">Utilisateurs recemment ajoutés</p>
+                <p class="mb-4 text-xl text-zinc-600">Utilisateurs recemment ajoutés</p>
                 
                 <div class="relative">
                     {{-- t-head --}}
