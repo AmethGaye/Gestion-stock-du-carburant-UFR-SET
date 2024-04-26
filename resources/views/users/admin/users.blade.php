@@ -127,14 +127,19 @@
                     <span class="basis-[100px]">{{$user->ufr->nom}}</span>
                     @if($user->status==1)
                     <span class="basis-[130px]  pr-4 flex items-center mr-2">
-                        <form action="" method="POST" class="m-0 ">
+                        @php $id=$user->id @endphp
+                        <form action="{{route('disable.user',compact('id'))}}" method="POST" class="m-0 "> 
+                            @csrf
+                            
                             <button class="p-1.5 rounded-full hover:bg-zinc-100"><div class="w-2 h-2 rounded-full bg-green-500 block"></div></button>
                         </form>
                         <span class="font-semibold text ml-1">Active</span>
                     </span>
                     @else
+                    @php $id=$user->id @endphp
                         <span class="basis-[130px]  pr-4 flex items-center">
-                            <form action="" method="POST" class="m-0 ">
+                            <form action="{{route('disable.user',compact('id'))}}" method="POST" class="m-0 ">
+                                @csrf
                                 <button class="p-1.5 rounded-full hover:bg-zinc-100"><div class="w-2 h-2 rounded-full bg-zinc-400 block"></div></button>
                             </form>
                             <span class="font-semibold text-zinc-400">Inactive</span>

@@ -97,7 +97,19 @@ class UserController extends Controller
         }
         return response()->json(['success' => true, 'msg' => "L'utilisateur ajouté avec succés !"]);
     }
+  public function disable($id){
+   
+    $user=User::find($id);
+    if($user->status==1){
+        User::where('id',$id)->update(['status'=>0]);
+        return redirect()->back();
+    }
+    if($user->status ==0){
+        User::where('id',$id)->update(['status'=>1]);
+        return redirect()->back();
+    }
 
+  }
 
     public function update(Request $request, string $id){
         $validator = Validator::make($request->all(),$this->rules(true), $this->messages());

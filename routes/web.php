@@ -64,6 +64,7 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('adm
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 Route::get('/admin/users/search', [UserController::class, 'search'])->name('search.users');
 Route::post('/admin/users/{id}', [UserController::class, 'update'])->name('admin.update');
+Route::post('/admin/users/{id}', [UserController::class, 'disable'])->name('disable.user');
 Route::get('/admin/users/filtre', [UserController::class, 'filtre'])->name('filtre.users');
 
 Route::get('/admin/roles', [RoleController::class, 'index'])->name('admin.roles');
