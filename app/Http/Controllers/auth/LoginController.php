@@ -60,19 +60,19 @@ class LoginController extends Controller
            switch ($user_role){
                case 'admin' :
                     return redirect()->route('admin.dashboard');
-                    break;
+                    
                 case 'directeur':
                     return redirect()->route('directeur.dashboard');
-                    break;
+                    
                case 'comptable':
                     return redirect()->route('comptable.dashboard');
-                    break;
+                    
                 case 'assistant' || 'chef_departement':
                     return redirect()->route('departement.dashboard');
-                    break;
+                    
                default :
                     return redirect()->route('auth.login')->withErrors(['email'=>'email invalide ou mot de passe erroné']);
-                    break;
+                    
 
            }
 
