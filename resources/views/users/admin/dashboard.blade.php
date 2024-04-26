@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('section')
-    <section class="min-h-[90vh] px-6 grid grid-cols-8 grid-rows-[170px_repeat(2,_minmax(0,_1fr))] gap-7">
+    <section class="min-h-[90vh] px-6 grid grid-cols-8 grid-rows-[170px_repeat(2,_minmax(200px,_1fr))] gap-7">
         <div class="grid col-span-8 row-span-1 grid-cols-4 gap-x-7 *:p-6">
             <div class="bg-white rounded-3xl shadow_3 flex flex-col justify-between">
                 <div class=" flex items-start justify-between">
