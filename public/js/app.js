@@ -15,6 +15,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
 
+try {
+    let progressCircle = document.querySelector('.progress');
+    let radius = progressCircle.r.baseVal.value;
+    let circumference = radius * 2 * Math.PI;
+    progressCircle.style.strokeDasharray = circumference;
+    // progressCircle.style.strokeDashoffset = 300
+    setProgress(95)
+
+    function setProgress(parcent) {
+        progressCircle.style.strokeDashoffset = circumference * (1 - parcent / 100);
+    }
+} catch (error) {
+    
+}
+
 
 // les variables
 const container = document.querySelector('#container');

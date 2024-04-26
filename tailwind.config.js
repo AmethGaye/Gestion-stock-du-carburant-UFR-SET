@@ -13,6 +13,9 @@ export default {
         'mtrph' : ['Metrophobic'],
         'tt-web' : ['Titillium Web'],
         'inter' : ['inter'],
+      },
+      gridColumn: {
+        'span-14': 'span 14 / span 14',
       }
     },
   },
