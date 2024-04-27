@@ -181,7 +181,7 @@
                         <span class="basis-3/12 grow pr-4">{{ $cours->matiere->nom }}</span>
                         <span class="basis-40 shrink-0 pr-4 pl-[1.5px]"> Semestre {{ $cours->matiere->semestre }} </span>
                         <span class="basis-2/12 grow pr-4  pl-[1.5px]">{{ date('d-m-Y', strtotime($cours->date)) }}</span>
-                        <span class="basis-32 font-bold pr-4  pl-[1.5px]">{{ $cours->duree }} heures</span>
+                        <span class="basis-32 font-bold pr-4  pl-[1.5px]">{{ $cours->duree}} heures</span>
                         <span class="basis-[140px] flex pr-4 justify-center">
                                 <div class="w-28 relative ">
                                     <input type="number" name="" id="number"  value="{{ $cours->remboursement->nombre_tickets }}" class="border-[1.5px] border-zinc-200 w-full rounded-md outline-none focus:border-zinc-500 px-4 py-2 font-bold text-zinc-600 disabled:text-zinc-400" @if ($cours->remboursement->statut == 2) @disabled(true) @endif>

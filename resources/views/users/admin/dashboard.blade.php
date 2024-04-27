@@ -123,7 +123,7 @@
     
                             <span class="basis-[110px] pr-4">SET</span>
 
-                            <span class="basis-[12%] grow pr-4 capitalize">{{$user->role}}</span>
+                            <span class="basis-[12%] grow pr-4 capitalize">{{$user->roles->nom}}</span>
 
                             @if($user->status==1)
                             <span class="basis-[110px]  pr-4 flex items-center">

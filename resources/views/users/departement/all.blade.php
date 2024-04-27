@@ -147,15 +147,17 @@
 
                 {{--calcul du total d'heure effectuer  par le vacataire--}}
                 @php
-                    $total=0; 
-                    foreach ($sceance_cour->cours as $cour)
-                    {   
-                        $departs = $cour->matiere->filieres->map(function($item){ return $item->departement_id; });
-                        if($departs->has(auth()->user()->departement_id)){
-                            $total +=  $cour->duree;
+                        $total = 0;
+                        $departement_id = auth()->user()->departement->id;
+                        foreach ($sceance_cour->cours as $cour)
+                         {
+                           if ($cour->matiere->filieres->pluck('departement_id')->contains($departement_id))
+                            {
+                                $total += $cour->duree; 
+                            }
                         }
-                    }
                 @endphp
+            
                 {{--calcul du total d'heure effectuer  par le vacataire--}}
                 <span class="basis-[160px] font-bold pr-4">{{$total}} Heures</span>
                 <span class="basis-[160px] pr-4">{{$sceance_cour->provenance}}</span>
