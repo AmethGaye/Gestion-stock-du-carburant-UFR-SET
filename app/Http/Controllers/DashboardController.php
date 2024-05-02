@@ -30,7 +30,6 @@ class DashboardController extends Controller
     
         if($user_role == 'admin'){
             $total_users=User::all()->count();
-
             $users_ufr_set=User::whereHas('ufr',function($query)use ($ufr){
                 $query->where('nom',$ufr->nom);
             })->count();

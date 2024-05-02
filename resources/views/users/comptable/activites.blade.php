@@ -130,9 +130,8 @@
                     @php
                       $distance=0;
                       foreach ($tableau_distance as $ville=> $value) {
-                           if($ville==$item->lieux)
-                           {
-                              $distance=$value;
+                           if($ville==$item->lieux){
+                            $distance=$value;
                            }
                       }
                     @endphp

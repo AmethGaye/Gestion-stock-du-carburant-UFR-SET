@@ -245,7 +245,7 @@
                         <span class="text-zinc-600 font-semibold bg-zinc-100 btn-2 ml-2">8 Heures</span>
                         {{-- separator --}}
                         <div class=" w-0.5 h-5 bg-zinc-200"></div>
-                        <span class="text-zinc-600 font-semibold bg-zinc-100 btn-2 ">10 tickets</span>
+                        <span class="text-zinc-600 font-semibold bg-zinc-100 btn-2 ">4 tickets</span>
                     </div>
 
                     <div class="flex gap-2">

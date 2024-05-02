@@ -20,6 +20,11 @@
                     @error('email')
                          <span class="text-red-500">{{ $message }}</span>
                     @enderror
+                    
+                    @if(session('success'))
+                    
+                    <span class="text-green-500">{{ session('success') }}</span>
+                    @endif
                 </div>
 
                 <div class="flex flex-col">

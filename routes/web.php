@@ -46,7 +46,7 @@ Route::get('/login', [LoginController::class, 'create'])->name('auth.login')->mi
 Route::post('/login', [LoginController::class, 'login']);
 
 // deconnexion d'un utlisateur
-Route::post('/logout', [LogoutController::class, 'logout'])->name('auth.logout')->middleware('auth')->middleware('auth');
+Route::post('/logout', [LogoutController::class, 'logout'])->name('auth.logout')->middleware('auth');
 
 // oubli de mot de passe
 Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.email')->middleware('guest');
