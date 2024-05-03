@@ -90,7 +90,7 @@
                     
             </div>
         </div>
-        <div class="bg-white col-span-5 rounded-3xl p-6 row-span-2">
+        <div class="bg-white col-span-8 rounded-3xl p-6 row-span-2">
             <div>
                 <p class="mb-4 text-xl text-zinc-600">Utilisateurs recemment ajoutés</p>
                 
@@ -123,7 +123,7 @@
     
                             <span class="basis-[110px] pr-4">SET</span>
 
-                            <span class="basis-[12%] grow pr-4 capitalize">{{$user->role}}</span>
+                            <span class="basis-[12%] grow pr-4 capitalize">{{$user->roles->nom}}</span>
 
                             @if($user->status==1)
                             <span class="basis-[110px]  pr-4 flex items-center">
@@ -143,6 +143,6 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white col-span-3 rounded-3xl p-6 row-span-2">diskpart list disk select diks one list volume detail volume</div>
+        
     </section>
 @endsection

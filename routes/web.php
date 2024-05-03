@@ -157,6 +157,7 @@ Route::post('departement/demande_remboursement', [RemboursementController::class
 */
 
 Route::get('/comptable/dashboard', [DashboardController::class, 'index'])->name('comptable.dashboard');
+Route::get('/stats', [DashboardController::class, 'getStats']);
 
 Route::get('comptable/remboursements', [RemboursementController::class, 'index'])->name('comptable.remboursements');
 Route::get('comptable/remboursements/search', [RemboursementController::class, 'search'])->name('search.remboursements');
@@ -183,6 +184,8 @@ Route::get('comptable/dotation/historique/search', [HistoriqueController::class,
 
 Route::get('comptable/dotation/historique/filtre', [HistoriqueController::class, 'filtre_historique'])->name('filtre.historique');
 Route::get('comptable/dotation/historique/month', [HistoriqueController::class, 'filtre_historique_month'])->name('filtre.historique.month');
+
+
 
 
 /*

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->decimal('volume');
             $table->decimal('prix_unitaire');
             $table->decimal('prix_total');
-            $table->unsignedTinyInteger('nombre_ticket');
+            $table->unsignedInteger('nombre_ticket');
             $table->timestamps();
         });
     }

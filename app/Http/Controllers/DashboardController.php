@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activite;
-use App\Models\Cours;
-use App\Models\Remboursement_vac;
-use App\Models\Role;
-use App\Models\Ufr;
-use App\Models\User;
-use App\Models\Vacataire;
 use Carbon\Carbon;
+use App\Models\Ufr;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Cours;
+use App\Models\Stock;
+use App\Models\Activite;
+use App\Models\Vacataire;
 use Illuminate\Http\Request;
+use App\Models\Remboursement_vac;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -150,9 +152,67 @@ class DashboardController extends Controller
         }
 
         if($user_role == 'comptable'){
+
+            
             return view('users.comptable.dashboard');
         }
 
 
+    }
+    public function getStats (){
+
+
+        // Année courante
+        $anneeCourante = Carbon::now()->year;
+
+        // Tableau des mois en français
+        $moisEnFrancais = [
+            1 => 'Janvier', 2 => 'Février', 3 => 'Mars', 4 => 'Avril',
+            5 => 'Mai', 6 => 'Juin', 7 => 'Juillet', 8 => 'Août',
+            9 => 'Septembre', 10 => 'Octobre', 11 => 'Novembre', 12 => 'Décembre'
+        ];
+
+        // Tableau pour stocker le nombre de jours de chaque mois
+        $nombreDeJoursParMois = [];
+
+        // Boucle à travers les mois de l'année courante
+        for ($mois = 1; $mois <= 12; $mois++) {
+            // Créer un objet Carbon pour le premier jour du mois
+            $premierJour = Carbon::create($anneeCourante, $mois, 1);
+            // Obtenir le nombre de jours dans ce mois
+            $nombreDeJours = $premierJour->daysInMonth;
+            // Stocker le nombre de jours dans le tableau
+            $nombreDeJoursParMois[$moisEnFrancais[$mois]] = $nombreDeJours;
+        }
+
+        // Année pour laquelle vous voulez récupérer les données
+        $annee = 2024;
+
+        // Requête pour récupérer la quantité totale pour chaque mois de l'année donnée en utilisant Eloquent
+        $quantiteParMois = Stock::select(DB::raw('MONTH(date) as mois'), DB::raw('SUM(quantity) as quantite_totale'))
+            ->whereYear('date', $annee)
+            ->groupBy(DB::raw('MONTH(date)'))
+            ->get();
+
+        $moisEnFrancais = [];
+        foreach ($quantiteParMois as $quantite) {
+            $moisEnFrancais[Carbon::createFromFormat('!m', $quantite->mois)->monthName] = $quantite->quantite_totale;
+        }
+
+        // Année et mois pour lesquels vous voulez récupérer les données
+        $annee = 2024;
+        $mois = 5; // Par exemple, mai
+
+        // Requête pour récupérer la quantité par jour pour un mois donné
+        // $quantiteParJour = Stock::select('date', DB::raw('SUM(quantity) as quantite_totale'))
+        //     ->whereYear('date', $annee)
+        //     ->whereMonth('date', $mois)
+        //     ->groupBy('date')
+        //     ->get();
+
+        // $quantiteParJour contient la quantité par jour pour le mois donné
+        // $quantiteParMois contient la quantité totale pour chaque mois de l'année donnée
+
+        return response()->json($nombreDeJoursParMois);
     }
 }

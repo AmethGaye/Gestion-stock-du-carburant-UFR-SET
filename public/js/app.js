@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         sessionStorage.removeItem('msg')
     }
     try {
-        document.querySelector('#opt-choosen').value = sessionStorage.getItem('month') || "Janvier";
+        document.querySelector('#opt-choosen').value = sessionStorage.getItem('month') || "Mois";
         sessionStorage.removeItem('month');
     } catch (error) {
         
@@ -21,7 +21,7 @@ try {
     let circumference = radius * 2 * Math.PI;
     progressCircle.style.strokeDasharray = circumference;
     // progressCircle.style.strokeDashoffset = 300
-    setProgress(95)
+    setProgress(70)
 
     function setProgress(parcent) {
         progressCircle.style.strokeDashoffset = circumference * (1 - parcent / 100);
