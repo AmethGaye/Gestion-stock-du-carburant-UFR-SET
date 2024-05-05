@@ -58,7 +58,7 @@ class ForgotPasswordController extends Controller
         });
 
         return redirect()->to(route('password.email'))
-            ->with('success', 'Nous vous avons envoyé un email pour la réinitialisation de votre mot de passe.');
+            ->with('success', 'Veuillez consulter votre boite e-mail pour la reinitialisation de votre mot de passe.');
     }
 
 

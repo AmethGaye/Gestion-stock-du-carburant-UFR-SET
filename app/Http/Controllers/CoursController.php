@@ -24,25 +24,40 @@ class CoursController extends Controller
      * Display a listing of the resource.
      */
     public function index()
+    
     {
-       $id_user=auth()->user()->getAuthIdentifier();
-        $vacataires = Vacataire::where('status','=',1)
-                ->where('ufr_id', auth()->user()->ufr->id)
-                ->get();
-        $filieres = Filiere::with('matieres')->get();
-        //dd($filieres);
-        $vacataires_sceances = Vacataire::where('ufr_id', auth()->user()->ufr->id)
-                ->with([
-                    'cours' => function($query){
-                        $query->where('demande', '0');
-                    },
-                    'cours.matiere',
-                ])->get();
-        
-      //dd($vacataires_sceances);
-
-        return view('users.departement.all',compact('vacataires','filieres','vacataires_sceances'));
+        $id_user = auth()->user()->getAuthIdentifier();
+        $ufr_id = auth()->user()->ufr->id;
+        $departement_id = auth()->user()->departement->id;
+    
+        // Récupération des vacataires de l'UFR avec le status actif
+        $vacataires = Vacataire::where('status', '=', 1)
+            ->where('ufr_id', $ufr_id)
+            ->get();
+    
+        // Récupération des filières du département avec les matières associées
+        $filieres = Filiere::where('departement_id', $departement_id)
+            ->with('matieres')
+            ->get();
+    
+        // Récupération des séances de cours des vacataires du département spécifique
+        $vacataires_sceances = Vacataire::where('ufr_id', $ufr_id)
+            ->whereHas('cours.matiere.filieres', function ($query) use ($departement_id) {
+                $query->where('departement_id', $departement_id); // S'assure que les matières sont dans le bon département
+            })
+            ->with([
+                'cours' => function ($query) {
+                    $query->where('demande', '0'); // Filtrer les cours selon la demande
+                },
+                'cours.matiere','cours.matiere.filieres'
+            ])
+            ->get();
+    
+        //dd($vacataires_sceances);
+    
+        return view('users.departement.all', compact('vacataires', 'filieres', 'vacataires_sceances'));
     }
+    
 
 
     public function filtre(Request $request){
@@ -99,7 +114,8 @@ class CoursController extends Controller
     }
     
     public function approbation(){
-        $filieres = Filiere::all();
+        $departement_id=auth()->user()->departement->id;
+        $filieres = Filiere::where('departement_id',$departement_id)->get();
         $matieres = Matiere::all();
         $vacataires = Vacataire::all();
         $id_user=auth()->user()->getAuthIdentifier();

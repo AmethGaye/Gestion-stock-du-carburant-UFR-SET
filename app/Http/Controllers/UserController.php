@@ -158,10 +158,12 @@ class UserController extends Controller
         if ($request->filled('status')) {
             $query->whereIn('status', $request->status);
         }
-        if ($request->filled('role')) {
-            $query->whereIn('role', $request->role);
+        if ($request->filled('role')) { 
+             $query->whereHas('roles', function ($query) use ($request) {
+                        $query->whereIn('nom', $request->role);
+        });
         }
-    
+        //dd($query->get());
         if ($request->filled('order')) {
             foreach ($request->order as $order) {
                 $query->orderBy($order, 'asc');
@@ -172,8 +174,9 @@ class UserController extends Controller
 
         //dd($users);
         $ufr = Ufr::all();
+        $roles = Role::all();
         $departements = Departement::all();
-        return view('users.admin.users',compact('users', 'ufr', 'departements'));
+        return view('users.admin.users',compact('users', 'ufr', 'departements','roles'));
     }
 
     /**

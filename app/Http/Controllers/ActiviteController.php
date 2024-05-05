@@ -26,19 +26,57 @@ class ActiviteController extends Controller
      */
     public function index()
     {
+        $tableau_distance = [
+        
+            'Dakar'=> 74.7,
+            'Diourbel'=> 112.8,
+            'Louga'=> 112,8 ,
+            'Saint-louis'=> 192.8,
+            'Thies'=> 0.0,
+            'Matam'=> 473.2,
+            'Tambacounda'=> 453.0,
+            'Kolda'=> 676.2,
+            'Sedhiou'=> 367.7,
+            'Ziguinchor'=> 429.2,
+            'Fatick'=> 115.8,
+            'Kaffrine'=> 239.1,
+            'Kaolack'=> 171.3,
+            'Kedougou'=> 686.5,
+    
+    
+           ];
         $user_role=auth()->user()->roles->nom;
         if($user_role == 'directeur'){
             $activities = Activite::all();
-            return view('users.directeur.activites',compact('activities'));
+            return view('users.directeur.activites',compact('activities','tableau_distance'));
         }
 
         if($user_role == 'comptable'){
             $activities = Activite::all();
-            return view('users.comptable.activites',compact('activities'));
+            return view('users.comptable.activites',compact('activities','tableau_distance'));
         }
     }
    
     public function search(Request $request){
+        $tableau_distance = [
+        
+            'Dakar'=> 74.7,
+            'Diourbel'=> 112.8,
+            'Louga'=> 112,8 ,
+            'Saint-louis'=> 192.8,
+            'Thies'=> 0.0,
+            'Matam'=> 473.2,
+            'Tambacounda'=> 453.0,
+            'Kolda'=> 676.2,
+            'Sedhiou'=> 367.7,
+            'Ziguinchor'=> 429.2,
+            'Fatick'=> 115.8,
+            'Kaffrine'=> 239.1,
+            'Kaolack'=> 171.3,
+            'Kedougou'=> 686.5,
+    
+    
+           ];
         $user_role=auth()->user()->roles->nom;
         $search = $request->input('search','');
         $search = "%{$search}%";
@@ -47,7 +85,7 @@ class ActiviteController extends Controller
             $activities = Activite::query()
                                  ->whereAny(['titre','description','lieux','adresse','ticket','date'],'like',$search)
                                  ->get();
-            return view('users.directeur.activites',compact('activities'));
+            return view('users.directeur.activites',compact('activities','tableau_distance'));
         }
 
         if($user_role == 'comptable'){
@@ -55,7 +93,7 @@ class ActiviteController extends Controller
             ->whereAny(['titre','description','lieux','adresse','ticket','date'],'like',$search)
             ->get();
             
-            return view('users.comptable.activites',compact('activities'));
+            return view('users.comptable.activites',compact('activities','tableau_distance'));
         }
     }
 
@@ -64,6 +102,25 @@ class ActiviteController extends Controller
      */
     public function filtre_by_month(Request $request)
     {  
+        $tableau_distance = [
+        
+            'Dakar'=> 74.7,
+            'Diourbel'=> 112.8,
+            'Louga'=> 112,8 ,
+            'Saint-louis'=> 192.8,
+            'Thies'=> 0.0,
+            'Matam'=> 473.2,
+            'Tambacounda'=> 453.0,
+            'Kolda'=> 676.2,
+            'Sedhiou'=> 367.7,
+            'Ziguinchor'=> 429.2,
+            'Fatick'=> 115.8,
+            'Kaffrine'=> 239.1,
+            'Kaolack'=> 171.3,
+            'Kedougou'=> 686.5,
+    
+    
+           ];
         $user_role=auth()->user()->roles->nom;
         
         if($user_role =='directeur'){
@@ -76,7 +133,7 @@ class ActiviteController extends Controller
 
         $activities =$activities->get() ;
         
-            return view('users.directeur.activites',compact('activities'));
+            return view('users.directeur.activites',compact('activities','tableau_distance'));
         }
        
         
@@ -84,6 +141,25 @@ class ActiviteController extends Controller
     }
 //POur le comptable
     public function filtre_activite(Request $request){
+        $tableau_distance = [
+        
+            'Dakar'=> 74.7,
+            'Diourbel'=> 112.8,
+            'Louga'=> 112,8 ,
+            'Saint-louis'=> 192.8,
+            'Thies'=> 0.0,
+            'Matam'=> 473.2,
+            'Tambacounda'=> 453.0,
+            'Kolda'=> 676.2,
+            'Sedhiou'=> 367.7,
+            'Ziguinchor'=> 429.2,
+            'Fatick'=> 115.8,
+            'Kaffrine'=> 239.1,
+            'Kaolack'=> 171.3,
+            'Kedougou'=> 686.5,
+    
+    
+           ];
 
         $activities = Activite::query();
 
@@ -101,11 +177,30 @@ class ActiviteController extends Controller
 
         $activities = $activities->get();
           
-        return view('users.comptable.activites',compact('activities'));
+        return view('users.comptable.activites',compact('activities','tableau_distance'));
 
     }
 
     public function filtre_activite_by_month(Request $request){
+        $tableau_distance = [
+        
+            'Dakar'=> 74.7,
+            'Diourbel'=> 112.8,
+            'Louga'=> 112,8 ,
+            'Saint-louis'=> 192.8,
+            'Thies'=> 0.0,
+            'Matam'=> 473.2,
+            'Tambacounda'=> 453.0,
+            'Kolda'=> 676.2,
+            'Sedhiou'=> 367.7,
+            'Ziguinchor'=> 429.2,
+            'Fatick'=> 115.8,
+            'Kaffrine'=> 239.1,
+            'Kaolack'=> 171.3,
+            'Kedougou'=> 686.5,
+    
+    
+           ];
             $num_month= $request->month;
     
             $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();
@@ -115,7 +210,7 @@ class ActiviteController extends Controller
     
             $activities =$activities->get() ;
 
-            return view('users.comptable.activites',compact('activities')); 
+            return view('users.comptable.activites',compact('activities','tableau_distance')); 
 
     }
 

@@ -1,12 +1,9 @@
 <script src="{{ asset('js/app.js') }}" defer>
+    
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   // Données factices pour illustrer l'exemple
-
-   
-    
-
     function setProgress(parcent) {
       let progressCircle = document.querySelector('.progress');
       let radius = progressCircle.r.baseVal.value;
@@ -169,7 +166,7 @@
         
     });
     Chart.defaults.font.family = "poppins";
-}
+  }
   
 
 
@@ -187,5 +184,11 @@
 
 
 </script>
+<script> 
+  window.User = {
+      id:{{ auth()->check() ? auth()->user()->id : null }}
+  }
+</script>
+
 </body>
 </html>
