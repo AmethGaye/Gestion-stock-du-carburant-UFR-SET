@@ -15,7 +15,7 @@
                         </svg>
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
@@ -37,7 +37,7 @@
                         </svg>
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
@@ -59,7 +59,7 @@
                         </svg>
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
@@ -81,7 +81,7 @@
                         </svg>
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
@@ -90,7 +90,7 @@
                     
             </div>
         </div>
-        <div class="bg-white col-span-5 rounded-3xl p-6 row-span-2">
+        <div class="bg-white col-span-8 rounded-3xl p-6 row-span-2">
             <div>
                 <p class="mb-4 text-xl text-zinc-600">Utilisateurs recemment ajoutés</p>
                 
@@ -98,7 +98,8 @@
                     {{-- t-head --}}
                     <div class="flex items-center text-sm text-zinc-400 font-nunito font-bold py-5 border-b ">
                         {{-- cols --}}
-                        <span class="basis-[28%] pr-4 grow">PRENOM & NOM</span>
+                        <span class="basis-[22%] pr-4 grow">PRENOM & NOM</span>
+                        <span class="basis-[24%] pr-4 grow">PRENOM & NOM</span>
                         <span class="basis-[110px] pr-4">UFR</span>
                         <span class="basis-[12%] pr-4 grow">ROLE</span>
                         <span class="basis-[110px] pr-4">STATUT</span>
@@ -112,7 +113,7 @@
                         <div class="flex items-center text-sm text-zinc-500 font-medium py-5 border-b border-b-zinc-200">
                             {{-- cols --}}
     
-                            <span class="basis-[28%]  pr-4 grow flex items-center gap-4">
+                            <span class="basis-[22%]  pr-4 grow flex items-center gap-4">
                                 @if($user->image)
                                     <img src="{{ asset('storage/'.$user->image) }}" alt="" class="w-8 h-8 object-cover rounded-full object-center" >
                                 @else
@@ -120,8 +121,10 @@
                                 @endif
                                {{$user->prenom }} {{$user->nom}}
                             </span>
-    
-                            <span class="basis-[110px] pr-4">SET</span>
+                            
+                            <span class="basis-[24%] pr-4 grow">{{ $user->email }}</span>
+
+                            <span class="basis-[110px] pr-4">{{ $user->ufr->nom }}</span>
 
                             <span class="basis-[12%] grow pr-4 capitalize">{{$user->roles->nom}}</span>
 
@@ -143,6 +146,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="bg-white col-span-3 rounded-3xl p-6 row-span-2"></div>
     </section>
 @endsection

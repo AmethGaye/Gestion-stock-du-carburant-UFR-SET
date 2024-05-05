@@ -106,7 +106,7 @@
 
            
         </div>
-        <div class="bg-white col-span-5 rounded-3xl p-6 row-span-2">
+        <div class="bg-white col-span-8 rounded-3xl p-6 row-span-2">
             <div>
                 <p class="mb-4 font-medium">Scéance de cours recemment ajoutés</p>
                 
@@ -145,7 +145,6 @@
             </div>
         </div>
 
-        <div class="bg-white col-span-3 rounded-3xl p-6 row-span-2">diskpart list disk select diks one list volume detail volume</div>
 
         <div class="bg-white col-span-8 rounded-3xl p-6 row-span-2">
             <div>

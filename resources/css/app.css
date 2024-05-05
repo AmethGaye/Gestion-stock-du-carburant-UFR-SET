@@ -7,7 +7,7 @@
 
 @layer base {
     html {
-      font-family: "poppins", sans-serif;
+      font-family: "poppins", 'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif;
     }
  }
 
@@ -90,16 +90,20 @@ main, .nav-bar {
   background-color : rgba(0, 0, 0, 0.8);
 }
 
-.max-h-44.overflow-y-scroll::-webkit-scrollbar{
+.max-h-44.overflow-y-scroll::-webkit-scrollbar, .max-h-96.overflow-y-scroll::-webkit-scrollbar{
     width: 2px;
 }
-.max-h-44.overflow-y-scroll::-webkit-scrollbar-track{
+.max-h-44.overflow-y-scroll::-webkit-scrollbar-track, .max-h-96.overflow-y-scroll::-webkit-scrollbar-track{
     @apply bg-transparent
 }
-.max-h-44.overflow-y-scroll::-webkit-scrollbar-thumb{
-    @apply bg-zinc-500 rounded-2xl
+.max-h-44.overflow-y-scroll::-webkit-scrollbar-thumb, .max-h-96.overflow-y-scroll::-webkit-scrollbar-thumb{
+    @apply bg-zinc-300 rounded-2xl
 }
 
 .opt {
   @apply left-10 opacity-100 visible translate-x-0
+}
+
+.notif {
+  @apply -left-40 opacity-100 visible
 }

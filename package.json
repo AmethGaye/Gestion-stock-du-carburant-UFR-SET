@@ -17,7 +17,12 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
+<<<<<<< HEAD
+        "chart.js": "^4.4.2",
+        "jquery": "^3.7.1"
+=======
         "jquery": "^3.7.1",
         "laravel": "^0.0.1"
+>>>>>>> 0294cfc3d6f0ba9708bdef6b89bf46cbc195a3e6
     }
 }

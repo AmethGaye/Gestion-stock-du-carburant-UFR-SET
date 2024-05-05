@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activite;
-use App\Models\Cours;
-use App\Models\Remboursement_vac;
-use App\Models\Role;
-use App\Models\Ufr;
-use App\Models\User;
-use App\Models\Vacataire;
 use Carbon\Carbon;
+use App\Models\Ufr;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Cours;
+use App\Models\Stock;
+use App\Models\Activite;
+use App\Models\Vacataire;
 use Illuminate\Http\Request;
+use App\Models\Remboursement_vac;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -149,9 +151,50 @@ class DashboardController extends Controller
         }
 
         if($user_role == 'comptable'){
-            return view('users.comptable.dashboard');
+
+            $stock = Stock::latest()->first();
+            // dd($quantiteParJour);
+            
+            return view('users.comptable.dashboard', compact('stock'));
         }
 
 
+    }
+    public function monthlyData (){
+
+        $anneeCourante = Carbon::now()->year;
+
+        $quantiteParMois = Remboursement_vac::select(DB::raw('MONTH(created_at) as mois'), DB::raw('SUM(nombre_tickets) as quantite_totale'))
+            ->whereYear('created_at', $anneeCourante)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->get();
+
+        $moisEnFrancais = [];
+        foreach ($quantiteParMois as $quantite) {
+            $moisEnFrancais[Carbon::createFromFormat('!m', $quantite->mois)->monthName] = $quantite->quantite_totale;
+        }
+
+        return response()->json($moisEnFrancais);
+    }
+
+    public function dailyData(int $mois){
+        $annee = Carbon::now()->year;
+        $resultats = [];
+        
+        $quantiteParJour = Remboursement_vac::select(
+            DB::raw('DAY(created_at) as jour'), 
+            DB::raw('SUM(nombre_tickets) as quantite_totale')
+        )
+        ->whereYear('created_at', $annee)
+        ->whereMonth('created_at', $mois)
+        ->havingRaw('SUM(nombre_tickets) > 0') // Filtrer les jours avec une quantité non nulle
+        ->groupBy(DB::raw('DAY(created_at)'))
+        ->get();
+        
+        foreach ($quantiteParJour as $resultat) {
+            $resultats[$resultat->jour] = $resultat->quantite_totale;
+        }
+        // $nombreJoursDuMois = Carbon::createFromDate($annee, $mois)->daysInMonth();
+        return response()->json($resultats);
     }
 }

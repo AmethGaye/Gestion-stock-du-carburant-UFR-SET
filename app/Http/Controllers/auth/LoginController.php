@@ -35,19 +35,11 @@ class LoginController extends Controller
                 'sexe'=>'M',
         ]);
         */
-        
-
 
         return view('auth.login');
     }
 
-    /**
-     * valider ou non l'authentification de l'utlisateur
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    
     public function login(LoginRequest  $request)
     {
 

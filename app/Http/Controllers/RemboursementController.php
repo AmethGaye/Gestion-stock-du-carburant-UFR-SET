@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\Cours;
-use App\Models\Vacataire;
 use Cron\MonthField;
+use App\Models\Cours;
+use App\Models\Stock;
+use App\Models\Vacataire;
 use Illuminate\Http\Request;
 use App\Models\Remboursement_vac;
 use App\Models\User;
@@ -457,8 +458,7 @@ class RemboursementController extends Controller
         $remboursement = Remboursement_vac::where('cours_id',$id_cour)->first();
         // Notifier le comptable
         if($comptable){
-            
-        
+
             $comptable->notify(new ComptableNotification($remboursement));
     
         }
@@ -469,8 +469,24 @@ class RemboursementController extends Controller
 
 
     public function r_update(Request $request, string $id){
-        Remboursement_vac::where('id', $id)->update(['statut' => '2', 'nombre_tickets' => $request->input('tickets')]);
-        return redirect()->back()->with('success', 'sceance de cours remboursé avec succés');
+        $stock = Stock::latest()->first();
+        if($request->tickets < $stock->nombre_ticket){
+            Remboursement_vac::where('id', $id)->update(['statut' => '2', 'nombre_tickets' => $request->input('tickets')]);
+            $price = $stock->prix_unitaire;
+            $nombre_tickets = $stock->nombre_ticket - $request->input('tickets');
+            $new_volume = $nombre_tickets * 10;
+            $sorties = $stock->sorties + $request->input('tickets');
+            $stock->update([
+                'volume' => $new_volume, 
+                'prix_total' => $price * $new_volume, 
+                'nombre_ticket' => $nombre_tickets,  
+                'sorties' => $sorties
+            ]);
+            $stock->save();
+            return redirect()->back()->with('success', 'sceance de cours remboursé avec succés');
+        }else{
+            return redirect()->back()->withFail('Le stock est insuffisant');
+        }
     }
 
     public function _update(Request $request){
@@ -484,10 +500,24 @@ class RemboursementController extends Controller
      */
     public function reset(string $id)
     {
-        $user_role=auth()->user()->roles->nom;// variable de comparaison
+        $user_role = auth()->user()->roles->nom;// variable de comparaison
         if($user_role == 'comptable'){
             $remboursement = Remboursement_vac::find($id);
             $remboursement->statut = '1';
+
+            $stock = Stock::latest()->first();
+            $price = $stock->prix_unitaire;
+            $nombre_tickets = $stock->nombre_ticket + $remboursement->nombre_tickets;
+            $new_volume = $nombre_tickets * 10;
+            $sorties = $stock->sorties - $remboursement->nombre_tickets;
+            $stock->update([
+                'volume' => $new_volume, 
+                'prix_total' => $price * $new_volume, 
+                'nombre_ticket' => $nombre_tickets,  
+                'sorties' => $sorties
+            ]);
+
+            $stock->save();
             $remboursement->save();
             return redirect()->back()->with('success', 'restauration réussie !');
         }
