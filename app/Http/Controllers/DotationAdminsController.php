@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dotation_admin;
+use App\Models\Stock;
 use Illuminate\Http\Request;
+use App\Models\Dotation_admin;
 
 class DotationAdminsController extends Controller
 {
@@ -35,7 +36,10 @@ class DotationAdminsController extends Controller
             ]
         );
 
-        if($validated){
+        
+
+        $stock = Stock::latest()->first();
+        if($request->ticket < $stock->nombre_ticket){
             Dotation_admin::create([
                 'nom' => $validated['nom'],
                 'email' => $validated['email'],
@@ -43,7 +47,20 @@ class DotationAdminsController extends Controller
                 'statut' => 1,
                 'user_id' => auth()->user()->getAuthIdentifier(),
             ]);
-            return redirect()->back()->with('success', 'l\'opération est réussie avec succès !');
+            $price = $stock->prix_unitaire;
+            $nombre_tickets = $stock->nombre_ticket - $request->ticket;
+            $new_volume = $nombre_tickets * 10;
+            $sorties = $stock->sorties + $request->ticket;
+            $stock->update([
+                'volume' => $new_volume, 
+                'prix_total' => $price * $new_volume, 
+                'nombre_ticket' => $nombre_tickets,  
+                'sorties' => $sorties
+            ]);
+            $stock->save();
+            return redirect()->back()->withSuccess( 'l\'opération est réussie avec succès !');
+        }else{
+            return redirect()->back()->withFail('Le stock est insuffisant'); 
         }
     }
 }

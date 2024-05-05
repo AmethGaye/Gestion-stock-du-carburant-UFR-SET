@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activite;
-use http\Env\Response;
-use Illuminate\Http\Request;
-use App\Http\Requests\ActiviteRequestValidation;
-use App\Models\Departement;
 use Carbon\Carbon;
+use App\Models\Stock;
+use http\Env\Response;
+use App\Models\Activite;
+use App\Models\Departement;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\ActiviteRequestValidation;
 
 class ActiviteController extends Controller
 {
@@ -157,7 +158,22 @@ class ActiviteController extends Controller
      */
     public function reset(string $id)
     {
-        Activite::where('id', $id)->update(['statut' => false, 'ticket' => 0]);
+        $activite = Activite::find($id);
+        $stock = Stock::latest()->first();
+        $price = $stock->prix_unitaire;
+        $nombre_tickets = $stock->nombre_ticket + $activite->ticket;
+        $new_volume = $nombre_tickets * 10;
+        $sorties = $stock->sorties - $activite->ticket;
+        $stock->update([
+            'volume' => $new_volume, 
+            'prix_total' => $price * $new_volume, 
+            'nombre_ticket' => $nombre_tickets,  
+            'sorties' => $sorties
+        ]);
+        $activite->statut = false;
+        $activite->ticket = 0;
+        $activite->save();
+        $stock->save();
         return redirect()->back()->with('success', 'Restauration réussie !');
     }
 
@@ -181,8 +197,24 @@ class ActiviteController extends Controller
 
         if($user_role == 'comptable'){
 
-            Activite::where('id', $id)->update(['ticket' => $request->ticket, 'statut' => true]);
-            return redirect()->route('comptable.activites')->withSuccess('La demande a été traitée avec succés !');
+            $stock = Stock::latest()->first();
+            if($request->ticket < $stock->nombre_ticket){
+                Activite::where('id', $id)->update(['ticket' => $request->ticket, 'statut' => true]);
+                $price = $stock->prix_unitaire;
+                $nombre_tickets = $stock->nombre_ticket - $request->ticket;
+                $new_volume = $nombre_tickets * 10;
+                $sorties = $stock->sorties + $request->ticket;
+                $stock->update([
+                    'volume' => $new_volume, 
+                    'prix_total' => $price * $new_volume, 
+                    'nombre_ticket' => $nombre_tickets,  
+                    'sorties' => $sorties
+                ]);
+                $stock->save();
+                return redirect()->back()->withSuccess('La demande a été traitée avec succés !');
+            }else{
+                return redirect()->back()->withFail('Le stock est insuffisant'); 
+            }
         }
     }
 

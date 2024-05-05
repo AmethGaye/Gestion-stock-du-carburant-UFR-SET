@@ -137,12 +137,12 @@
                     </span>
                     @else
                     @php $id=$user->id @endphp
-                        <span class="basis-[130px]  pr-4 flex items-center">
+                        <span class="basis-[130px]  pr-4 flex items-center mr-2">
                             <form action="{{route('disable.user',compact('id'))}}" method="POST" class="m-0 ">
                                 @csrf
                                 <button class="p-1.5 rounded-full hover:bg-zinc-100"><div class="w-2 h-2 rounded-full bg-zinc-400 block"></div></button>
                             </form>
-                            <span class="font-semibold text-zinc-400">Inactive</span>
+                            <span class="font-semibold text-zinc-400 ml-1">Inactive</span>
                         </span>
                     @endif
                     <span class="flex basis-[170px] justify-center">

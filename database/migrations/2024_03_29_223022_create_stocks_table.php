@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->decimal('volume');
+            $table->float('volume');
             $table->decimal('prix_unitaire');
-            $table->decimal('prix_total');
+            $table->unsignedDouble('prix_total');
             $table->unsignedInteger('nombre_ticket');
+            $table->unsignedInteger('entrees');
+            $table->unsignedInteger('tickets_apres_entrees');
+            $table->unsignedInteger('sorties');
             $table->timestamps();
         });
     }

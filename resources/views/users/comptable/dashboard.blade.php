@@ -95,38 +95,68 @@
             <div class="p-6 bg-white col-span-3 col-start-1 rounded-3xl shadow_3 relative flex flex-col items-center gap-4">
                 <h1 class="text-center text-zinc-700 font-bold text-4xl font-tt-web mb-4" >Stock</h1>
                 <div class="w-[200px]  h-[200px] rounded-full border border-zinc-200 flex items-center justify-center gap-4 relative">
-                    <div class="text-4xl font-semibold text-zinc-600">75%</div>
+                    <div class="text-4xl font-semibold text-zinc-600" id="percent">0%</div>
                     <svg class="w-[200px] h-[200px] rounded-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                         <circle cx="100" cy="100" r="100" class="fill-transparent stroke-zinc-100 stroke-[55]" style="transform-origin: center"></circle>
                         <circle cx="100" cy="100" r="100" class="fill-transparent stroke-emerald-700 stroke-[55] progress" style="transform-origin: center;" ></circle>
                     </svg>
                 </div>
-                <div class="text-sm w-full *:mb-1.5 font-medium mt-6">
+                <div class="text-sm w-full *:mb-1 font-medium mt-6">
+                    <div class="flex justify-between">
+                        <span class="">Tickets restants : </span>
+                        <span class="text-red-700 font-bold">{{ $stock->nombre_ticket }} Tickets</span>
+                    </div>
                     <div class="flex justify-between">
                         <span class="">Volume : </span>
-                        <span class="text-zinc-600 font-bold">3000 Litres</span>
+                        <span class="text-zinc-600 font-bold">{{ $stock->volume }} Litres</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="">Nombre de tickets : </span>
-                        <span class="text-zinc-600 font-bold">300 Tickets</span>
+                        <span class="">Entrées : </span>
+                        <span class="text-zinc-600 font-bold">{{ $stock->entrees }} Tickets</span>
                     </div>
                     <div class="flex justify-between">
-                        <span class="">Les entrées : </span>
-                        <span class="text-zinc-600 font-bold">1200 Tickets</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="">Les sorties : </span>
-                        <span class="text-zinc-600 font-bold">300 Tickets</span>
+                        <span class="">Sorties : </span>
+                        <span class="text-zinc-600 font-bold">{{ $stock->sorties }} Tickets</span>
                     </div>
                     <div class="flex justify-between">
                         <span class="">Prix unitaire : </span>
-                        <span class="text-zinc-600 font-bold">450 Fcfa</span>
+                        <span class="text-zinc-600 font-bold">{{ $stock->prix_unitaire }} Fcfa</span>
                     </div>
                     <div class="flex justify-between">
                         <span class="">Prix total : </span>
-                        <span class="text-zinc-600 font-bold">1350000 Fcfa</span>
+                        <span class="text-zinc-600 font-bold">{{ $stock->prix_total }} Fcfa</span>
                     </div>
                 </div>
+                <form action="{{ route('c.store') }}" method="POST" class="m-0 flex gap-2 w-full" id="r_form">
+                    @csrf
+                    <div class="relative w-full">
+                        <input type="number" name="tickets" id="tickets" value="0" 
+                               class="border-[1.5px] border-zinc-200 w-full rounded-md outline-none focus:border-zinc-500  px-4 py-2 font-bold text-zinc-600 disabled:text-zinc-400" id="x">
+                        <div class="absolute right-2 top-1/2 -translate-y-1/2 flex">
+                            <button type="button" class="w-7 h-7 mr-1  bg-zinc-100 hover:bg-zinc-200 disabled:hover:bg-zinc-100 flex items-center justify-center rounded-md" onclick="decrementer(this, 100)">
+                                <svg width="12" height="3" viewBox="0 0 12 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 1.4999C12 1.65903 11.9473 1.81165 11.8536 1.92417C11.7598 2.03669 11.6326 2.0999 11.5 2.0999H0.5C0.367392 2.0999 0.240215 2.03669 0.146447 1.92417C0.0526785 1.81165 0 1.65903 0 1.4999C0 1.34077 0.0526785 1.18816 0.146447 1.07564C0.240215 0.963117 0.367392 0.899902 0.5 0.899902H11.5C11.6326 0.899902 11.7598 0.963117 11.8536 1.07564C11.9473 1.18816 12 1.34077 12 1.4999Z" fill="#1C1C1C"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="w-7 h-7 bg-zinc-100 hover:bg-zinc-200 disabled:hover:bg-zinc-100 flex items-center justify-center rounded-md" onclick="incrementer(this, 100)">
+                                <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 6.5C12 6.63261 11.9473 6.75979 11.8536 6.85355C11.7598 6.94732 11.6326 7 11.5 7H6.5V12C6.5 12.1326 6.44732 12.2598 6.35355 12.3536C6.25979 12.4473 6.13261 12.5 6 12.5C5.86739 12.5 5.74021 12.4473 5.64645 12.3536C5.55268 12.2598 5.5 12.1326 5.5 12V7H0.5C0.367392 7 0.240215 6.94732 0.146447 6.85355C0.0526785 6.75979 0 6.63261 0 6.5C0 6.36739 0.0526785 6.24021 0.146447 6.14645C0.240215 6.05268 0.367392 6 0.5 6H5.5V1C5.5 0.867392 5.55268 0.740215 5.64645 0.646447C5.74021 0.552679 5.86739 0.5 6 0.5C6.13261 0.5 6.25979 0.552679 6.35355 0.646447C6.44732 0.740215 6.5 0.867392 6.5 1V6H11.5C11.6326 6 11.7598 6.05268 11.8536 6.14645C11.9473 6.24021 12 6.36739 12 6.5Z" fill="#1C1C1C"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="btn text-white bg-zinc-800  font-medium">Valider</button>
+
+                </form>
+
+                <form action="{{ route('c.reset') }}" method="GET" class="m-0 absolute right-4 @if($stock->sorties != 0) hidden @endif">
+                    @csrf
+                    <button class="icon-hover" @if($stock->sorties != 0) disabled @endif>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 7C13 10.3137 10.3137 13 7 13C3.68629 13 1 10.3137 1 7C1 3.68629 3.68629 1 7 1C8.53671 1 9.93849 1.57771 11 2.52779M11.6667 1V3C11.6667 3.36819 11.3682 3.66667 11 3.66667H9" stroke="#4C535F" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </form>
             </div>
             <div class="p-6 bg-white col-span-9 col-start-4 rounded-3xl shadow_3 flex flex-col">
                 <div class="mb-10 flex items-center justify-between ">
@@ -157,7 +187,7 @@
                                  <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('11', 'Novembre')">Novembre</div>
                                  <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('12', 'Décembre')">Décembre</div>
                                  <div class="py-2 mt-2 border-t px-5 font-medium text-orange-400 hover:bg-zinc-100 cursor-pointer">
-                                     <a href="{{ route('comptable.remboursements') }}">Restaurer</a>
+                                     <a href="">Restaurer</a>
                                  </div>
                              </div>
                          </form>
@@ -175,6 +205,8 @@
         
     </section>
 @endsection
+
+
 
 
 

@@ -1,22 +1,24 @@
 <?php
 
+use App\Models\Stock;
+use App\Models\Dotation_depart;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CoursController;
 use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VacataireController;
 use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\HistoriqueController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\RemboursementController;
-use App\Http\Controllers\auth\ResetPasswordController;
-use App\Http\Controllers\auth\ForgotPasswordController;
 use App\Http\Controllers\DotationAdminsController;
 use App\Http\Controllers\DotationDepartsController;
-use App\Http\Controllers\HistoriqueController;
-use App\Http\Controllers\RoleController;
-use App\Models\Dotation_depart;
+use App\Http\Controllers\auth\ResetPasswordController;
+use App\Http\Controllers\auth\ForgotPasswordController;
+use App\Http\Controllers\StockController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -157,7 +159,8 @@ Route::post('departement/demande_remboursement', [RemboursementController::class
 */
 
 Route::get('/comptable/dashboard', [DashboardController::class, 'index'])->name('comptable.dashboard');
-Route::get('/stats', [DashboardController::class, 'getStats']);
+Route::get('/monthlyData', [DashboardController::class, 'monthlyData']);
+Route::get('/dailyData/{month}', [DashboardController::class, 'dailyData']);
 
 Route::get('comptable/remboursements', [RemboursementController::class, 'index'])->name('comptable.remboursements');
 Route::get('comptable/remboursements/search', [RemboursementController::class, 'search'])->name('search.remboursements');
@@ -184,6 +187,14 @@ Route::get('comptable/dotation/historique/search', [HistoriqueController::class,
 
 Route::get('comptable/dotation/historique/filtre', [HistoriqueController::class, 'filtre_historique'])->name('filtre.historique');
 Route::get('comptable/dotation/historique/month', [HistoriqueController::class, 'filtre_historique_month'])->name('filtre.historique.month');
+
+Route::post('comptable/stock_store', [StockController::class, 'store'])->name('c.store');
+Route::get('comptable/stock_reset', [StockController::class, 'reset'])->name('c.reset');
+Route::get('comptable/pourcentage',function(){
+    $stock = Stock::latest()->first();
+    $pourcentage = ($stock->nombre_ticket / $stock->tickets_apres_entrees) * 100;
+    return response()->json(['percent' => $pourcentage]);
+});
 
 
 

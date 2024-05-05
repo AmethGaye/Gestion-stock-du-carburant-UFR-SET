@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Stock extends Model
 {
     use HasFactory;
+    protected $fillable = ['volume','prix_unitaire', 'prix_total', 'nombre_ticket', 'entrees', 'sorties', 'tickets_apres_entrees'];
 
     public function user():HasOne
     {
