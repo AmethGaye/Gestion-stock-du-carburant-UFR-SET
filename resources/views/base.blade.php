@@ -39,7 +39,27 @@
             <button class="px-3 py-2.5 rounded-md bg-zinc-800 text-zinc-200 font-mtrph" id="delete">Supprimer</button>
         </div>
     </div>
+    
+</div>
 
+<div class="w-screen h-screen fixed left-0 top-0 -z-50 light-bg2 transition-opacity duration-75 ease-in-out flex items-center justify-center invisible opacity-0 scale-0" id="container-3">
+    <div class="w-4/12 min-h-2/6 bg-white rounded-md pt-6 pb-2 scale-75 opacity-0">
+        <div class="flex flex-col items-center justify-center mb-4 pl-8 pr-6">
+            <div>
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M24 43.2001C29.0922 43.2001 33.9758 41.1772 37.5765 37.5765C41.1772 33.9758 43.2001 29.0922 43.2001 24C43.2001 18.9079 41.1772 14.0243 37.5765 10.4236C33.9758 6.8229 29.0922 4.80005 24 4.80005C18.9079 4.80005 14.0243 6.8229 10.4236 10.4236C6.8229 14.0243 4.80005 18.9079 4.80005 24C4.80005 29.0922 6.8229 33.9758 10.4236 37.5765C14.0243 41.1772 18.9079 43.2001 24 43.2001ZM32.8968 20.8968C33.334 20.4442 33.5759 19.838 33.5705 19.2087C33.565 18.5794 33.3126 17.9775 32.8676 17.5325C32.4226 17.0875 31.8207 16.8351 31.1914 16.8296C30.5621 16.8242 29.9559 17.0661 29.5033 17.5033L21.6 25.4065L18.4968 22.3032C18.0442 21.8661 17.438 21.6242 16.8087 21.6296C16.1794 21.6351 15.5775 21.8875 15.1325 22.3325C14.6875 22.7775 14.4351 23.3794 14.4296 24.0087C14.4242 24.638 14.6661 25.2442 15.1032 25.6968L19.9032 30.4968C20.3533 30.9468 20.9637 31.1995 21.6 31.1995C22.2364 31.1995 22.8468 30.9468 23.2968 30.4968L32.8968 20.8968Z" fill="#249F5D"/>
+                </svg>                    
+            </div>
+            <h1 class="font-semibold text-lg text-zinc-800">Action Reussie !</h1>
+        </div>
+        <div class="mb-4 pb-4 pl-8 pr-5">
+            <p class="text-sm text-center" id="success">Cette action est permanente, impossible de retourner en arriere</p>
+        </div>
+
+        <div class="h-20 px-8 flex items-center justify-center gap-3">
+            <button class="px-3 py-2.5 rounded-md bg-zinc-800 text-zinc-100 font-mtrph  w-full font-bold" id="closeFlash">OK</button>
+        </div>
+    </div>
 </div>
 
 {{-- toutes les formulaires et les messages d'alertes --}}

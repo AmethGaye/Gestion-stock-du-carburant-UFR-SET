@@ -248,7 +248,7 @@ class UserController extends Controller
 
         $user->update($updateData);
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->back()->withSuccess('Votre profile a été mis à jour avec succès !');;
     }
 
 
@@ -289,7 +289,7 @@ class UserController extends Controller
         // update le mot de passe
             User::find($id)->update($data);
 
-            return redirect()->route('setting.password')->withSuccess('Votre mot de passe a été mis à jour');
+            return redirect()->back()->withSuccess('Votre mot de passe a été mis à jour');
        }
 
     /**

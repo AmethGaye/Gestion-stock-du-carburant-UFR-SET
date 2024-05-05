@@ -1,16 +1,24 @@
-<script src="{{ asset('js/app.js') }}" defer>
-    
+<script src="{{ asset('js/app.js') }}"></script>
+@if(session('success'))
+<script>
+    showMessage(`{{ session('success') }}`, 'success');
 </script>
+@endif
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
   // Données factices pour illustrer l'exemple
     function setProgress(parcent) {
-      let progressCircle = document.querySelector('.progress');
-      let radius = progressCircle.r.baseVal.value;
-      let circumference = radius * 2 * Math.PI;
-      progressCircle.style.strokeDasharray = circumference;
-      progressCircle.style.strokeDashoffset = circumference * (1 - parcent / 100);
-      document.querySelector('#percent').innerHTML = `${parcent} %`;
+      try {
+        let progressCircle = document.querySelector('.progress');
+        let radius = progressCircle.r.baseVal.value;
+        let circumference = radius * 2 * Math.PI;
+        progressCircle.style.strokeDasharray = circumference;
+        progressCircle.style.strokeDashoffset = circumference * (1 - parcent / 100);
+        document.querySelector('#percent').innerHTML = `${parcent} %`;
+      } catch (error) {
+        
+      }
     }
 
 
@@ -132,40 +140,44 @@
   
 
   function createChart(data, title = 'Statistiques mensuelles'){
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: {
-          plugins: {
-            legend : {
-              display : false,
-              labels: {
-                font: {
-                  size: 14,
-                  weight: '500'
+    try {
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const myChart = new Chart(ctx, {
+          type: 'line',
+          data: data,
+          options: {
+            plugins: {
+              legend : {
+                display : false,
+                labels: {
+                  font: {
+                    size: 14,
+                    weight: '500'
+                  }
                 }
-              }
-
-            },
-            title: {
-              display : true,
-              text : title,
-              font: {
-                size: 18,
-                weight: '500',
 
               },
-              position: 'bottom',
-              padding: {
-                top: 30
+              title: {
+                display : true,
+                text : title,
+                font: {
+                  size: 18,
+                  weight: '500',
+
+                },
+                position: 'bottom',
+                padding: {
+                  top: 30
+                }
               }
             }
-          }
-        },
-        
-    });
-    Chart.defaults.font.family = "poppins";
+          },
+          
+      });
+      Chart.defaults.font.family = "poppins";
+    } catch (error) {
+      
+    }
   }
   
 

@@ -267,6 +267,12 @@
     @endif
 @endforeach
 
+@if(session('success'))
+    <script>
+        showMessage(`{{ session('success') }}`, 'success');
+    </script>
+@endif
+
 
 
 

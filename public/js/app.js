@@ -20,8 +20,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
 // les variables
 const container = document.querySelector('#container');
 const container2 = document.querySelector('#container-2');
+const container3 = document.querySelector('#container-3');
 const child = document.querySelector('#container > div');
 const child2 = document.querySelector('#container-2 > div');
+const child3 = document.querySelector('#container-3 > div');
 const btn = document.querySelector('#submit');
 const closerBtn = document.querySelector('#closer');
 const form = document.querySelector('#subscription');
@@ -328,8 +330,25 @@ const subscribe = async () => {
 
 const showMessage = (message, type = 'success') => {
     if(type === 'success'){
+        container3.classList.replace('opacity-0', 'opacity-100');
+        container3.classList.replace('-z-50', 'z-50');
+        container3.classList.remove('invisible');
+        container3.classList.replace('scale-0', 'scale-100');
+
+        child3.classList.replace('opacity-0', 'opacity-100');
+        child3.classList.replace('scale-75', 'scale-100');
         document.getElementById('success').innerHTML = message;
-        setTimeout(()=>{document.getElementById('success').innerHTML = "";},3500 );
+
+        setTimeout(()=>{
+            child3.classList.replace('scale-100', 'scale-75');
+            child3.classList.replace('opacity-100', 'opacity-0');
+            container3.classList.replace('opacity-100', 'opacity-0');
+            container3.classList.replace('scale-100', 'scale-0');
+            container3.classList.replace('-z-50', 'z-50');
+            container3.classList.add('invisible');
+            document.getElementById('success').innerHTML = "";
+
+        },6000 );
     }
 
     if(type === 'error'){
@@ -342,11 +361,23 @@ const showMessage = (message, type = 'success') => {
                 item.nextElementSibling.textContent = message[item.id];
             }
         })
-        // console.log(message);
-
-
     }
 };
+
+
+try {
+    document.getElementById('closeFlash').addEventListener('click', () => {
+        child3.classList.replace('scale-100', 'scale-75');
+        child3.classList.replace('opacity-100', 'opacity-0');
+        container3.classList.replace('opacity-100', 'opacity-0');
+        container3.classList.replace('scale-100', 'scale-0');
+        container3.classList.replace('-z-50', 'z-50');
+        container3.classList.add('invisible');
+        document.getElementById('success').innerHTML = "";
+    });
+} catch (error) {
+    
+}
 
 
 const incrementer = (elem, value = 1) => {

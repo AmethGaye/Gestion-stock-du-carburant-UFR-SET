@@ -61,9 +61,12 @@ class StockController extends Controller
     }
 
     public function reset(){
-        $last = Stock::latest()->first();        
-        $last->delete();
-
-        return back()->with('success', 'Renouvellement annulé !');
+        if(Stock::all()->count() > 1){
+            $last = Stock::latest()->first();        
+            $last->delete();
+            return back()->with('success', 'Renouvellement annulé !');
+        }else{
+            return back()->with('fail', 'Vous ne pouvez pas retourner en arriere');
+        }
     }
 }

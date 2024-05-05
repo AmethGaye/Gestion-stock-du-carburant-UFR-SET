@@ -16,10 +16,6 @@
                     <input type="text" name='search' id="search" placeholder="Rechercher" class="pr-3 pl-9 py-1.5 outline-none w-60 bg-transparent text-sm text-zinc-500 border border-zinc-300 bg-zinc-100 rounded focus:border-zinc-500">
                 </div>
             </form>
-         {{---messages de reussite --}}
-            @if(session('success'))
-                <div class="text-green-500 ">{{session('success')}}</div>
-            @endif
             @error('errors')
             <div class="text-red-600">{{$errors->first('msg')}}}</div>
             @enderror
@@ -109,9 +105,6 @@
             </div>
         </div>
 
-        {{--    les message flash : type -> success --}}
-        <div class="text-green-500" id="success"></div>
-
 
         <div class="bg-white rounded-3xl shadow_2 relative">
             {{-- t-head --}}
@@ -188,7 +181,11 @@
 
             </div>
             {{-- pagination --}}
+<<<<<<< HEAD
             {{ $vacataires->links() }}
+=======
+            
+>>>>>>> 06992ec54ccd83b7d08997b70a73137c367ace5d
         </div>
     </section>
 @endsection

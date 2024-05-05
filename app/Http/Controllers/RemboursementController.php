@@ -21,76 +21,8 @@ class RemboursementController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-       $tableau_distance = [
-        
-        'Dakar'=> 74.7,
-        'Diourbel'=> 112.8,
-        'Louga'=> 112,8 ,
-        'Saint-louis'=> 192.8,
-        'Thies'=> 0.0,
-        'Matam'=> 473.2,
-        'Tambacounda'=> 453.0,
-        'Kolda'=> 676.2,
-        'Sedhiou'=> 367.7,
-        'Ziguinchor'=> 429.2,
-        'Fatick'=> 115.8,
-        'Kaffrine'=> 239.1,
-        'Kaolack'=> 171.3,
-        'Kedougou'=> 686.5,
-
-
-       ];
-
-        $user_role=auth()->user()->roles->nom;// variable de comparaison
-        if($user_role == 'directeur'){
-
-
-
-            $liste_remboursement = Vacataire::where('status', 1)
-            ->with([
-                'cours' => function ($query) {
-                    $query
-                    ->whereHas('remboursement', function ($query) {
-                        $query->where('statut', '0');
-                    })
-                    ->where('demande', '1');
-                },
-                'cours.remboursement',
-                'cours.matiere.filieres',
-                
-                'cours.remboursement.user'
-            ])->get();
- 
-    
-
-         // dd($liste_remboursement);
-            return view('users.directeur.demandes',compact('liste_remboursement'));
-        }
-
-        if($user_role == 'comptable'){
-            $vacataires = Vacataire::whereHas('cours.remboursement' ,function($query){$query
-                    ->whereIn('statut', ['1', '2']);})
-                    ->where('status', '1')      
-                    ->with([
-                        'cours' => function($query){$query->where('demande', '1');},
-                        'cours.matiere'
-                        ])
-                    ->paginate(5);
-                  //dd($vacataires)  ;
-            return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
-        }
-    }
-   
-    public function search(Request $request){
-        $search = $request->input('search', '');
-        $search = "%{$search}%";
-        $user_role=auth()->user()->roles->nom;// variable de comparaison
-        $tableau_distance = [
+    public function getDistances(){
+        return [
         
             'Dakar'=> 74.7,
             'Diourbel'=> 112.8,
@@ -109,62 +41,10 @@ class RemboursementController extends Controller
     
     
            ];
-
-        if($user_role == 'directeur'){
-
-
-
-            $liste_remboursement = Vacataire::query()
-                        ->whereAny(['nom','prenom','email','provenance'],'like', $search)
-                        ->where('status', 1)
-                        ->with([
-                             'cours' => function ($query) {
-                                  $query
-                                 ->whereHas('remboursement', function ($query) {
-                                     $query->where('statut', '0');
-                                 })
-                        ->where('demande', '1');
-                        },
-                        'cours.remboursement',
-                        'cours.matiere.filieres',
-                
-                        'cours.remboursement.user'
-                        ])->get();
- 
-            return view('users.directeur.demandes',compact('liste_remboursement'));
-        }
-
-        if($user_role == 'comptable'){
-            $vacataires = Vacataire::query()
-                   ->whereAny(['nom','prenom','provenance','origine','email','sexe'],'like',$search)
-                   ->where('status', '1')      
-                    ->with([
-                        'cours' => function($query){$query->where('demande', '1');},
-                        'cours.remboursement' => function($query){
-                              $query->whereIn('statut', ['1', '2']);},
-                        'cours.matiere'
-                        ])
-                    ->get();
-                   
-            return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
-
     }
-}
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $user_id = auth()->user()->getAuthIdentifier();
-        $cours_id = $request->cours_id;
-    
-        // Si aucune ID de cours n'est fournie, retourner avec une erreur.
-        if (empty($cours_id)) {
-            return redirect()->back()->withErrors(['msg' => 'Pas de cours dispensé']);
-        }
-        $tickets_par_region = [
+    public function getTicketsPerRegion(){
+        return [
             'Dakar' => [
                 'avec_vehicule' => 2,
                 'sans_vehicule' => 4,
@@ -222,6 +102,116 @@ class RemboursementController extends Controller
                 'sans_vehicule' => 3,
             ],
         ];
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+       $tableau_distance = $this->getDistances();
+
+        $user_role=auth()->user()->roles->nom;// variable de comparaison
+        if($user_role == 'directeur'){
+
+
+
+            $liste_remboursement = Vacataire::where('status', 1)
+            ->with([
+                'cours' => function ($query) {
+                    $query
+                    ->whereHas('remboursement', function ($query) {
+                        $query->where('statut', '0');
+                    })
+                    ->where('demande', '1');
+                },
+                'cours.remboursement',
+                'cours.matiere.filieres',
+                
+                'cours.remboursement.user'
+            ])->get();
+ 
+    
+
+         // dd($liste_remboursement);
+            return view('users.directeur.demandes',compact('liste_remboursement'));
+        }
+
+        if($user_role == 'comptable'){
+            $vacataires = Vacataire::whereHas('cours.remboursement' ,function($query){$query
+                    ->whereIn('statut', ['1', '2']);})
+                    ->where('status', '1')      
+                    ->with([
+                        'cours' => function($query){$query->where('demande', '1');},
+                        'cours.matiere'
+                        ])
+                    ->paginate(5);
+                  //dd($vacataires)  ;
+            return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
+        }
+    }
+   
+    public function search(Request $request){
+        $search = $request->input('search', '');
+        $search = "%{$search}%";
+        $user_role=auth()->user()->roles->nom;// variable de comparaison
+        $tableau_distance = $this->getDistances();
+
+        if($user_role == 'directeur'){
+
+
+
+            $liste_remboursement = Vacataire::query()
+                        ->whereAny(['nom','prenom','email','provenance'],'like', $search)
+                        ->where('status', 1)
+                        ->with([
+                             'cours' => function ($query) {
+                                  $query
+                                 ->whereHas('remboursement', function ($query) {
+                                     $query->where('statut', '0');
+                                 })
+                        ->where('demande', '1');
+                        },
+                        'cours.remboursement',
+                        'cours.matiere.filieres',
+                
+                        'cours.remboursement.user'
+                        ])->get();
+ 
+            return view('users.directeur.demandes',compact('liste_remboursement'));
+        }
+
+        if($user_role == 'comptable'){
+            $vacataires = Vacataire::query()
+                   ->whereAny(['nom','prenom','provenance','origine','email','sexe'],'like',$search)
+                   ->where('status', '1')      
+                    ->with([
+                        'cours' => function($query){$query->where('demande', '1');},
+                        'cours.remboursement' => function($query){
+                              $query->whereIn('statut', ['1', '2']);},
+                        'cours.matiere'
+                        ])
+                    ->get();
+                   
+            return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
+
+    }
+}
+
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $user_id = auth()->user()->getAuthIdentifier();
+        $cours_id = $request->cours_id;
+    
+        // Si aucune ID de cours n'est fournie, retourner avec une erreur.
+        if (empty($cours_id)) {
+            return redirect()->back()->withErrors(['msg' => 'Pas de cours dispensé']);
+        }
+        $tickets_par_region = $this->getTicketsPerRegion();
        
         $directeur = User::whereHas('roles', function($query) {
             $query->where('nom', 'directeur');
@@ -290,25 +280,7 @@ class RemboursementController extends Controller
 
 
     public function filtre_by_month_comptable(Request $request){
-        $tableau_distance = [
-        
-            'Dakar'=> 74.7,
-            'Diourbel'=> 112.8,
-            'Louga'=> 112,8 ,
-            'Saint-louis'=> 192.8,
-            'Thies'=> 0.0,
-            'Matam'=> 473.2,
-            'Tambacounda'=> 453.0,
-            'Kolda'=> 676.2,
-            'Sedhiou'=> 367.7,
-            'Ziguinchor'=> 429.2,
-            'Fatick'=> 115.8,
-            'Kaffrine'=> 239.1,
-            'Kaolack'=> 171.3,
-            'Kedougou'=> 686.5,
-    
-    
-           ];
+        $tableau_distance = $this->getDistances();
         $num_month = $request->month;
         $startOfMonth = Carbon::create(null, $num_month, 1)->startOfMonth();
         $endOfMonth = Carbon::create(null, $num_month, 1)->endOfMonth();
@@ -378,25 +350,7 @@ class RemboursementController extends Controller
      * Le comptable .
      */
     public function filtre(Request $request) {
-        $tableau_distance = [
-        
-            'Dakar'=> 74.7,
-            'Diourbel'=> 112.8,
-            'Louga'=> 112,8 ,
-            'Saint-louis'=> 192.8,
-            'Thies'=> 0.0,
-            'Matam'=> 473.2,
-            'Tambacounda'=> 453.0,
-            'Kolda'=> 676.2,
-            'Sedhiou'=> 367.7,
-            'Ziguinchor'=> 429.2,
-            'Fatick'=> 115.8,
-            'Kaffrine'=> 239.1,
-            'Kaolack'=> 171.3,
-            'Kedougou'=> 686.5,
-    
-    
-           ];
+        $tableau_distance = $this->getDistances();
         $vacataires = Vacataire::where('status', '1')      
                         ->with([
                             'cours' => function($query) {

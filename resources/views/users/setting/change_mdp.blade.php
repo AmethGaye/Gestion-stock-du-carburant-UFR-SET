@@ -3,11 +3,7 @@
 @section('setting-content')
 <div class="bg-white rounded-3xl shadow_2 px-8 py-6 font-mtrph">
     <h1 class="font-semibold text-lg text-zinc-700 mb-10">Changement de mot de passe</h1>
-    @if(session('success'))
-        <div class="text-green-500">
-            <h2>{{ session('success') }}</h2>
-        </div>
-    @endif
+   
     @if($errors->has('msg'))
         <div class="text-red-600 text-sm ">
             {{ $errors->first('msg') }}

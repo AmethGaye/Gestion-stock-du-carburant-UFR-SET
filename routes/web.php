@@ -88,7 +88,8 @@ Route::delete('/admin/users', [UserController::class, 'destroy'])->name('delete.
 */
 
 Route::get('/setting/compte', [UserController::class, 'edit_compte'])->name('setting.compte');
-Route::post('/setting/compte', [UserController::class, 'update_compte']);
+Route::post('/setting/compte', [UserController::class, 'update
+_compte']);
 
 Route::get('/setting/change-password', [UserController::class, 'edit_password'])->name('setting.password');
 Route::post('/setting/change-password/{id}', [UserController::class, 'update_password'])->name('update.password');
@@ -194,7 +195,7 @@ Route::post('comptable/stock_store', [StockController::class, 'store'])->name('c
 Route::get('comptable/stock_reset', [StockController::class, 'reset'])->name('c.reset');
 Route::get('comptable/pourcentage',function(){
     $stock = Stock::latest()->first();
-    $pourcentage = ($stock->nombre_ticket / $stock->tickets_apres_entrees) * 100;
+    $pourcentage = number_format(($stock->nombre_ticket / $stock->tickets_apres_entrees) * 100, 1);
     return response()->json(['percent' => $pourcentage]);
 });
 

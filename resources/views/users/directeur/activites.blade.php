@@ -106,8 +106,6 @@
         </div>
     </div>
 
-{{--    les message flash : type -> success --}}
-    <div class="text-green-500" id="success"></div>
 
     {{-- activites --}}
     {{-- row 1 --}}

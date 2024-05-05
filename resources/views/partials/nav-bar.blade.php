@@ -28,7 +28,7 @@
 
         {{-- notification --}}
         <div class="w-80 max-h-96 overflow-y-scroll bg-white absolute top-[146%] shadow_2 rounded-md border -left-10 opacity-0 invisible px-4 py-6 text-[small] transition-all duration-75"  id="notification">
-            <h3 class="font-medium text-zinc-600 pb-4 border-b">notifications</h3>
+            <h3 class="font-medium text-zinc-600 text-base pb-4 border-b">notifications</h3>
 
             @if(auth()->user()->roles->nom == 'directeur')
             {{-- type remboursement vacataire --}}

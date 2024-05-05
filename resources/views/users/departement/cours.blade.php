@@ -11,10 +11,6 @@
     </div>
     @endif
 
-    
-    {{--    les message flash : type -> success --}}
-    <div class="text-green-500" id="success"></div>
-
 
     {{-- choix entre les deux liens : tous les cours ou approbation --}}
     @yield('cours')
