@@ -53,6 +53,7 @@ class ComptableNotification extends Notification
             'id_demande'=>$this->comptableNotification->id,
             'id_demandeur'=>$this->comptableNotification->user_id,
             'cours_id'=>$this->comptableNotification->cours_id,
+            'nom_directeur' => auth()->user()->prenom . ' ' . auth()->user()->nom,
         ];
     }
     public function toBroadCast($notifiable){
@@ -62,6 +63,7 @@ class ComptableNotification extends Notification
             'id_demande'=>$this->comptableNotification->id,
             'id_demandeur'=>$this->comptableNotification->user_id,
             'cours_id'=>$this->comptableNotification->cours_id,
+            'nom_directeur' => auth()->user()->prenom . ' ' . auth()->user()->nom,
         
             ]
             );

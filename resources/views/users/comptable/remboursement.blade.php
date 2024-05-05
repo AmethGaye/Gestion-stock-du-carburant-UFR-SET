@@ -273,6 +273,6 @@
 
 
 {{-- pagination --}}
-@include('partials.pagination')
+{{$vacataires->links()}}
 </section>
 @endsection

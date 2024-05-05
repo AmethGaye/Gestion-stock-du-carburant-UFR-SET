@@ -25,40 +25,55 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-red-500 block mr-2 absolute right-[1px] top-[10px]"></span>               
             @endif
         </div>
+
         {{-- notification --}}
         <div class="w-80 max-h-96 overflow-y-scroll bg-white absolute top-[146%] shadow_2 rounded-md border -left-10 opacity-0 invisible px-4 py-6 text-[small] transition-all duration-75"  id="notification">
             <h3 class="font-medium text-zinc-600 pb-4 border-b">notifications</h3>
 
-            @if (auth()->user()->roles->nom == 'directeur')
-               {{-- type activité --}}
-               <div class=" flex flex-col pb-3 border-b">
-                    <p class="font-medium text-zinc-600 pt-3 pb-1.5">Activités </p>
-                    <a href="" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
-                        <span class="font-medium">lun.18:40</span>
-                        <span>Sortie Pedagogie à <span class="font-semibold">Mbour</span>. Remboursement effectué </span>
-                    </a>
-                </div> 
-            @endif
+            @if(auth()->user()->roles->nom == 'directeur')
+            {{-- type remboursement vacataire --}}
+            <div class="flex flex-col pb-3 border-b">
+                <p class="font-medium text-zinc-600 pt-3 pb-1.5">Remboursement vacataires</p>
+                @foreach(auth()->user()->unreadNotifications as $notification)
+                    @if($notification->type == 'App\Notifications\DemandeNotification')
+                        @php
+                            $remboursement = App\Models\Remboursement_vac::find($notification->data['id_demande']);
+                        @endphp
+                        @if($remboursement)
+                            <a href="{{route('mark_read_notification',$notification->id)}}" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
+                                <span class="font-medium">{{ $notification->created_at->format('D H:i') }}</span>
+                                <span>Vous avez une scéance de cours à approuver. Demandeur : <span class="font-semibold">{{ $remboursement->user->prenom }} {{ $remboursement->user->nom }}</span></span>
+                            </a>
+                        @endif
+                    @endif
+                @endforeach
+            </div>
+        @endif
 
-            @if(auth()->user()->roles->nom == 'comptable')
-                {{-- type remboursement vacataire --}}
-                <div class="flex flex-col pb-3 border-b">
-                    <p class="font-medium text-zinc-600 pt-3 pb-1.5">Remboursement vacataires</p>
-                    <a href="" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
-                        <span class="font-medium">lun.18:40</span>
-                        <span>Vous avez une scéance de cours à rembourser. Vacataire : <span class="font-semibold">Seny Mbaye</span></span>
-                    </a>
-                </div>
-
-                {{-- type activité --}}
-                <div class=" flex flex-col pb-3 border-b">
-                    <p class="font-medium text-zinc-600 pt-3 pb-1.5">Activités </p>
-                    <a href="" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
-                        <span class="font-medium">lun.18:40</span>
-                        <span>Sortie Pedagogie à <span class="font-semibold">Mbour</span>. Tickets : <span class="font-semibold">10</span> </span>
-                    </a>
-                </div>
-            @endif
+        @if(auth()->user()->roles->nom == 'comptable')
+        {{-- type remboursement vacataire --}}
+        <div class="flex flex-col pb-3 border-b">
+            <p class="font-medium text-zinc-600 pt-3 pb-1.5">Remboursement vacataires</p>
+            @foreach(auth()->user()->unreadNotifications->where('type', 'App\Notifications\ComptableNotification') as $notification)
+                <a href="{{ route('mark_read_notification', $notification->id) }}" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
+                    <span class="font-medium">{{ $notification->created_at->format('D H:i') }}</span>
+                    <span>Vous avez une séance de cours à rembourser. Directeur: <span class="font-semibold">{{$notification->data['nom_directeur']  }}</span></span>
+                </a>
+            @endforeach
+        </div>
+    
+        {{-- type activité --}}
+        <div class="flex flex-col pb-3 border-b">
+            <p class="font-medium text-zinc-600 pt-3 pb-1.5">Activités</p>
+            @foreach(auth()->user()->unreadNotifications->where('type', 'App\Notifications\ActiviteNotification') as $notification)
+                <a href="{{ route('mark-as-read', $notification->id) }}" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
+                    <span class="font-medium">{{ $notification->created_at->format('D H:i') }}</span>
+                    <span>Sortie Pédagogique à <span class="font-semibold">{{ $notification->data['lieu'] }}</span>. Tickets : <span class="font-semibold">{{ $notification->data['tickets'] }}</span> </span>
+                </a>
+            @endforeach
+        </div>
+    @endif
+    
 
             @if(auth()->user()->roles->nom == 'chef_departement')
                 {{-- type cours --}}

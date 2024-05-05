@@ -80,7 +80,7 @@ class RemboursementController extends Controller
                         'cours' => function($query){$query->where('demande', '1');},
                         'cours.matiere'
                         ])
-                    ->get();
+                    ->paginate(5);
                   //dd($vacataires)  ;
             return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
         }

@@ -7,7 +7,7 @@
                 <div class=" flex items-start justify-between">
                     <div>
                         <p class="mb-3 font-medium py-1">Demandes</p>
-                        <h1 class="text-3xl font-bold text-zinc-800">33</h1>
+                        <h1 class="text-3xl font-bold text-zinc-800">{{$liste_demande}}</h1>
                     </div>
                     <span class="bg-zinc-100 px-2 py-1.5 rounded-xl flex items-center justify-center ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#52525b" fill="none">
@@ -21,14 +21,14 @@
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
-                    <p><span class="text-emerald-400 mr-2">+66%</span>de demandes</p>
+                    <p><span class="text-emerald-400 mr-2">+{{$percent_demande }}%</span>de demandes</p>
                 </div>
             </div>
             <div class="bg-white rounded-3xl shadow_3 flex flex-col justify-between">
                 <div class=" flex items-start justify-between">
                     <div>
                         <p class="mb-3 font-medium py-1">cours non Remboursé</p>
-                        <h1 class="text-3xl font-bold text-zinc-800">13</h1>
+                        <h1 class="text-3xl font-bold text-zinc-800">{{$cours_non_rem}}</h1>
                     </div>
                     <span class="bg-red-100 px-2.5 py-1.5 rounded-xl flex items-center justify-center h-12 w-12">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#f87171" fill="none">
@@ -42,14 +42,14 @@
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
-                    <p><span class="text-emerald-400 mr-2">+44%</span> cours non Remboursés</p>
+                    <p><span class="text-emerald-400 mr-2">+{{$percent_cours_non_appr}}%</span> cours non Remboursés</p>
                 </div>
             </div>
             <div class="bg-white rounded-3xl shadow_3 flex flex-col justify-between">
                 <div class=" flex items-start justify-between">
                     <div>
                         <p class="mb-3 font-medium py-1">Activités</p>
-                        <h1 class="text-3xl font-bold text-zinc-800">5</h1>
+                        <h1 class="text-3xl font-bold text-zinc-800">{{$total_activite}}</h1>
                     </div>
                     <span class="bg-green-100 px-2.5 py-1.5 rounded-xl flex items-center justify-center h-12 w-12">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#4ade80" fill="none">
@@ -71,7 +71,7 @@
                 <div class=" flex items-start justify-between">
                     <div>
                         <p class="mb-3 font-medium py-1">Non Remboursés</p>
-                        <h1 class="text-3xl font-bold text-zinc-800">2</h1>
+                        <h1 class="text-3xl font-bold text-zinc-800">{{$activite_non_rem}}</h1>
                     </div>
                     <span class="bg-amber-100 px-2.5 py-1.5 rounded-xl flex items-center justify-center h-12 w-12">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#fbbf24" fill="none">
@@ -86,7 +86,7 @@
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
-                    <p><span class="text-emerald-400 mr-2">+40%</span> d' activités non Remboursés</p>
+                    <p><span class="text-emerald-400 mr-2">+{{$percent_activite}}%</span> d' activités non Remboursés</p>
                 </div>
             </div>
         </div>

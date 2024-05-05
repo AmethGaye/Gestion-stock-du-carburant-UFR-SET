@@ -153,9 +153,37 @@ class DashboardController extends Controller
         if($user_role == 'comptable'){
 
             $stock = Stock::latest()->first();
-            // dd($quantiteParJour);
+            $liste_demande=Remboursement_vac::where('statut','1')->count();
+            $total_demande=Remboursement_vac::all()->count();
             
-            return view('users.comptable.dashboard', compact('stock'));
+            if($total_demande !=0){
+                $percent_demande = ($liste_demande)/$total_demande*100;
+                $percent_demande = number_format( $percent_demande , 2, '.', '');
+            }else{
+                $percent_demande=0;
+            }
+           $cours_non_rem=Cours::where('statut',1)->whereHas('remboursement',function ($query){
+            $query->where('statut','1');
+           })->count();
+           $total_cours=Cours::all()->count();
+            if($total_cours !=0){
+                $percent_cours_non_appr =  $cours_non_rem/$total_cours*100;
+                $percent_cours_non_appr  = number_format( $percent_cours_non_appr  , 2, '.', '');
+
+            }else{
+                $percent_cours_non_appr=0;
+            }
+
+            $total_activite = Activite::all()->count();
+            $activite_non_rem = Activite::where('statut',0)->count();
+            if($total_activite != 0){
+                $percent_activite = ($activite_non_rem/$total_activite)*100;
+                $percent_activite  = number_format( $percent_activite  , 2, '.', '');
+            }else{
+                $percent_activite=0; 
+            }
+            
+            return view('users.comptable.dashboard', compact('stock','liste_demande','percent_demande','percent_cours_non_appr','cours_non_rem','total_activite','activite_non_rem','percent_activite'));
         }
 
 

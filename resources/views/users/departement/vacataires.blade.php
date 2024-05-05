@@ -188,7 +188,7 @@
 
             </div>
             {{-- pagination --}}
-            @include('partials.pagination')
+            {{ $vacataires->links() }}
         </div>
     </section>
 @endsection

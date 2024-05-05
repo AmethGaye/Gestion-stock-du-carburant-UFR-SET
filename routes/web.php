@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotificationController;
 use App\Models\Stock;
 use App\Models\Dotation_depart;
 use Illuminate\Support\Facades\Route;
@@ -117,6 +118,7 @@ Route::post('/directeur/demandes', [RemboursementController::class, 'update'])->
 Route::get('/directeur/demandes/filtre', [RemboursementController::class, 'filtre_demande'])->name('filtre.demande');
 
 Route::get('/directeur/demandes/month', [RemboursementController::class, 'filtre_by_month'])->name('filtre_by_month');
+Route::get('/directeur/demande/notification/{id}',[NotificationController::class,'markAsRead'])->name('mark_read_notification');
 
 
 
