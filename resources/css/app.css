@@ -97,7 +97,7 @@ main, .nav-bar {
     @apply bg-transparent
 }
 .max-h-44.overflow-y-scroll::-webkit-scrollbar-thumb, .max-h-96.overflow-y-scroll::-webkit-scrollbar-thumb{
-    @apply bg-zinc-500 rounded-2xl
+    @apply bg-zinc-300 rounded-2xl
 }
 
 .opt {

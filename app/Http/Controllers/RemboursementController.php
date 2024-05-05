@@ -443,12 +443,6 @@ class RemboursementController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request)
-<<<<<<< HEAD
-    {
-        $id_cours = $request->id_cours;
-        foreach ($id_cours as $id_cour){
-            Remboursement_vac::where('cours_id',$id_cour)->update(['statut'=>'1']);
-=======
 {
     $id_cours = $request->id_cours;
 
@@ -464,11 +458,9 @@ class RemboursementController extends Controller
         $remboursement = Remboursement_vac::where('cours_id',$id_cour)->first();
         // Notifier le comptable
         if($comptable){
-            
-        
+
             $comptable->notify(new ComptableNotification($remboursement));
     
->>>>>>> 0294cfc3d6f0ba9708bdef6b89bf46cbc195a3e6
         }
        }
 

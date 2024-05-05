@@ -16,36 +16,62 @@
     </form>
     <div class="flex items-center gap-3 relative">
         
-        @if (in_array(auth()->user()->roles->nom, ['directeur', 'comptable']))
-        <div class="icon-hover relative">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 7V3M16 7V3M7 11H17M5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21Z" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>  
-            <span class="w-2.5 h-2.5 rounded-full bg-red-500 block mr-2 absolute right-[1px] top-[10px]"></span>              
-        <div class="icon-hover">
-            
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 7V3M16 7V3M7 11H17M5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V7C21 6.46957 20.7893 5.96086 20.4142 5.58579C20.0391 5.21071 19.5304 5 19 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21Z" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>  
-            <span class="text-red-500 " id="js-count">{{auth()->user()->unreadNotifications->count()}} </span>
-        </div>  
-        @endif
+        
         <div class="icon-hover relative" onclick="notifBox()">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15 17H20L18.595 15.595C18.4063 15.4063 18.2567 15.1822 18.1546 14.9357C18.0525 14.6891 18 14.4249 18 14.158V11C18.0002 9.75894 17.6156 8.54834 16.8992 7.53489C16.1829 6.52144 15.17 5.75496 14 5.341V5C14 4.46957 13.7893 3.96086 13.4142 3.58579C13.0391 3.21071 12.5304 3 12 3C11.4696 3 10.9609 3.21071 10.5858 3.58579C10.2107 3.96086 10 4.46957 10 5V5.341C7.67 6.165 6 8.388 6 11V14.159C6 14.697 5.786 15.214 5.405 15.595L4 17H9M15 17H9M15 17V18C15 18.7956 14.6839 19.5587 14.1213 20.1213C13.5587 20.6839 12.7956 21 12 21C11.2044 21 10.4413 20.6839 9.87868 20.1213C9.31607 19.5587 9 18.7956 9 18V17" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg> 
-            <span class="w-2.5 h-2.5 rounded-full bg-red-500 block mr-2 absolute right-[1px] top-[10px]"></span>               
+            @if(auth()->user()->unreadNotifications->count())
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500 block mr-2 absolute right-[1px] top-[10px]"></span>               
+            @endif
         </div>
         {{-- notification --}}
         <div class="w-80 max-h-96 overflow-y-scroll bg-white absolute top-[146%] shadow_2 rounded-md border -left-10 opacity-0 invisible px-4 py-6 text-[small] transition-all duration-75"  id="notification">
             <h3 class="font-medium text-zinc-600 pb-4 border-b">notifications</h3>
-            <div class=" mb-3 flex flex-col">
-                <p class="font-medium text-zinc-600 pt-3 pb-1.5">Activités </p>
-                <a href="" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
-                    <span>lun.18:40</span>
-                    <span>Sortie Pedagogie a mbour</span>
-                </a>
-            </div>
+
+            @if (auth()->user()->roles->nom == 'directeur')
+               {{-- type activité --}}
+               <div class=" flex flex-col pb-3 border-b">
+                    <p class="font-medium text-zinc-600 pt-3 pb-1.5">Activités </p>
+                    <a href="" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
+                        <span class="font-medium">lun.18:40</span>
+                        <span>Sortie Pedagogie à <span class="font-semibold">Mbour</span>. Remboursement effectué </span>
+                    </a>
+                </div> 
+            @endif
+
+            @if(auth()->user()->roles->nom == 'comptable')
+                {{-- type remboursement vacataire --}}
+                <div class="flex flex-col pb-3 border-b">
+                    <p class="font-medium text-zinc-600 pt-3 pb-1.5">Remboursement vacataires</p>
+                    <a href="" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
+                        <span class="font-medium">lun.18:40</span>
+                        <span>Vous avez une scéance de cours à rembourser. Vacataire : <span class="font-semibold">Seny Mbaye</span></span>
+                    </a>
+                </div>
+
+                {{-- type activité --}}
+                <div class=" flex flex-col pb-3 border-b">
+                    <p class="font-medium text-zinc-600 pt-3 pb-1.5">Activités </p>
+                    <a href="" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
+                        <span class="font-medium">lun.18:40</span>
+                        <span>Sortie Pedagogie à <span class="font-semibold">Mbour</span>. Tickets : <span class="font-semibold">10</span> </span>
+                    </a>
+                </div>
+            @endif
+
+            @if(auth()->user()->roles->nom == 'chef_departement')
+                {{-- type cours --}}
+                <div class="flex flex-col pb-3 border-b">
+                    <p class="font-medium text-zinc-600 pt-3 pb-1.5">Cours à approuver </p>
+                    <a href="" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
+                        <span class="font-medium">lun.18:40</span>
+                        <span>Vous avez une scéance de cours à approuver. Vacataire : <span class="font-semibold">Seny Mbaye</span></span>
+                    </a>
+                </div>
+            @endif
+
+            
             
         </div>
      
