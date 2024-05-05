@@ -51,6 +51,7 @@ class CoursController extends Controller
                 },
                 'cours.matiere','cours.matiere.filieres'
             ])
+            ->latest()
             ->get();
     
         //dd($vacataires_sceances);
@@ -119,7 +120,7 @@ class CoursController extends Controller
         $matieres = Matiere::all();
         $vacataires = Vacataire::all();
         $id_user=auth()->user()->getAuthIdentifier();
-        $sceance_cours=Cours::with(['vacataire','matiere'])->get();
+        $sceance_cours=Cours::with(['vacataire','matiere'])->latest()->get();
        //dd($sceance_cours);
         return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }
@@ -221,7 +222,7 @@ class CoursController extends Controller
 
     public function approuver(string $id){
         Cours::where('id', $id)->update(['statut' => true]);
-        return redirect()->route('cours.approbation');
+        return redirect()->back()->with('success', "l'approbation est reussie avec succès !");
     }
     public function restaurer(string $id){
 
@@ -235,7 +236,7 @@ class CoursController extends Controller
             Cours::where('id', $id)->update(['statut' => false,'demande'=>0]);
 
 
-            return redirect()->route('cours.approbation');
+            return redirect()->back()->with('success', "l'approbation à été restaurée !");
         } else {
              // sinon on lui retourne la page avec un message d'erreur
             return redirect()->back()->withErrors(['msg'=>'Le cours ne peut pas être restauré car il est déjà approuvé par le directeur ou payé.']);

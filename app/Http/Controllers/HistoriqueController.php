@@ -14,13 +14,16 @@ class HistoriqueController extends Controller
     }
 
     public function index(){
-
-        $dotation_depart = Dotation_depart::all();
+        $debut_mois = Carbon::now()->startOfMonth();
+        $fin_mois = Carbon::now()->endOfMonth();
+        
+        $dotation_depart = Dotation_depart::whereBetween('created_at', [$debut_mois, $fin_mois])->get();
         $total_dep = Dotation_depart::sum('nombre_tickets');
-        $dotation_admin = Dotation_admin::all();
+        $dotation_admin = Dotation_admin::whereBetween('created_at', [$debut_mois, $fin_mois])->get();
         $total_admin = Dotation_admin::sum('nombre_tickets');
+        $current_month = Carbon::now()->translatedFormat('F');
 
-        return view('users.comptable.historique', compact('dotation_depart', 'dotation_admin', 'total_dep', 'total_admin'));
+        return view('users.comptable.historique', compact('dotation_depart', 'dotation_admin', 'total_dep', 'total_admin', 'current_month'));
     }
     public function search(Request $request ){
         $search = $request->input('search','');

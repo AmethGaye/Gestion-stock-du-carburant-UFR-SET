@@ -98,7 +98,7 @@
         <div class="flex items-center gap-4">
             <h2 class="text-base font-medium text-zinc-600 m-0">Départements</h2>
             <div class="flex justify-center items-center">
-                <span class="flex items-center bg-[#E2FBD7] px-3 text-[#34B53A] py-1.5 rounded-xl font-semibold text-[small] tracking-wider">Janvier</span>
+                <span class="flex items-center bg-[#E2FBD7] px-3 text-[#34B53A] py-1.5 rounded-xl font-semibold text-[small] tracking-wider">{{ $current_month }}</span>
             </div>
         </div>
         <div class="px-3 py-1.5 border border-zinc-200 rounded-md font-semibold text-slate-400">
@@ -144,7 +144,7 @@
         <div class="flex items-center gap-4">
             <h2 class="text-base font-medium text-zinc-600 m-0">Administration</h2>
             <div class="flex justify-center items-center">
-                <span class="flex items-center bg-[#E2FBD7] px-3 text-[#34B53A] py-1.5 rounded-xl font-semibold text-[small] tracking-wider">Janvier</span>
+                <span class="flex items-center bg-[#E2FBD7] px-3 text-[#34B53A] py-1.5 rounded-xl font-semibold text-[small] tracking-wider">{{ $current_month }}</span>
             </div>
         </div>
         <div class="px-3 py-1.5 border border-zinc-200 rounded-md font-semibold text-slate-400">

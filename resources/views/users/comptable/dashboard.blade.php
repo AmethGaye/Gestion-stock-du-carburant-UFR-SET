@@ -98,7 +98,7 @@
                     <div class="text-3xl font-bold text-zinc-800" id="percent"></div>
                     <svg class="w-[200px] h-[200px] rounded-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                         <circle cx="100" cy="100" r="100" class="fill-transparent stroke-zinc-100 stroke-[55]" style="transform-origin: center"></circle>
-                        <circle cx="100" cy="100" r="100" class="fill-transparent stroke-emerald-700 stroke-[55] progress" style="transform-origin: center;" ></circle>
+                        <circle cx="100" cy="100" r="100" class="fill-transparent stroke-emerald-700 stroke-[55] progress transition-all" style="transform-origin: center;" ></circle>
                     </svg>
                 </div>
                 <div class="text-sm w-full *:mb-1 font-medium mt-6">
