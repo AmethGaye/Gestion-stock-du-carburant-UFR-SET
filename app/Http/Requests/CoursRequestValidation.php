@@ -12,7 +12,7 @@ Trait CoursRequestValidation
             'matiere_id'=>'required|string|numeric',
             'vacataire_id'=>'required|string|numeric',
             'date'=>'required|date',
-            'remarque'=>'string',
+            'remarque'=>'string|nullable',
             'duree'=>'required|string|numeric',
         ];
     }

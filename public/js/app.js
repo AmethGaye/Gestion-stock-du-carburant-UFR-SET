@@ -309,8 +309,8 @@ const subscribe = async () => {
             body: data,
         });
         const result = await response.json();
-         //const result = await response.text();
-        //console.log(result);
+        //  const result = await response.text();
+        // console.log(result);
 
         if(response.ok && result.success){
             sessionStorage.setItem('msg',result.msg);

@@ -13,6 +13,7 @@ class Cours extends Model
     protected $fillable=['filiere_id','matiere_id','vacataire_id','duree','remarque','date','statut', 'demande'];
 
 
+
     public function matiere():BelongsTo
     {
         return $this->belongsTo(Matiere::class);

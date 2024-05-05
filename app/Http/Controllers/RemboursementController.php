@@ -397,29 +397,29 @@ class RemboursementController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request)
-{
-    $id_cours = $request->id_cours;
+    {
+        $id_cours = $request->id_cours;
 
-    $comptable = User::whereHas('roles', function($query) {
-        $query->where('nom', 'comptable');
-    })->first();
+        $comptable = User::whereHas('roles', function($query) {
+            $query->where('nom', 'comptable');
+        })->first();
 
-    foreach ($id_cours as $id_cour) {
+        foreach ($id_cours as $id_cour) {
+            
+            Remboursement_vac::where('cours_id', $id_cour)->update(['statut' => '1']);
+
+            
+            $remboursement = Remboursement_vac::where('cours_id',$id_cour)->first();
+            // Notifier le comptable
+            if($comptable){
+
+                $comptable->notify(new ComptableNotification($remboursement));
         
-        Remboursement_vac::where('cours_id', $id_cour)->update(['statut' => '1']);
-
-        
-        $remboursement = Remboursement_vac::where('cours_id',$id_cour)->first();
-        // Notifier le comptable
-        if($comptable){
-
-            $comptable->notify(new ComptableNotification($remboursement));
-    
+            }
         }
-       }
 
-    return redirect()->back();
-}
+    return redirect()->back()->withSuccess('La demande été validée avec succès !');
+    }
 
 
     public function r_update(Request $request, string $id){

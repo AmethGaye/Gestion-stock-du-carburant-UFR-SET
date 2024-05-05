@@ -102,16 +102,14 @@ class CoursController extends Controller
         $vacataires_sceances = Vacataire::whereHas('cours', function($query) use ($startOfMonth, $endOfMonth) {
             $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
         })->with([
-            'cours' => function($query) {
-                $query->where('demande', '0');
-            },
+            'cours',
             'cours.matiere',
             'cours.filiere'
         ])->get();
         $vacataires = Vacataire::where('status','=',1)->get();
         $filieres = Filiere::with('matieres')->get();
     
-        return view('users.departement.all', compact('vacataires', 'matieres', 'filieres', 'vacataires_sceances'));
+        return view('users.departement.all', compact('vacataires', 'filieres', 'vacataires_sceances'));
     }
     
     public function approbation(){
@@ -210,7 +208,7 @@ class CoursController extends Controller
                     'matiere_id'=>$validated['matiere_id'],
                     'vacataire_id'=>$validated['vacataire_id'],
                     'date'=>$validated['date'],
-                    'remarque'=>$validated['remarque'],
+                    'remarque'=>$validated['remarque'] || 'pas de remarque',
                     'duree'=>$validated['duree'],
                     'statut'=>false,
             ]);
@@ -264,7 +262,7 @@ class CoursController extends Controller
             return response()->json(['errors' => $validator->errors()]);
         }
 
-        Cours::where('id', $id)->update($request->only(['filiere_id', 'matiere_id', 'vacataire_id', 'date', 'remarque', 'duree']));
+        Cours::where('id', $id)->update($request->only(['matiere_id', 'vacataire_id', 'date', 'remarque', 'duree']));
         return response()->json(['success' => true, 'msg' => 'Mise à jour du cours réussie avec succés !']);
     }
 

@@ -120,7 +120,7 @@
                 <span class="basis-[15%] grow">TELEPHONE</span>
                 <span class="basis-[160px]">PROVENANCE</span>
                 <span class="basis-[150px] text-center">SITUATION</span>
-                <span class="basis-[130px]">STATUT</span>
+                <span class="basis-[130px] pr-4 flex items-center mr-2">STATUT</span>
                 <span class="basis-[150px] text-center">ACTION</span>
             </div>
             {{-- t-body --}}
@@ -146,16 +146,25 @@
                         </span>
                     </span>
                     @if($vacataire->status=='1')
-                    <span class="basis-[130px] flex items-center">
-                        <span class="w-2 h-2 rounded-full bg-green-500 block mr-2"></span>
-                        <span class="font-semibold text">Active</span>
+                    <span class="basis-[130px]  pr-4 flex items-center mr-2">
+                        <form action="" method="POST" class="m-0 "> 
+                            @csrf
+                            
+                            <button class="p-1.5 rounded-full hover:bg-zinc-100"><div class="w-2 h-2 rounded-full bg-green-500 block"></div></button>
+                        </form>
+                        <span class="font-semibold text ml-1">Active</span>
                     </span>
                     @else
-                        <span class="basis-[130px] flex items-center">
-                        <span class="w-2 h-2 rounded-full bg-zinc-400 block mr-2"></span>
-                        <span class="font-semibold text-zinc-400">Inactif</span>
+                        <span class="basis-[130px]  pr-4 flex items-center mr-2">
+                            <form action="" method="POST" class="m-0 ">
+                                @csrf
+                                <button class="p-1.5 rounded-full hover:bg-zinc-100"><div class="w-2 h-2 rounded-full bg-zinc-400 block"></div></button>
+                            </form>
+                            <span class="font-semibold text-zinc-400 ml-1">Inactive</span>
+                        </span>
                     </span>
                     @endif
+
                     <span class="flex basis-[150px] justify-center">
                         <div class="border border-zinc-200  rounded-l-lg bg-zinc-100 m-0">
                             <button type="submit" class="px-3 py-1.5" onclick="displayContainer(`/departement/vacataires/update/`+{{ $vacataire->id }}, true, {{ json_encode($vacataire) }} )" >

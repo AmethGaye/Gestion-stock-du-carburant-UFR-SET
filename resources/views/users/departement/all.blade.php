@@ -101,9 +101,6 @@
 
 <div class="">
     {{-- t-head --}}
-    @if(session('success'))
-      <span class="text-green-500 bg-green-100">{{session('success')}} </span>
-    @endif
     <div class="flex items-center text-sm text-zinc-400 font-nunito font-bold py-4 px-4">
         {{-- cols --}}
         <span class="pr-4">
