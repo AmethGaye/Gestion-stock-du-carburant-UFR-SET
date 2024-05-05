@@ -14,6 +14,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UserRequestValidation;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -95,6 +96,18 @@ class UserController extends Controller
                 'password'=>Hash::make($request->password),
             ]);
         }
+        $credentials = [
+            'username' => $request->email, 
+            'password' => $request->password,
+            'nom'=> $request->nom,
+            'prenom'=>$request->prenom,
+        ];
+    
+        Mail::send('emails.add_user', $credentials, function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject('Votre nouveau compte sur notre plateforme');
+        });
+       
         return response()->json(['success' => true, 'msg' => "L'utilisateur ajouté avec succés !"]);
     }
   public function disable($id){

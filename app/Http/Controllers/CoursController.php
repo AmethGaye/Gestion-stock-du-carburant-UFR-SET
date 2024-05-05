@@ -109,8 +109,9 @@ class CoursController extends Controller
         ])->get();
         $vacataires = Vacataire::where('status','=',1)->get();
         $filieres = Filiere::with('matieres')->get();
+        //$matieres = Matiere::with('filieres')->get();
     
-        return view('users.departement.all', compact('vacataires', 'matieres', 'filieres', 'vacataires_sceances'));
+        return view('users.departement.all', compact('vacataires', 'filieres', 'vacataires_sceances'));
     }
     
     public function approbation(){

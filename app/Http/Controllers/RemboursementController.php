@@ -276,13 +276,13 @@ class RemboursementController extends Controller
             ->whereHas('cours.remboursement', function($query) use ($startOfMonth, $endOfMonth){
               //du premier du mois jusqu au fin du mois
                 $query->whereBetween('created_at', [$startOfMonth, $endOfMonth])
-                ->where('statut',0);
+                ->where('statut',);
             })
-            ->with(['cours.remboursement' => function($query) use ($startOfMonth, $endOfMonth){
-                $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+            ->with(['cours' => function($query) {
+                $query->where('demande','1') ;
             }, 'cours.matiere', 'cours.filiere', 'cours.remboursement.user'])
             ->get();
-    
+   
         return view('users.directeur.demandes', compact('liste_remboursement'));
     }
 
