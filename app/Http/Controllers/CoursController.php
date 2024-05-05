@@ -24,6 +24,7 @@ class CoursController extends Controller
      * Display a listing of the resource.
      */
     public function index()
+    
     {
         $id_user = auth()->user()->getAuthIdentifier();
         $ufr_id = auth()->user()->ufr->id;

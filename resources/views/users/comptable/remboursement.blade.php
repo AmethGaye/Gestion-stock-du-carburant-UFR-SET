@@ -184,6 +184,7 @@
                         <span class="basis-32 font-bold pr-4  pl-[1.5px]">{{ $cours->duree}} heures</span>
                         <span class="basis-[140px] flex pr-4 justify-center">
                                 <div class="w-28 relative ">
+                                    
                                     <input type="number" name="" id="number"  value="{{ $cours->remboursement->nombre_tickets }}" class="border-[1.5px] border-zinc-200 w-full rounded-md outline-none focus:border-zinc-500 px-4 py-2 font-bold text-zinc-600 disabled:text-zinc-400" @if ($cours->remboursement->statut == 2) @disabled(true) @endif>
                                     <div class="absolute right-2 top-1/2 -translate-y-1/2 flex bg-white ">
                                         <button type="button" class="w-7 h-7 mr-1  bg-zinc-100 hover:bg-zinc-200 disabled:hover:bg-zinc-100 flex items-center justify-center rounded-md" onclick="decrementer(this)" @if ($cours->remboursement->statut == 2) @disabled(true) @endif>

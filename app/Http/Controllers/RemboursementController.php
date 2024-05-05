@@ -8,7 +8,10 @@ use App\Models\Vacataire;
 use Cron\MonthField;
 use Illuminate\Http\Request;
 use App\Models\Remboursement_vac;
+use App\Models\User;
+use App\Notifications\ComptableNotification;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use App\Notifications\DemandeNotification;
 
 class RemboursementController extends Controller
 {
@@ -153,28 +156,111 @@ class RemboursementController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id=auth()->user()->getAuthIdentifier();
+        $user_id = auth()->user()->getAuthIdentifier();
         $cours_id = $request->cours_id;
-
-        // if (empty($cours_id)) {
-        //     return redirect()->back()->withErrors(['msg' => 'Pas de cours dispensé ']);
-        // }
-        foreach ($cours_id as $id){
-            $cours = Cours::where('id', $id)->first();
-
-            // $if_id_cours_exist=Remboursement_vac::where('cours_id', $cours->id)->exists();
-            Cours::find($id)->update(['demande'=> 1]);
-            Remboursement_vac::create([
-                'nombre_heure'=>$cours->duree,
-                'nombre_tickets'=>2,
-                'user_id'=>$user_id,
-                'cours_id'=>$cours->id,
-                'statut'=>'0',
-            ]);
+    
+        // Si aucune ID de cours n'est fournie, retourner avec une erreur.
+        if (empty($cours_id)) {
+            return redirect()->back()->withErrors(['msg' => 'Pas de cours dispensé']);
         }
-        return redirect()->back()->withSuccess('La demande est transmise avec success');
+        $tickets_par_region = [
+            'Dakar' => [
+                'avec_vehicule' => 2,
+                'sans_vehicule' => 4,
+            ],
+            'Thiès' => [
+                'avec_vehicule' => 3,
+                'sans_vehicule' => 5,
+            ],
+            'Diourbel' => [
+                'avec_vehicule' => 3,
+                'sans_vehicule' => 2,
+            ],
+            'Louga' => [
+                'avec_vehicule' => 3,
+                'sans_vehicule' => 5,
+            ],
+            'Saint-louis' => [
+                'avec_vehicule' => 3,
+                'sans_vehicule' => 4,
+            ],
+            'Kaolack' => [
+                'avec_vehicule' => 3,
+                'sans_vehicule' => 5,
+            ],
+            'Fatick' => [
+                'avec_vehicule' => 2,
+                'sans_vehicule' => 4,
+            ],
+            'Kaffrine' => [
+                'avec_vehicule' => 3,
+                'sans_vehicule' => 5,
+            ],
+            'Matam' => [
+                'avec_vehicule' => 2,
+                'sans_vehicule' => 4,
+            ],
+            'Tambacounda' => [
+                'avec_vehicule' => 3,
+                'sans_vehicule' => 5,
+            ],
+            'Kolda' => [
+                'avec_vehicule' => 2,
+                'sans_vehicule' => 4,
+            ],
+            'Sedhiou' => [
+                'avec_vehicule' => 3,
+                'sans_vehicule' => 5,
+            ],
+            'Ziguinchor' => [
+                'avec_vehicule' =>4,
+                'sans_vehicule' => 3,
+            ],
+            'Kedougou' => [
+                'avec_vehicule' => 5,
+                'sans_vehicule' => 3,
+            ],
+        ];
+       
+        $directeur = User::whereHas('roles', function($query) {
+            $query->where('nom', 'directeur');
+        })->first();
+    
+        foreach ($cours_id as $id) {
+            $cours = Cours::findOrFail($id); 
+            $vacataire = $cours->vacataire;
+            $region = $vacataire->provenance;
+            $situation = $vacataire->situation;
+            $nombre_ticket=0;
+             if(isset($tickets_par_region[$region])){
+                
+                if($situation){
+                    $nombre_ticket = $tickets_par_region[$region]['avec_vehicule'];
+                }else{
+                    $nombre_ticket = $tickets_par_region[$region]['sans_vehicule'];
+                }
 
+             }
+           
+            $cours->update(['demande' => 1]);
+    
+            $remboursement_vac = Remboursement_vac::create([
+                'nombre_heure' => $cours->duree,
+                'nombre_tickets' => $nombre_ticket,
+                'user_id' => $user_id,
+                'cours_id' => $cours->id,
+                'statut' => '0',
+            ]);
+    
+            // Envoyer une notification pour chaque cours si le directeur existe.
+            if ($directeur) {
+                $directeur->notify(new DemandeNotification($remboursement_vac));
+            }
+        }
+    
+        return redirect()->back()->withSuccess('La demande est transmise avec succès');
     }
+    
 /**
      * filtrage des donne par mois .
      */
@@ -356,14 +442,31 @@ class RemboursementController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request)
-    {
-        $id_cours= $request->id_cours;
-        foreach ($id_cours as $id_cour){
-            Remboursement_vac::where('cours_id',$id_cour)->update(['statut'=>'1']);
+{
+    $id_cours = $request->id_cours;
+
+    $comptable = User::whereHas('roles', function($query) {
+        $query->where('nom', 'comptable');
+    })->first();
+
+    foreach ($id_cours as $id_cour) {
+        
+        Remboursement_vac::where('cours_id', $id_cour)->update(['statut' => '1']);
+
+        
+        $remboursement = Remboursement_vac::where('cours_id',$id_cour)->first();
+        // Notifier le comptable
+        if($comptable){
+            
+        
+            $comptable->notify(new ComptableNotification($remboursement));
+    
         }
-        return redirect()->back();
-       
-    }
+       }
+
+    return redirect()->back();
+}
+
 
     public function r_update(Request $request, string $id){
         Remboursement_vac::where('id', $id)->update(['statut' => '2', 'nombre_tickets' => $request->input('tickets')]);
