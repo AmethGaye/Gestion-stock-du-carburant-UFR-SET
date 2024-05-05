@@ -17,7 +17,7 @@
                         </svg>  
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
@@ -38,7 +38,7 @@
                         </svg>  
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
@@ -60,11 +60,11 @@
                         </svg>
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
-                    <p><span class="text-emerald-400 mr-2">+100%</span></p>
+                    <p><span class="text-emerald-400 mr-2">+100%</span>d'activités</p>
                 </div>
             </div>
             <div class="bg-white rounded-3xl shadow_3 flex flex-col justify-between">
@@ -82,20 +82,20 @@
                         </svg>
                     </span>
                 </div>
-                <div class="flex gap-1 items-center text-sm">
+                <div class="flex gap-1 items-center text-[small]">
                     <svg width="14" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1 13L7.64645 6.35355C7.84171 6.15829 8.15829 6.15829 8.35355 6.35355L11.6464 9.64645C11.8417 9.84171 12.1583 9.84171 12.3536 9.64645L20 2M15 1H20.5C20.7761 1 21 1.22386 21 1.5V7" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
                     </svg>                        
-                    <p><span class="text-emerald-400 mr-2">+40%</span> d' activités non Remboursés</p>
+                    <p class=""><span class="text-emerald-400 mr-2">+40%</span> non Remboursés</p>
                 </div>
             </div>
         </div>
         <div class="grid row-span-2 row-start-2 col-span-12 grid-cols-12 gap-x-6">
 
             <div class="p-6 bg-white col-span-3 col-start-1 rounded-3xl shadow_3 relative flex flex-col items-center gap-4">
-                <h1 class="text-center text-zinc-700 font-bold text-4xl font-tt-web mb-4" >Stock</h1>
+                <h1 class="text-center text-zinc-800 font-bold text-4xl font-tt-web mb-4" >Stock</h1>
                 <div class="w-[200px]  h-[200px] rounded-full border border-zinc-200 flex items-center justify-center gap-4 relative">
-                    <div class="text-4xl font-semibold text-zinc-600" id="percent">0%</div>
+                    <div class="text-3xl font-bold text-zinc-800" id="percent"></div>
                     <svg class="w-[200px] h-[200px] rounded-full absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                         <circle cx="100" cy="100" r="100" class="fill-transparent stroke-zinc-100 stroke-[55]" style="transform-origin: center"></circle>
                         <circle cx="100" cy="100" r="100" class="fill-transparent stroke-emerald-700 stroke-[55] progress" style="transform-origin: center;" ></circle>

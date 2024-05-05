@@ -192,7 +192,7 @@ Route::post('comptable/stock_store', [StockController::class, 'store'])->name('c
 Route::get('comptable/stock_reset', [StockController::class, 'reset'])->name('c.reset');
 Route::get('comptable/pourcentage',function(){
     $stock = Stock::latest()->first();
-    $pourcentage = ($stock->nombre_ticket / $stock->tickets_apres_entrees) * 100;
+    $pourcentage = number_format(($stock->nombre_ticket / $stock->tickets_apres_entrees) * 100, 1);
     return response()->json(['percent' => $pourcentage]);
 });
 

@@ -77,8 +77,6 @@
             </div>
         </div>
 
-    <div class="text-green-500" id="success"></div>
-
         <div class="bg-white rounded-2xl shadow_2 relative">
             {{-- t-head --}}
             <div class="flex items-center text-sm text-zinc-400 font-nunito font-bold py-5 border-b border-b-zinc-200 ">
