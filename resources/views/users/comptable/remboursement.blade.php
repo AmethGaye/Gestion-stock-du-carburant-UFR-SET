@@ -120,12 +120,9 @@
                 <span class="basis-3/12 grow pr-4">{{ $vacataire->email }}</span>
                 <span class="basis-2/12 grow pr-4">{{ $vacataire->provenance }}</span>
                 <span class="basis-[160px] pr-4 font-bold">{{ $vacataire->cours->sum('duree') }} Heures</span>
-                @php
-                    $array = ['bg-blue-100', 'text-blue-500' => $vacataire->situation == 1, 'bg-fuchsia-100', 'text-fuchsia-500' => $vacataire->situation == 0];
-                    $classes = Arr::toCssClasses($array);
-                @endphp
+                
                 <span class="basis-[190px] flex  justify-center">
-                    <span class="flex items-center {{ $classes }} px-4  py-1 rounded font-semibold text-xs">  @if ($vacataire->situation) Véhiculé @else Non @endif</span>
+                    <span class="flex items-center @if ($vacataire->situation) bg-blue-100 text-blue-500 @else bg-fuchsia-100 text-fuchsia-500 @endif px-4  py-1 rounded font-semibold text-xs">  @if ($vacataire->situation) Véhiculé @else Non @endif</span>
                 </span>
              @php 
                 $distance = 0;

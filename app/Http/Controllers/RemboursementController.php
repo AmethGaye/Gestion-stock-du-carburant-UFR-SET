@@ -264,15 +264,10 @@ class RemboursementController extends Controller
         $endOfMonth = Carbon::create(null, $num_month, 1)->endOfMonth();
     
         $liste_remboursement = Vacataire::where('status', 1)
-            ->whereHas('cours.remboursement', function($query) use ($startOfMonth, $endOfMonth){
-              //du premier du mois jusqu au fin du mois
-                $query->whereBetween('created_at', [$startOfMonth, $endOfMonth])
-                ->where('statut',0);
-            })
-            ->with(['cours.remboursement' => function($query) use ($startOfMonth, $endOfMonth){
-                $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
-            }, 'cours.matiere', 'cours.filiere', 'cours.remboursement.user'])
-            ->get();
+        ->with(['cours' => fn($query) =>  $query->whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('demande', 1) , 'cours.remboursement', 'cours.matiere', 'cours.remboursement.user'])
+        ->get();
+
+        // dd($liste_remboursement);
     
         return view('users.directeur.demandes', compact('liste_remboursement'));
     }

@@ -140,58 +140,60 @@ class CoursController extends Controller
        //dd($sceance_cours);
         return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }
-   public function ap_filtre(Request $request){
 
-    $filieres = Filiere::all();
-    $matieres = Matiere::all();
-    $vacataires = Vacataire::all();
 
-    $sceance_cours=Cours::with(['vacataire','filiere','matiere']);
+    public function ap_filtre(Request $request){
 
-    if($request->filled('order')){
-        foreach ( $request->order as  $order) {
-            $sceance_cours->whereHas('vacataire' , function ($query) use ($order){
-                $query->orderBy($order, 'asc');
-            });
+        $filieres = Filiere::all();
+        $matieres = Matiere::all();
+        $vacataires = Vacataire::all();
+
+        $sceance_cours=Cours::with(['vacataire','filiere','matiere']);
+
+        if($request->filled('order')){
+            foreach ( $request->order as  $order) {
+                $sceance_cours->whereHas('vacataire' , function ($query) use ($order){
+                    $query->orderBy($order, 'asc');
+                });
+            }
         }
+
+        if($request->filled('situation')){
+        $situation = $request->situation;
+            $sceance_cours->whereHas('vacataire', function($query) use ($situation){
+                $query->whereIn('situation',$situation);
+            });
+
+        }
+
+        if($request->filled('demande')){
+
+            $sceance_cours->whereIn('demande',$request->demande);
+        }
+        $sceance_cours=$sceance_cours->get();
+    // dd($sceance_cours);
+
+        return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }
 
-    if($request->filled('situation')){
-      $situation = $request->situation;
-        $sceance_cours->whereHas('vacataire', function($query) use ($situation){
-            $query->whereIn('situation',$situation);
-        });
+    public function ap_filtre_month(Request $request){
+        $filieres = Filiere::all();
+        $matieres = Matiere::all();
+        $vacataires = Vacataire::all();
+        $sceance_cours=Cours::with(['vacataire','filiere','matiere']);
+        
+        $num_month=$request->month;
+        $startOfMonth = Carbon::create(null,$num_month,1)->startOfMonth();
+        $endOfMonth = Carbon::create(null,$num_month,1)->endOfMonth();
 
+        if($request->filled('month')){
+            $sceance_cours->whereBetween('created_at',[$startOfMonth,$endOfMonth]);
+        }
+        
+        $sceance_cours=$sceance_cours->get();
+        // dd($sceance_cours);
+        return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
     }
-
-    if($request->filled('demande')){
-
-        $sceance_cours->whereIn('demande',$request->demande);
-    }
-    $sceance_cours=$sceance_cours->get();
-   // dd($sceance_cours);
-
-    return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
-   }
-
-   public function ap_filtre_month(Request $request){
-    $filieres = Filiere::all();
-    $matieres = Matiere::all();
-    $vacataires = Vacataire::all();
-   $sceance_cours=Cours::with(['vacataire','filiere','matiere']);
-   
-   $num_month=$request->month;
-   $startOfMonth = Carbon::create(null,$num_month,1)->startOfMonth();
-   $endOfMonth = Carbon::create(null,$num_month,1)->endOfMonth();
-
-   if($request->filled('month')){
-    $sceance_cours->whereBetween('created_at',[$startOfMonth,$endOfMonth]);
-   }
-   
-   $sceance_cours=$sceance_cours->get();
-   // dd($sceance_cours);
-    return view('users.departement.approbation',compact('filieres','matieres','vacataires','sceance_cours'));
-   }
 
 
     public function store(Request $request){
@@ -290,19 +292,19 @@ class CoursController extends Controller
         $vacataires = Vacataire::where('status','=',1)
                                 ->where('ufr_id', auth()->user()->ufr->id)
                                  ->get();
-              $filieres = Filiere::with('matieres')->get();
-              
-              $vacataires_sceances = Vacataire::whereAny(['nom','prenom','email','provenance'],'like', $search)
-                                                ->orWhereHas('cours', function ($query) use ($search){ $query->whereAny(['remarque','statut','demande','duree','date'],'like',$search);})
-                                                ->orWhereHas('cours.matiere', function ($query) use ($search){$query->whereAny(['nom','volume_horaire','semestre'],'like',$search);})
-                                                ->orWhereHas('cours.matiere.filieres',function ($query) use ($search,$departement){ $query->where('nom','like',$search)->where('departement_id',$departement);})
-                                                ->where('ufr_id', auth()->user()->ufr->id)
-                                                ->with([
-                                                       'cours' => function($query){
-                                                        $query->where('demande', '0');
-                                                        },
-                                                'cours.matiere',
-                                                ])->get();
+        $filieres = Filiere::with('matieres')->get();
+        
+        $vacataires_sceances = Vacataire::whereAny(['nom','prenom','email','provenance'],'like', $search)
+                                        ->orWhereHas('cours', function ($query) use ($search){ $query->whereAny(['remarque','statut','demande','duree','date'],'like',$search);})
+                                        ->orWhereHas('cours.matiere', function ($query) use ($search){$query->whereAny(['nom','volume_horaire','semestre'],'like',$search);})
+                                        ->orWhereHas('cours.matiere.filieres',function ($query) use ($search,$departement){ $query->where('nom','like',$search)->where('departement_id',$departement);})
+                                        ->where('ufr_id', auth()->user()->ufr->id)
+                                        ->with([
+                                                'cours' => function($query){
+                                                $query->where('demande', '0');
+                                                },
+                                        'cours.matiere',
+                                        ])->get();
               
             
       

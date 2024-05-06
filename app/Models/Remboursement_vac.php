@@ -20,12 +20,12 @@ class Remboursement_vac extends Model
     ];
     public function user():BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function cours():BelongsTo
+    public function cours()
     {
-        return $this->belongsTo(Cours::class);
+        return $this->belongsTo(Cours::class, 'cours_id');
     }
 
 }
