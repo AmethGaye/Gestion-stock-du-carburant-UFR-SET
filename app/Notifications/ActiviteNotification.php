@@ -2,23 +2,24 @@
 
 namespace App\Notifications;
 
+use App\Models\Activite;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\BroadcastMessage;
-use App\Models\Remboursement_vac;
 
-class ComptableNotification extends Notification
+class ActiviteNotification extends Notification
 {
     use Queueable;
-    public Remboursement_vac $comptableNotification;
+    public $activite;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct(Remboursement_vac $comptableNotification)
+    public function __construct(Activite $activite)
     {
-        $this->comptableNotification=$comptableNotification ;
+        $this->activite=$activite;
     }
 
     /**
@@ -50,22 +51,19 @@ class ComptableNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'id_demande'=>$this->comptableNotification->id,
-            'id_demandeur'=>$this->comptableNotification->user_id,
-            'cours_id'=>$this->comptableNotification->cours_id,
-            'nom_directeur' => auth()->user()->prenom . ' ' . auth()->user()->nom,
+            'lieux'=>$this->activite->lieux,
+            'ticket_demande'=>$this->activite->ticket_demande,
+            'date'=>$this->activite->date,
         ];
     }
     public function toBroadCast($notifiable){
-         return new BroadcastMessage(
-            [
-            
-            'id_demande'=>$this->comptableNotification->id,
-            'id_demandeur'=>$this->comptableNotification->user_id,
-            'cours_id'=>$this->comptableNotification->cours_id,
-            'nom_directeur' => auth()->user()->prenom . ' ' . auth()->user()->nom,
-        
-            ]
-            );
-    }
+        return new BroadcastMessage(
+           [
+            'lieux'=>$this->activite->lieux,
+            'ticket_demande'=>$this->activite->ticket_demande,
+            'date'=>$this->activite->date,
+       
+           ]
+           );
+   }
 }

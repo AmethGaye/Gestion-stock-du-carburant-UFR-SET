@@ -190,7 +190,9 @@
 
             </div>
             {{-- pagination --}}
-            
+
+            {{ $vacataires->links() }}
+
         </div>
     </section>
 @endsection

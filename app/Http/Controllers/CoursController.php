@@ -7,7 +7,9 @@ use App\Models\Cours;
 use App\Models\Filiere;
 use App\Models\Matiere;
 use App\Models\Remboursement_vac;
+use App\Models\User;
 use App\Models\Vacataire;
+use App\Notifications\CoursNotification;
 use Carbon\Carbon;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
@@ -108,6 +110,7 @@ class CoursController extends Controller
         ])->get();
         $vacataires = Vacataire::where('status','=',1)->get();
         $filieres = Filiere::with('matieres')->get();
+        //$matieres = Matiere::with('filieres')->get();
     
         return view('users.departement.all', compact('vacataires', 'filieres', 'vacataires_sceances'));
     }
@@ -196,52 +199,58 @@ class CoursController extends Controller
     }
 
 
-    public function store(Request $request){
+        public function store(Request $request){
 
-        $validator = Validator::make($request->all(),$this->rules(), $this->messages());
+            $validator = Validator::make($request->all(),$this->rules(), $this->messages());
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()]);
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()]);
+            }
+            $id_departement=auth()->user()->departement_id;
+        $chef_departement= User::whereHas('roles', function($query) {
+                $query->where('nom', 'chef_departement');
+            })->where('departement_id',$id_departement)->first();
+            $validated = $validator->validated();
+            if ($validated){
+            $cours= Cours::create([
+                        'matiere_id'=>$validated['matiere_id'],
+                        'vacataire_id'=>$validated['vacataire_id'],
+                        'date'=>$validated['date'],
+                        'remarque'=>$validated['remarque'],
+                        'duree'=>$validated['duree'],
+                        'statut'=>false,
+                ]);
+                if ($chef_departement) {
+                    $chef_departement->notify(new CoursNotification($cours));
+                }
+                return response()->json(['success' => true, 'msg' => 'Ajout d\'un nouveau cours réussie avec succès !']);
+            }
+            return back() ;
         }
 
-        $validated = $validator->validated();
-        if ($validated){
-            Cours::create([
-                    'matiere_id'=>$validated['matiere_id'],
-                    'vacataire_id'=>$validated['vacataire_id'],
-                    'date'=>$validated['date'],
-                    'remarque'=>$validated['remarque'] || 'pas de remarque',
-                    'duree'=>$validated['duree'],
-                    'statut'=>false,
-            ]);
-            return response()->json(['success' => true, 'msg' => 'Ajout d\'un nouveau cours réussie avec succès !']);
+
+        public function approuver(string $id){
+            Cours::where('id', $id)->update(['statut' => true]);
+            return redirect()->back()->with('success', "l'approbation est reussie avec succès !");
         }
-          return back() ;
-    }
+        public function restaurer(string $id){
+
+            $if_id_cours_exist = Remboursement_vac::where('cours_id', $id)->exists();
+
+            $if_id_cours_statut_zero_exist = Remboursement_vac::where('cours_id', $id)->where('statut', '0')->exists();
+
+            if (!$if_id_cours_exist || $if_id_cours_statut_zero_exist) {
+                Remboursement_vac::where('cours_id', $id)->delete();
+
+                Cours::where('id', $id)->update(['statut' => false,'demande'=>0]);
 
 
-    public function approuver(string $id){
-        Cours::where('id', $id)->update(['statut' => true]);
-        return redirect()->back()->with('success', "l'approbation est reussie avec succès !");
-    }
-    public function restaurer(string $id){
-
-        $if_id_cours_exist = Remboursement_vac::where('cours_id', $id)->exists();
-
-        $if_id_cours_statut_zero_exist = Remboursement_vac::where('cours_id', $id)->where('statut', '0')->exists();
-
-           if (!$if_id_cours_exist || $if_id_cours_statut_zero_exist) {
-            Remboursement_vac::where('cours_id', $id)->delete();
-
-            Cours::where('id', $id)->update(['statut' => false,'demande'=>0]);
-
-
-            return redirect()->back()->with('success', "l'approbation à été restaurée !");
-        } else {
-             // sinon on lui retourne la page avec un message d'erreur
-            return redirect()->back()->withErrors(['msg'=>'Le cours ne peut pas être restauré car il est déjà approuvé par le directeur ou payé.']);
+                return redirect()->back()->with('success', "l'approbation à été restaurée !");
+            } else {
+                // sinon on lui retourne la page avec un message d'erreur
+                return redirect()->back()->withErrors(['msg'=>'Le cours ne peut pas être restauré car il est déjà approuvé par le directeur ou payé.']);
+            }
         }
-    }
 
 
 

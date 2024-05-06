@@ -2,23 +2,28 @@
 
 namespace App\Notifications;
 
+use App\Models\Cours;
+use App\Models\Vacataire;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\BroadcastMessage;
-use App\Models\Remboursement_vac;
 
-class ComptableNotification extends Notification
+use Illuminate\Notifications\Messages\BroadcastMessage;
+
+class CoursNotification extends Notification
 {
     use Queueable;
-    public Remboursement_vac $comptableNotification;
+    public $cours;
+    public $vacataire;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct(Remboursement_vac $comptableNotification)
+    public function __construct(Cours $cours)
     {
-        $this->comptableNotification=$comptableNotification ;
+        $this->cours=$cours;
+        $this->vacataire = Vacataire::find($this->cours->vacataire_id);
     }
 
     /**
@@ -50,22 +55,20 @@ class ComptableNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'id_demande'=>$this->comptableNotification->id,
-            'id_demandeur'=>$this->comptableNotification->user_id,
-            'cours_id'=>$this->comptableNotification->cours_id,
-            'nom_directeur' => auth()->user()->prenom . ' ' . auth()->user()->nom,
+            'nom_vacataire' => $this->vacataire ? $this->vacataire->nom : null,
+        'prenom_vacataire' => $this->vacataire ? $this->vacataire->prenom : null,
+        
         ];
     }
     public function toBroadCast($notifiable){
-         return new BroadcastMessage(
-            [
-            
-            'id_demande'=>$this->comptableNotification->id,
-            'id_demandeur'=>$this->comptableNotification->user_id,
-            'cours_id'=>$this->comptableNotification->cours_id,
-            'nom_directeur' => auth()->user()->prenom . ' ' . auth()->user()->nom,
+       
+        return new BroadcastMessage(
+           [
+
+            'nom_vacataire' => $this->vacataire->nom,
+            'prenom_vacataire' => $this->vacataire->prenom,
         
-            ]
-            );
-    }
+           ]
+           );
+   }
 }

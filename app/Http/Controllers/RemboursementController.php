@@ -28,7 +28,7 @@ class RemboursementController extends Controller
             'Diourbel'=> 112.8,
             'Louga'=> 112,8 ,
             'Saint-louis'=> 192.8,
-            'Thies'=> 0.0,
+            'Thiès'=> 0,
             'Matam'=> 473.2,
             'Tambacounda'=> 453.0,
             'Kolda'=> 676.2,
@@ -145,7 +145,7 @@ class RemboursementController extends Controller
                         'cours' => function($query){$query->where('demande', '1');},
                         'cours.matiere'
                         ])
-                    ->get();
+                    ->paginate(5);
                   //dd($vacataires)  ;
             return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
         }

@@ -10,6 +10,8 @@ use App\Models\Departement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\ActiviteRequestValidation;
+use App\Models\User;
+use App\Notifications\ActiviteNotification;
 
 class ActiviteController extends Controller
 {
@@ -227,7 +229,7 @@ class ActiviteController extends Controller
 
         $credentials = $validator->validated();
         if($credentials){
-            Activite::create([
+        $activite= Activite::create([
                 'titre'=>$credentials['titre'],
                 'description'=>$credentials['description'],
                 'lieux'=>$credentials['lieux'],
@@ -236,6 +238,12 @@ class ActiviteController extends Controller
                 'ticket_demande'=>$credentials['ticket_demande'],
                 'user_id'=>auth()->user()->getAuthIdentifier(),
             ]);
+            $comptable=User::whereHas('roles', function($query) {
+                $query->where('nom', 'comptable');
+            })->first();
+            if ($comptable) {
+                $comptable->notify(new ActiviteNotification($activite));
+            }
             return response()->json(['success' => true, 'msg' => 'Ajout d\'une nouvelle activité réussie avec succès !']);
         }
     }
@@ -306,6 +314,7 @@ class ActiviteController extends Controller
                     'sorties' => $sorties
                 ]);
                 $stock->save();
+                
                 return redirect()->back()->withSuccess('La demande a été traitée avec succés !');
             }else{
                 return redirect()->back()->withFail('Le stock est insuffisant'); 

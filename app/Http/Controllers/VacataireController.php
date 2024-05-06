@@ -18,7 +18,7 @@ class VacataireController extends Controller
     public function index()
     {
         $id_ufr=auth()->user()->ufr->id;
-        $vacataires=Vacataire::all();
+        $vacataires=Vacataire::paginate(5);
         $ufr = Ufr::where('id',$id_ufr)->get();
         return view('users.departement.vacataires',compact('vacataires', 'ufr'));
     }
