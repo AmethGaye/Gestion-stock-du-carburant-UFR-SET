@@ -131,6 +131,7 @@
                 $distance = 0;
 
              foreach ($tableau_distance as $ville => $distance) {
+                 
                      if ($vacataire->provenance == $ville) {
                          $distance = $tableau_distance[$ville];
                            break;

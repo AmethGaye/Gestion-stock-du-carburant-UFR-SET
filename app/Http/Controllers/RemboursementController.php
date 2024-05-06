@@ -28,7 +28,7 @@ class RemboursementController extends Controller
             'Diourbel'=> 112.8,
             'Louga'=> 112,8 ,
             'Saint-louis'=> 192.8,
-            'Thies'=> 0.0,
+            'Thiès'=> 0,
             'Matam'=> 473.2,
             'Tambacounda'=> 453.0,
             'Kolda'=> 676.2,

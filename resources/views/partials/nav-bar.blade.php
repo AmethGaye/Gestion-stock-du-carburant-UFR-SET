@@ -66,9 +66,9 @@
         <div class="flex flex-col pb-3 border-b">
             <p class="font-medium text-zinc-600 pt-3 pb-1.5">Activités</p>
             @foreach(auth()->user()->unreadNotifications->where('type', 'App\Notifications\ActiviteNotification') as $notification)
-                <a href="{{ route('mark-as-read', $notification->id) }}" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
+                <a href="{{ route('mark_read_notification', $notification->id) }}" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
                     <span class="font-medium">{{ $notification->created_at->format('D H:i') }}</span>
-                    <span>Sortie Pédagogique à <span class="font-semibold">{{ $notification->data['lieu'] }}</span>. Tickets : <span class="font-semibold">{{ $notification->data['tickets'] }}</span> </span>
+                    <span>Sortie Pédagogique à <span class="font-semibold">{{ $notification->data['lieux'] }}</span>. Tickets : <span class="font-semibold">{{ $notification->data['ticket_demande'] }}</span> </span>
                 </a>
             @endforeach
         </div>
@@ -79,10 +79,12 @@
                 {{-- type cours --}}
                 <div class="flex flex-col pb-3 border-b">
                     <p class="font-medium text-zinc-600 pt-3 pb-1.5">Cours à approuver </p>
-                    <a href="" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
-                        <span class="font-medium">lun.18:40</span>
-                        <span>Vous avez une scéance de cours à approuver. Vacataire : <span class="font-semibold">Seny Mbaye</span></span>
+                    @foreach(auth()->user()->unreadNotifications->where('type', 'App\Notifications\CoursNotification') as $notification)
+                    <a href="{{ route('mark_read_notification', $notification->id) }}" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
+                        <span class="font-medium">{{ $notification->created_at->format('D H:i') }}</span>
+                        <span>Vous avez une scéance de cours à approuver. Vacataire : <span class="font-semibold">{{ $notification->data['prenom_vacataire'] }} {{ $notification->data['nom_vacataire'] }}</</span></span>
                     </a>
+                    @endforeach
                 </div>
             @endif
 

@@ -181,11 +181,9 @@
 
             </div>
             {{-- pagination --}}
-<<<<<<< HEAD
+
             {{ $vacataires->links() }}
-=======
-            
->>>>>>> 06992ec54ccd83b7d08997b70a73137c367ace5d
+
         </div>
     </section>
 @endsection
