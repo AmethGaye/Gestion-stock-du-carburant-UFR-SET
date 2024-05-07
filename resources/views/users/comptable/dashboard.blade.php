@@ -163,36 +163,35 @@
             <div class="p-6 bg-white col-span-9 col-start-4 rounded-3xl shadow_3 flex flex-col">
                 <div class="mb-10 flex items-center justify-between ">
                     <div class="font-medium text-zinc-600">
-                        <h2>entrées - sorites (en ticket de 10L)</h2>
+                        <h2 class="flex items-center gap-3">Remboursement des vacataires : <div class="w-2 h-2 rounded-full bg-[#4ade80] block"></div>Sorties (en ticket de 10L)</h2>
                     </div>
                     <div class="">
-                        <form action=""  method="get" class=" text-zinc-600 relative min-w-[130px] h-[34px] rounded-md tracking-wide text-sm m-0 border">
+                        <div class=" text-zinc-600 relative min-w-[130px] h-[34px] rounded-md tracking-wide text-sm m-0 border">
                             @csrf
                              <input type="text" value="" readonly class="font-medium outline-none border-none cursor-pointer absolute left-0 top-0 w-full h-full bg-transparent px-4" onclick="showOptionContainer(this)" id="opt-choosen">
-                             <input type="hidden" name="month" value="">
                              <span class="absolute top-1/2 right-3 -translate-y-1/2 transition-transform" id="chevron">
                                  <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M0.933058 0.879586C1.17714 0.613462 1.57286 0.613462 1.81694 0.879586L5.93306 5.36749C6.17714 5.63362 6.57286 5.63362 6.81694 5.36749L10.9331 0.879587C11.1771 0.613463 11.5729 0.613463 11.8169 0.879587C12.061 1.14571 12.061 1.57718 11.8169 1.84331L7.70082 6.33121C6.96859 7.12959 5.78141 7.12959 5.04918 6.33121L0.933058 1.84331C0.688981 1.57718 0.688981 1.14571 0.933058 0.879586Z" fill="#52525B"/>
                                  </svg>
                              </span>
                              <div class="absolute -left-6 top-10 w-44 rounded-lg bg-white z-40 border tracking-wide py-2 hidden" id="options-container">
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('1', 'Janvier')">Janvier</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('2', 'Février')">Février</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('3', 'Mars')">Mars</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('4', 'Avril')">Avril</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('5', 'Mai')">Mai</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('6', 'Juin')">Juin</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('7', 'Juillet')">Juillet</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('8', 'Aout')">Aout</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('9', 'Septembre')">Septembre</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('10', 'Octobre')">Octobre</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('11', 'Novembre')">Novembre</div>
-                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="getOption('12', 'Décembre')">Décembre</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 1)">Janvier</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 2)">Février</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 3)">Mars</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 4)">Avril</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 5)">Mai</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 6)">Juin</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 7)">Juillet</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 8)">Aout</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 9)">Septembre</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 10)">Octobre</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 11)">Novembre</div>
+                                 <div class="py-1.5 px-5 hover:bg-zinc-100 cursor-pointer" onclick="showDailyStat(this, 12)">Décembre</div>
                                  <div class="py-2 mt-2 border-t px-5 font-medium text-orange-400 hover:bg-zinc-100 cursor-pointer">
-                                     <a href="">Restaurer</a>
+                                     <button onclick="showMonthlyStat(this)">Restaurer</button>
                                  </div>
                              </div>
-                         </form>
+                         </div>
                     </div>
                 </div>
 

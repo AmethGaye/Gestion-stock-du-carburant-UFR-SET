@@ -191,22 +191,28 @@ class DashboardController extends Controller
     public function monthlyData (){
 
         $anneeCourante = Carbon::now()->year;
+        
 
         $quantiteParMois = Remboursement_vac::select(DB::raw('MONTH(created_at) as mois'), DB::raw('SUM(nombre_tickets) as quantite_totale'))
             ->whereYear('created_at', $anneeCourante)
             ->groupBy(DB::raw('MONTH(created_at)'))
             ->get();
 
-        $moisEnFrancais = [];
-        foreach ($quantiteParMois as $quantite) {
-            $moisEnFrancais[Carbon::createFromFormat('!m', $quantite->mois)->monthName] = $quantite->quantite_totale;
+        $resultats = [];
+
+        
+        for ($mois = 1; $mois <= 12; $mois++) {
+            $nomMois = Carbon::createFromDate($anneeCourante, $mois, 1)->locale('fr_FR')->monthName;
+            $quantite = $quantiteParMois->firstWhere('mois', $mois);
+            $resultats[$nomMois] = $quantite ? $quantite->quantite_totale : null;
         }
 
-        return response()->json($moisEnFrancais);
+        return response()->json($resultats);
     }
 
     public function dailyData(int $mois){
         $annee = Carbon::now()->year;
+        $nombreDeJours = Carbon::createFromDate($annee, $mois, 1)->daysInMonth;
         $resultats = [];
         
         $quantiteParJour = Remboursement_vac::select(
@@ -218,11 +224,13 @@ class DashboardController extends Controller
         ->havingRaw('SUM(nombre_tickets) > 0') // Filtrer les jours avec une quantité non nulle
         ->groupBy(DB::raw('DAY(created_at)'))
         ->get();
-        
-        foreach ($quantiteParJour as $resultat) {
-            $resultats[$resultat->jour] = $resultat->quantite_totale;
+
+        for ($jour = 1; $jour <= $nombreDeJours; $jour++) {
+            $quantite = $quantiteParJour->firstWhere('jour', $jour);
+
+            $resultats[$jour] = $quantite ? $quantite->quantite_totale : null;
         }
-        // $nombreJoursDuMois = Carbon::createFromDate($annee, $mois)->daysInMonth();
+        ;
         return response()->json($resultats);
     }
 }

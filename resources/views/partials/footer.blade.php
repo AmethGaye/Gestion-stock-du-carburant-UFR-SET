@@ -21,7 +21,9 @@
       }
     }
 
+  const myChart = createChart(null, title = 'Statistiques mensuelles');
 
+  
   document.addEventListener('DOMContentLoaded', ()=> {
     try {
       fetch('/comptable/pourcentage')
@@ -29,10 +31,42 @@
       .then(data => {
           setProgress(data.percent)
       });
+      getMonths();
     } catch (error) {
       console.log(error)
     }
   });
+
+  // getMonths();
+
+
+  const Mois = {
+    '1' : 'Janvier',
+    '2' : 'Février',
+    '3' : 'Mars',
+    '4' : 'Avril',
+    '5' : 'Mai',
+    '6' : 'Juin',
+    '7' : 'Juillet',
+    '8' : 'Aout',
+    '9' : 'Septembre',
+    '10' : 'Octobre',
+    '11' : 'Novembre',
+    '12' : 'Decembre'
+  }
+
+  function showDailyStat(elem, month){
+    elem.parentNode.classList.toggle('hidden');
+    document.getElementById('opt-choosen').value = Mois[month];
+    getDays(month);
+  }
+
+  function showMonthlyStat(elem){
+    elem.parentNode.parentNode.classList.toggle('hidden');
+    getMonths();
+  }
+
+
 
   const getMonths = ()=>{
     try {
@@ -57,7 +91,9 @@
           };
 
           // Créer le graphique
-          createChart(monthlyData);
+          myChart.data = monthlyData;
+          myChart.options.plugins.title.text = "Statistiques mensuelles"
+          myChart.update();
           
       });
     } catch (error) {
@@ -65,42 +101,9 @@
     }
   };
   
-  // getMonths();
+  
 
 
-  // var data1 = {
-  //           label: 'Courbe 1',
-  //           data: [10, 20, 30, 40, 50, 60], // Exemple de données
-  //           borderColor: 'rgba(255, 99, 132, 1)',
-  //           backgroundColor: 'rgba(255, 99, 132, 0.2)',
-  //           fill: false
-  //       };
-
-  //       // Données pour la deuxième courbe
-  //       var data2 = {
-  //           label: 'Courbe 2',
-  //           data: [20, 30, 40, 50, 60, 70], // Exemple de données
-  //           borderColor: 'rgba(54, 162, 235, 1)',
-  //           backgroundColor: 'rgba(54, 162, 235, 0.2)',
-  //           fill: false
-  //       };
-
-  //       // Créer le graphique
-  //       var ctx = document.getElementById('myChart').getContext('2d');
-  //       var myChart = new Chart(ctx, {
-  //           type: 'line',
-  //           data: {
-  //               labels: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin'], // Exemple de labels de l'axe x
-  //               datasets: [data1, data2] // Ajouter les deux ensembles de données
-  //           },
-  //           options: {
-  //               scales: {
-  //                   y: {
-  //                       beginAtZero: true
-  //                   }
-  //               }
-  //           }
-  //       });
 
   const getDays = (month)=>{
     try {
@@ -125,14 +128,15 @@
           };
 
           // Créer le graphique
-          createChart(dailyData, 'Statistiques journalières');
+          myChart.data = dailyData;
+          myChart.options.plugins.title.text = "Statistiques journalières"
+          myChart.update();
       });
     } catch (error) {
       
     }
   };
 
-  getDays(5);
   
 
 
@@ -170,29 +174,25 @@
                   top: 30
                 }
               }
+            },
+            scales: {
+              y: {
+                  beginAtZero: true // Commencer l'axe des ordonnées à zéro
+              }
             }
           },
           
       });
       Chart.defaults.font.family = "poppins";
+      return myChart;
     } catch (error) {
       
     }
   }
+
+  
   
 
-
-  // Fonction pour afficher les statistiques mensuelles
-  async function showMonthlyStats() {
-      myChart.data = monthlyData;
-      myChart.update();
-  }
-
-  // Fonction pour afficher les statistiques journalières
-  function showDailyStats() {
-      myChart.data = dailyData;
-      myChart.update();
-  }
 
 
 </script>

@@ -57,7 +57,7 @@
             @foreach(auth()->user()->unreadNotifications->where('type', 'App\Notifications\ComptableNotification') as $notification)
                 <a href="{{ route('mark_read_notification', $notification->id) }}" class="px-3 py-1 hover:bg-zinc-100 rounded-md flex flex-col text-zinc-600">
                     <span class="font-medium">{{ $notification->created_at->format('D H:i') }}</span>
-                    <span>Vous avez une séance de cours à rembourser. Directeur: <span class="font-semibold">{{$notification->data['nom_directeur']  }}</span></span>
+                    <span>Vous avez une séance de cours à rembourser. Directeur: <span class="font-semibold">{{ $notification->data['nom_directeur'] }}</span></span>
                 </a>
             @endforeach
         </div>

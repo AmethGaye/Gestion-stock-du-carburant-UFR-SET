@@ -30,6 +30,6 @@ class Cours extends Model
     }
     public function remboursement()
     {
-        return $this->hasMany(Remboursement_vac::class);
+        return $this->hasOne(Remboursement_vac::class);
     }
 }

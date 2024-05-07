@@ -15,8 +15,6 @@
     {{-- choix entre les deux liens : tous les cours ou approbation --}}
     @yield('cours')
 
-    {{-- pagination --}}
-    @include('partials.pagination')
 
 </section>
 

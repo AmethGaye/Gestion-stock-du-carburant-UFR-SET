@@ -129,7 +129,7 @@ class RemboursementController extends Controller
                 'cours.matiere.filieres',
                 
                 'cours.remboursement.user'
-            ])->get();
+            ])->latest()->get();
  
     
 
@@ -191,7 +191,7 @@ class RemboursementController extends Controller
                               $query->whereIn('statut', ['1', '2']);},
                         'cours.matiere'
                         ])
-                    ->get();
+                        ->paginate(5);
                    
             return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
 
@@ -293,7 +293,7 @@ class RemboursementController extends Controller
                 },
                 'cours.matiere'
             ])
-            ->get();
+            ->paginate(10);
     
         return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));
     }
@@ -372,7 +372,7 @@ class RemboursementController extends Controller
             $vacataires->whereIn('situation', $request->situation);
         }
     
-        $vacataires = $vacataires->get();
+        $vacataires = $vacataires->paginate(10);
         
     
         return view('users.comptable.remboursement', compact('vacataires','tableau_distance'));

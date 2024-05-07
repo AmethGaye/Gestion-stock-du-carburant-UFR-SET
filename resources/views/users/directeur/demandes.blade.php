@@ -129,11 +129,12 @@
                     </span>
 
                     <span class="w-[210px] relative flex items-center justify-center gap-4 ">
+
                        
                         @php
                             $id_cours = [];
                             foreach($vacataire->cours as $cours) {
-                                if ($cours->statut == 1 && $cours->demande == 1 && $cours->remboursement->first() && $cours->remboursement->first()->statut == 0) {
+                                if ($cours->statut == 1 && $cours->demande == 1 && $cours->remboursement && $cours->remboursement->statut == 0) {
                                     $id_cours[] = $cours->id;
                                 }
                             }
@@ -185,7 +186,7 @@
                         @php 
                         $nom_filiere='inconnue';
                         foreach ($cours->matiere->filieres as $filiere) {
-                            if ($cours->remboursement->first() && $filiere->departement->id == $cours->remboursement->first()->user->departement_id) {
+                            if ($cours->remboursement && $filiere->departement->id == $cours->remboursement->user->departement_id) {
                                 $nom_filiere = $filiere->nom;
                                 break;
                             }
@@ -195,7 +196,7 @@
                         <span class="basis-[15%] grow pr-4">{{$cours->date}}</span>
                         <span class="w-[120px] font-bold pr-4">{{$cours->duree}} Heure</span>
                         @php
-                            if($cours->remboursement->first()){
+                            if($cours->remboursement){
                                 $statut = ($cours->remboursement->first()->statut == '0') ? 'En cours' : 'Approuvé' ;
                                 $classes = ($cours->remboursement->first()->statut == '0') ? 'bg-orange-100 px-4 text-orange-500' : 'bg-violet-100 px-4 text-violet-500';
                             }
