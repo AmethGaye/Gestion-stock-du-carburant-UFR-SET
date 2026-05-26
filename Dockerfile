@@ -1,9 +1,8 @@
-FROM php:8.2-fpm
+FROM php:8.2-cli
 
-# Dépendances système + Nginx
+# Dépendances système
 RUN apt-get update && apt-get install -y \
-    git curl zip unzip nginx \
-    libpng-dev libonig-dev libxml2-dev libzip-dev \
+    git curl zip unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -26,17 +25,8 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 RUN npm ci && npm run build
 
 # Permissions Laravel
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
-    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# Config Nginx Railway (PORT sera remplacé au démarrage)
-COPY docker/nginx-railway.conf /etc/nginx/conf.d/default.conf
-RUN rm -f /etc/nginx/sites-enabled/default
+EXPOSE 8000
 
-# Script de démarrage
-COPY docker/start.sh /start.sh
-RUN chmod +x /start.sh
-
-EXPOSE 80
-
-CMD ["/start.sh"]
+CMD php artisan migrate --seed --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
