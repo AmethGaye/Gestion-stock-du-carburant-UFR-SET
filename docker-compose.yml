@@ -10,15 +10,10 @@ services:
     volumes:
       - .:/var/www
       - ./storage:/var/www/storage
+    env_file:
+      - .env
     environment:
-      - APP_ENV=production
-      - APP_KEY=${APP_KEY}
-      - DB_CONNECTION=mysql
       - DB_HOST=db
-      - DB_PORT=3306
-      - DB_DATABASE=${DB_DATABASE:-gsc_ufr_set}
-      - DB_USERNAME=${DB_USERNAME:-root}
-      - DB_PASSWORD=${DB_PASSWORD:-ahmada}
     depends_on:
       db:
         condition: service_healthy
