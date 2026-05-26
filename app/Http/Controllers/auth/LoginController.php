@@ -22,19 +22,19 @@ class LoginController extends Controller
     public function create()
     {
 
-        /*  User::create( [
-               'nom' =>'BA',
-               'prenom'=>'Mamadou',
-                'email' => 'mamadou.ba2@univ-thies.sn',
-                'role'=>'admin',
-                'status'=>true,
-                'telephone'=>'774350647',
-                'date_naiss'=>'2001-08-12',
-                'password'=>Hash::make('12345678'),
-                'ufr_id'=>1,
-                'sexe'=>'M',
-        ]);
-        */
+        // User::create( [
+        //        'nom' =>'Gaye',
+        //        'prenom'=>'Mouhamed',
+        //         'email' => 'ahmada@univ-thies.sn',
+        //         'role'=>'admin',
+        //         'status'=>true,
+        //         'telephone'=>'774350647',
+        //         'date_naiss'=>'2001-08-12',
+        //         'password'=>Hash::make('12345678'),
+        //         'ufr_id'=>1,
+        //         'sexe'=>'M',
+        // ]);
+        
 
         return view('auth.login');
     }
