@@ -1,66 +1,250 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Gestion Stock du Carburant — UFR SET
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Description
 
-## About Laravel
+### Présentation du projet
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**GSC-UFR-SET** est une application web dédiée à la gestion du stock de carburant de l'Unité
+de Formation et de Recherche en Sciences et Technologies (UFR SET) de l'Université Iba Der
+Thiam de Thiès. Elle centralise et automatise l'ensemble du processus de dotation, de
+remboursement des vacataires et de suivi du carburant, à travers une interface multi-rôles
+adaptée à chaque intervenant de la chaîne administrative.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Contexte et Problématique
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+L'UFR SET utilise le carburant comme ressource stratégique pour assurer la mobilité de ses
+enseignants vacataires, financer ses activités pédagogiques et couvrir les déplacements
+administratifs. Avant ce projet, la gestion de cette ressource reposait entièrement sur des
+processus manuels :
 
-## Learning Laravel
+- **Suivi sur Excel** — saisie manuelle sujette aux erreurs et aux incohérences
+- **Circulation physique des documents** — impression, signature et transmission papier entre
+  assistants, chefs de département, directeur et comptable, entraînant des délais importants
+- **Aucune visibilité temps réel** — le comptable ne disposait pas d'une vue précise et à jour
+  du stock, ce qui pouvait provoquer des ruptures ou des surplus non anticipés
+- **Calcul manuel des tickets** — la détermination du nombre de tickets à attribuer à chaque
+  vacataire (selon sa provenance, son statut de véhiculé et le nombre de cours effectués)
+  était réalisée à la main, augmentant le risque d'erreurs et de contestations
+- **Absence d'outils de statistiques** — les chefs de département, le directeur et le comptable
+  ne disposaient d'aucun tableau de bord pour piloter leurs activités
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Solution proposée
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+En réponse à ces problèmes, nous avons conçu et développé une plateforme web intégrée qui
+digitalise l'intégralité du processus. La solution offre :
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Un **workflow multi-étapes** entièrement dématérialisé : saisie des cours → approbation
+  chef de département → validation directeur → remboursement comptable
+- Un **calcul automatique** du nombre de tickets de carburant selon la région de provenance
+  du vacataire, son statut (véhiculé ou non) et le nombre d'heures dispensées
+- Un **tableau de bord personnalisé** par rôle avec statistiques en temps réel (stock restant,
+  demandes en cours, cours remboursés, activités validées)
+- Une **gestion du stock** avec renouvellement, suivi des entrées/sorties, dotations régulières
+  aux départements et à l'administration, et historique complet des attributions
+- Un système de **notifications** automatiques entre les acteurs à chaque étape du workflow
+- Un **contrôle d'accès strict** : seul l'administrateur peut créer des comptes utilisateurs,
+  garantissant la sécurité et la traçabilité des opérations
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Technologies Utilisées
 
-### Premium Partners
+- **Backend** : Laravel 10, PHP 8.1+, Eloquent ORM
+- **Frontend** : Blade, Tailwind CSS, JavaScript, jQuery, Chart.js
+- **Base de données** : MySQL
+- **Build** : Vite, npm
+- **Authentification** : Laravel Auth (sessions), réinitialisation par email
+- **Temps réel** : Laravel Echo, Pusher
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## Prérequis
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- PHP 8.1 ou supérieur
+- Composer 2.x
+- Node.js 18+ et npm
+- MySQL 8.0 ou supérieur
+- XAMPP / WAMP / LAMP (ou tout serveur Apache + MySQL)
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Installation et Configuration
 
-## Security Vulnerabilities
+### 1. Cloner le projet
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+git clone https://github.com/AmethGaye/Gestion-stock-du-carburant-UFR-SET.git
+cd Gestion-stock-du-carburant-UFR-SET
+```
 
-## License
+### 2. Installer les dépendances PHP
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+composer install
+```
+
+### 3. Installer les dépendances JavaScript
+
+```bash
+npm install
+```
+
+### 4. Configurer l'environnement
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Modifier le fichier `.env` avec vos paramètres de base de données :
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=gsc_ufr_set
+DB_USERNAME=root
+DB_PASSWORD=votre_mot_de_passe
+```
+
+### 5. Créer la base de données
+
+```sql
+CREATE DATABASE gsc_ufr_set;
+```
+
+### 6. Exécuter les migrations
+
+```bash
+php artisan migrate
+```
+
+### 7. Compiler les assets frontend
+
+```bash
+npm run dev
+```
+
+### 8. Lancer le serveur de développement
+
+```bash
+php artisan serve
+```
+
+L'application sera accessible sur `http://localhost:8000`
+
+---
+
+## Comptes de Test
+
+### Utilisateurs prédéfinis
+
+| Rôle | Email | Mot de passe |
+|------|-------|-------------|
+| Administrateur | mamadou.ba2@univ-thies.sn | password |
+| Directeur | directeur@univ-thies.sn | password |
+| Chef de département | chefdepart@univ-thies.sn | password |
+| Assistant(e) | chefdepart2@univ-thies.sn | password |
+| Comptable | comptable@univ-thies.sn | password |
+
+---
+
+## Permissions par Rôle
+
+### Administrateur
+- Créer, modifier, désactiver et supprimer des utilisateurs
+- Gérer les rôles et les UFR
+- Consulter les statistiques globales du système
+
+### Directeur
+- Consulter et approuver les demandes de remboursement transmises par les chefs de département
+- Créer, modifier et supprimer des activités nécessitant une dotation en tickets
+- Recevoir des notifications pour chaque nouvelle demande soumise
+
+### Chef de département / Assistant(e)
+- Gérer les vacataires (ajout, modification, suppression)
+- Saisir les séances de cours (vacataire, matière, filière, durée)
+- Approuver ou rejeter les cours avant transmission au directeur
+- Soumettre les demandes de remboursement au directeur
+
+### Comptable
+- Consulter et renouveler le stock de carburant
+- Traiter les remboursements des vacataires approuvés par le directeur
+- Allouer des tickets aux activités créées par le directeur
+- Gérer les dotations régulières aux départements et à l'administration
+- Consulter l'historique complet des attributions
+
+---
+
+## Fonctionnalités Implémentées
+
+✅ **Authentification sécurisée** — Connexion par email/mot de passe avec redirection par rôle  
+✅ **Réinitialisation de mot de passe** — Envoi d'un lien par email  
+✅ **Gestion des utilisateurs** — CRUD complet avec filtres et barre de recherche  
+✅ **Gestion des vacataires** — CRUD, filtres par mois et par provenance  
+✅ **Gestion des cours** — Saisie, approbation multi-niveaux, restauration  
+✅ **Workflow de remboursement** — Chef dept → Directeur → Comptable avec notifications  
+✅ **Calcul automatique des tickets** — Basé sur la région, le statut véhiculé et les heures  
+✅ **Gestion du stock** — Renouvellement, suivi entrées/sorties, annulation  
+✅ **Dotations régulières** — Aux départements et aux membres de l'administration  
+✅ **Gestion des activités** — Création par le directeur, allocation tickets par le comptable  
+✅ **Historique des attributions** — Filtres par mois et recherche  
+✅ **Tableaux de bord** — Statistiques par rôle avec graphiques (Chart.js)  
+✅ **Notifications** — Alertes entre acteurs à chaque étape du workflow  
+✅ **Gestion du profil** — Modification des informations et changement de mot de passe  
+
+---
+
+## Limitations Actuelles
+
+- Le `TicketController` est vide — la gestion individuelle des tickets n'est pas implémentée
+- Pas d'export PDF / CSV des remboursements et du stock
+- Pas d'alertes automatiques en cas de stock bas
+- Le système de notifications temps réel (Pusher) est installé mais peu exploité
+- Pas de gestion multi-UFR (prévu pour une future extension à toute l'université)
+- Pas de 2FA pour les comptes sensibles (directeur, comptable)
+
+---
+
+## Structure du Projet
+
+```
+├── app/
+│   ├── Http/Controllers/    # Contrôleurs par rôle
+│   └── Models/              # Modèles Eloquent
+├── database/
+│   └── migrations/          # Schéma de la base de données
+├── resources/
+│   ├── views/               # Templates Blade par rôle
+│   ├── css/                 # Styles
+│   └── js/                  # Scripts JavaScript
+├── routes/
+│   └── web.php              # Routes organisées par rôle
+└── public/                  # Assets compilés
+```
+
+---
+
+## Modélisation
+
+Le système repose sur **15 modèles Eloquent** interconnectés :
+
+```
+User ──── Role          Vacataire ──── Cours
+ │                          │
+ ├── Activite           Cours ──── Matiere
+ ├── RemboursementVac        └──── Filiere ──── Departement ──── Ufr
+ ├── DotationAdmin
+ └── DotationDepart     Stock ──── Ticket
+```
+
+---
+
+## Auteurs
+
+- **Mouhamad Gaye** — Conception & Développement full-stack
+- **Mamadou Ba** — Analyse des besoins & Modélisation UML
+
+**Encadreur** : Pr Mouhamadou Thiam — Directeur de l'UFR SET  
+**Établissement** : Université Iba Der Thiam de Thiès — UFR Sciences et Technologies  
+**Diplôme** : Licence Informatique, option Génie Logiciel — Année 2022/2023
