@@ -49,54 +49,73 @@ digitalise l'intégralité du processus. La solution offre :
 
 ## Technologies Utilisées
 
-- **Backend** : Laravel 10, PHP 8.1+, Eloquent ORM
+- **Backend** : Laravel 10, PHP 8.2, Eloquent ORM
 - **Frontend** : Blade, Tailwind CSS, JavaScript, jQuery, Chart.js
-- **Base de données** : MySQL
+- **Base de données** : MySQL 8.0
 - **Build** : Vite, npm
-- **Authentification** : Laravel Auth (sessions), réinitialisation par email
-- **Temps réel** : Laravel Echo, Pusher
+- **Authentification** : Laravel Auth (sessions)
+- **Conteneurisation** : Docker (PHP-FPM + Nginx + MySQL)
 
 ---
 
-## Prérequis
+## Installation
 
-- PHP 8.1 ou supérieur
-- Composer 2.x
-- Node.js 18+ et npm
-- MySQL 8.0 ou supérieur
-- XAMPP / WAMP / LAMP (ou tout serveur Apache + MySQL)
+### Option 1 — Docker (recommandé)
 
----
-
-## Installation et Configuration
-
-### 1. Cloner le projet
+**Prérequis** : Docker Desktop installé et démarré.
 
 ```bash
 git clone https://github.com/AmethGaye/Gestion-stock-du-carburant-UFR-SET.git
 cd Gestion-stock-du-carburant-UFR-SET
 ```
 
-### 2. Installer les dépendances PHP
+Copier et configurer l'environnement :
 
 ```bash
+cp .env.example .env
+```
+
+Modifier les variables de base de données dans `.env` :
+
+```env
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=gsc_ufr_set
+DB_USERNAME=root
+DB_PASSWORD=ahmada
+```
+
+Démarrer les containers :
+
+```bash
+docker-compose up -d
+```
+
+Générer la clé d'application et peupler la base :
+
+```bash
+docker-compose exec app php artisan key:generate
+docker-compose exec app php artisan migrate:fresh --seed --force
+```
+
+L'application est accessible sur `http://localhost:8000`.
+
+---
+
+### Option 2 — Installation classique (XAMPP / WAMP)
+
+**Prérequis** : PHP 8.1+, Composer, Node.js 18+, MySQL 8.0.
+
+```bash
+git clone https://github.com/AmethGaye/Gestion-stock-du-carburant-UFR-SET.git
+cd Gestion-stock-du-carburant-UFR-SET
 composer install
-```
-
-### 3. Installer les dépendances JavaScript
-
-```bash
 npm install
-```
-
-### 4. Configurer l'environnement
-
-```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-Modifier le fichier `.env` avec vos paramètres de base de données :
+Créer la base de données puis configurer `.env` :
 
 ```env
 DB_CONNECTION=mysql
@@ -107,45 +126,29 @@ DB_USERNAME=root
 DB_PASSWORD=votre_mot_de_passe
 ```
 
-### 5. Créer la base de données
-
-```sql
-CREATE DATABASE gsc_ufr_set;
-```
-
-### 6. Exécuter les migrations
+Lancer les migrations avec les données de test :
 
 ```bash
-php artisan migrate
-```
-
-### 7. Compiler les assets frontend
-
-```bash
+php artisan migrate --seed
 npm run dev
-```
-
-### 8. Lancer le serveur de développement
-
-```bash
 php artisan serve
 ```
 
-L'application sera accessible sur `http://localhost:8000`
+L'application sera accessible sur `http://localhost:8000`.
 
 ---
 
 ## Comptes de Test
 
-### Utilisateurs prédéfinis
+Les comptes suivants sont automatiquement créés par `php artisan migrate --seed` :
 
 | Rôle | Email | Mot de passe |
 |------|-------|-------------|
-| Administrateur | mamadou.ba2@univ-thies.sn | password |
-| Directeur | directeur@univ-thies.sn | password |
-| Chef de département | chefdepart@univ-thies.sn | password |
-| Assistant(e) | chefdepart2@univ-thies.sn | password |
-| Comptable | comptable@univ-thies.sn | password |
+| Administrateur | mouhamad.gaye@univ-thies.sn | password |
+| Directeur | thiam@univ-thies.sn | password |
+| Chef de département | gaye@univ-thies.sn | password |
+| Comptable | diop@univ-thies.sn | password |
+| Assistant(e) | seck@univ-thies.sn | password |
 
 ---
 
@@ -208,14 +211,19 @@ L'application sera accessible sur `http://localhost:8000`
 │   ├── Http/Controllers/    # Contrôleurs par rôle
 │   └── Models/              # Modèles Eloquent
 ├── database/
-│   └── migrations/          # Schéma de la base de données
+│   ├── migrations/          # Schéma de la base de données
+│   └── seeders/             # Données de test (9 seeders)
 ├── resources/
 │   ├── views/               # Templates Blade par rôle
 │   ├── css/                 # Styles
 │   └── js/                  # Scripts JavaScript
 ├── routes/
 │   └── web.php              # Routes organisées par rôle
-└── public/                  # Assets compilés
+├── nginx/
+│   └── default.conf         # Configuration Nginx (Docker)
+├── public/                  # Assets compilés
+├── Dockerfile               # Image PHP 8.2-FPM + Node 20
+└── docker-compose.yml       # Services app + nginx + MySQL
 ```
 
 ---
