@@ -178,9 +178,7 @@ L'application sera accessible sur `http://localhost:8000`
 
 ## Fonctionnalités Implémentées
 
-✅ **Authentification sécurisée** — Connexion par email/mot de passe avec redirection par rôle  
 ✅ **Réinitialisation de mot de passe** — Envoi d'un lien par email  
-✅ **Gestion des utilisateurs** — CRUD complet avec filtres et barre de recherche  
 ✅ **Gestion des vacataires** — CRUD, filtres par mois et par provenance  
 ✅ **Gestion des cours** — Saisie, approbation multi-niveaux, restauration  
 ✅ **Workflow de remboursement** — Chef dept → Directeur → Comptable avec notifications  
@@ -190,14 +188,12 @@ L'application sera accessible sur `http://localhost:8000`
 ✅ **Gestion des activités** — Création par le directeur, allocation tickets par le comptable  
 ✅ **Historique des attributions** — Filtres par mois et recherche  
 ✅ **Tableaux de bord** — Statistiques par rôle avec graphiques (Chart.js)  
-✅ **Notifications** — Alertes entre acteurs à chaque étape du workflow  
-✅ **Gestion du profil** — Modification des informations et changement de mot de passe  
 
 ---
 
 ## Limitations Actuelles
 
-- Le `TicketController` est vide — la gestion individuelle des tickets n'est pas implémentée
+- La gestion individuelle des tickets n'est pas implémentée
 - Pas d'export PDF / CSV des remboursements et du stock
 - Pas d'alertes automatiques en cas de stock bas
 - Le système de notifications temps réel (Pusher) est installé mais peu exploité
@@ -242,8 +238,8 @@ User ──── Role          Vacataire ──── Cours
 
 ## Auteurs
 
-- **Mouhamad Gaye** — Conception & Développement full-stack
-- **Mamadou Ba** — Analyse des besoins & Modélisation UML
+- **Mouhamad Gaye** — Développeur Full-Stack
+- **Mamadou Ba** — Développeur Backend
 
 **Encadreur** : Pr Mouhamadou Thiam — Directeur de l'UFR SET  
 **Établissement** : Université Iba Der Thiam de Thiès — UFR Sciences et Technologies  
