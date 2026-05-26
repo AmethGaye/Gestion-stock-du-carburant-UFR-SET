@@ -9,8 +9,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Mot de passe hashé correspondant à "password"
-        $hash = '$2y$12$06YwdthrvBg/JDj7PwQoX.T3QKVhGRweoEmNE7MD0IIrZYMGH4ngG';
+        $hash = bcrypt('password');
 
         DB::table('users')->insert([
             [
