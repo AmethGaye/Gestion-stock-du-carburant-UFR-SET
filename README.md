@@ -178,7 +178,6 @@ L'application sera accessible sur `http://localhost:8000`
 
 ## Fonctionnalités Implémentées
 
-✅ **Réinitialisation de mot de passe** — Envoi d'un lien par email  
 ✅ **Gestion des vacataires** — CRUD, filtres par mois et par provenance  
 ✅ **Gestion des cours** — Saisie, approbation multi-niveaux, restauration  
 ✅ **Workflow de remboursement** — Chef dept → Directeur → Comptable avec notifications  
