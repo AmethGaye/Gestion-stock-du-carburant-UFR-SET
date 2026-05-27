@@ -67,7 +67,43 @@ digitalise l'intégralité du processus. La solution offre :
 
 ## Installation
 
-### Option 1 — Docker (recommandé)
+#### Installation classique (XAMPP / WAMP)
+
+**Prérequis** : PHP 8.1+, Composer, Node.js 18+, MySQL 8.0.
+
+```bash
+git clone https://github.com/AmethGaye/Gestion-stock-du-carburant-UFR-SET.git
+cd Gestion-stock-du-carburant-UFR-SET
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+```
+
+Créer la base de données puis configurer `.env` :
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=gsc_ufr_set
+DB_USERNAME=root
+DB_PASSWORD=votre_mot_de_passe
+```
+
+Lancer les migrations avec les données de test :
+
+```bash
+php artisan migrate --seed
+npm run dev
+php artisan serve
+```
+
+L'application sera accessible sur `http://localhost:8000`.
+
+---
+
+#### Avec Docker (recommandé)
 
 **Prérequis** : Docker Desktop installé et démarré.
 
@@ -105,43 +141,7 @@ docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate:fresh --seed --force
 ```
 
-L'application est accessible sur `http://localhost:8000`.
-
----
-
-### Option 2 — Installation classique (XAMPP / WAMP)
-
-**Prérequis** : PHP 8.1+, Composer, Node.js 18+, MySQL 8.0.
-
-```bash
-git clone https://github.com/AmethGaye/Gestion-stock-du-carburant-UFR-SET.git
-cd Gestion-stock-du-carburant-UFR-SET
-composer install
-npm install
-cp .env.example .env
-php artisan key:generate
-```
-
-Créer la base de données puis configurer `.env` :
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=gsc_ufr_set
-DB_USERNAME=root
-DB_PASSWORD=votre_mot_de_passe
-```
-
-Lancer les migrations avec les données de test :
-
-```bash
-php artisan migrate --seed
-npm run dev
-php artisan serve
-```
-
-L'application sera accessible sur `http://localhost:8000`.
+L'application est accessible sur `http://localhost:8000`
 
 ---
 
