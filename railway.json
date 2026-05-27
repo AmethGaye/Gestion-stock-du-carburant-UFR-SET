@@ -10,7 +10,7 @@
   },
   "environments": {
     "production": {
-      "APP_URL": "https://${{RAILWAY_PUBLIC_DOMAIN}}"
+      "APP_URL": "https://gestion-stock-du-carburant-ufr-set-production-84ca.up.railway.app"
     }
   }
 }
