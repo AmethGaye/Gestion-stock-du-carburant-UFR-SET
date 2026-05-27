@@ -27,6 +27,8 @@ RUN npm ci && npm run build
 # Permissions Laravel
 RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-EXPOSE 8000
+# Script de démarrage
+COPY docker/start.sh /start.sh
+RUN chmod +x /start.sh
 
-CMD php artisan migrate:fresh --seed --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+CMD ["/start.sh"]
