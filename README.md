@@ -1,5 +1,12 @@
 # Gestion Stock du Carburant — UFR SET
 
+## Application en ligne
+
+> **Accéder à l'application déployée :**  
+> [https://gestion-stock-du-carburant-ufr-set-production-84ca.up.railway.app](https://gestion-stock-du-carburant-ufr-set-production-84ca.up.railway.app)
+
+---
+
 ## Description
 
 ### Présentation du projet
